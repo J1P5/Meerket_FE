@@ -2,7 +2,7 @@ name: git push into another repo to deploy to vercel
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   build:
@@ -15,10 +15,10 @@ jobs:
 
       - name: List current directory
         run: ls -la
-      
+
       - name: Check .storybook directory
         run: ls -la .storybook
-        
+
       - name: creates output
         run: sh ./build.sh
       - name: Pushes to another repository
@@ -35,4 +35,3 @@ jobs:
           target-branch: main
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
-
