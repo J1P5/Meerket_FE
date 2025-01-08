@@ -10,13 +10,13 @@ interface ILoginGuardProps {
  * 로그인한 사용자가 로그인 페이지 접근 시 처리
  */
 export const LoginGuard = ({ children }: ILoginGuardProps) => {
-  const { sessionUser, isLoading } = useFetchSession();
+  const { sessionUser, isLoading, isError } = useFetchSession();
 
   if (isLoading) {
     return null;
   }
 
-  if (sessionUser) {
+  if (!isError && sessionUser) {
     return <Navigate to="/" replace />;
   }
 

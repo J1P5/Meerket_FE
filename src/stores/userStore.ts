@@ -29,10 +29,10 @@ export const useUserStore: UseBoundStore<StoreApi<UserState>> = create(
             }
           })
         );
-      }
+      },
     }),
     {
-      name: localStorageKey
+      name: localStorageKey,
     }
   )
 );
