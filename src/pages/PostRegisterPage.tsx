@@ -8,6 +8,50 @@ import { getExpiredDate } from "utils";
 import { registerProduct, editProduct } from "services/apis/product";
 // import { useFetchProduct } from "hooks";
 
+
+/**
+ * 임시 헬퍼 함수
+ */
+const transformFormData = (formData: IProductForm, isNewProduct: boolean) => {
+  const transformed = { ...formData };
+
+  if (
+    transformed.category &&
+    typeof transformed.category === "object" &&
+    "value" in transformed.category
+  ) {
+    transformed.category = transformed.category.value;
+  }
+
+  if (
+    isNewProduct &&
+    transformed.expiredTime &&
+    typeof transformed.expiredTime === "object" &&
+    "value" in transformed.expiredTime
+  ) {
+    transformed.expiredTime = transformed.expiredTime.value;
+  }
+
+  return transformed;
+};
+
+const createProductData = (
+  formData: IProductForm,
+  coordinates: { lat: number; lng: number; address: string }
+): IProductPost => ({
+  title: formData.title!,
+  content: formData.content!,
+  minimumPrice: Number(formData.minimumPrice!.replace(/,/g, "")),
+  category: formData.category!,
+  latitude: coordinates.lat,
+  longitude: coordinates.lng,
+  address: coordinates.address,
+  location: formData.location!,
+  images: formData.imgUrls!.map((img) => img.file!),
+  expiredTime: getExpiredDate(formData.expiredTime as string),
+});
+
+
 export const PostRegisterPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -16,9 +60,7 @@ export const PostRegisterPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const productId = Number(queryParams.get("productId"));
   const formData = useFormDataStore((state) => state.formData);
-  const lat = useFormDataStore((state) => state.formData.latitude);
-  const lng = useFormDataStore((state) => state.formData.longitude);
-  const address = useFormDataStore((state) => state.formData.address);
+  const { latitude: lat, longitude: lng, address } = formData;
   const { setFormData, clear } = useFormDataStore();
 
   // const { product, isProductLoading } = useFetchProduct(
@@ -48,47 +90,32 @@ export const PostRegisterPage = () => {
 
   const handleSubmit = useCallback(
     async (formData: IProductForm) => {
-      if (formData.category && typeof formData.category === "object") {
-        formData.category = formData.category.value as Category;
-      }
-      if (
-        !productId &&
-        formData.expiredTime &&
-        typeof formData.expiredTime === "object"
-      ) {
-        formData.expiredTime = formData.expiredTime.value as ExpiredTime;
-      }
-
-      const newProduct: IProductPost = {
-        title: formData.title!,
-        content: formData.content!,
-        minimumPrice: Number(formData.minimumPrice!.replace(/,/g, "")),
-        category: formData.category!,
-        latitude: lat!,
-        longitude: lng!,
-        address: address!,
-        location: formData.location!,
-        images: formData.imgUrls!.map((img) => img.file!),
-        expiredTime: getExpiredDate(formData.expiredTime as string),
-      };
-
       try {
+        const transformedData = transformFormData(formData, !productId);
+
+        const productData = createProductData(transformedData, {
+          lat: lat!,
+          lng: lng!,
+          address: address!,
+        });
+
         if (!productId) {
-          await registerProduct(newProduct);
+          await registerProduct(productData);
           navigate(`/`);
           Toast.show("물품이 등록되었어요!");
         } else {
-          const updatedProduct = { ...newProduct };
-          delete updatedProduct.images;
-          delete updatedProduct.expiredTime;
+          const updateData = { ...productData };
+          delete updateData.images;
+          delete updateData.expiredTime;
 
-          await editProduct(productId, updatedProduct);
+          await editProduct(productId, updateData);
           navigate(`/product/${productId}`);
           Toast.show("물품이 수정되었어요!");
         }
         clear();
       } catch (error) {
-        console.error("Failed to submit new product:", error);
+        Toast.show("처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
+        console.error("Product submission failed:", error);
       }
     },
     [lat, lng, address, clear, navigate, productId]
