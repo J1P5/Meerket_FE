@@ -1,13 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icons/AppIcon.svg" sizes="240x240" />
+    <link rel="mask-icon" href="/icons/AppIcon.svg" color="#FFFFFF" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preload" href="/Logo.svg" as="image" />
+    <link rel="preconnect" href="https://s3.ap-northeast-2.amazonaws.com" />
     <title>미어켓</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((registration) => {
+            console.log("Service Worker 등록 성공:", registration);
+          })
+          .catch((error) => {
+            console.error("Service Worker 등록 실패:", error);
+          });
+        navigator.serviceWorker
+          .register("/firebase-messaging-sw.js")
+          .then((registration) => {
+            console.log("Firebase Service Worker 등록 성공:", registration);
+          })
+          .catch((error) => {
+            console.error("Firebase Service Worker 등록 실패:", error);
+          });
+      }
+    </script>
   </body>
 </html>
