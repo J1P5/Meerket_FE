@@ -11,13 +11,15 @@ export interface IIconButtonProps {
   backgroundColor?: "default" | "transparent";
   /** onClick 이벤트, 상위 컴포넌트 개발할 때 수정 요망 */
   onClick?: () => void;
+  ariaLabel?: string;
 }
 export const IconButton = ({
   icon,
   type = "square",
   size = "m",
   backgroundColor = "default",
-  onClick = () => {}
+  onClick = () => {},
+  ariaLabel,
 }: IIconButtonProps) => {
   const IconComponent = icon;
 
@@ -31,8 +33,9 @@ export const IconButton = ({
       shape={type}
       backgroundColor={backgroundColor}
       onClick={handleOnClick}
+      aria-label={ariaLabel}
     >
-      <IconComponent size={size}></IconComponent>
+      <IconComponent size={size} />
     </IconButtonWrapper>
   );
 };
