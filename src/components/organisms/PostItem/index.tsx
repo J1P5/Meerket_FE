@@ -53,7 +53,12 @@ export interface IPostItemImageProps {
 const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
   return (
     <PostItemImageWrapper size={size}>
-      <Image type="square" url={imgUrl} alt="PostItem Image" />
+      <Image
+        fetchpriority="high"
+        type="square"
+        url={imgUrl}
+        alt="PostItem Image"
+      />
     </PostItemImageWrapper>
   );
 };
