@@ -14,7 +14,7 @@ export const ImageUpload = ({ onFileChange }: IImageUploadProps) => {
 
   return (
     <ImageUploadWrapper>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file" onChange={handleFileChange} aria-label="imageUploader" />
     </ImageUploadWrapper>
   );
 };
