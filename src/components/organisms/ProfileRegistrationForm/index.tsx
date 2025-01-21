@@ -1,9 +1,11 @@
+import { useCallback } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Image, ImageUpload, Text, TextButton } from "components/atoms";
 import { LabeledInput } from "components/molecules";
 import ProfileUpload from "assets/ProfileRegistrationForm/profile_upload.svg";
 import type { IUser } from "types";
 import { ProfileImageWrapper, ProfileRegistrationFormWrapper } from "./styled";
+import { convertToWebP } from "utils";
 
 interface IProfileRegistrationFormProps {
   /** Submit 이벤트 발생 시 실행할 함수 */
@@ -31,6 +33,15 @@ export const ProfileRegistrationForm = ({
     return URL.createObjectURL(profile);
   };
 
+
+  const onChange = useCallback(
+    async (file: File) => {
+      const resizedFile = await convertToWebP(file, 360);
+      setValue("profile", resizedFile);
+    },
+    [setValue]
+  );
+  
   return (
     <ProfileRegistrationFormWrapper onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -42,8 +53,9 @@ export const ProfileRegistrationForm = ({
               type="round"
               url={getProfileImageURL(value) || ProfileUpload}
               alt="유저 프로필 사진"
+              fetchpriority="high"
             />
-            <ImageUpload onFileChange={(file) => setValue("profile", file)} />
+            <ImageUpload onFileChange={onChange} />
           </ProfileImageWrapper>
         )}
       />
