@@ -26,13 +26,12 @@ export const ProfileRegistrationForm = ({
     },
   });
 
-  const getProfileImageURL = (profile: IUser["profile"]) => {
+  const getProfileImageURL = useCallback((profile: IUser["profile"]) => {
     if (!profile || typeof profile === "string") {
       return profile;
     }
     return URL.createObjectURL(profile);
-  };
-
+  }, []);
 
   const onChange = useCallback(
     async (file: File) => {
