@@ -7,8 +7,8 @@ import { useForegroundNotification } from "hooks";
 import { Modal } from "components/organisms";
 import { useModalStore } from "stores";
 import { Loading } from "components/molecules/Loading";
-//import { router } from "router";
-import { routerTest } from "router";
+import { router } from "router";
+//import { routerTest } from "router";
 const queryClient: QueryClient = new QueryClient();
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
       <GlobalStyle />
       <Suspense fallback={<Loading />}>
         <RouterProvider
-          router={routerTest}
+          router={router}
           future={{
             v7_startTransition: true,
           }}
