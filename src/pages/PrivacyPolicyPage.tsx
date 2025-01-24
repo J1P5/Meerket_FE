@@ -3,7 +3,7 @@ import { PRIVACY_POLICY_TITLE } from "constants/PrivacyPolicyPageConstants";
 import { useEffect } from "react";
 import { useTopBarStore } from "stores";
 
-const PrivacyPolicyPage = () => {
+export const PrivacyPolicyPage = () => {
   const { clear, setTitle } = useTopBarStore();
   useEffect(() => {
     clear();
@@ -13,5 +13,3 @@ const PrivacyPolicyPage = () => {
 
   return <PrivacyPolicyTemplate />;
 };
-
-export default PrivacyPolicyPage;

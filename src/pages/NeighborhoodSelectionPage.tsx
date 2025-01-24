@@ -4,7 +4,7 @@ import { useTopBarStore } from "stores";
 import { SearchIcon } from "components/atoms/Icon";
 import { useNeighborhoodSelection } from "hooks";
 
-const NeighborhoodSelectionPage = () => {
+export const NeighborhoodSelectionPage = () => {
   const { setSearchBar, setRightIcon } = useTopBarStore();
   const {
     term,
@@ -43,5 +43,3 @@ const NeighborhoodSelectionPage = () => {
     </>
   );
 };
-
-export default NeighborhoodSelectionPage;

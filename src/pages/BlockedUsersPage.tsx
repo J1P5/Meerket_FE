@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Toast } from "components/atoms";
 import { BlockedUsersTemplate, EmptyTemplate } from "components/templates";
 import { blockUser, unblockUser} from "services/apis";
 import { useTopBarStore } from "stores";
@@ -7,7 +7,7 @@ import { useFetchBlockedUsers } from "hooks";
 import { Loading } from "components/molecules/Loading";
 import { IBlockedUserItem } from "types";
 
-const BlockedUsersPage = () => {
+export const BlockedUsersPage = () => {
   const { setTitle } = useTopBarStore();
   const [unblockingUsers, setUnblockingUsers] = useState<Set<number>>(new Set());
   const [processingUsers, setProcessingUsers] = useState<Set<number>>(new Set());
@@ -98,5 +98,3 @@ const BlockedUsersPage = () => {
     </>
   );
 };
-
-export default BlockedUsersPage;

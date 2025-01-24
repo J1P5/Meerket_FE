@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Toast } from "components/atoms";
+
 interface IToastArgs {
   message: string;
   duration: number;

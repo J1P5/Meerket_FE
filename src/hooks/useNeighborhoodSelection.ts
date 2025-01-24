@@ -8,7 +8,8 @@ import {
   searchActivityAreas,
 } from "services/apis";
 import { useUserStore } from "../stores";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Toast } from "../components/atoms";
+
 /**
  * 동네 선택 시 사용되는 훅
  */

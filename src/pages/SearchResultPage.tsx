@@ -25,7 +25,7 @@ interface ISearchPostResponse extends IResponse {
     content: ISearchPost[];
   };
 }
-const SearchResultPage = () => {
+export const SearchResultPage = () => {
   /** 2. 키워드 검색결과 관련 변수 및 함수   */
   const SEARCH_KEYWORD_API_URL = `/products/keywords`;
   const SEARCH_CATEGORY_API_URL = `/products/categories`;
@@ -93,34 +93,29 @@ const SearchResultPage = () => {
     keyword?: string;
   }>();
   const { setSearchTerm } = useSearchTopBar();
-  useEffect(
-    () => {
-      let categoryText: ICategory = { code: "", name: "" };
-      if (category) {
-        categoryText = CATEGORIES.find(item => item.code === category) || {
-          code: "",
-          name: "",
-        };
-      }
-      const searchValue = keyword || categoryText.name;
-
-      setSearchTerm(searchValue);
-
-      const fetchSearchPosts = async () => {
-        // URL 결정
-        const url = category
-          ? SEARCH_CATEGORY_API_URL + `?category=${category}`
-          : SEARCH_KEYWORD_API_URL + `?keyword=${keyword}`;
-        await fetchPosts(url);
+  useEffect(() => {
+    let categoryText: ICategory = { code: "", name: "" };
+    if (category) {
+      categoryText = CATEGORIES.find((item) => item.code === category) || {
+        code: "",
+        name: "",
       };
-      fetchSearchPosts().catch(error => {
-        console.error("Error fetchting Home Post:", error);
-      });
-    },
-    [category, keyword]
-  );
+    }
+    const searchValue = keyword || categoryText.name;
 
-  return <SearchResultsTemplate posts={posts} />;
+    setSearchTerm(searchValue);
+
+    const fetchSearchPosts = async () => {
+      // URL 결정
+      const url = category
+        ? SEARCH_CATEGORY_API_URL + `?category=${category}`
+        : SEARCH_KEYWORD_API_URL + `?keyword=${keyword}`;
+      await fetchPosts(url);
+    };
+    fetchSearchPosts().catch((error) => {
+      console.error("Error fetchting Home Post:", error);
+    });
+  }, [category, keyword]);
+
+  return <SearchResultsTemplate posts={posts}></SearchResultsTemplate>;
 };
-
-export default SearchResultPage;
