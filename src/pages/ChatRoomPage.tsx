@@ -1,13 +1,13 @@
 import { Loading } from "components/molecules/Loading";
 import { IPost } from "components/organisms/PostList";
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { EmptyTemplate } from "components/templates";
 import { ChatRoomTemplate } from "components/templates/ChatRoomTemplate";
 import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
 import { useChatGroups } from "hooks/useChatGroups";
 import { useWebSocket } from "hooks/useWebSocket";
-import throttle from "lodash/throttle";
+import { throttle } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { http } from "services/api";
@@ -61,7 +61,7 @@ interface IChatRoomPageResponse extends IResponse {
 interface IChatRoomNewMsgResponse extends IResponse {
   result: IChatMsg[];
 }
-export const ChatRoomPage = () => {
+const ChatRoomPage = () => {
   const { clear, setTitle } = useTopBarStore();
   const navigate = useNavigate();
   const { roomId, userId } = useParams(); // URL에서 roomId 가져오기
@@ -108,15 +108,14 @@ export const ChatRoomPage = () => {
       },
       onTextButtonClick: () => {
         completeProduct(chatRoomBasicInfo.productId!.toString())
-          .then((data) => {
-            console.log(data);
-            Toast.show("거래가 완료되었어요!", 2000);
-            setIsCompleted(true);
-          })
-          .catch((error) => {
-            Toast.show("잠시 후에 다시 시도해 주세요.", 2000);
-            console.error(error);
-          });
+        .then(() => {
+          Toast.show("거래가 완료되었어요!", 2000);
+          setIsCompleted(true);
+        })
+        .catch((error) => {
+          Toast.show("잠시 후에 다시 시도해 주세요.", 2000);
+          console.error(error);
+        });
       },
       onIconButtonClick: () => {
         console.log("onIconButtonClick");
@@ -327,3 +326,5 @@ export const ChatRoomPage = () => {
     </div>
   );
 };
+
+export default ChatRoomPage;

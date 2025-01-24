@@ -2,7 +2,7 @@ import { useState } from "react";
 import { bidding, cancelBidding, editBidding } from "services/apis";
 import { useFetchProduct } from "hooks";
 import { useModalStore } from "stores";
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 
 /**
  * 입찰 로직

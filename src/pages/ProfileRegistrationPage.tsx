@@ -1,20 +1,18 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { ProfileRegistrationTemplate } from "components/templates";
 import { useTopBarStore, useUserStore } from "stores";
 
 import type { IUser, IUserProfileData } from "types";
 import { registerAndEditProfile } from "services/apis/user";
 
-export const ProfileRegistrationPage = () => {
+const ProfileRegistrationPage = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
   const { clear, setTitle } = useTopBarStore();
-  console.log(user);
-  const handleProfileRegistration = (data: IUser) => {
-    console.log(user);
-    console.log(data);
+
+  const handleProfileRegistration = useCallback((data: IUser) => {
     // nickname은 검사하고 오기 때문에 타입 어설션 사용
     const nickname = data.nickname!;
     const profile = data.profile;
@@ -28,8 +26,7 @@ export const ProfileRegistrationPage = () => {
 
     // TODO API 확정 이후 수정
     registerAndEditProfile(requestData)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         // 저장 완료 내역을 클라이언트에도 적용
         // const { result } = data;
         // setUser(result);
@@ -48,7 +45,7 @@ export const ProfileRegistrationPage = () => {
         }
         console.error(error);
       });
-  };
+  },[user, setUser]);
 
   useEffect(() => {
     clear();
@@ -66,3 +63,5 @@ export const ProfileRegistrationPage = () => {
     />
   );
 };
+
+export default ProfileRegistrationPage;

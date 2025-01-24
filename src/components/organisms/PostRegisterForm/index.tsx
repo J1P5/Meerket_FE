@@ -5,6 +5,7 @@ import {
   LabeledInput,
   LabeledSelect,
   LabeledTextarea,
+  ErrorMessage
 } from "components/molecules";
 import { PostImageManager } from "components/organisms";
 import { PostRegisterFormWrapper, DivWrapper } from "./styled";
@@ -68,13 +69,7 @@ export const PostRegisterForm = ({
               disabled={!!productId}
             />
             {invalid && (
-              <div
-                style={{
-                  color: "#FF2E4D",
-                }}
-              >
-                <Text variant="explan_regular" content={error?.message || ""} />
-              </div>
+              <ErrorMessage message={error?.message || ""} />
             )}
           </DivWrapper>
         )}
@@ -100,16 +95,7 @@ export const PostRegisterForm = ({
               placeholder="카테고리를 검색해보세요!"
             />
             {invalid && (
-              <div
-                style={{
-                  color: "#FF2E4D",
-                }}
-              >
-                <Text
-                  variant="explan_regular"
-                  content={formState.errors.category?.message || ""}
-                />
-              </div>
+              <ErrorMessage message={formState.errors.category?.message || ""} />
             )}
           </DivWrapper>
         )}
@@ -132,12 +118,7 @@ export const PostRegisterForm = ({
               placeholder="제목을 입력해주세요."
             />
             {invalid && (
-              <div style={{ color: "#FF2E4D" }}>
-                <Text
-                  variant="explan_regular"
-                  content={formState.errors.title?.message || ""}
-                />
-              </div>
+              <ErrorMessage message={formState.errors.title?.message || ""} />
             )}
           </DivWrapper>
         )}
@@ -162,12 +143,7 @@ export const PostRegisterForm = ({
               }
             />
             {invalid && (
-              <div style={{ color: "#FF2E4D" }}>
-                <Text
-                  variant="explan_regular"
-                  content={formState.errors.content?.message || ""}
-                />
-              </div>
+              <ErrorMessage message={formState.errors.content?.message || ""} />
             )}
           </DivWrapper>
         )}
@@ -197,12 +173,7 @@ export const PostRegisterForm = ({
               placeholder="최저 입찰가를 입력해주세요."
             />
             {invalid && (
-              <div style={{ color: "#FF2E4D" }}>
-                <Text
-                  variant="explan_regular"
-                  content={formState.errors.minimumPrice?.message || ""}
-                />
-              </div>
+              <ErrorMessage message={formState.errors.minimumPrice?.message || ""} />
             )}
           </DivWrapper>
         )}
@@ -261,12 +232,7 @@ export const PostRegisterForm = ({
                 </div>
               )}
               {invalid && (
-                <div style={{ color: "#FF2E4D" }}>
-                  <Text
-                    variant="explan_regular"
-                    content={formState.errors.expiredTime?.message || ""}
-                  />
-                </div>
+                <ErrorMessage message={formState.errors.expiredTime?.message || ""} />
               )}
             </DivWrapper>
           );
@@ -291,12 +257,7 @@ export const PostRegisterForm = ({
               placeholder="거래 희망 장소를 입력해주세요."
             />
             {invalid && (
-              <div style={{ color: "#FF2E4D" }}>
-                <Text
-                  variant="explan_regular"
-                  content={formState.errors.location?.message || ""}
-                />
-              </div>
+              <ErrorMessage message={formState.errors.location?.message || ""} />
             )}
           </DivWrapper>
         )}

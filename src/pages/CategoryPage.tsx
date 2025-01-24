@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTopBarStore } from "stores";
 
-export const CategoryPage = () => {
+const CategoryPage = () => {
   const { clear, setTitle } = useTopBarStore();
 
   const navigate = useNavigate();
@@ -30,3 +30,5 @@ export const CategoryPage = () => {
     ></CategoryTemplate>
   );
 };
+
+export default CategoryPage;

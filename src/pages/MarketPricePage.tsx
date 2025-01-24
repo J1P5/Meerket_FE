@@ -30,7 +30,7 @@ interface IMarketPricePostResponse extends IResponse {
   };
 }
 
-export const MarketPricePage = () => {
+const MarketPricePage = () => {
   const navigate = useNavigate();
   const preloadLinks: HTMLLinkElement[] = [];
 
@@ -132,3 +132,5 @@ export const MarketPricePage = () => {
   }
   return <MarketPriceTemplate posts={data || []}></MarketPriceTemplate>;
 };
+
+export default MarketPricePage;

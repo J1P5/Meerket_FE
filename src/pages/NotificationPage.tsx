@@ -1,3 +1,5 @@
-export const NotificationPage = () => {
+const NotificationPage = () => {
   return <>NotificationPage</>;
 };
+
+export default NotificationPage;
