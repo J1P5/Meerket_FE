@@ -108,15 +108,14 @@ const ChatRoomPage = () => {
       },
       onTextButtonClick: () => {
         completeProduct(chatRoomBasicInfo.productId!.toString())
-          .then((data) => {
-            console.log(data);
-            Toast.show("거래가 완료되었어요!", 2000);
-            setIsCompleted(true);
-          })
-          .catch((error) => {
-            Toast.show("잠시 후에 다시 시도해 주세요.", 2000);
-            console.error(error);
-          });
+        .then(() => {
+          Toast.show("거래가 완료되었어요!", 2000);
+          setIsCompleted(true);
+        })
+        .catch((error) => {
+          Toast.show("잠시 후에 다시 시도해 주세요.", 2000);
+          console.error(error);
+        });
       },
       onIconButtonClick: () => {
         console.log("onIconButtonClick");
