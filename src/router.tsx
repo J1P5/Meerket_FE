@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy } from "react";
 import { createBrowserRouter, type RouteObject } from "react-router-dom";
 const BlockedUsersPage = lazy(() => import("pages/BlockedUsersPage"));
 const CategoryPage = lazy(() => import("pages/CategoryPage"));
@@ -10,18 +10,24 @@ const LoginPage = lazy(() => import("pages/LoginPage"));
 const MarketPricePage = lazy(() => import("pages/MarketPricePage"));
 const MyPage = lazy(() => import("pages/MyPage"));
 const NeighborhoodAuthPage = lazy(() => import("pages/NeighborhoodAuthPage"));
-const NeighborhoodSelectionPage = lazy(() => import("pages/NeighborhoodSelectionPage"));
+const NeighborhoodSelectionPage = lazy(
+  () => import("pages/NeighborhoodSelectionPage")
+);
 const NotificationPage = lazy(() => import("pages/NotificationPage"));
 const OAuthCallbackPage = lazy(() => import("pages/OAuthCallbackPage"));
 const PermissionRequestPage = lazy(() => import("pages/PermissionRequestPage"));
 const PostRegisterPage = lazy(() => import("pages/PostRegisterPage"));
 const PrivacyPolicyPage = lazy(() => import("pages/PrivacyPolicyPage"));
-const ProfileRegistrationPage = lazy(() => import("pages/ProfileRegistrationPage"));
+const ProfileRegistrationPage = lazy(
+  () => import("pages/ProfileRegistrationPage")
+);
 const SearchPage = lazy(() => import("pages/SearchPage"));
 const SearchResultPage = lazy(() => import("pages/SearchResultPage"));
 const SelectLocationPage = lazy(() => import("pages/SelectLocationPage"));
 const TermsOfServicePage = lazy(() => import("pages/TermsOfServicePage"));
-const TransactionLocationPage = lazy(() => import("pages/TransactionLocationPage"));
+const TransactionLocationPage = lazy(
+  () => import("pages/TransactionLocationPage")
+);
 const TransactionPage = lazy(() => import("pages/TransactionPage"));
 
 // import {
