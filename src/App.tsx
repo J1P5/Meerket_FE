@@ -1,11 +1,12 @@
-import { RouterProvider } from "react-router-dom";
+//import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { router } from "router";
+//import { router } from "router";
 import { GlobalStyle } from "styles";
 import { useForegroundNotification } from "hooks";
 import { Modal } from "components/organisms";
 import { useModalStore } from "stores";
+import { LoginPage } from "pages";
 
 const queryClient: QueryClient = new QueryClient();
 
@@ -18,12 +19,13 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <RouterProvider
+      {/* <RouterProvider
         router={router}
         future={{
           v7_startTransition: true
         }}
-      />
+      /> */}
+      <LoginPage></LoginPage>
       <Modal open={isOpen} onClose={closeModal}>
         <Modal.Background hasClickEvent />
         <Modal.Container>{content}</Modal.Container>
