@@ -1,14 +1,14 @@
-//import { Suspense } from "react";
-//import { RouterProvider } from "react-router-dom";
+import { Suspense } from "react";
+import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyle } from "styles";
 import { useForegroundNotification } from "hooks";
 import { Modal } from "components/organisms";
 import { useModalStore } from "stores";
-//import { Loading } from "components/molecules/Loading";
-import { LoginPage } from "pages";
-
+import { Loading } from "components/molecules/Loading";
+//import { router } from "router";
+import { routerTest } from "router";
 const queryClient: QueryClient = new QueryClient();
 
 const App = () => {
@@ -17,18 +17,19 @@ const App = () => {
   const content = useModalStore((store) => store.content);
   const { closeModal } = useModalStore((store) => store.actions);
 
+  console.log("05_35_RouterTest");
+
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <LoginPage></LoginPage>
-      {/* <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
         <RouterProvider
-          router={router}
+          router={routerTest}
           future={{
             v7_startTransition: true,
           }}
         />
-      </Suspense> */}
+      </Suspense>
       <Modal open={isOpen} onClose={closeModal}>
         <Modal.Background hasClickEvent />
         <Modal.Container>{content}</Modal.Container>

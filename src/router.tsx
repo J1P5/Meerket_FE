@@ -161,3 +161,11 @@ export const router: ReturnType<typeof createBrowserRouter> =
       v7_skipActionErrorRevalidation: true,
     },
   });
+
+const routesTest: RouteObject[] = [
+  { path: "/", element: <LoginPage /> },
+  { path: "/login", element: <LoginPage /> },
+];
+
+export const routerTest: ReturnType<typeof createBrowserRouter> =
+  createBrowserRouter(routesTest);
