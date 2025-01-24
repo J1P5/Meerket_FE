@@ -1,14 +1,25 @@
 importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js");
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBiDu_GpAQ62HLx1jihJxEjKGhfPyQmT1c",
+//   authDomain: "meerket-test.firebaseapp.com",
+//   projectId: "meerket-test",
+//   storageBucket: "meerket-test.firebasestorage.app",
+//   messagingSenderId: "342062933646",
+//   appId: "1:342062933646:web:776be14ae4fe4aaee40bdf",
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBiDu_GpAQ62HLx1jihJxEjKGhfPyQmT1c",
-  authDomain: "meerket-test.firebaseapp.com",
-  projectId: "meerket-test",
-  storageBucket: "meerket-test.firebasestorage.app",
-  messagingSenderId: "342062933646",
-  appId: "1:342062933646:web:776be14ae4fe4aaee40bdf",
+  apiKey: "AIzaSyDW5D3PgKLgB43bjav1EvAhQtBhLSc76C4",
+  authDomain: "meerket-83e38.firebaseapp.com",
+  projectId: "meerket-83e38",
+  storageBucket: "meerket-83e38.firebasestorage.app",
+  messagingSenderId: "518393754968",
+  appId: "1:518393754968:web:208f662de1b23f690da12d",
+  measurementId: "G-R7RM1PVXKM",
 };
+
 firebase.initializeApp(firebaseConfig);
 
 /**

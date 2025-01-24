@@ -12,6 +12,7 @@ export const GlobalStyle = () => {
             format("woff");
           font-weight: 400;
           font-style: normal;
+          font-display: swap;
         }
 
         @font-face {
@@ -20,6 +21,7 @@ export const GlobalStyle = () => {
             format("woff");
           font-weight: 600;
           font-style: normal;
+          font-display: swap;
         }
 
         @font-face {
@@ -28,6 +30,7 @@ export const GlobalStyle = () => {
             format("woff");
           font-weight: 700;
           font-style: normal;
+          font-display: swap;
         }
 
         // RootContainer

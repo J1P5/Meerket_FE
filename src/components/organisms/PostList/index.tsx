@@ -95,14 +95,15 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
         </PostItem.Container>
-        {isSeller &&
+        {isSeller && (
           <PostItem.ButtonContainer
             buttonText={isCompleted ? "거래가 완료되었어요!" : "거래 완료"}
             onTextButtonClick={onTextButtonClick}
             icon={DownIcon}
             onIconButtonClick={onIconButtonClick}
             disabled={isCompleted}
-          />}
+          />
+        )}
       </PostItem>
     );
   };
@@ -263,9 +264,9 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   const SelectedStateComponent = StateComponents[type] || DefaultState;
   return (
     <PostListWrapper>
-      {posts.map(post =>
+      {posts.map((post) => (
         <SelectedStateComponent key={post.productId} {...post} />
-      )}
+      ))}
     </PostListWrapper>
   );
 };

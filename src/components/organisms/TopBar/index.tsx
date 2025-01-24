@@ -28,6 +28,7 @@ const TopBarBackIcon = ({ onBackIconClick }: ITopBarBackIconProps) => {
         icon={BackIcon}
         onClick={onBackIconClick}
         backgroundColor="transparent"
+        ariaLabel="backIcon"
       />
     </TopBarBackIconWrapper>
   );
@@ -48,6 +49,7 @@ const TopBarIcon = ({ icon = NoIcon, onIconClick }: ITopBarIconProps) => {
         icon={icon}
         onClick={onIconClick}
         backgroundColor="transparent"
+        ariaLabel="icon"
       />
     </TopBarIconWrapper>
   );

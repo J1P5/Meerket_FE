@@ -1,7 +1,19 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import { Image } from "components/atoms";
 import { ImageSliderWrapper } from "./styled";
+import { Pagination } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Swiper 컴포넌트를 지연 로딩 - 지연로딩 후 버그 발생으로 주석처리
+// eslint-disable-next-line @rushstack/typedef-var
+// const Swiper = React.lazy(() =>
+//   import("swiper/react").then((module) => ({ default: module.Swiper }))
+// );
+// // eslint-disable-next-line @rushstack/typedef-var
+// const SwiperSlide = React.lazy(() =>
+//   import("swiper/react").then((module) => ({ default: module.SwiperSlide }))
+// );
+
 import "swiper/swiper-bundle.css";
 
 // TODO: import 오류 해결하기
@@ -19,7 +31,7 @@ export const ImageSlider = ({ imgUrls }: IImageSliderProps) => {
     <ImageSliderWrapper>
       <Swiper
         pagination={{
-          type: "fraction"
+          type: "fraction",
         }}
         modules={[Pagination]}
         className="image-slider"
@@ -33,4 +45,3 @@ export const ImageSlider = ({ imgUrls }: IImageSliderProps) => {
     </ImageSliderWrapper>
   );
 };
-

@@ -10,7 +10,7 @@ export const useFetchSession = () => {
     retry: false,
   });
   return {
-    sessionUser: data,
+    sessionUser: isError ? null : data,
     isLoading,
     isError,
   };

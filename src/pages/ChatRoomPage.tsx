@@ -7,7 +7,7 @@ import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
 import { useChatGroups } from "hooks/useChatGroups";
 import { useWebSocket } from "hooks/useWebSocket";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { http } from "services/api";
@@ -42,7 +42,7 @@ interface IChatRoomBasic {
   /** 게시글 등록 날짜 */
   productCreatedAt: string;
   /** 게시글 상태 */
-  productStatus:  "BIDDING" | "IN_PROGRESS" | "COMPLETED";
+  productStatus: "BIDDING" | "IN_PROGRESS" | "COMPLETED";
 }
 
 export interface IChatMsg {
@@ -120,7 +120,7 @@ export const ChatRoomPage = () => {
       onIconButtonClick: () => {
         console.log("onIconButtonClick");
       },
-    }
+    };
   };
 
   /** 메시지 시간순(오름차순) 으로 정렬하는 함수
