@@ -163,7 +163,14 @@ export const router: ReturnType<typeof createBrowserRouter> =
   });
 
 const routesTest: RouteObject[] = [
-  { path: "/", element: <LoginPage /> },
+  {
+    path: "/",
+    element: (
+      <LoginGuard>
+        <LoginPage />
+      </LoginGuard>
+    ),
+  },
   { path: "/login", element: <LoginPage /> },
 ];
 

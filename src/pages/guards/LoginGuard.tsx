@@ -10,7 +10,7 @@ interface ILoginGuardProps {
  */
 export const LoginGuard = ({ children }: ILoginGuardProps) => {
   const { sessionUser } = useFetchSession();
-
+  console.log("LGP 관련 LoginGuard.tsx 06_48");
   // if (isLoading) {
   //   return null;
   // }

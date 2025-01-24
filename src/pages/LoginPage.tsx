@@ -20,7 +20,8 @@ const LoginPage = () => {
   if (location.pathname.includes("/callback")) {
     return <Outlet />;
   }
-  console.log("LCP 관련 router.tsx 0554");
+
+  console.log("LGP 관련 LoginPage.tsx 06_48");
   return (
     <>
       <LoginTemplate
