@@ -3,6 +3,7 @@ import { ImageSliderWrapper } from "./styled";
 import { Pagination } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useEffect } from "react";
 
 // Swiper 컴포넌트를 지연 로딩 - 지연로딩 후 버그 발생으로 주석처리
 // eslint-disable-next-line @rushstack/typedef-var
@@ -13,8 +14,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // const SwiperSlide = React.lazy(() =>
 //   import("swiper/react").then((module) => ({ default: module.SwiperSlide }))
 // );
-
-import "swiper/swiper-bundle.css";
 
 // TODO: import 오류 해결하기
 // import "swiper/css";
@@ -27,6 +26,17 @@ interface IImageSliderProps {
 }
 
 export const ImageSlider = ({ imgUrls }: IImageSliderProps) => {
+  useEffect(() => {
+    // CSS 파일을 지연 로딩하고 오류를 처리 (block되기 때문에 지연로딩으로 변경)
+    import("swiper/swiper-bundle.css")
+      .then(() => {
+        console.log("CSS 파일이 성공적으로 로드되었습니다.");
+      })
+      .catch((error) => {
+        console.error("CSS 파일 로드 중 오류 발생:", error);
+      });
+  }, []);
+
   return (
     <ImageSliderWrapper>
       <Swiper
