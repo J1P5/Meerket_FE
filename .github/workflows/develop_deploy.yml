@@ -21,6 +21,15 @@ jobs:
 
       - name: creates output
         run: sh ./build.sh
+
+      - name: Clear target repository
+        run: |
+          git clone https://github.com/JW-Ahn0/Meerket_Develop.git target_repo
+          cd target_repo
+          git rm -rf .
+          git commit -m "Clear repository"
+          git push origin main
+
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
