@@ -35,8 +35,7 @@ interface IHomePostResponse extends IResponse {
     nextCursor: number;
   };
 }
-
-export const HomePage = () => {
+const HomePage = () => {
   const { user } = useUserStore();
   const { setTitle } = useHeaderStore();
   const navigate = useNavigate();
@@ -167,3 +166,5 @@ export const HomePage = () => {
     </HomeTemplate>
   );
 };
+
+export default HomePage;

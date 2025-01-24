@@ -1,7 +1,7 @@
 import { usePermission } from "../hooks";
 import { useEffect } from "react";
 
-export const PermissionRequestPage = () => {
+const PermissionRequestPage = () => {
   const { permission, handleRequestPermission } = usePermission();
 
   /**
@@ -26,3 +26,5 @@ export const PermissionRequestPage = () => {
   }, []);
   return <>PermissionRequestPage</>;
 };
+
+export default PermissionRequestPage;

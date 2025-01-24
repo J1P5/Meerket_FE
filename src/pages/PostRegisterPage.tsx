@@ -1,4 +1,4 @@
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { PostRegisterTemplate } from "components/templates";
 import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -153,6 +153,8 @@ export const PostRegisterPage = () => {
     />
   );
 };
+
+export default PostRegisterPage;
 
 /**
  * 이미지 업로드 시 응답 받는 타입 (고도화에서 사용)

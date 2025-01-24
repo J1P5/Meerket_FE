@@ -16,7 +16,7 @@ interface TransactionPageProps {
   type: "buy" | "sell";
 }
 
-export const TransactionPage = ({ type }: TransactionPageProps) => {
+const TransactionPage = ({ type }: TransactionPageProps) => {
   const navigate = useNavigate();
   const TransactionTemplate =
     // 현재 페이지 타입에 따라 Template 설정
@@ -139,3 +139,5 @@ export const TransactionPage = ({ type }: TransactionPageProps) => {
     </Suspense>
   );
 };
+
+export default TransactionPage;
