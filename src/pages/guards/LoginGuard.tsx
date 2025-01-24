@@ -20,5 +20,5 @@ export const LoginGuard = ({ children }: ILoginGuardProps) => {
     return <Navigate to="/" replace />;
   }
 
-  return <Suspense fallback={null}>{children}</Suspense>;
+  return <>{children}</>;
 };
