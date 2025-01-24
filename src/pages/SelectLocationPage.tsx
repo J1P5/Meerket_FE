@@ -6,7 +6,7 @@ import { useLocationErrorEvent } from "hooks";
 import { useFormDataStore, useTopBarStore } from "stores";
 import type { ILocation } from "types";
 
-export const SelectLocationPage = () => {
+const SelectLocationPage = () => {
   const navigate = useNavigate();
   const { setTitle } = useTopBarStore();
   const productId = useFormDataStore((state) => state.productId);
@@ -75,3 +75,5 @@ export const SelectLocationPage = () => {
     />
   );
 };
+
+export default SelectLocationPage;

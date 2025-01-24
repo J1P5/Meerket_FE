@@ -1,3 +1,5 @@
+import { IResponse } from "types";
+
 export interface IChat {
   /** 채팅 메시지 내용 */
   msg: string;
@@ -8,3 +10,29 @@ export interface IChat {
   /** 해당 메시지 보낸 시간 */
   createdAt: string;
 }
+
+/** 백엔드 타입 */
+export interface IChatRoom {
+  userId: string;
+  roomId: string;
+  productId: number;
+
+  lastMessage: string;
+  lastMessageAt: string;
+  unreadCount: number;
+
+  productImage: string | undefined;
+  otherNickname: string;
+  otherProfileImage: string | undefined;
+}
+
+export interface IChatRoomResponse extends IResponse {
+  result: IChatRoom[];
+}
+
+export interface IChatRoomType {
+  type: chatRoomTabMapValue;
+}
+
+export type chatRoomTabMapKey = "전체" | "판매" | "구매" | "안 읽은 채팅방";
+export type chatRoomTabMapValue = "ALL" | "SALE" | "PURCHASE";
