@@ -48,7 +48,8 @@ export const MarketPricePage = () => {
     /** 게시글 ID */
     productId: marketPricePost.productId,
     /** 게시글 썸네일 이미지 */
-    imgUrl: marketPricePost.image,
+    //imgUrl: marketPricePost.image,
+    imgUrl: "https://avatars.githubusercontent.com/u/50391687?v=4&size=64",
     /** 게시글 제목 */
     title: marketPricePost.title,
     /** 게시글 가격 */
