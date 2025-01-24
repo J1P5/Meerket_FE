@@ -1,20 +1,23 @@
 import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { MyPageTemplate } from "components/templates";
 import { useHeaderStore, useUserStore } from "stores";
 import { getUserProfile, oauthLogout, withdraw } from "services/apis";
 import { useModalForm } from "hooks";
 
-export const MyPage = () => {
+const MyPage = () => {
   const { setTitle } = useHeaderStore();
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
   const { confirm } = useModalForm();
 
-  const handleProfileEditButtonClick = useCallback(() => {
-    navigate("/profile");
-  }, [navigate]);
+  const handleProfileEditButtonClick = useCallback(
+    () => {
+      navigate("/profile");
+    },
+    [navigate]
+  );
 
   const handleMenuClick = useCallback(
     (pathname: string) => {
@@ -39,33 +42,39 @@ export const MyPage = () => {
       });
   }, []);
 
-  const handleLogout = useCallback(() => {
-    confirm("로그아웃 하시겠습니까?", () => {
-      oauthLogout()
-        .then(() => {
-          setUser(null);
-          location.reload();
-        })
-        .catch((error) => {
-          Toast.show("잠시 후에 다시 시도해주세요.", 2000);
-          console.error("Logout failed", error);
-        });
-    });
-  }, [confirm, setUser]);
+  const handleLogout = useCallback(
+    () => {
+      confirm("로그아웃 하시겠습니까?", () => {
+        oauthLogout()
+          .then(() => {
+            setUser(null);
+            location.reload();
+          })
+          .catch(error => {
+            Toast.show("잠시 후에 다시 시도해주세요.", 2000);
+            console.error("Logout failed", error);
+          });
+      });
+    },
+    [confirm, setUser]
+  );
 
-  const handleWithdraw = useCallback(() => {
-    confirm("정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.", () => {
-      withdraw()
-        .then(() => {
-          setUser(null);
-          location.reload();
-        })
-        .catch((error) => {
-          Toast.show("잠시 후에 다시 시도해주세요.", 2000);
-          console.error("Withdraw failed", error);
-        });
-    });
-  }, [confirm, setUser]);
+  const handleWithdraw = useCallback(
+    () => {
+      confirm("정말 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.", () => {
+        withdraw()
+          .then(() => {
+            setUser(null);
+            location.reload();
+          })
+          .catch(error => {
+            Toast.show("잠시 후에 다시 시도해주세요.", 2000);
+            console.error("Withdraw failed", error);
+          });
+      });
+    },
+    [confirm, setUser]
+  );
 
   if (!user) {
     return null;
@@ -82,3 +91,5 @@ export const MyPage = () => {
     />
   );
 };
+
+export default MyPage;

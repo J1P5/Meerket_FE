@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "components/atoms/Icon";
 import { useTopBarStore } from "stores";
-import { Toast } from "../components/atoms";
-
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 /**
  * SearchTopBar가 필요한 페이지(search, searchResult)에서 사용하는 hook
  * @param value searchTerm의 기본 값 (default: "")
