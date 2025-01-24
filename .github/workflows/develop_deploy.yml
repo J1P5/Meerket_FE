@@ -30,12 +30,14 @@ jobs:
           git config --global user.name "JW-Ahn0"
 
       - name: Clear target repository
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.DEVELOP_REPO_DEPLOYMENT_TOKEN }}
         run: |
           git clone https://github.com/JW-Ahn0/Meerket_Develop.git target_repo
           cd target_repo
           git rm -rf .
           git commit -m "Clear repository"
-          git push origin main
+          git push https://x-access-token:${{ secrets.DEVELOP_REPO_DEPLOYMENT_TOKEN }}@github.com/JW-Ahn0/Meerket_Develop.git main
           cd ..
 
       - name: Pushes to another repository
