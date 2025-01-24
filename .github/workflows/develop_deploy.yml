@@ -10,10 +10,8 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v4
-      - name: Install mustache and git
-        run: |
-          apk add ruby git
-          gem install mustache
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
 
       - name: List current directory
         run: ls -la
@@ -23,22 +21,6 @@ jobs:
 
       - name: creates output
         run: sh ./build.sh
-
-      - name: Configure Git user
-        run: |
-          git config --global user.email "${{ secrets.DEVELOP_EMAIL }}"
-          git config --global user.name "JW-Ahn0"
-
-      - name: Clear target repository
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.DEVELOP_REPO_DEPLOYMENT_TOKEN }}
-        run: |
-          git clone https://github.com/JW-Ahn0/Meerket_Develop.git target_repo
-          cd target_repo
-          git rm -rf .
-          git commit -m "Clear repository"
-          git push https://x-access-token:${{ secrets.DEVELOP_REPO_DEPLOYMENT_TOKEN }}@github.com/JW-Ahn0/Meerket_Develop.git main
-          cd ..
 
       - name: Pushes to another repository
         id: push_directory
