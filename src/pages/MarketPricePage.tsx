@@ -29,7 +29,7 @@ interface IMarketPricePostResponse extends IResponse {
   };
 }
 
-export const MarketPricePage = () => {
+const MarketPricePage = () => {
   const navigate = useNavigate();
 
   /** 백엔드 IMarketPricePost 타입을 프론트 IPost 으로 변환 함수
@@ -104,3 +104,5 @@ export const MarketPricePage = () => {
   }
   return <MarketPriceTemplate posts={data || []}></MarketPriceTemplate>;
 };
+
+export default MarketPricePage;

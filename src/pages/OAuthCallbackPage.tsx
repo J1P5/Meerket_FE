@@ -9,7 +9,7 @@ import { oauthLogin } from "services/apis";
 import { useUserStore } from "stores";
 import type { OAuthProvider } from "types";
 
-export const OAuthCallbackPage = () => {
+const OAuthCallbackPage = () => {
   // TODO 직접 접근 막기
   const navigate = useNavigate();
   const { provider } = useParams<{ provider: Lowercase<OAuthProvider> }>();
@@ -50,3 +50,5 @@ export const OAuthCallbackPage = () => {
 
   return null;
 };
+
+export default OAuthCallbackPage;

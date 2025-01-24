@@ -1,6 +1,6 @@
 import { Loading } from "components/molecules/Loading";
 import { IPost } from "components/organisms/PostList";
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { EmptyTemplate } from "components/templates";
 import { ChatRoomTemplate } from "components/templates/ChatRoomTemplate";
 import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
@@ -61,7 +61,7 @@ interface IChatRoomPageResponse extends IResponse {
 interface IChatRoomNewMsgResponse extends IResponse {
   result: IChatMsg[];
 }
-export const ChatRoomPage = () => {
+const ChatRoomPage = () => {
   const { clear, setTitle } = useTopBarStore();
   const navigate = useNavigate();
   const { roomId, userId } = useParams(); // URL에서 roomId 가져오기
@@ -327,3 +327,5 @@ export const ChatRoomPage = () => {
     </div>
   );
 };
+
+export default ChatRoomPage;

@@ -1,6 +1,6 @@
 import { ChatListTemplateWrapper } from "./styled";
 import { IChatItemProps } from "components/organisms/ChatItem";
-import { ChatOverview } from "components/organisms";
+import { ChatOverview } from "components/organisms/ChatOverview";
 import { chatRoomTabMap, chatRoomTabMapKey } from "constants/Chat";
 
 interface IChatListTemplateProps {

@@ -36,7 +36,7 @@ interface IChatRoomResponse extends IResponse {
   result: IChatRoom[];
 }
 
-export const ChatListPage = () => {
+const ChatListPage = () => {
   const { setTitle } = useHeaderStore();
   //헤더 세팅
   useEffect(() => {
@@ -126,3 +126,5 @@ export const ChatListPage = () => {
     ></ChatListTemplate>
   );
 };
+
+export default ChatListPage;

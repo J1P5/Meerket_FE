@@ -2,7 +2,7 @@ import { TransactionLocationTemplate } from "components/templates";
 import { useSelectedLocationStore } from "stores";
 import { useLocationErrorEvent } from "hooks";
 
-export const TransactionLocationPage = () => {
+const TransactionLocationPage = () => {
   const coord = useSelectedLocationStore((state) => state.coord);
   const location = useSelectedLocationStore((state) => state.location);
   const locationErrorEvent = useLocationErrorEvent();
@@ -15,3 +15,6 @@ export const TransactionLocationPage = () => {
     />
   );
 };
+
+
+export default TransactionLocationPage;

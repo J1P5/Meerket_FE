@@ -30,7 +30,7 @@ interface IHomePostResponse extends IResponse {
     content: IHomePost[];
   };
 }
-export const HomePage = () => {
+const HomePage = () => {
   const { user } = useUserStore();
   const { setTitle } = useHeaderStore();
   const navigate = useNavigate();
@@ -123,3 +123,5 @@ export const HomePage = () => {
     ></HomeTemplate>
   );
 };
+
+export default HomePage;
