@@ -1,12 +1,12 @@
-import { type Context, createContext, useContext, useState } from "react";
-
+import {} from "components/atoms";
 import { TabItem } from "components/molecules";
 import { ChatList } from "components/organisms";
-import { IChatItemProps } from "components/organisms/ChatItem";
-import { EmptyTemplate } from "components/templates";
-import { chatRoomTabMapKey } from "types";
-
 import { ChatOverviewRootWrapper, ListWrapper, PanelWrapper } from "./styled";
+import { type Context, createContext, useContext, useState } from "react";
+
+import { IChatItemProps } from "components/organisms/ChatItem";
+import { chatRoomTabMapKey } from "constants/Chat";
+import { EmptyTemplate } from "components/templates";
 
 interface IChatOverviewRootProps {
   children: React.ReactNode;

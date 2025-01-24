@@ -20,10 +20,10 @@ import {
 import { KebabWrapper } from "./styled";
 import { deleteProduct, earlyClose, reportUser, blockUser as blockSeller } from "services/apis";
 import type { Category, ReportType } from "types";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Toast } from "components/atoms";
 import { isExpired } from "../../utils";
 
-const DetailPage = () => {
+export const DetailPage = () => {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
   const { product, isProductLoading, productRefetch, isProductRefetching } =
@@ -274,5 +274,3 @@ const DetailPage = () => {
     </Suspense>
   );
 };
-
-export default DetailPage;

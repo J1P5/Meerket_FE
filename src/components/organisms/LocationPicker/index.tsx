@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Text, TextButton } from "components/atoms";
-import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
+import { Map } from "components/organisms";
 import { LocationPickerWrapper, PaddingWrapper } from "./styled";
 import { ICoord, ILocation } from "types";
 import { useReverseGeocode } from "hooks";

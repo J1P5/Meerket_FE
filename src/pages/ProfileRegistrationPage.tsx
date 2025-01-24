@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Toast } from "components/atoms";
 import { ProfileRegistrationTemplate } from "components/templates";
 import { useTopBarStore, useUserStore } from "stores";
 
 import type { IUser, IUserProfileData } from "types";
 import { registerAndEditProfile } from "services/apis/user";
 
-const ProfileRegistrationPage = () => {
+export const ProfileRegistrationPage = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
   const { clear, setTitle } = useTopBarStore();
@@ -63,5 +63,3 @@ const ProfileRegistrationPage = () => {
     />
   );
 };
-
-export default ProfileRegistrationPage;

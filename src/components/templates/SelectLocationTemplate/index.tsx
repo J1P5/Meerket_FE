@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { LocationInputBottomSheet } from "components/organisms";
-import { LocationPicker } from "components/organisms/LocationPicker";
+import { LocationInputBottomSheet, LocationPicker } from "components/organisms";
 import { SelectLocationTemplateWrapper } from "./styled";
 import { ICoord, ILocation } from "types";
 
@@ -32,18 +31,19 @@ export const SelectLocationTemplate = ({
   closeBottomSheet,
   onRegistrationButtonClick,
   locationErrorEvent,
-  isError,
+  isError
 }: ISelectLocationTemplateProps) => {
   // TODO: 템플릿은 스켈레톤이기 때문에 페이지로 useState를 빼는 게 나을까?
   const [place, setPlace] = useState(location || "");
 
   const memoizedLocationPicker = useMemo(
-    () =>
+    () => (
       <LocationPicker
         coord={coord}
         onLocationSelect={onLocationSelect}
         locationErrorEvent={locationErrorEvent}
-      />,
+      />
+    ),
     [coord, onLocationSelect, locationErrorEvent]
   );
 

@@ -1,9 +1,7 @@
-import { IChatItemProps } from "components/organisms/ChatItem";
-import { ChatOverview } from "components/organisms/ChatOverview";
-import { chatRoomTabMap } from "constants/Chat";
-import { chatRoomTabMapKey } from "types";
-
 import { ChatListTemplateWrapper } from "./styled";
+import { IChatItemProps } from "components/organisms/ChatItem";
+import { ChatOverview } from "components/organisms";
+import { chatRoomTabMap, chatRoomTabMapKey } from "constants/Chat";
 
 interface IChatListTemplateProps {
   /** 채팅 방 아이템 리스트 Organisms/ChatItem 컴포넌트 참조  */

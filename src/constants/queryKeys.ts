@@ -9,8 +9,6 @@ const SELL = "sell" as const;
 const IN_PROGRESS = "in_progress" as const;
 const COMPLETED = "completed" as const;
 const BLOCK = "block" as const;
-const CHATITEMS = "chatItems" as const;
-const ALL = "all" as const;
 
 export const queries = {
   session: {
@@ -38,13 +36,5 @@ export const queries = {
   },
   block:{
     DEFAULT: [BLOCK],
-  },
-  // TODO: 다른 것들과 통일 필요
-  chatItems: {
-    DEFAULT: [CHATITEMS],
-    ALL: [CHATITEMS, ALL],
-    SALE: [CHATITEMS, SELL],
-    PURCHASE: [CHATITEMS, PURCHASES],
   }
-
 } as const;

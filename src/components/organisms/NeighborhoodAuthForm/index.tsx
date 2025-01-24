@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { TextButton } from "components/atoms";
 import { NeighborhoodAuthFormWrapper } from "./styled";
-import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
+import { Map } from "components/organisms";
 import { ICoord, ILocation } from "types";
 import { useReverseGeocode } from "hooks";
 import { createPortal } from "react-dom";
