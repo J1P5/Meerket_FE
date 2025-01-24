@@ -63,6 +63,10 @@ export const PostRegisterPage = () => {
   const { latitude: lat, longitude: lng, address } = formData;
   const { setFormData, clear } = useFormDataStore();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // const { product, isProductLoading } = useFetchProduct(
   //   productId?.toString() || ""
   // );
