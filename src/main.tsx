@@ -1,8 +1,9 @@
 import { createRoot } from "react-dom/client";
-import App from "./App";
+//import App from "./App";
 import { NavermapsProvider } from "react-naver-maps";
 import { ThemeProvider } from "@emotion/react";
 import { defaultTheme } from "styles/theme";
+import { LoginPage } from "pages";
 
 createRoot(document.getElementById("root")!).render(
   <NavermapsProvider
@@ -10,7 +11,8 @@ createRoot(document.getElementById("root")!).render(
     submodules={["geocoder"]}
   >
     <ThemeProvider theme={defaultTheme}>
-      <App />
+      {/* <App /> */}
+      <LoginPage></LoginPage>
     </ThemeProvider>
   </NavermapsProvider>
 );
