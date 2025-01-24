@@ -12,9 +12,9 @@ interface ILoginGuardProps {
 export const LoginGuard = ({ children }: ILoginGuardProps) => {
   const { sessionUser, isLoading } = useFetchSession();
 
-  if (isLoading) {
-    return null;
-  }
+  // if (isLoading) {
+  //   return null;
+  // }
 
   if (sessionUser) {
     return <Navigate to="/" replace />;
