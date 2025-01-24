@@ -10,8 +10,10 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v4
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
+      - name: Install mustache and git
+        run: |
+          apk add ruby git
+          gem install mustache
 
       - name: List current directory
         run: ls -la
