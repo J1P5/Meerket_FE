@@ -33,6 +33,7 @@ export type TextVariant =
   | "badge_regular";
 
 interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
+  children: React.ReactNode;
   /** Text의 타입 (스타일 가이드 준수) */
   variant?: TextVariant;
   /** Text의 색깔 */

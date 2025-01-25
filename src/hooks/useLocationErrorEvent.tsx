@@ -34,14 +34,12 @@ export const useLocationErrorEvent = () => {
                   color: "#2D2D39",
                 }}
               >
-                <Text content={message} variant='title_bold' />
+                <Text  variant='title_bold'>{message}</Text>
                 {/* // TODO: 에러마다 바뀔 것 같아서, 나중에 prop으로 처리 */}
-                <div style={{ color: "#707192" }}>
                   <Text
-                    content={"위치 권한 허용 후 다시 시도해 주세요!"}
+                    color="#707192"
                     variant='explan_regular'
-                  />
-                </div>
+                  >위치 권한 허용 후 다시 시도해 주세요!</Text>
               </div>
             </div>
           </Modal.Body>

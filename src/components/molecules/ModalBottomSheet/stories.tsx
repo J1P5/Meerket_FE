@@ -16,10 +16,10 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <Text variant="h5" content="ModalBottonSheet 내부 Content 영역입니다" />
-        <Text content="Modal과 동일하게 open, onClose를 받아 스타일을 설정합니다." />
-        <Text content="children에는 아무거나 올 수 있습니다. (다양한 컴포넌트들)" />
-        <Text content="className을 지정해 Body 영역 스타일을 변경할 수 있습니다." />
+        <Text variant="h5">ModalBottonSheet 내부 Content 영역입니다</Text>
+        <Text>Modal과 동일하게 open, onClose를 받아 스타일을 설정합니다.</Text>
+        <Text>children에는 아무거나 올 수 있습니다. (다양한 컴포넌트들)</Text>
+        <Text>className을 지정해 Body 영역 스타일을 변경할 수 있습니다.</Text>
       </>
     ),
     open: true,
@@ -34,13 +34,10 @@ export const Animation: Story = {
         <>
           <button onClick={() => setOpen(true)}>Open</button>
           <ModalBottomSheet open={open} onClose={() => setOpen(false)}>
-            <Text
-              variant="h5"
-              content="ModalBottonSheet 내부 Content 영역입니다"
-            />
-            <Text content="Modal과 동일하게 open, onClose를 받아 스타일을 설정합니다." />
-            <Text content="children에는 아무거나 올 수 있습니다. (다양한 컴포넌트들)" />
-            <Text content="className을 지정해 Body 영역 스타일을 변경할 수 있습니다." />
+            <Text variant="h5">ModalBottonSheet 내부 Content 영역입니다</Text>
+            <Text>Modal과 동일하게 open, onClose를 받아 스타일을 설정합니다.</Text>
+            <Text>children에는 아무거나 올 수 있습니다. (다양한 컴포넌트들)</Text>
+            <Text>className을 지정해 Body 영역 스타일을 변경할 수 있습니다.</Text>
           </ModalBottomSheet>
         </>
       );

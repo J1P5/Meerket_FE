@@ -14,17 +14,17 @@ interface IPostImageItemProps {
 export const PostImageItem = ({
   imgUrl,
   isThumbnail,
-  onClick
+  onClick,
 }: IPostImageItemProps) => {
   return (
     <PostImageItemWrapper>
-      <Image url={imgUrl}></Image>
+      <Image url={imgUrl} />
       <IconButton
         icon={XIcon}
         onClick={onClick}
         backgroundColor="transparent"
-      ></IconButton>
-      {isThumbnail && <Text content={"대표 사진"}></Text>}
+      />
+      {isThumbnail && <Text>대표 사진</Text>}
     </PostImageItemWrapper>
   );
 };

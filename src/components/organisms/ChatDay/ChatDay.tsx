@@ -12,7 +12,9 @@ const ChatDay = ({ date }: ChatDayProps) => {
 
   return (
     <ChatDayWarpper>
-      <Text variant="tag_regular" content={formattedDate}></Text>
+      <Text variant="tag_regular">
+        {formattedDate}
+      </Text>
     </ChatDayWarpper>
   );
 };

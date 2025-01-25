@@ -6,7 +6,7 @@ import {
   MyPageMenuWrapper,
   SubMenuWrapper,
   ColorWrapper,
-  TextContainer
+  TextContainer,
 } from "./styled";
 
 interface IMyPageMenuProps {
@@ -17,13 +17,15 @@ interface IMyPageMenuProps {
 export const MyPageMenu = ({ onMenuClick }: IMyPageMenuProps) => {
   return (
     <MyPageMenuWrapper>
-      {MY_PAGE_MENUS.map(({ title, menus }, idx) => (
+      {MY_PAGE_MENUS.map(({ title, menus }, idx) =>
         <MainMenuWrapper key={`m_root_${idx}`}>
           <ColorWrapper>
-            <Text content={title} variant="title_semibold" />
+            <Text variant="title_semibold">
+              {title}
+            </Text>
           </ColorWrapper>
           <SubMenuWrapper>
-            {menus.map(({ icon, name, desc, pathname }, i) => (
+            {menus.map(({ icon, name, desc, pathname }, i) =>
               <TextContainer
                 key={`m_${idx}_${i}`}
                 onClick={() => onMenuClick(pathname)}
@@ -35,12 +37,14 @@ export const MyPageMenu = ({ onMenuClick }: IMyPageMenuProps) => {
                     contentVariant="title_semibold"
                   />
                 </IconWithText>
-                <Text content={desc} variant="explan_regular" />
+                <Text variant="explan_regular">
+                  {desc}
+                </Text>
               </TextContainer>
-            ))}
+            )}
           </SubMenuWrapper>
         </MainMenuWrapper>
-      ))}
+      )}
     </MyPageMenuWrapper>
   );
 };

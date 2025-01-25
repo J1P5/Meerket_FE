@@ -20,16 +20,13 @@ export const AuctionTimer = ({
 
   return (
     <AuctionTimerWrapper>
-      <Text
-        variant="title_bold"
-        content={
-          timeRemaining === "over"
-            ? "마감시간이 지나 경매가 종료되었습니다!"
-            : isEarly
-              ? `조기마감이 적용되어 ${timeRemaining} 남았어요!`
-              : `경매 종료까지 ${timeRemaining} 남았어요!`
-        }
-      />
+      <Text variant="title_bold">
+        {timeRemaining === "over"
+          ? "마감시간이 지나 경매가 종료되었습니다!"
+          : isEarly
+            ? `조기마감이 적용되어 ${timeRemaining} 남았어요!`
+            : `경매 종료까지 ${timeRemaining} 남았어요!`}
+      </Text>
     </AuctionTimerWrapper>
   );
 };

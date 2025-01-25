@@ -36,7 +36,7 @@ export const AuctionBidBottomSheet = ({
 
   return (
     <AuctionBidBottomSheetWrapper open={open} onClose={onClose}>
-      <Text variant="title_bold" content="희망 입찰가" />
+      <Text variant="title_bold">희망 입찰가</Text>
       <Input
         type="number"
         value={price}
@@ -45,16 +45,10 @@ export const AuctionBidBottomSheet = ({
       />
       {isInvalidPrice && (
         <div style={{ color: "#FF2E4D" }}>
-          <Text
-            variant="explan_regular"
-            content={"20억 이하로 입력해주세요."}
-          />
+          <Text variant="explan_regular">20억 이하로 입력해주세요.</Text>
         </div>
       )}
-      <Text
-        variant="desc_regular"
-        content={`최소 입찰가 ${minPrice.toLocaleString()}`}
-      />
+      <Text variant="desc_regular">{`최소 입찰가 ${minPrice.toLocaleString()}`}</Text>
       <TextButton text="입찰하기" onClick={onBid} disabled={isInvalidPrice} />
     </AuctionBidBottomSheetWrapper>
   );

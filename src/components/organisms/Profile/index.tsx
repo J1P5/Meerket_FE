@@ -5,7 +5,7 @@ import {
   ProfileWrapper,
   ImageWrapper,
   TextWrapper,
-  TextGuideColor
+  TextGuideColor,
 } from "./styled";
 
 interface IProfileProps {
@@ -33,7 +33,9 @@ export const Profile = ({ imgUrl, nickname, location }: IProfileProps) => {
           <IconWithText.Icon icon={LinkIcon} size="s" />
         </IconWithText>
         <TextGuideColor>
-          <Text content={location} variant="explan_regular" />
+          <Text variant="explan_regular">
+            {location}
+          </Text>
         </TextGuideColor>
       </TextWrapper>
     </ProfileWrapper>

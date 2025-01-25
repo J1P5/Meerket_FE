@@ -95,15 +95,14 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
         </PostItem.Container>
-        {isSeller && (
+        {isSeller &&
           <PostItem.ButtonContainer
             buttonText={isCompleted ? "거래가 완료되었어요!" : "거래 완료"}
             onTextButtonClick={onTextButtonClick}
             icon={DownIcon}
             onIconButtonClick={onIconButtonClick}
             disabled={isCompleted}
-          />
-        )}
+          />}
       </PostItem>
     );
   };
@@ -142,12 +141,11 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold" content={"낙찰된 가격"} />
+            <Text variant="explan_bold">낙찰된 가격</Text>
             <Text
               color={"#344fff"}
               variant="explan_bold"
-              content={maxPrice.toLocaleString() + "원"}
-            />
+            >{`${maxPrice.toLocaleString()}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -193,12 +191,11 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold" content={"현재 입찰가"} />
+            <Text variant="explan_bold">현재 입찰가</Text>
             <Text
               color={"#344fff"}
               variant="explan_bold"
-              content={price.toLocaleString() + "원"}
-            />
+            >{`${price.toLocaleString()}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -242,12 +239,11 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold" content={"나의 입찰가"} />
+            <Text variant="explan_bold">나의 입찰가</Text>
             <Text
               color={"#344fff"}
               variant="explan_bold"
-              content={maxPrice.toLocaleString() + "원"}
-            />
+            >{`${maxPrice.toLocaleString()}원`}</Text>
           </div>
         </PostItem.Container>
       </PostItem>
@@ -264,9 +260,9 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   const SelectedStateComponent = StateComponents[type] || DefaultState;
   return (
     <PostListWrapper>
-      {posts.map((post) => (
+      {posts.map(post =>
         <SelectedStateComponent key={post.productId} {...post} />
-      ))}
+      )}
     </PostListWrapper>
   );
 };

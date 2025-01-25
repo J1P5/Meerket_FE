@@ -23,7 +23,7 @@ export const LocationMap = ({
     <LocationMapWrapper onClick={onClick}>
       <TextContainer>
         <TitleWrapper>
-          <Text variant="title_bold" content="거래희망장소" />
+          <Text variant="title_bold">거래희망장소</Text>
         </TitleWrapper>
         <IconWithText>
           <IconWithText.Content

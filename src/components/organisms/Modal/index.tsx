@@ -154,7 +154,7 @@ const ModalHeader = ({ title, hasCloseButton = true }: IModalHeaderProps) => {
   const { onClose } = useModal();
   return (
     <ModalHeaderWrapper>
-      {title && <Text content={title} variant="body1" />}
+      {title && <Text  variant="body1" >{title}</Text>}
       {hasCloseButton && (
         <IconButton
           icon={XIcon}

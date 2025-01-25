@@ -19,12 +19,12 @@ export const SearchHistory = ({
   return (
     <SearchHistoryWrapper>
       <div className="search-top-bar">
-        <Text content={"최근 검색어"}></Text>
+        <Text>최근 검색어</Text>
         <TextButton
           text={"전체 삭제"}
           onClick={onAllDeleteButtonClick}
           backgroundColor="transparent"
-        ></TextButton>
+        />
       </div>
       {searchTerms.map((searchTerm, idx) => {
         return (
@@ -33,7 +33,7 @@ export const SearchHistory = ({
             searchTerm={searchTerm}
             onDeleteButtonClick={() => onDeleteButtonClick(idx)}
             onHistoryItemClick={() => onHistoryItemClick(searchTerm)}
-          ></SearchHistoryItem>
+          />
         );
       })}
     </SearchHistoryWrapper>

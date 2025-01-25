@@ -14,7 +14,9 @@ const IconWithTextRoot = ({
   onClick = () => {},
 }: IIconWithTextProps) => {
   return (
-    <IconWithTextWrapper onClick={onClick}>{children}</IconWithTextWrapper>
+    <IconWithTextWrapper onClick={onClick}>
+      {children}
+    </IconWithTextWrapper>
   );
 };
 
@@ -38,8 +40,13 @@ const Content = ({
 }: IIconWithTextContentProps) => {
   return (
     <IconWithTextContentWrapper content={content}>
-      <Text content={content} variant={contentVariant || "body1"}></Text>
-      {desc && <Text content={desc} variant={descVariant || "button"}></Text>}
+      <Text variant={contentVariant || "body1"}>
+        {content}
+      </Text>
+      {desc &&
+        <Text variant={descVariant || "button"}>
+          {desc}
+        </Text>}
     </IconWithTextContentWrapper>
   );
 };

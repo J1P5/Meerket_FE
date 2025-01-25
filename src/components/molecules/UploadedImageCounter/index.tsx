@@ -17,7 +17,7 @@ export const UploadedImageCounter = ({
   text,
   currentCount,
   onChange,
-  totalCount = 10
+  totalCount = 10,
 }: IUploadedImageCounter) => {
   return (
     <UploadedImageCounterContainer>
@@ -26,17 +26,16 @@ export const UploadedImageCounter = ({
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <div style={{ color: "#707192" }}>
-          <Text content={text} variant="explan_bold" />
+          <Text variant="explan_bold">
+            {text}
+          </Text>
         </div>
         <div style={{ color: "#9B9FBC" }}>
-          <Text
-            content={`${currentCount}/${totalCount}`}
-            variant="explan_regular"
-          />
+          <Text variant="explan_regular">{`${currentCount}/${totalCount}`}</Text>
         </div>
       </div>
       <ImageUploadWrapper>

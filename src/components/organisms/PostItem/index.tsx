@@ -93,7 +93,7 @@ interface IPostItemTitleProps {
 const PostItemTitle = ({ title }: IPostItemTitleProps) => {
   return (
     <PostItemTitleWrapper>
-      <Text variant="title_bold" content={title} />
+      <Text variant="title_bold">{title}</Text>
     </PostItemTitleWrapper>
   );
 };
@@ -124,9 +124,9 @@ const PostItemLocationAndTime = ({
       : formatToDateTime(uploadTime);
   return (
     <PostItemLocationAndTimeWrapper>
-      <Text variant="tag_regular" content={address} />
-      <Text variant="tag_regular" content="·" />
-      <Text variant="tag_regular" content={time} />
+      <Text variant="tag_regular">{address}</Text>
+      <Text variant="tag_regular">.</Text>
+      <Text variant="tag_regular">{time}</Text>
     </PostItemLocationAndTimeWrapper>
   );
 };
@@ -153,8 +153,8 @@ const PostItemPrice = ({
 }: IPostItemPriceProps) => {
   return (
     <PostItemPriceWrapper>
-      {title && <Text variant={variant} content={`${title}`} />}
-      <Text variant={variant} content={`${price.toLocaleString()}원`} />
+      {title && <Text variant={variant}>{title}</Text>}
+      <Text variant={variant}>{`${price.toLocaleString()}원`}</Text>
     </PostItemPriceWrapper>
   );
 };
@@ -177,12 +177,9 @@ const PostItemRemainingTime = ({
   const { timeRemaining } = useRemainingTimer(expiredTime);
   return (
     <PostItemRemainingTimeWrapper>
-      <Text variant="tag_regular" content="남은 시간" />
-      <Text variant="tag_regular" content="·" />
-      <Text
-        variant="tag_regular"
-        content={timeRemaining === "over" ? "종료" : timeRemaining}
-      />
+      <Text variant="tag_regular">남은 시간</Text>
+      <Text variant="tag_regular">·</Text>
+      <Text variant="tag_regular">{timeRemaining === "over" ? "종료" : timeRemaining}</Text>
     </PostItemRemainingTimeWrapper>
   );
 };

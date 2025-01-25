@@ -11,9 +11,15 @@ export const Badge = ({ text, type = "default" }: IBadgeProps) => {
   if (type === "chat") {
     return (
       <BadgeChatWrapper>
-        <Text variant="badge_regular" content={text}></Text>
+        <Text variant="badge_regular">
+          {text}
+        </Text>
       </BadgeChatWrapper>
     );
   }
-  return <BadgeWrapper>{text}</BadgeWrapper>;
+  return (
+    <BadgeWrapper>
+      {text}
+    </BadgeWrapper>
+  );
 };

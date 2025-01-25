@@ -16,7 +16,7 @@ export const NeighborhoodSelectionList = ({
 }: INeighborhoodSelectionListrops) => {
   return (
     <NeighborhoodSelectionListWrapper>
-      <Text content={"근처동네"} variant={"title_bold"}></Text>
+      <Text variant="title_bold">근처동네</Text>
 
       {neighborhoods.map((neighborhood, idx) => {
         return (

@@ -29,12 +29,17 @@ export const IconWithTextLegacy = ({
       onClick={onClick}
       iconLocation={iconLocation}
     >
-      <IconComponent></IconComponent>
+      <IconComponent />
       <div className="text-con">
         {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
-        <Text content={content} variant={"body1"}></Text>
+        <Text variant="body1">
+          {content}
+        </Text>
         {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
-        {desc && <Text content={desc} variant={"button"}></Text>}
+        {desc &&
+          <Text variant="button">
+            {desc}
+          </Text>}
       </div>
     </IconWithTextWrapper>
   );

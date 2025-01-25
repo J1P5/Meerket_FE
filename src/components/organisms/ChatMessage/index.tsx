@@ -22,12 +22,12 @@ export const ChatMessage = ({
   return (
     <ChatMessageWrapper isMe={isMe}>
       <MessageWrapper>
-        <Text variant="explan_regular" content={msg} />
+        <Text variant="explan_regular">{msg}</Text>
       </MessageWrapper>
       <MessageInfoWrapper>
-        {!isRead && <Text variant="tag_regular" content={"1"} />}
+        {!isRead && <Text variant="tag_regular">1</Text>}
         {isLastMsg && (
-          <Text variant="tag_regular" content={getTime(createdAt)} />
+          <Text variant="tag_regular">{getTime(createdAt)}</Text>
         )}
       </MessageInfoWrapper>
     </ChatMessageWrapper>

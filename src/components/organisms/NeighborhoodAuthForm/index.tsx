@@ -68,13 +68,11 @@ export const NeighborhoodAuthForm = ({
     <NeighborhoodAuthFormWrapper>
       <Map setMyCoord={setMyCoord} locationErrorEvent={locationErrorEvent} />
       {/* <LocationConfirmationContainer>
-        <Text
-          content={
+        <Text>{
             location.address
               ? `현재 위치가 '${location.address}'에 있어요`
               : "현재 위치정보를 가져올 수 없어요. 잠시 후 다시 시도해주세요"
-          }
-        />
+          }</Text>
       </LocationConfirmationContainer> */}
       {location.address && (
         <TextButton
