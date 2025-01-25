@@ -8,7 +8,6 @@ import { Modal } from "components/organisms";
 import { useModalStore } from "stores";
 import { Loading } from "components/molecules/Loading";
 import { router } from "router";
-//import { routerTest } from "router";
 const queryClient: QueryClient = new QueryClient();
 
 const App = () => {
@@ -16,8 +15,6 @@ const App = () => {
   const isOpen = useModalStore((store) => store.isOpen);
   const content = useModalStore((store) => store.content);
   const { closeModal } = useModalStore((store) => store.actions);
-
-  console.log("05_35_RouterTest");
 
   return (
     <QueryClientProvider client={queryClient}>
