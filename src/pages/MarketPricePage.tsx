@@ -7,7 +7,6 @@ import {
   MARKET_PRICE_LOADING_MESSAGE,
   MARKET_PRICE_NAVIGATE_URL,
 } from "constants/MarketPricePageConstants";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { http } from "services/api";
 import { IResponse } from "types";
@@ -32,7 +31,6 @@ interface IMarketPricePostResponse extends IResponse {
 
 const MarketPricePage = () => {
   const navigate = useNavigate();
-  const preloadLinks: HTMLLinkElement[] = [];
 
   /** 백엔드 IMarketPricePost 타입을 프론트 IPost 으로 변환 함수
    * @param marketPricePost : IMarketPricePost
@@ -49,7 +47,7 @@ const MarketPricePage = () => {
     productId: marketPricePost.productId,
     /** 게시글 썸네일 이미지 */
     //imgUrl: marketPricePost.image,
-    imgUrl: "https://avatars.githubusercontent.com/u/50391687?v=4&size=64",
+    imgUrl: marketPricePost.image,
     /** 게시글 제목 */
     title: marketPricePost.title,
     /** 게시글 가격 */
@@ -89,34 +87,10 @@ const MarketPricePage = () => {
     );
     if (response.success && response.code === "COMMON200") {
       const posts = response.result.content.map(createMarketPricePostItem);
-
-      // 이미지 미리 로드
-      posts.forEach((post) => {
-        const link = document.createElement("link");
-        link.rel = "preload";
-        link.as = "image";
-        link.href = post.imgUrl;
-        link.fetchPriority = "high";
-        link.type = "image/webp";
-        document.head.appendChild(link);
-        preloadLinks.push(link);
-      });
-
       return posts;
     }
     throw new Error("Failed to fetch market price posts");
   };
-
-  useEffect(() => {
-    // 컴포넌트 언마운트 시 미리 로드된 링크 제거
-    return () => {
-      preloadLinks.forEach((link) => {
-        if (link.parentNode) {
-          link.parentNode.removeChild(link);
-        }
-      });
-    };
-  }, []);
 
   /** React Query로 데이터 패칭 */
   const { data, isLoading } = useQuery({

@@ -161,26 +161,3 @@ export const router: ReturnType<typeof createBrowserRouter> =
       v7_skipActionErrorRevalidation: true,
     },
   });
-
-const routesTest: RouteObject[] = [
-  {
-    path: "/",
-    element: (
-      <LoginGuard>
-        <LoginPage />
-      </LoginGuard>
-    ),
-  },
-  { path: "/login", element: <LoginPage /> },
-];
-
-export const routerTest: ReturnType<typeof createBrowserRouter> =
-  createBrowserRouter(routesTest, {
-    future: {
-      v7_relativeSplatPath: true,
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_partialHydration: true,
-      v7_skipActionErrorRevalidation: true,
-    },
-  });
