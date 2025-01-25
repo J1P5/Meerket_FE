@@ -53,36 +53,14 @@ export const LocationPicker: React.MemoExoticComponent<
     return (
       <LocationPickerWrapper>
         <PaddingWrapper>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start"
-            }}
-          >
-            <Text content="이웃과 만나서" variant="writing_bold" />
-            <Text
-              content="거래하고 싶은 장소를 선택해주세요."
-              variant="writing_bold"
-            />
-          </div>
-          {/* // TODO: content children으로 분리 필요 */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column"
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Text content="만나서 거래할 때는&nbsp;" variant="desc_regular" />
-              <Text content="누구나 찾기 쉬운 공공장소" variant="desc_bold" />
-              <Text content="가 좋아요." variant="desc_regular" />
-            </div>
-            <Text
-              content="나와 거래자 모두를 위해, 안전한 장소를 선택해주세요!"
-              variant="desc_regular"
-            />
-          </div>
+            <Text variant="writing_bold">{"이웃과 만나서\n거래하고 싶은 장소를 선택해주세요."}</Text>
+            <Text variant="desc_regular">
+              만나서 거래할 때는&nbsp;
+              <strong>누구나 찾기 쉬운 공공장소</strong>
+              가 좋아요.
+              <br/>
+              나와 거래자 모두를 위해, 안전한 장소를 선택해주세요!
+            </Text>
         </PaddingWrapper>
         <Map
           coord={coord}

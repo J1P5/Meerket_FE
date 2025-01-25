@@ -80,10 +80,7 @@ export const ProfileRegistrationForm = ({
               placeholder="닉네임을 입력해주세요."
             />
             {invalid && (
-              <Text
-                variant="button"
-                content={formState.errors.nickname?.message || ""}
-              />
+              <Text variant="button">{formState.errors.nickname?.message || ""}</Text>
             )}
           </>
         )}

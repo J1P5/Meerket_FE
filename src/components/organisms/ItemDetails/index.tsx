@@ -43,11 +43,11 @@ export const ItemDetails = ({
             <IconWithText.Icon icon={LinkIcon} size="s" />
           </IconWithText>
         </CategoryWrapper>
-        <Text variant="title_bold" content={title} />
-        <Text variant="desc_regular" content={getRelativeTime(createdAt)} />
+        <Text variant="title_bold">{title}</Text>
+        <Text variant="desc_regular">{getRelativeTime(createdAt)}</Text>
       </ItemDetailsHeader>
       <DescriptionWrapper>
-        <Text variant="desc_regular" content={description} />
+        <Text variant="desc_regular">{description}</Text>
       </DescriptionWrapper>
     </ItemDetailsWrapper>
   );

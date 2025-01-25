@@ -72,14 +72,15 @@ export const EmptyTemplate = ({ type = "default" }: IEmptyTemplateProps) => {
   return (
     <EmptyTemplateWrapper className={type}>
       <div className="text-con">
-        <Text variant="h5" content={msg}></Text>
+        <Text variant="h5">
+          {msg}
+        </Text>
       </div>
       <Sticker />
       {/* noButtonTypes 배열에 포함되지 않는 경우에만 TextButton 렌더링 */}
-      {!noButtonTypes.includes(type) && (
-        <TextButton text={buttonText} onClick={handleClick} />
-      )}
-      {noButtonTypes.includes(type) && <div></div>}
+      {!noButtonTypes.includes(type) &&
+        <TextButton text={buttonText} onClick={handleClick} />}
+      {noButtonTypes.includes(type) && <div />}
     </EmptyTemplateWrapper>
   );
 };

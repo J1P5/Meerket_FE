@@ -33,8 +33,7 @@ export type TextVariant =
   | "badge_regular";
 
 interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
-  /** Text에 들어가는 내용 */
-  content: string;
+  children: React.ReactNode;
   /** Text의 타입 (스타일 가이드 준수) */
   variant?: TextVariant;
   /** Text의 색깔 */
@@ -63,7 +62,7 @@ const variantMap: {
 };
 
 export const Text = ({
-  content,
+  children,
   variant = "body1",
   onClick = () => {},
   color,
@@ -71,7 +70,7 @@ export const Text = ({
   const Component = variantMap[variant];
   return (
     <Component onClick={onClick} color={color}>
-      {content}
+      {children}
     </Component>
   );
 };

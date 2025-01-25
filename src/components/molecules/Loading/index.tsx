@@ -8,9 +8,10 @@ interface LoadingProps {
 
 // 스타일 정의
 
-export const Loading: React.FC<LoadingProps> = ({ message = "" }) => (
+export const Loading: React.FC<LoadingProps> = ({ message = "" }) =>
   <LoadingWrapper>
     <Spinner />
-    <Text content={message} variant="btn_bold"></Text>
-  </LoadingWrapper>
-);
+    <Text variant="btn_bold">
+      {message}
+    </Text>
+  </LoadingWrapper>;

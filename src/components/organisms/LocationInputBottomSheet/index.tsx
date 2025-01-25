@@ -33,8 +33,7 @@ export const LocationInputBottomSheet = ({
       >
         <Text
           variant="title_bold"
-          content="선택한 곳의 장소명을 입력해주세요"
-        />
+          >선택한 곳의 장소명을 입력해주세요</Text>
         <Input
           value={place}
           setValue={setPlace}
@@ -42,7 +41,7 @@ export const LocationInputBottomSheet = ({
         />
         {isError && (
           <div style={{ color: "#FF2E4D" }}>
-            <Text variant="explan_regular" content="장소를 입력해주세요!" />
+            <Text variant="explan_regular">장소를 입력해주세요!</Text>
           </div>
         )}
       </div>

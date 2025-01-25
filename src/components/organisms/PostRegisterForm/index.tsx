@@ -227,8 +227,7 @@ export const PostRegisterForm = ({
                 <div style={{ color: "#707192" }}>
                   <Text
                     variant="explan_regular"
-                    content="포스팅이 등록될 때 경매 마감 시간이 카운트됩니다."
-                  />
+                    >포스팅이 등록될 때 경매 마감 시간이 카운트됩니다.</Text>
                 </div>
               )}
               {invalid && (

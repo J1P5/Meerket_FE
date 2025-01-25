@@ -53,12 +53,12 @@ export const MyPageTemplate = ({
       </BackGroundWrapper>
       <MyPageMenu onMenuClick={onMenuClick} />
       <LogoutWithDrawWrapper>
-        <Text variant="explan_regular" content="로그아웃" onClick={onLogout} />
-        <Text
-          variant="explan_regular"
-          content="회원탈퇴"
-          onClick={onServiceExit}
-        />
+        <Text variant="explan_regular" onClick={onLogout}>
+          로그아웃
+        </Text>
+        <Text variant="explan_regular" onClick={onServiceExit}>
+          회원탈퇴
+        </Text>
       </LogoutWithDrawWrapper>
     </MyPageTemplateWrapper>
   );

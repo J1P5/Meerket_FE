@@ -28,35 +28,23 @@ export const UserLocationBottomSheet = ({
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          textAlign: "center",
           gap: "10px",
         }}
       >
         {/* // TODO: 선택하신 동네는 나의 동네 선택에서 설정한 동네를 말하는 것 같아서 추후 수정 필요 */}
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Text variant='explan_regular' content='선택하신 동네는&nbsp;' />
-          <Text variant='explan_bold' content={`${myAddress}`} />
-          <Text variant='explan_regular' content='이에요.' />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <Text variant='writing_bold' content={`${nickname}님의 현 위치는`} />
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div style={{ color: "#344FFF" }}>
-              <Text
+        <Text variant='explan_regular'>선택하신 동네는&nbsp;<strong>{myAddress}</strong>이에요.</Text>
+          <Text variant='writing_bold'>{`${nickname}님의 현 위치는`}
+          <div style={{display: "flex"}}>
+            <Text
+                color="#344FFF"
                 variant={address!.length > 15 ? "btn_bold" : "writing_bold"}
-                content={`${address}`}
-              />
+                >{address}</Text>
+            이에요!
             </div>
-            <Text variant='writing_bold' content='이에요!' />
-          </div>
+          </Text>
         </div>
-      </div>
+ 
 
       <TextButton
         text={

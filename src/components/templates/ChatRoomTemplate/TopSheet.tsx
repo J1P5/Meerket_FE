@@ -93,7 +93,11 @@ export const TopSheet = ({ post, isCompleted }: TopSheetProps) => {
         isOpen={isOpen}
         isSeller={post.isSeller || false}
       >
-        {isOpen ? "" : <Text content={post.title} variant="tag_regular" />}
+        {isOpen
+          ? ""
+          : <Text variant="tag_regular">
+              {post.title}
+            </Text>}
         <div className="btn-bar" />
       </ToggleButton>
       <TopSheetContainer isOpen={isOpen} isSeller={post.isSeller || false}>

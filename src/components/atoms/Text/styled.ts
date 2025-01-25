@@ -5,6 +5,11 @@ import { ThemeType } from "styles/theme";
 const commonStyles: SerializedStyles = css`
   line-height: 140%;
   letter-spacing: -2.5%;
+  white-space: pre-line;
+
+  & strong {
+    font-weight: bold;
+  }
 `;
 
 export const H1Wrapper: ReturnType<typeof styled.p> = styled.h1<{

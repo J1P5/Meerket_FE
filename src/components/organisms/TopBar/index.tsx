@@ -61,7 +61,7 @@ interface ITopBarTitleProps {
 }
 
 const TopBarTitle = ({ title }: ITopBarTitleProps) => {
-  return <Text variant="body1" content={title} />;
+  return <Text variant="body1">{title}</Text>;
 };
 
 interface ITopBarInputProps {

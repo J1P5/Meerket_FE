@@ -23,7 +23,7 @@ export const Comment = ({ comments, hasBuyer }: ICommentProps) => {
 
   return (
     <CommentWrapper>
-      <Text variant="title_bold" content="문의사항" />
+      <Text variant="title_bold">문의사항</Text>
       <CommentWriteBoxWrapper>
         <InputWithButton
           value={comment}

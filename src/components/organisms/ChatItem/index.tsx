@@ -27,24 +27,28 @@ export const ChatItem = ({
   return (
     <ChatItemWrapper onClick={onClick}>
       <div className="img-msg-con">
-        <Image url={itemImgUrl} type="square"></Image>
+        <Image url={itemImgUrl} type="square" />
         {/* <OverlappingImage
           frontImgUrl={itemImgUrl}
           backImgUrl={profileImgUrl}
           type="square"
         ></OverlappingImage> */}
         <div className="msg-con">
-          <Text content={name} variant="title_bold"></Text>
-          <Text content={lastMsg} variant="explan_regular"></Text>
+          <Text variant="title_bold">
+            {name}
+          </Text>
+          <Text variant="explan_regular">
+            {lastMsg}
+          </Text>
         </div>
       </div>
       <div className="time-cnt-con">
         <div className="time">
-          <Text content={lastMsgTimeStr} variant="tag_regular"></Text>
+          <Text variant="tag_regular">
+            {lastMsgTimeStr}
+          </Text>
         </div>
-        {lastMsgCnt > 0 && (
-          <Badge type="chat" text={lastMsgCnt.toString()}></Badge>
-        )}
+        {lastMsgCnt > 0 && <Badge type="chat" text={lastMsgCnt.toString()} />}
       </div>
     </ChatItemWrapper>
   );

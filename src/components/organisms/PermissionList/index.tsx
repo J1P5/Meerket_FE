@@ -21,24 +21,23 @@ export const PermissionList = ({
 }: IPermissionListProps) => {
   return (
     <PermissionListWrapper>
-      <Text
-        content={"미어켓 이용을 위해\n 앱 권한을 허용해주세요"}
-        variant="h5"
-      ></Text>
+      <Text variant="h5">
+        {"미어켓 이용을 위해\n 앱 권한을 허용해주세요"}
+      </Text>
       <div className="permission-con">
         {permissions.map((permission, idx) => {
           return (
             <IconWithText key={idx}>
-              <IconWithText.Icon icon={permission.icon}></IconWithText.Icon>
+              <IconWithText.Icon icon={permission.icon} />
               <IconWithText.Content
                 content={permission.content}
                 desc={permission.desc}
-              ></IconWithText.Content>
+              />
             </IconWithText>
           );
         })}
       </div>
-      <TextButton text={"확인"} onClick={onClick}></TextButton>
+      <TextButton text={"확인"} onClick={onClick} />
     </PermissionListWrapper>
   );
 };

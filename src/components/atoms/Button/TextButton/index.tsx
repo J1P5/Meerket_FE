@@ -35,7 +35,9 @@ export const TextButton = ({
       disabled={disabled}
       aria-label={ariaLabel}
     >
-      <Text content={text} variant={variant} />
+      <Text variant={variant}>
+        {text}
+      </Text>
     </TextButtonWrapper>
   );
 };

@@ -18,7 +18,7 @@ export const TextWithImage = ({
   title,
   desc,
   imgUrl = DEFAULT_IMG_PATH,
-  onClick
+  onClick,
 }: ITextWithImageProps) => {
   return (
     <TextWithImageWrapper
@@ -29,14 +29,17 @@ export const TextWithImage = ({
     >
       <div className="text-con">
         {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
-        <Text content={title} variant={"body1"}></Text>
+        <Text variant={"body1"}>
+          {title}
+        </Text>
         {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
         <div className="text-desc">
-          <Text content={desc} variant={"button"}></Text>
+          <Text variant={"button"}>
+            {desc}
+          </Text>
         </div>
       </div>
       <Image type="square" url={imgUrl} />
     </TextWithImageWrapper>
   );
 };
-
