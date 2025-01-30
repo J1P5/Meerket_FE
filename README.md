@@ -94,7 +94,7 @@ yarn add --dev @rushstack/eslint-config eslint-plugin-jsx-a11y eslint-plugin-no-
 yarn add react-router-dom
 yarn add zustand @tanstack/react-query @tanstack/react-query-devtools
 yarn add @emotion/react @emotion/styled
-yarn add swiper react-icons
+yarn add swiper @react-icons/all-files
 yarn add lodash-es react-hook-form
 ```
 

@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiShoppingBag } from "react-icons/fi";
+import { FiShoppingBag } from "@react-icons/all-files/fi/FiShoppingBag";
 
 /**
  * 구매 아이콘

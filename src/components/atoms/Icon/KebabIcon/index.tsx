@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiMoreVertical } from "react-icons/fi";
+import { FiMoreVertical } from "@react-icons/all-files/fi/FiMoreVertical";
 
 /**
  * 케밥메뉴 아이콘
