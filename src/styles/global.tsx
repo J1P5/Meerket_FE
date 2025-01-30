@@ -5,7 +5,6 @@ export const GlobalStyle = () => {
     <Global
       styles={() => css`
         // Font
-
         @font-face {
             font-family: 'Pretendard';
             font-weight: 400;
@@ -15,7 +14,6 @@ export const GlobalStyle = () => {
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.woff') format('woff'),
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.otf') format('opentype');
         }
-
         @font-face {
             font-family: 'Pretendard';
             font-weight: 600;
@@ -24,8 +22,7 @@ export const GlobalStyle = () => {
             src: url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.woff2') format('woff2'),
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.woff') format('woff'),
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.otf') format('opentype');
-        }
-                
+        }       
         @font-face {
             font-family: 'Pretendard';
             font-weight: 700;
@@ -35,7 +32,6 @@ export const GlobalStyle = () => {
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.woff') format('woff'),
                 url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.otf') format('opentype');
         }
-
         // RootContainer
         body {
           background-color: #212121; // 임시
