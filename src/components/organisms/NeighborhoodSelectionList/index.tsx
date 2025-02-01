@@ -18,7 +18,6 @@ const baseNeighborhoodSelectionList = ({
   return (
     <NeighborhoodSelectionListWrapper>
       <Text variant="title_bold">근처동네</Text>
-
       {neighborhoods.map((neighborhood, idx) => {
         return (
           <IconWithText key={idx} onClick={() => onClick(neighborhood)}>
@@ -30,12 +29,6 @@ const baseNeighborhoodSelectionList = ({
           </IconWithText>
         );
       })}
-
-      {/* 
-      // <TextDividerList
-      //   items={neighborhoods}
-      //   onClick={onClick}
-      // ></TextDividerList> */}
     </NeighborhoodSelectionListWrapper>
   );
 };
