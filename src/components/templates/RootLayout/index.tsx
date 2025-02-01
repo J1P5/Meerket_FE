@@ -47,32 +47,24 @@ export const RootLayout = () => {
    * 뒤로가기
    */
   const handleBackButtonClick = () => {
-    // const productRegex = /^\/product\/\d+$/; // "/product/"로 시작하고 숫자가 오는 형식
-    // if (productRegex.test(_pathname)) {
-    //   navigate("/");
-    // } else {
-    // navigate(-1);
-    // }
     navigate(-1);
   };
 
   /** backIcon 클릭 기본 함수 지정 */
   useEffect(() => {
     setBackClick(handleBackButtonClick);
-    // }, [handleBackButtonClick]);
   }, []);
 
   return (
     <RootLayoutWrapper>
-      {["/", "/market-price", "/chat", "/my-page"].includes(pathname) && (
+      {["/", "/market-price", "/chat", "/my-page"].includes(pathname) &&
         <Header
           type={pathname === "/" ? "home" : "default"}
           title={headerTitle}
           onNotificationClick={handleNotificationButtonClick}
           onSearchClick={handleSearchButtonClick}
           onLocationClick={handleLocationButtonClick}
-        />
-      )}
+        />}
       {![
         "/",
         "/market-price",
@@ -80,29 +72,25 @@ export const RootLayout = () => {
         "/login",
         "/permission-request",
         "/chat",
-      ].includes(pathname) && (
+      ].includes(pathname) &&
         <TopBar>
           <TopBar.BackIcon onBackIconClick={onBackClick} />
-          {!["/search", "/neighborhood-selection"].includes(pathname) && (
-            <TopBar.Title title={topBarTitle} />
-          )}
-          {["/search", "/neighborhood-selection"].includes(pathname) && (
+          {!["/search", "/neighborhood-selection"].includes(pathname) &&
+            <TopBar.Title title={topBarTitle} />}
+          {["/search", "/neighborhood-selection"].includes(pathname) &&
             <TopBar.Input
               value={value}
               setValue={setValue}
               placeholder={placeholder}
               onEnter={onSearch}
-            />
-          )}
+            />}
           <TopBar.Icon icon={icon} onIconClick={onRightClick} />
-        </TopBar>
-      )}
+        </TopBar>}
       <PageLayoutWrapper>
         <Outlet />
       </PageLayoutWrapper>
-      {["/", "/market-price", "/chat", "/my-page"].includes(pathname) && (
-        <BottomNavBar />
-      )}
+      {["/", "/market-price", "/chat", "/my-page"].includes(pathname) &&
+        <BottomNavBar />}
     </RootLayoutWrapper>
   );
 };

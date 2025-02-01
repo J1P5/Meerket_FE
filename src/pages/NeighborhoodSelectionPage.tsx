@@ -15,14 +15,6 @@ const NeighborhoodSelectionPage = () => {
     handleClickNeighborhood,
   } = useNeighborhoodSelection();
 
-  /**
-   * 동네 클릭 시 실행될 함수
-   * @param neighborhood 동네
-   */
-  const handleNeighborhoodClick = (neighborhood: string) => {
-    handleClickNeighborhood(neighborhood);
-  };
-
   useEffect(() => {
     setSearchBar(
       term,
@@ -30,15 +22,18 @@ const NeighborhoodSelectionPage = () => {
       "동네를 입력해주세요.",
       handleSearchNeighborhoods,
     );
-    setRightIcon(SearchIcon, handleSearchNeighborhoods);
   }, [term]);
+
+  useEffect(() => {
+    setRightIcon(SearchIcon, handleSearchNeighborhoods);
+  }, [handleSearchNeighborhoods]);
 
   return (
     <>
       <NeighborhoodSelectionTemplate
         neighborhoods={neighborhoods}
-        onNeighborhoodClick={handleNeighborhoodClick}
-        onFindCurrentLocationClick={() => handleGetMyNeighborhood()}
+        onNeighborhoodClick={handleClickNeighborhood}
+        onFindCurrentLocationClick={handleGetMyNeighborhood}
       />
     </>
   );

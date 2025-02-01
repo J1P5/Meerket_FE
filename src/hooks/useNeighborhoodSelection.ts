@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import type { IActivityArea, ICoord } from "types";
 import {
@@ -25,9 +25,10 @@ export const useNeighborhoodSelection = () => {
   /**
    * 동네 검색 함수
    */
-  const handleSearchNeighborhoods = () => {
+  const handleSearchNeighborhoods = useCallback(() => {
     if (!term.trim()) {
       Toast.show("검색어를 입력해주세요.", 2000);
+      return;
     }
     searchActivityAreas(term)
       .then((data) => {
@@ -37,13 +38,13 @@ export const useNeighborhoodSelection = () => {
         setNeighborhoods(content);
       })
       .catch(console.error);
-  };
+  },[searchActivityAreas, setNeighborhoods, term, Toast, Toast.show]);
 
   /**
    * 내 위치 동네 조회 함수
    * @param _location `optional` 최초로 위치를 받았을 때 처리하기 위한 변수
    */
-  const handleGetMyNeighborhood = (_location = location) => {
+  const handleGetMyNeighborhood = useCallback((_location = location) => {
     if (!_location) {
       // 내 위치 불러올 수 없음
       console.error(
@@ -57,20 +58,20 @@ export const useNeighborhoodSelection = () => {
           result: { content },
         } = data;
         setNeighborhoods(content);
+        setTerm("");
       })
       .catch(console.error);
-  };
+  },[location, getActivityAreas, setNeighborhoods, setTerm]);
 
   /**
    * 동네 클릭 시 실행될 함수
    * @param neighborhood 선택된 동네
    */
-  const handleClickNeighborhood = (neighborhood: string) => {
+  const handleClickNeighborhood = useCallback((neighborhood: string) => {
     const activityArea = neighborhoods.find(
       (n) => n.fullAddress === neighborhood,
     );
     const emdId = activityArea?.emdId;
-
     if (emdId) {
       console.log(emdId);
       (!user?.emdName ? registerActivityArea : editActivityArea)(emdId)
@@ -86,16 +87,16 @@ export const useNeighborhoodSelection = () => {
         })
         .catch(console.error);
     }
-  };
+  }, [neighborhoods, user, setUser, navigate]);
 
-  const onSuccessGeolocation = (position: GeolocationPosition) => {
+  const onSuccessGeolocation = useCallback((position: GeolocationPosition) => {
     const location = {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     };
     setLocation(location);
     handleGetMyNeighborhood(location);
-  };
+  }, [setLocation, handleGetMyNeighborhood]);
 
   const onErrorGeolocation = () => {
     /**

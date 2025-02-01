@@ -1,3 +1,4 @@
+import React from "react";
 import { Text } from "components/atoms";
 import { IconWithText } from "components/molecules";
 import { NeighborhoodSelectionListWrapper } from "./styled";
@@ -10,7 +11,7 @@ interface INeighborhoodSelectionListrops {
   onClick: (neighborhood: string) => void;
 }
 
-export const NeighborhoodSelectionList = ({
+const baseNeighborhoodSelectionList = ({
   neighborhoods,
   onClick,
 }: INeighborhoodSelectionListrops) => {
@@ -38,3 +39,7 @@ export const NeighborhoodSelectionList = ({
     </NeighborhoodSelectionListWrapper>
   );
 };
+
+export const NeighborhoodSelectionList = React.memo(
+  baseNeighborhoodSelectionList
+);

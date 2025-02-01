@@ -1,7 +1,8 @@
+import React from "react";
 import { TextButton } from "components/atoms";
 import { NeighborhoodSelectionList } from "components/organisms";
 import { NeighborhoodSelectionTemplateWrapper } from "./styled";
-import type { IActivityArea } from "types";
+import type { IActivityArea, ICoord } from "types";
 
 interface INeighborhoodSelectionTemplateProps {
   /** 동네 목록 */
@@ -9,10 +10,10 @@ interface INeighborhoodSelectionTemplateProps {
   /** 동네 클릭 시 실행할 함수 */
   onNeighborhoodClick: (neighborhood: string) => void;
   /** 현재 위치로 찾기 클릭 시 실행할 함수 */
-  onFindCurrentLocationClick: () => void;
+  onFindCurrentLocationClick: (location?: ICoord) => void;
 }
 
-export const NeighborhoodSelectionTemplate = ({
+const baseNeighborhoodSelectionTemplate = ({
   neighborhoods,
   onNeighborhoodClick,
   onFindCurrentLocationClick,
@@ -27,8 +28,10 @@ export const NeighborhoodSelectionTemplate = ({
       />
       <TextButton
         text="현재 위치로 찾기"
-        onClick={onFindCurrentLocationClick}
+        onClick={() => onFindCurrentLocationClick()}
       />
     </NeighborhoodSelectionTemplateWrapper>
   );
 };
+
+export const NeighborhoodSelectionTemplate = React.memo(baseNeighborhoodSelectionTemplate);
