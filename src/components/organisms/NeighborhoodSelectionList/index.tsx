@@ -1,3 +1,4 @@
+import React from "react";
 import { Text } from "components/atoms";
 import { IconWithText } from "components/molecules";
 import { NeighborhoodSelectionListWrapper } from "./styled";
@@ -10,14 +11,13 @@ interface INeighborhoodSelectionListrops {
   onClick: (neighborhood: string) => void;
 }
 
-export const NeighborhoodSelectionList = ({
+const baseNeighborhoodSelectionList = ({
   neighborhoods,
   onClick,
 }: INeighborhoodSelectionListrops) => {
   return (
     <NeighborhoodSelectionListWrapper>
       <Text variant="title_bold">근처동네</Text>
-
       {neighborhoods.map((neighborhood, idx) => {
         return (
           <IconWithText key={idx} onClick={() => onClick(neighborhood)}>
@@ -29,12 +29,10 @@ export const NeighborhoodSelectionList = ({
           </IconWithText>
         );
       })}
-
-      {/* 
-      // <TextDividerList
-      //   items={neighborhoods}
-      //   onClick={onClick}
-      // ></TextDividerList> */}
     </NeighborhoodSelectionListWrapper>
   );
 };
+
+export const NeighborhoodSelectionList = React.memo(
+  baseNeighborhoodSelectionList
+);

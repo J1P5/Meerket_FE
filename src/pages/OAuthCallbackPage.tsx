@@ -16,20 +16,12 @@ const OAuthCallbackPage = () => {
   const { setUser } = useUserStore();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
-  // const { setActivityArea } = useActivityAreaStore(state => state.actions);
 
   useEffect(() => {
     if (code) {
       oauthLogin({ code, provider: provider!.toUpperCase() as OAuthProvider })
         .then((data) => {
           const { result } = data;
-
-          /**
-           * TODO: 지금 따로 스토어를 만들었는데, user랑 합칠 지 논의 필요
-           * 임시로 필요한 로직을 추가
-           */
-          // setActivityArea(result.activityAreaId, result.activityArea);
-
           setUser({
             profile: result.profileUrl || undefined,
             nickname: result.nickname || undefined,

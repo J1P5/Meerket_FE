@@ -1,4 +1,4 @@
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft } from "@react-icons/all-files/fa/FaArrowLeft";
 import { type IIconProps, IconWrapper } from "../styled";
 
 /**
