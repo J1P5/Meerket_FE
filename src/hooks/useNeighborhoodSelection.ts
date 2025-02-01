@@ -38,7 +38,7 @@ export const useNeighborhoodSelection = () => {
         setNeighborhoods(content);
       })
       .catch(console.error);
-  },[searchActivityAreas, setNeighborhoods, term, Toast, Toast.show]);
+  },[searchActivityAreas, setNeighborhoods, term]);
 
   /**
    * 내 위치 동네 조회 함수
@@ -73,7 +73,6 @@ export const useNeighborhoodSelection = () => {
     );
     const emdId = activityArea?.emdId;
     if (emdId) {
-      console.log(emdId);
       (!user?.emdName ? registerActivityArea : editActivityArea)(emdId)
         .then((data) => {
           console.log(data);

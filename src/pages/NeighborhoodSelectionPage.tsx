@@ -25,17 +25,15 @@ const NeighborhoodSelectionPage = () => {
   }, [term]);
 
   useEffect(() => {
-    setRightIcon(SearchIcon, handleSearchNeighborhoods);
+      setRightIcon(SearchIcon, handleSearchNeighborhoods);
   }, [handleSearchNeighborhoods]);
 
   return (
-    <>
-      <NeighborhoodSelectionTemplate
-        neighborhoods={neighborhoods}
-        onNeighborhoodClick={handleClickNeighborhood}
-        onFindCurrentLocationClick={handleGetMyNeighborhood}
-      />
-    </>
+    <NeighborhoodSelectionTemplate
+      neighborhoods={neighborhoods}
+      onNeighborhoodClick={handleClickNeighborhood}
+      onFindCurrentLocationClick={handleGetMyNeighborhood}
+    />
   );
 };
 
