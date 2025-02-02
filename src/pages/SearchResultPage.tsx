@@ -1,37 +1,45 @@
-import { useEffect, useState } from "react";
-import { useSearchTopBar } from "hooks";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ICategory, IResponse } from "types";
-import { http } from "services/api";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
+
+import { useSearchTopBar } from "hooks";
+import { getCategoryPosts, getKeywordPosts } from "services/apis/post";
+import { ISearchPost } from "types";
 import { IPost } from "components/organisms/PostList";
+import { Loading } from "components/molecules/Loading";
 import { SearchResultsTemplate } from "components/templates";
 import { CATEGORIES } from "constants/categories";
+import { queries } from "constants/queryKeys";
+import { SEARCH_NAVIGATE_URL, SEARCH_LOADING_MESSAGE } from "constants/SearchResultPageConstants";
 
-interface ISearchPost {
-  myLocation: string;
-  productId: number;
-  memberId: number;
-  title: string;
-  price: number;
-  address: string;
-  uploadTime: string;
-  expiredTime: string;
-  isEarly: boolean;
-  image: string;
-}
-
-interface ISearchPostResponse extends IResponse {
-  result: {
-    content: ISearchPost[];
-  };
-}
 const SearchResultPage = () => {
-  /** 2. 키워드 검색결과 관련 변수 및 함수   */
-  const SEARCH_KEYWORD_API_URL = `/products/keywords`;
-  const SEARCH_CATEGORY_API_URL = `/products/categories`;
-  const SEARCH_NAVIGATE_URL = "/product";
+  const queryClient = useQueryClient();
+
+  useEffect(
+    () => {
+      return () => {
+        // 언마운트 시 캐시 제거
+        queryClient.removeQueries({ queryKey: queries.searchResult.DEFAULT });
+      };
+    },
+    [queryClient]
+  );
+
+  /** 1. 초기 카테고리, 검색 키워드 세팅  */
+  const { category, keyword } = useParams<{
+      category?: string;
+      keyword?: string;
+  }>();
+  const isCategory = !!category;
+  const term = isCategory ? category : keyword!;
+  const { setSearchTerm } = useSearchTopBar();
+  useEffect(()=>{
+    setSearchTerm(keyword || CATEGORIES.find(item => item.code === category)!.name);
+  },[])
+
+  /** 2. 키워드 검색결과 관련 함수   */
   const navigate = useNavigate();
-  const [posts, setPosts] = useState<IPost[]>([]);
   /** 백엔드 IHomePost 타입을 프론트 IPost 으로 변환 함수
    * @param searchPost : ISearchPost
    * @returns IPost
@@ -70,57 +78,46 @@ const SearchResultPage = () => {
     onIconButtonClick: () => {},
   });
 
-  /** userId 를 기반으로 해당 유저가 볼 수 있는 post 목록을 가져오는 함수
-   * @returns void
-   */
-  const fetchPosts = async (url: string) => {
-    console.log(url);
-    try {
-      const response = await http.get<ISearchPostResponse>(url);
-      if (response.success && response.code === "COMMON200") {
-        // 백엔드 타입 프론트엔드 타입으로 변환
-        const posts = response.result.content.map(createSearchPostItem);
-        setPosts(posts);
-      }
-    } catch (error) {
-      console.error("Failed to fetch messages:", error);
-    }
-  };
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: queries.searchResult.DEFAULT,
+    queryFn: ({ pageParam = undefined }: { pageParam: number | undefined }) => isCategory ? getCategoryPosts(pageParam, term) : getKeywordPosts(pageParam, term),
+    getNextPageParam: lastPage => lastPage.result.nextCursor,
+    initialPageParam: undefined,
+    select: (data) => ({
+      pages: data.pages.flatMap(page =>
+        page.result.content.map(createSearchPostItem)
+      ),
+    }),
+  });
 
-  /** 1. 초기 카테고리, 검색 키워드 세팅  */
-  const { category, keyword } = useParams<{
-    category?: string;
-    keyword?: string;
-  }>();
-  const { setSearchTerm } = useSearchTopBar();
+  const { ref, inView } = useInView({
+    rootMargin: "400px",
+  });
+
   useEffect(
     () => {
-      let categoryText: ICategory = { code: "", name: "" };
-      if (category) {
-        categoryText = CATEGORIES.find(item => item.code === category) || {
-          code: "",
-          name: "",
-        };
+      if (inView) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        fetchNextPage();
       }
-      const searchValue = keyword || categoryText.name;
-
-      setSearchTerm(searchValue);
-
-      const fetchSearchPosts = async () => {
-        // URL 결정
-        const url = category
-          ? SEARCH_CATEGORY_API_URL + `?category=${category}`
-          : SEARCH_KEYWORD_API_URL + `?keyword=${keyword}`;
-        await fetchPosts(url);
-      };
-      fetchSearchPosts().catch(error => {
-        console.error("Error fetchting Home Post:", error);
-      });
     },
-    [category, keyword]
+    [inView]
   );
 
-  return <SearchResultsTemplate posts={posts} />;
+  if (isLoading) {
+    return <Loading message={SEARCH_LOADING_MESSAGE} />;
+  }
+
+  return (
+    <SearchResultsTemplate posts={data?.pages as IPost[] || [] }>
+      {!isFetchingNextPage && <div ref={ref} />}
+    </SearchResultsTemplate>
+  );
 };
 
 export default SearchResultPage;
