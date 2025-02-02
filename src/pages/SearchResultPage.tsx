@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
@@ -20,7 +20,7 @@ const SearchResultPage = () => {
     () => {
       return () => {
         // 언마운트 시 캐시 제거
-        queryClient.removeQueries({ queryKey: queries.searchResult.DEFAULT });
+        queryClient.removeQueries({ queryKey: [queries.searchResult.DEFAULT, term] });
       };
     },
     [queryClient]
@@ -32,10 +32,10 @@ const SearchResultPage = () => {
       keyword?: string;
   }>();
   const { setSearchTerm } = useSearchTopBar();
-  const [term, setTerm] = useState<string>("");
+  const term = category || keyword!;
+
   useEffect(()=>{
     setSearchTerm(keyword || CATEGORIES.find(item => item.code === category)!.name);
-    setTerm(category || keyword!);
   },[category, keyword, setSearchTerm])
 
   /** 2. 키워드 검색결과 관련 함수   */
