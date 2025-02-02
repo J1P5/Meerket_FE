@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
@@ -31,12 +31,12 @@ const SearchResultPage = () => {
       category?: string;
       keyword?: string;
   }>();
-  const isCategory = !!category;
-  const term = isCategory ? category : keyword!;
   const { setSearchTerm } = useSearchTopBar();
+  const [term, setTerm] = useState<string>("");
   useEffect(()=>{
     setSearchTerm(keyword || CATEGORIES.find(item => item.code === category)!.name);
-  },[])
+    setTerm(category || keyword!);
+  },[category, keyword, setSearchTerm])
 
   /** 2. 키워드 검색결과 관련 함수   */
   const navigate = useNavigate();
@@ -84,8 +84,8 @@ const SearchResultPage = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: queries.searchResult.DEFAULT,
-    queryFn: ({ pageParam = undefined }: { pageParam: number | undefined }) => isCategory ? getCategoryPosts(pageParam, term) : getKeywordPosts(pageParam, term),
+    queryKey: [queries.searchResult.DEFAULT, term],
+    queryFn: ({ pageParam = undefined }: { pageParam: number | undefined }) => !!category ? getCategoryPosts(pageParam, term) : getKeywordPosts(pageParam, term),
     getNextPageParam: lastPage => lastPage.result.nextCursor,
     initialPageParam: undefined,
     select: (data) => ({
@@ -93,6 +93,7 @@ const SearchResultPage = () => {
         page.result.content.map(createSearchPostItem)
       ),
     }),
+    enabled: !!term,
   });
 
   const { ref, inView } = useInView({
