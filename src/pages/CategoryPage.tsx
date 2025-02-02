@@ -10,9 +10,9 @@ const CategoryPage = () => {
 
   const navigate = useNavigate();
 
-  const categories: ICategory[] = CATEGORIES.map((category) => ({
+  const categories: ICategory[] = CATEGORIES.map(category => ({
     title: category.name,
-    imgUrl: `/categorys/${category.code}.png`,
+    imgUrl: category.imgUrl,
     serverType: category.code,
   }));
 
@@ -24,10 +24,7 @@ const CategoryPage = () => {
     navigate(`/search/category/${category}`);
   };
   return (
-    <CategoryTemplate
-      categories={categories}
-      onClick={handleCategoryButton}
-    ></CategoryTemplate>
+    <CategoryTemplate categories={categories} onClick={handleCategoryButton} />
   );
 };
 

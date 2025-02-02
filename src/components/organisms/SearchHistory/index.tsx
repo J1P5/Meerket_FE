@@ -1,5 +1,4 @@
 import { Text, TextButton } from "components/atoms";
-import {} from "components/molecules";
 import { SearchHistoryWrapper } from "./styled";
 import { SearchHistoryItem } from "../SearchHistoryItem";
 
