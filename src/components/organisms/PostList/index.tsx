@@ -250,14 +250,13 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
     );
   };
 
-  const StateComponents = {
+  const SelectedStateComponent = {
     completed: CompletedState,
     default: DefaultState,
     chat: ChatState,
     selling: SellingState,
     buying: BuyingState,
-  };
-  const SelectedStateComponent = StateComponents[type] || DefaultState;
+  }[type || "default"];
   return (
     <PostListWrapper>
       {posts.map(post =>
