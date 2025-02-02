@@ -17,7 +17,7 @@ export const RoundImageWithText = ({
 }: IRoundImageWithText) => {
   return (
     <RoundImageWithTextWrapper onClick={onClick}>
-      <Image type="round" url={imgUrl} />
+      <Image type="round" url={imgUrl} fetchpriority="high" />
       <Text variant="tag_regular">
         {title}
       </Text>
