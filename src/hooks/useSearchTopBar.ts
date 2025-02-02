@@ -20,7 +20,9 @@ export const useSearchTopBar = () => {
         Toast.show("검색어를 입력해주세요.", 2000);
       }
       if (searchTerm.trim()) {
-        navigate(`/search/keyword/${encodeURIComponent(searchTerm)}`);
+        navigate(`/search/keyword/${encodeURIComponent(searchTerm)}`, {
+          replace: location.pathname !== "/search",
+        });
       }
     },
     [searchTerm, navigate]
