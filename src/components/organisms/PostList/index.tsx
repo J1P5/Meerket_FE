@@ -83,7 +83,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
     console.log("postList isCompleted", isCompleted);
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} />
+        <PostItem.Image imgUrl={imgUrl} loading="lazy" />
         <PostItem.Container>
           <PostItem.Title title={title} />
           <PostItem.Price price={price} />

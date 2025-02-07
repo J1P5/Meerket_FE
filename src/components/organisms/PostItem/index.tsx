@@ -41,6 +41,7 @@ const PostItemRoot = ({ children, onClick }: IPostItemRootProps) => {
 export interface IPostItemImageProps {
   imgUrl: string;
   size?: "default" | "mini";
+  loading?: "eager" | "lazy";
 }
 
 /**
@@ -49,8 +50,9 @@ export interface IPostItemImageProps {
  * @param size 이미지 사이즈 (default: default)
  * 	- default: 84px
  * 	- mini: 60px
+ * @param lazyLoading 유무 (eager, lazy)
  */
-const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
+const PostItemImage = ({ imgUrl, size = "default", loading="eager" }: IPostItemImageProps) => {
   return (
     <PostItemImageWrapper size={size}>
       <Image
@@ -58,6 +60,7 @@ const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
         type="square"
         url={imgUrl}
         alt="PostItem Image"
+        loading={loading}
       />
     </PostItemImageWrapper>
   );
