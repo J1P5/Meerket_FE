@@ -53,7 +53,7 @@ const ToggleButton =
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  pading: 0;
+  padding: 0;
   gap: 5px;
   border-radius: 0 0 0.625rem 0.625rem;
 
