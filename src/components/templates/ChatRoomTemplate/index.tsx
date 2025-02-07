@@ -30,7 +30,7 @@ export const ChatRoomTemplate = ({
         chatBubbles={chatBubbles}
         onWriteMessage={onWriteMessage}
         scrollContainerRef={scrollContainerRef}
-      ></ChatMessages>
+      />
     </ChatRoomTemplateWrapper>
   );
 };

@@ -1,6 +1,6 @@
 import { TransactionOverview } from "components/organisms";
 import { TransactionBuyTemplateWrapper } from "./styled";
-import { IPost, PostItemType } from "components/organisms/PostList";
+import { IPost, PostItemType } from "types";
 import { useState } from "react";
 import { BUYING_TAB, COMPLETED_TAB } from "constants/transaction";
 
@@ -30,7 +30,7 @@ export const TransactionBuyTemplate = ({
         onClick={handleTabClick}
         posts={posts}
         type={type}
-      ></TransactionOverview>
+      />
     </TransactionBuyTemplateWrapper>
   );
 };

@@ -1,5 +1,5 @@
 import { Client } from "@stomp/stompjs";
-import { IChatMsg } from "pages/ChatRoomPage";
+import { IChatMsg } from "types";
 import { useState } from "react";
 
 let stompClient: Client | undefined = undefined;

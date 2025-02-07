@@ -4,7 +4,6 @@ import { throttle } from "lodash-es";
 
 import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { Loading } from "components/molecules";
-import { IPost } from "components/organisms/PostList";
 import { EmptyTemplate, ChatRoomTemplate } from "components/templates";
 import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
 
@@ -14,7 +13,7 @@ import { useChatGroups, useWebSocket } from "hooks";
 import { http } from "services/api";
 import { completeProduct } from "services/apis";
 import { useTopBarStore } from "stores";
-import { IResponse } from "types";
+import { IPost, IChatMsg, IChatRoomPageResponse, IChatRoomNewMsgResponse } from "types";
 import { decryptRoomId } from "utils";
 
 interface IChatRoomBasic {
@@ -46,22 +45,7 @@ interface IChatRoomBasic {
   productStatus: "BIDDING" | "IN_PROGRESS" | "COMPLETED";
 }
 
-export interface IChatMsg {
-  /** 채팅 ObjectId 문자열 / 추후 안읽은 메시지 개수 관리를 위해 */
-  id: string;
-  senderId: number;
-  content: string;
-  createdAt: string;
-}
-interface IChatRoomPageResponse extends IResponse {
-  result: {
-    chatRoomBasicInfo: IChatRoomBasic;
-    messages: IChatMsg[];
-  };
-}
-interface IChatRoomNewMsgResponse extends IResponse {
-  result: IChatMsg[];
-}
+
 const ChatRoomPage = () => {
   const { clear, setTitle } = useTopBarStore();
   const navigate = useNavigate();
