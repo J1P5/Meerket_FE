@@ -1,20 +1,21 @@
-import { Loading } from "components/molecules/Loading";
-import { IPost } from "components/organisms/PostList";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { EmptyTemplate } from "components/templates";
-import { ChatRoomTemplate } from "components/templates/ChatRoomTemplate";
-import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
-import { DEFAULT_IMG_PATH } from "constants/imgPath";
-import { useChatGroups } from "hooks/useChatGroups";
-import { useWebSocket } from "hooks/useWebSocket";
-import { throttle } from "lodash-es";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { throttle } from "lodash-es";
+
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Loading } from "components/molecules";
+import { IPost } from "components/organisms/PostList";
+import { EmptyTemplate, ChatRoomTemplate } from "components/templates";
+import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
+
+import { DEFAULT_IMG_PATH } from "constants/imgPath";
+import { CHATROOM_LOADING_MESSAGE, CHATROOM_ENTER_API_URL, CHATROOM_NEW_MESSAGE_API_URL, CHATROOM_NAVIGATE_URL } from "constants/ChatRoomPageConstants";
+import { useChatGroups, useWebSocket } from "hooks";
 import { http } from "services/api";
 import { completeProduct } from "services/apis";
 import { useTopBarStore } from "stores";
 import { IResponse } from "types";
-import { decryptRoomId } from "utils/security";
+import { decryptRoomId } from "utils";
 
 interface IChatRoomBasic {
   /** 채팅방 ID, 몽고DB */
@@ -67,8 +68,6 @@ const ChatRoomPage = () => {
   const { roomId, userId } = useParams(); // URL에서 roomId 가져오기
   const decrtyptRoomId = roomId ? decryptRoomId(roomId) : "";
 
-  const chatRoomEnterurl = `/chats/enter/${decrtyptRoomId}`;
-  const chatRoomNewMessagesurl = `/chats/messages`;
   const [post, setPost] = useState<IPost>();
   const [otherUserId, setOtherUserId] = useState<number>(-1);
   const [otherNickname, setOtherNickname] = useState<string>("");
@@ -104,7 +103,7 @@ const ChatRoomPage = () => {
       isSeller: chatRoomBasicInfo.isSeller,
       status: chatRoomBasicInfo.productStatus,
       onClick: () => {
-        navigate(`/product/${chatRoomBasicInfo.productId}`);
+        navigate(`${CHATROOM_NAVIGATE_URL}/${chatRoomBasicInfo.productId}`);
       },
       onTextButtonClick: () => {
         completeProduct(chatRoomBasicInfo.productId!.toString())
@@ -127,7 +126,7 @@ const ChatRoomPage = () => {
    * @param messages : IChatMsg[]
    * @return messages : IChatMsg[]
    */
-  const sortMessages = (messages: IChatMsg[]): IChatMsg[] => {
+  const sortMessages = useCallback((messages: IChatMsg[]): IChatMsg[] => {
     messages.sort((a, b) => {
       const dateA = new Date(a.createdAt); // a의 createdAt을 Date 객체로 변환
       const dateB = new Date(b.createdAt); // b의 createdAt을 Date 객체로 변환
@@ -135,14 +134,14 @@ const ChatRoomPage = () => {
       return dateA.getTime() - dateB.getTime(); // 오름차순 정렬
     });
     return messages;
-  };
+  },[]);
 
   /** 초기 채팅방 진입 시 기본 정보 및 초기 메시지30 불러오는 함수
    */
   const fetchMessages = async () => {
     console.log("메시지를 fetch하는 함수 실행");
     try {
-      const response = await http.post<IChatRoomPageResponse>(chatRoomEnterurl);
+      const response = await http.post<IChatRoomPageResponse>(`${CHATROOM_ENTER_API_URL}/${decrtyptRoomId}`);
       if (response.success && response.code === "COMMON200") {
         setOtherUserId(response.result.chatRoomBasicInfo.otherUserId);
         setOtherNickname(response.result.chatRoomBasicInfo.otherNickname);
@@ -176,7 +175,7 @@ const ChatRoomPage = () => {
       const response = await http.get<
         IChatRoomNewMsgResponse,
         { roomId: string; beforeTime: string }
-      >(chatRoomNewMessagesurl, {
+      >(CHATROOM_NEW_MESSAGE_API_URL, {
         roomId: decrtyptRoomId || "",
         beforeTime: lastMsgTime || "",
       });
@@ -208,7 +207,7 @@ const ChatRoomPage = () => {
     };
     fetchChatMessages()
       .catch((error) => {
-        console.error("Error fetchting Chat Message:", error);
+        console.error("Error fetching Chat Message:", error);
       })
       .finally(() => {
         setLoading(false);
@@ -306,9 +305,8 @@ const ChatRoomPage = () => {
     }
   }, [chatGroups]); // 데이터가 fetch된 이후에만 실행
 
-  const chatLoadingMsg = "채팅 글\n불러 오는 중";
   if (loading) {
-    return <Loading message={chatLoadingMsg}></Loading>; // 로딩 중 메시지
+    return <Loading message={CHATROOM_LOADING_MESSAGE}></Loading>; // 로딩 중 메시지
   }
   return post ? (
     <>
