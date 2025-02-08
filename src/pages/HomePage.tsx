@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { Loading } from "components/molecules/Loading";
-import { IPost } from "components/organisms/PostList";
 import { HomeTemplate } from "components/templates";
 import {
   HOME_API_URL,
@@ -14,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useScrollRestoration } from 'hooks';
 import { http } from "services/api";
 import { useHeaderStore, useUserStore, useFormDataStore } from "stores";
-import { IResponse } from "types";
+import { IPost, IResponse } from "types";
 
 interface IHomePost {
   myLocation: string;
