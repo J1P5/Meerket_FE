@@ -1,5 +1,5 @@
 /* eslint-disable @rushstack/typedef-var */
-import { useState } from "react";
+import { useState, memo } from "react";
 import styled from "@emotion/styled";
 import { PostList } from "components/organisms";
 import { ThemeType } from "styles/theme";
@@ -83,7 +83,10 @@ interface TopSheetProps {
   post: IPost;
   isCompleted: boolean;
 }
-export const TopSheet = ({ post, isCompleted }: TopSheetProps) => {
+
+export const TopSheet: React.FC<
+  TopSheetProps
+> = memo(({ post, isCompleted }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleSheet = () => {
     setIsOpen(prev => !prev);
@@ -106,4 +109,6 @@ export const TopSheet = ({ post, isCompleted }: TopSheetProps) => {
       </TopSheetContainer>
     </TopSheetWrapper>
   );
-};
+});
+
+TopSheet.displayName = "TopSheet";
