@@ -2,7 +2,7 @@ import { PostListWrapper } from "./styled";
 import { PostItem } from "../PostItem";
 import { DownIcon } from "components/atoms/Icon";
 import { Text } from "components/atoms";
-import { IPost, PostItemType } from "types";
+import type { IPost, PostItemType } from "types";
 
 interface IPostListProps {
   posts: IPost[];

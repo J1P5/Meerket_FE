@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useScrollRestoration } from 'hooks';
 import { http } from "services/api";
 import { useHeaderStore, useUserStore, useFormDataStore } from "stores";
-import { IPost, IResponse } from "types";
+import type { IPost, IResponse } from "types";
 
 interface IHomePost {
   myLocation: string;

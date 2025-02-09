@@ -1,7 +1,7 @@
 import { TabMenu } from "components/molecules";
 import { TransactionOverviewWrapper } from "./styled";
 import { PostList } from "../PostList";
-import { IPost, PostItemType } from "types";
+import type { IPost, PostItemType } from "types";
 
 interface ITransactionOverviewProps {
   /** 탭 메뉴 title 리스트 */

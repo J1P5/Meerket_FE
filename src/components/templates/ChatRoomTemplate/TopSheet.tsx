@@ -1,11 +1,13 @@
 /* eslint-disable @rushstack/typedef-var */
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { IPost, PostList } from "components/organisms/PostList";
+import { PostList } from "components/organisms";
 import { ThemeType } from "styles/theme";
 import { Text } from "components/atoms";
 import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
 import { PostItemRootWrapper } from "components/organisms/PostItem/styled";
+
+import { IPost } from "types";
 
 /** 시간이 촉박해서 임시로 제작한 TopSheet 입니다. 현재는 채팅쪽에서만 사용할 수 있습니다.  */
 

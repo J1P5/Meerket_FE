@@ -13,7 +13,7 @@ import { useChatGroups, useWebSocket } from "hooks";
 import { http } from "services/api";
 import { completeProduct } from "services/apis";
 import { useTopBarStore } from "stores";
-import { IPost, IChatMsg, IChatRoomPageResponse, IChatRoomNewMsgResponse } from "types";
+import type { IPost, IChatMsg, IChatRoomPageResponse, IChatRoomNewMsgResponse } from "types";
 import { decryptRoomId } from "utils";
 
 interface IChatRoomBasic {

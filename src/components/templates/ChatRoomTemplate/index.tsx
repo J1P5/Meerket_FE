@@ -1,6 +1,6 @@
 import { ChatMessages } from "components/organisms";
 import { ChatRoomTemplateWrapper } from "./styled";
-import { IPost } from "components/organisms/PostList";
+import { IPost } from "types";
 import { IChatBubbleProps } from "components/organisms/ChatBubble";
 
 export interface IChatRoomTemplateProps {

@@ -1,6 +1,6 @@
 import { TransactionOverview } from "components/organisms";
 import { TransactionBuyTemplateWrapper } from "./styled";
-import { IPost, PostItemType } from "types";
+import type { IPost, PostItemType } from "types";
 import { useState } from "react";
 import { BUYING_TAB, COMPLETED_TAB } from "constants/transaction";
 

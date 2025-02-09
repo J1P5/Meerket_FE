@@ -1,4 +1,5 @@
-import { IPost, PostList } from "components/organisms/PostList";
+import { PostList } from "components/organisms";
+import { IPost } from "types";
 import { SearchResultsTemplateWrapper } from "./styled";
 import { EmptyTemplate } from "../EmptyTemplate";
 

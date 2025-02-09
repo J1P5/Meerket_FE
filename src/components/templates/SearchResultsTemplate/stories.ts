@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SearchResultsTemplate } from ".";
-import { IPost } from "components/organisms/PostList";
+import { IPost } from "types";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
 
 const meta: Meta<typeof SearchResultsTemplate> = {
