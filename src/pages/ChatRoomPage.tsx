@@ -248,12 +248,6 @@ const ChatRoomPage = () => {
    *  isFirstFetch 값에 따라 scrollToBottom() 실행해서 맨 아래로 내림
    */
   useEffect(() => {
-
-    if (scrollRef.current) {
-      console.log("Current Scroll Height:", scrollRef.current.scrollHeight);
-      console.log("Current Scroll Top:", document.documentElement.scrollTop);
-    }
-
     if (chatGroups.length > 0) {
       if (isFirstFetch) {
         scrollToBottom();
@@ -264,16 +258,14 @@ const ChatRoomPage = () => {
         setIsMsgSended(false);
       }
       if (isNewFetch && scrollRef.current) {
-        document.documentElement.scrollTop += scrollRef.current.scrollHeight - prevHeight; 
+        document.documentElement.scrollTop = scrollRef.current.scrollHeight - prevHeight; 
         setIsNewFetch(false);
       }
     }
   }, [chatGroups]);
 
 
-  const { ref: loadMoreRef, inView } = useInView({
-    rootMargin: "200px",
-  });
+  const { ref: loadMoreRef, inView } = useInView();
 
   useEffect(() => {
     if (inView) {
@@ -308,7 +300,7 @@ const ChatRoomPage = () => {
         scrollContainerRef={scrollContainerRef}
         scrollRef={scrollRef}
       >
-        <div ref={loadMoreRef} style={{ height: "1px" }} />
+        <div ref={loadMoreRef} />
       </ChatRoomTemplate>
     </>
   ) : (
