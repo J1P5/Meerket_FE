@@ -66,7 +66,6 @@ const ChatRoomPage = () => {
   const [isMsgSended, setIsMsgSended] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [prevHeight, setPrevHeight] = useState(0); // 이전 스크롤 높이 저장
-  const [prevScrollTop, setPrevScrollTop] = useState(0); // 이전 스크롤 위치 저장
 
   const [loading, setLoading] = useState(true); // 로딩 상태
 
@@ -265,7 +264,7 @@ const ChatRoomPage = () => {
         setIsMsgSended(false);
       }
       if (isNewFetch && scrollRef.current) {
-        document.documentElement.scrollTop = scrollRef.current.scrollHeight - prevHeight + prevScrollTop; 
+        document.documentElement.scrollTop += scrollRef.current.scrollHeight - prevHeight; 
         setIsNewFetch(false);
       }
     }
@@ -282,7 +281,6 @@ const ChatRoomPage = () => {
         setCheck(true);
         return;
       }
-      setPrevScrollTop(document.documentElement.scrollTop || 0);
       setPrevHeight(scrollRef.current?.scrollHeight || 0);
       fetchNewMessages().then(() => {
         setIsNewFetch(true);
