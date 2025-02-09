@@ -3,6 +3,7 @@ import { PostItem } from "../PostItem";
 import { DownIcon } from "components/atoms/Icon";
 import { Text } from "components/atoms";
 import type { IPost, PostItemType } from "types";
+import { formatPrice } from "utils";
 
 interface IPostListProps {
   posts: IPost[];
@@ -111,7 +112,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${maxPrice.toLocaleString()}원`}</Text>
+            >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -161,7 +162,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${price.toLocaleString()}원`}</Text>
+            >{`${formatPrice(price)}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -209,7 +210,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${maxPrice.toLocaleString()}원`}</Text>
+            >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
       </PostItem>

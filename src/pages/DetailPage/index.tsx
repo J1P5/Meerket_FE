@@ -21,7 +21,7 @@ import { KebabWrapper } from "./styled";
 import { deleteProduct, earlyClose, reportUser, blockUser as blockSeller } from "services/apis";
 import type { Category, ReportType } from "types";
 import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { isExpired } from "../../utils";
+import { formatPrice, isExpired } from "../../utils";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -156,7 +156,7 @@ const DetailPage = () => {
       setFormData({
         title: product.title,
         content: product.content,
-        minimumPrice: product.minimumPrice.toLocaleString(),
+        minimumPrice: formatPrice(product.minimumPrice),
         category: product.category as Category,
         latitude: product.productLocation.latitube,
         longitude: product.productLocation.longitude,

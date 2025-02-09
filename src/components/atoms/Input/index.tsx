@@ -4,7 +4,7 @@ import {
   useCallback,
   useState
 } from "react";
-
+import { formatPrice } from "utils";
 import { InputWrapper } from "./styled";
 
 interface IInputProps {
@@ -61,7 +61,7 @@ export const Input = ({
 
         if (numCheck) {
           const numValue = value.split(",").join("");
-          value = Number(numValue).toLocaleString();
+          value = formatPrice(Number(numValue));
         }
         setValue(value);
       } else {
