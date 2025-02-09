@@ -47,7 +47,6 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
     address,
     uploadTime,
   }: IPost) => {
-    console.log("postList isCompleted", isCompleted);
     return (
       <PostItem key={productId} onClick={onClick}>
         <PostItem.Image imgUrl={imgUrl} loading="lazy" />

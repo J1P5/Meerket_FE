@@ -43,7 +43,6 @@ export const ChatMessages = ({
           const currentCreatedAt = bubble.chats[0].createdAt; // string으로 가정
           const previousCreatedAt =
             idx > 0 ? chatBubbles[idx - 1].chats[0].createdAt : null;
-          if (idx === 0) console.log(currentCreatedAt);
           return (
             <div key={`chat_bubble_${idx}`}>
               {(idx === 0 ||

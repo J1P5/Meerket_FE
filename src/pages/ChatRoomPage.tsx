@@ -123,7 +123,6 @@ const ChatRoomPage = () => {
   /** 초기 채팅방 진입 시 기본 정보 및 초기 메시지30 불러오는 함수
    */
   const fetchMessages = async () => {
-    console.log("메시지를 fetch하는 함수 실행");
     try {
       const response = await http.post<IChatRoomPageResponse>(`${CHATROOM_ENTER_API_URL}/${decrtyptRoomId}`);
       if (response.success && response.code === "COMMON200") {
@@ -140,7 +139,6 @@ const ChatRoomPage = () => {
         );
         if (response.result.messages.length !== 0) {
           const sortedMessages = sortMessages(response.result.messages);
-          console.log(sortedMessages[0].createdAt);
           setChats(sortedMessages);
           setLastMsgTime(sortedMessages[0].createdAt);
         }
@@ -153,8 +151,6 @@ const ChatRoomPage = () => {
   /** 스크롤 올릴때마다 30개씩 새로운 메시지만 fetch 하는 함수
    */
   const fetchNewMessages = async () => {
-    console.log("새로운 메시지를 fetch하는 함수 실행");
-    console.log(lastMsgTime);
     try {
       const response = await http.get<
         IChatRoomNewMsgResponse,
@@ -169,7 +165,6 @@ const ChatRoomPage = () => {
         response.result.length !== 0
       ) {
         const sortedMessages = sortMessages(response.result);
-        console.log(sortedMessages);
         const responseLastMsgTime = sortedMessages[0].createdAt;
         if (lastMsgTime !== responseLastMsgTime) {
           setChats([...sortedMessages, ...chats]);
@@ -239,9 +234,6 @@ const ChatRoomPage = () => {
   const scrollToBottom = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollIntoView({ behavior: "auto" });
-      console.log("3. 스크롤 함수 완료");
-    } else {
-      console.log("3. 없지 않나?");
     }
   };
 
@@ -250,7 +242,6 @@ const ChatRoomPage = () => {
    */
   useEffect(() => {
     if (chatGroups.length !== 0 && isFirstFetch) {
-      console.log("2. 스크롤 함수 실행");
       scrollToBottom();
       setIsFirstFetch(false);
     }
