@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useSearchTopBar } from "hooks";
 import { getCategoryPosts, getKeywordPosts } from "services/apis/post";
 import { ISearchPost } from "types";
-import { IPost } from "components/organisms/PostList";
+import { IPost } from "types";
 import { Loading } from "components/molecules/Loading";
 import { SearchResultsTemplate } from "components/templates";
 import { CATEGORIES } from "constants/categories";

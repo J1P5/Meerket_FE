@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MarketPriceTemplate } from ".";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
-import { IPost } from "components/organisms/PostList";
+import { IPost } from "types";
 
 const meta: Meta<typeof MarketPriceTemplate> = {
   title: "Templates/MarketPriceTemplate",

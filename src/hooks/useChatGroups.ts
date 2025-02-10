@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { IChatMsg } from "pages/ChatRoomPage";
+import { IChatMsg } from "types";
 import { IChatBubbleProps } from "components/organisms/ChatBubble";
 
 // 커스텀 훅: chatList 변경에 따라 그룹화된 chatGroups를 반환
@@ -10,12 +10,15 @@ export function useChatGroups(
   imgUrl: string
 ) {
   const [chatGroups, setChatGroups] = useState<IChatBubbleProps[]>([]);
-  useEffect(() => {
-    if (chatList) {
-      const groups = groupChats(chatList, otherUserId, imgUrl);
-      setChatGroups(groups);
-    }
-  }, [chatList, imgUrl, otherUserId]);
+  useEffect(
+    () => {
+      if (chatList) {
+        const groups = groupChats(chatList, otherUserId, imgUrl);
+        setChatGroups(groups);
+      }
+    },
+    [chatList, imgUrl, otherUserId]
+  );
   return chatGroups;
 }
 
@@ -28,7 +31,7 @@ function groupChats(
   const groups: IChatBubbleProps[] = [];
   let currentGroup: IChatBubbleProps | null = null;
 
-  chatList.forEach((chat) => {
+  chatList.forEach(chat => {
     const chatTime = formatTime(chat.createdAt);
     const isMe = chat.senderId !== otherUserId;
     if (

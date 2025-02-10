@@ -80,7 +80,7 @@ export const PostRegisterPage = () => {
   //     setFormData({
   //       title: product.title,
   //       content: product.content,
-  //       minimumPrice: product.minimumPrice.toLocaleString(),
+  //       minimumPrice: formatPrice(product.minimumPrice),
   //       category: product.category as Category,
   //       latitude: product.productLocation.latitude,
   //       longitude: product.productLocation.longitude,

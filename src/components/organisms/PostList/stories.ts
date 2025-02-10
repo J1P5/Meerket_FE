@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { IPost, PostList } from ".";
+import { PostList } from ".";
+import type { IPost } from "types";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
 
 const meta: Meta<typeof PostList> = {

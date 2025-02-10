@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Input, Text, TextButton } from "components/atoms";
 import type { IModalBottomSheetProps } from "components/molecules/ModalBottomSheet";
+import { formatPrice } from "utils";
 
 import { AuctionBidBottomSheetWrapper } from "./styled";
 
@@ -27,8 +28,8 @@ export const AuctionBidBottomSheet = ({
   onBid,
 }: IAuctionBidBottomSheetProps) => {
   const placeholder = beforePrice
-    ? `내 입찰가 ${beforePrice.toLocaleString()}`
-    : `최소 ${minPrice.toLocaleString()}`;
+    ? `내 입찰가 ${formatPrice(beforePrice)}`
+    : `최소 ${formatPrice(minPrice)}`;
   const isInvalidPrice = useMemo(
     () => parseInt(price.replace(/,/g, "")) > 2000000000,
     [price],
@@ -48,7 +49,7 @@ export const AuctionBidBottomSheet = ({
           <Text variant="explan_regular">20억 이하로 입력해주세요.</Text>
         </div>
       )}
-      <Text variant="desc_regular">{`최소 입찰가 ${minPrice.toLocaleString()}`}</Text>
+      <Text variant="desc_regular">{`최소 입찰가 ${formatPrice(minPrice)}`}</Text>
       <TextButton text="입찰하기" onClick={onBid} disabled={isInvalidPrice} />
     </AuctionBidBottomSheetWrapper>
   );

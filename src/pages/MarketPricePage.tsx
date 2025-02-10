@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "components/molecules/Loading";
-import { IPost } from "components/organisms/PostList";
+import { IPost } from "types";
 import { MarketPriceTemplate } from "components/templates";
 import {
   MARKET_PRICE_API_URL,

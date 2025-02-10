@@ -1,7 +1,8 @@
 import { TextButton } from "components/atoms";
 import { HomeTemplateWrapper } from "./styled";
-import { IPost, PostList } from "components/organisms/PostList";
+import { PostList } from "components/organisms";
 import { EmptyTemplate } from "../EmptyTemplate";
+import { IPost } from "types";
 
 interface IHomeTemplateProps {
   posts: IPost[];

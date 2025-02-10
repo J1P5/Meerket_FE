@@ -3,6 +3,7 @@ import { bidding, cancelBidding, editBidding } from "services/apis";
 import { useFetchProduct } from "hooks";
 import { useModalStore } from "stores";
 import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { formatPrice } from "utils";
 
 /**
  * 입찰 로직
@@ -37,7 +38,7 @@ export const useBid = (productId: number) => {
     const priceValue = Number(price.replace(/,/g, ""));
     if (priceValue < minimumPrice) {
       Toast.show(
-        `${minimumPrice.toLocaleString()}원 이상으로 입력해주세요.`,
+        `${formatPrice(minimumPrice)}원 이상으로 입력해주세요.`,
         2000,
       );
       return;

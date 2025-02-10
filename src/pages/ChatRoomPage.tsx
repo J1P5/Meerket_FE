@@ -1,20 +1,20 @@
-import { Loading } from "components/molecules/Loading";
-import { IPost } from "components/organisms/PostList";
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { EmptyTemplate } from "components/templates";
-import { ChatRoomTemplate } from "components/templates/ChatRoomTemplate";
-import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
-import { DEFAULT_IMG_PATH } from "constants/imgPath";
-import { useChatGroups } from "hooks/useChatGroups";
-import { useWebSocket } from "hooks/useWebSocket";
-import { throttle } from "lodash-es";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
+import { Loading } from "components/molecules";
+import { EmptyTemplate, ChatRoomTemplate } from "components/templates";
+import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
+
+import { DEFAULT_IMG_PATH } from "constants/imgPath";
+import { CHATROOM_LOADING_MESSAGE, CHATROOM_ENTER_API_URL, CHATROOM_NEW_MESSAGE_API_URL, CHATROOM_NAVIGATE_URL } from "constants/ChatRoomPageConstants";
+import { useChatGroups, useWebSocket } from "hooks";
 import { http } from "services/api";
 import { completeProduct } from "services/apis";
 import { useTopBarStore } from "stores";
-import { IResponse } from "types";
-import { decryptRoomId } from "utils/security";
+import type { IPost, IChatMsg, IChatRoomPageResponse, IChatRoomNewMsgResponse } from "types";
+import { decryptRoomId } from "utils";
 
 interface IChatRoomBasic {
   /** 채팅방 ID, 몽고DB */
@@ -45,30 +45,13 @@ interface IChatRoomBasic {
   productStatus: "BIDDING" | "IN_PROGRESS" | "COMPLETED";
 }
 
-export interface IChatMsg {
-  /** 채팅 ObjectId 문자열 / 추후 안읽은 메시지 개수 관리를 위해 */
-  id: string;
-  senderId: number;
-  content: string;
-  createdAt: string;
-}
-interface IChatRoomPageResponse extends IResponse {
-  result: {
-    chatRoomBasicInfo: IChatRoomBasic;
-    messages: IChatMsg[];
-  };
-}
-interface IChatRoomNewMsgResponse extends IResponse {
-  result: IChatMsg[];
-}
+
 const ChatRoomPage = () => {
   const { clear, setTitle } = useTopBarStore();
   const navigate = useNavigate();
   const { roomId, userId } = useParams(); // URL에서 roomId 가져오기
   const decrtyptRoomId = roomId ? decryptRoomId(roomId) : "";
 
-  const chatRoomEnterurl = `/chats/enter/${decrtyptRoomId}`;
-  const chatRoomNewMessagesurl = `/chats/messages`;
   const [post, setPost] = useState<IPost>();
   const [otherUserId, setOtherUserId] = useState<number>(-1);
   const [otherNickname, setOtherNickname] = useState<string>("");
@@ -78,11 +61,14 @@ const ChatRoomPage = () => {
   const [isFirstFetch, setIsFirstFetch] = useState(true);
   const chatGroups = useChatGroups(chats, otherUserId, imgUrl);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const { connect, disconnect, sendMessage, isConnected } = useWebSocket();
   const [isMsgSended, setIsMsgSended] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [prevHeight, setPrevHeight] = useState(0); // 이전 스크롤 높이 저장
 
   const [loading, setLoading] = useState(true); // 로딩 상태
+
 
   /** 백엔드 IChatRoom 타입을 프론트 IChatItemProps 으로 변환 함수
    * @param chatRoom : IChatRoom
@@ -104,7 +90,7 @@ const ChatRoomPage = () => {
       isSeller: chatRoomBasicInfo.isSeller,
       status: chatRoomBasicInfo.productStatus,
       onClick: () => {
-        navigate(`/product/${chatRoomBasicInfo.productId}`);
+        navigate(`${CHATROOM_NAVIGATE_URL}/${chatRoomBasicInfo.productId}`);
       },
       onTextButtonClick: () => {
         completeProduct(chatRoomBasicInfo.productId!.toString())
@@ -127,7 +113,7 @@ const ChatRoomPage = () => {
    * @param messages : IChatMsg[]
    * @return messages : IChatMsg[]
    */
-  const sortMessages = (messages: IChatMsg[]): IChatMsg[] => {
+  const sortMessages = useCallback((messages: IChatMsg[]): IChatMsg[] => {
     messages.sort((a, b) => {
       const dateA = new Date(a.createdAt); // a의 createdAt을 Date 객체로 변환
       const dateB = new Date(b.createdAt); // b의 createdAt을 Date 객체로 변환
@@ -135,14 +121,13 @@ const ChatRoomPage = () => {
       return dateA.getTime() - dateB.getTime(); // 오름차순 정렬
     });
     return messages;
-  };
+  },[]);
 
   /** 초기 채팅방 진입 시 기본 정보 및 초기 메시지30 불러오는 함수
    */
   const fetchMessages = async () => {
-    console.log("메시지를 fetch하는 함수 실행");
     try {
-      const response = await http.post<IChatRoomPageResponse>(chatRoomEnterurl);
+      const response = await http.post<IChatRoomPageResponse>(`${CHATROOM_ENTER_API_URL}/${decrtyptRoomId}`);
       if (response.success && response.code === "COMMON200") {
         setOtherUserId(response.result.chatRoomBasicInfo.otherUserId);
         setOtherNickname(response.result.chatRoomBasicInfo.otherNickname);
@@ -157,7 +142,6 @@ const ChatRoomPage = () => {
         );
         if (response.result.messages.length !== 0) {
           const sortedMessages = sortMessages(response.result.messages);
-          console.log(sortedMessages[0].createdAt);
           setChats(sortedMessages);
           setLastMsgTime(sortedMessages[0].createdAt);
         }
@@ -170,13 +154,11 @@ const ChatRoomPage = () => {
   /** 스크롤 올릴때마다 30개씩 새로운 메시지만 fetch 하는 함수
    */
   const fetchNewMessages = async () => {
-    console.log("새로운 메시지를 fetch하는 함수 실행");
-    console.log(lastMsgTime);
     try {
       const response = await http.get<
         IChatRoomNewMsgResponse,
         { roomId: string; beforeTime: string }
-      >(chatRoomNewMessagesurl, {
+      >(CHATROOM_NEW_MESSAGE_API_URL, {
         roomId: decrtyptRoomId || "",
         beforeTime: lastMsgTime || "",
       });
@@ -186,8 +168,8 @@ const ChatRoomPage = () => {
         response.result.length !== 0
       ) {
         const sortedMessages = sortMessages(response.result);
-        console.log(sortedMessages);
         const responseLastMsgTime = sortedMessages[0].createdAt;
+
         if (lastMsgTime !== responseLastMsgTime) {
           setChats([...sortedMessages, ...chats]);
           setLastMsgTime(responseLastMsgTime);
@@ -208,7 +190,7 @@ const ChatRoomPage = () => {
     };
     fetchChatMessages()
       .catch((error) => {
-        console.error("Error fetchting Chat Message:", error);
+        console.error("Error fetching Chat Message:", error);
       })
       .finally(() => {
         setLoading(false);
@@ -256,59 +238,57 @@ const ChatRoomPage = () => {
   const scrollToBottom = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollIntoView({ behavior: "auto" });
-      console.log("3. 스크롤 함수 완료");
-    } else {
-      console.log("3. 없지 않나?");
     }
   };
+
+  const [check, setCheck] = useState(false);
+  const [isNewFetch, setIsNewFetch] = useState(false);
 
   /** 데이터가 fetch된 후, DOM이 렌더링된 상태에서 스크롤을 내리는 useEffect
    *  isFirstFetch 값에 따라 scrollToBottom() 실행해서 맨 아래로 내림
    */
   useEffect(() => {
-    if (chatGroups.length !== 0 && isFirstFetch) {
-      console.log("2. 스크롤 함수 실행");
-      scrollToBottom();
-      setIsFirstFetch(false);
+    if (chatGroups.length > 0) {
+      if (isFirstFetch) {
+        scrollToBottom();
+        setIsFirstFetch(false);
+      }
+      if (isMsgSended) {
+        scrollToBottom();
+        setIsMsgSended(false);
+      }
+      if (isNewFetch && scrollRef.current) {
+        document.documentElement.scrollTop = scrollRef.current.scrollHeight - prevHeight; 
+        setIsNewFetch(false);
+      }
     }
-  }, [chatGroups, isFirstFetch]); // 데이터가 fetch된 이후에만 실행
+  }, [chatGroups]);
 
-  /** 스크롤 이벤트 핸들러, 스크롤 상단으로 올리는 경우 새로운 메시지 fetch 함수 실행
-   *  throttle 사용하여 1.5초 딜레이
-   */
-  const handleScroll = throttle(async () => {
-    const scrollTop = document.documentElement.scrollTop;
-    if (scrollTop <= 100) {
-      await fetchNewMessages();
-    }
-  }, 1500);
 
-  /** lastMsgTime 값에 따라 윈도우에 스크롤 이벤트 등록하는 useEffect
-   */
+  const { ref: loadMoreRef, inView } = useInView();
+
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastMsgTime]);
+    if (inView) {
+      if(!check){
+        setCheck(true);
+        return;
+      }
+      setPrevHeight(scrollRef.current?.scrollHeight || 0);
+      fetchNewMessages().then(() => {
+        setIsNewFetch(true);
+      }).catch((error) => {
+        console.error("Failed to fetch new messages:", error);
+      });
+    }
+  }, [inView]); 
 
   const handleInput = (message: string) => {
     sendMessage(decrtyptRoomId, message, Number(userId!), otherUserId);
     setIsMsgSended(true);
   };
 
-  useEffect(() => {
-    if (chatGroups.length >= 0 && isMsgSended) {
-      scrollToBottom();
-      setIsMsgSended(false);
-    }
-  }, [chatGroups]); // 데이터가 fetch된 이후에만 실행
-
-  const chatLoadingMsg = "채팅 글\n불러 오는 중";
   if (loading) {
-    return <Loading message={chatLoadingMsg}></Loading>; // 로딩 중 메시지
+    return <Loading message={CHATROOM_LOADING_MESSAGE}></Loading>; // 로딩 중 메시지
   }
   return post ? (
     <>
@@ -318,7 +298,10 @@ const ChatRoomPage = () => {
         chatBubbles={chatGroups}
         onWriteMessage={handleInput}
         scrollContainerRef={scrollContainerRef}
-      />
+        scrollRef={scrollRef}
+      >
+        <div ref={loadMoreRef} />
+      </ChatRoomTemplate>
     </>
   ) : (
     <div style={{ width: "100%" }}>

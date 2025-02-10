@@ -1,5 +1,5 @@
 import { Image, Text, TextButton } from "components/atoms";
-import { formatToDateTime, getRelativeTime } from "utils";
+import { formatToDateTime, getRelativeTime, formatPrice } from "utils";
 import { useRemainingTimer } from "hooks";
 import type { IconType } from "types";
 import {
@@ -41,6 +41,7 @@ const PostItemRoot = ({ children, onClick }: IPostItemRootProps) => {
 export interface IPostItemImageProps {
   imgUrl: string;
   size?: "default" | "mini";
+  loading?: "eager" | "lazy";
 }
 
 /**
@@ -49,8 +50,9 @@ export interface IPostItemImageProps {
  * @param size 이미지 사이즈 (default: default)
  * 	- default: 84px
  * 	- mini: 60px
+ * @param lazyLoading 유무 (eager, lazy)
  */
-const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
+const PostItemImage = ({ imgUrl, size = "default", loading="eager" }: IPostItemImageProps) => {
   return (
     <PostItemImageWrapper size={size}>
       <Image
@@ -58,6 +60,7 @@ const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
         type="square"
         url={imgUrl}
         alt="PostItem Image"
+        loading={loading}
       />
     </PostItemImageWrapper>
   );
@@ -124,9 +127,7 @@ const PostItemLocationAndTime = ({
       : formatToDateTime(uploadTime);
   return (
     <PostItemLocationAndTimeWrapper>
-      <Text variant="tag_regular">{address}</Text>
-      <Text variant="tag_regular">.</Text>
-      <Text variant="tag_regular">{time}</Text>
+      <Text variant="tag_regular">{`${address}·${time}`}</Text>
     </PostItemLocationAndTimeWrapper>
   );
 };
@@ -153,8 +154,7 @@ const PostItemPrice = ({
 }: IPostItemPriceProps) => {
   return (
     <PostItemPriceWrapper>
-      {title && <Text variant={variant}>{title}</Text>}
-      <Text variant={variant}>{`${price.toLocaleString()}원`}</Text>
+      <Text variant={variant}>{`${title || ""}${formatPrice(price)}`}</Text>
     </PostItemPriceWrapper>
   );
 };
@@ -177,9 +177,7 @@ const PostItemRemainingTime = ({
   const { timeRemaining } = useRemainingTimer(expiredTime);
   return (
     <PostItemRemainingTimeWrapper>
-      <Text variant="tag_regular">남은 시간</Text>
-      <Text variant="tag_regular">·</Text>
-      <Text variant="tag_regular">{timeRemaining === "over" ? "종료" : timeRemaining}</Text>
+      <Text variant="tag_regular">{`남은 시간·${timeRemaining === "over" ? "종료" : timeRemaining}`}</Text>
     </PostItemRemainingTimeWrapper>
   );
 };

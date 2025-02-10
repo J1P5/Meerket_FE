@@ -1,5 +1,5 @@
 import { Client } from "@stomp/stompjs";
-import { IChatMsg } from "pages/ChatRoomPage";
+import { IChatMsg } from "types";
 import { useState } from "react";
 
 let stompClient: Client | undefined = undefined;
@@ -21,7 +21,6 @@ export function useWebSocket() {
           const newMsg = JSON.parse(message.body);
           newMsg.createdAt = new Date();
           newMsg.id = "0";
-          console.log("메시지 수신:", JSON.parse(message.body));
           setChats((prev) => [...prev, newMsg]);
         },
         /** TODO: 채팅 방 목록에서 userID 받아서 여기에 userId 넣어야함
@@ -41,7 +40,6 @@ export function useWebSocket() {
     setChats: React.Dispatch<React.SetStateAction<IChatMsg[]>>
   ) => {
     if (isConnected) {
-      console.log("WebSocket already connected.");
       return;
     }
 
@@ -51,11 +49,10 @@ export function useWebSocket() {
         console.log(str);
       },
       onConnect: () => {
-        console.log("연결 완료");
         setIsConnected(true); // 상태 업데이트
         // 구독 실행 및 반환 값 확인
         const subscription = subscribeToChatRoom(roomId, userId, setChats);
-
+        
         if (subscription) {
           console.log("Successfully subscribed to room:", subscription);
         } else {
@@ -72,18 +69,13 @@ export function useWebSocket() {
   };
 
   const disconnect = async () => {
-    console.log("disconnect 실행");
-    console.log(isConnected);
     if (!isConnected) {
-      console.log("WebSocket is not connected.");
       return;
     }
-    if (stompClient) {
+    if (stompClient) { // 웹 소켓 연결 끊음
       await stompClient.deactivate();
-      console.log("웹 소켓 연결 끊음");
       setIsConnected(false); // 상태 업데이트
     }
-    console.log("Disconnected");
   };
 
   /**
@@ -105,7 +97,6 @@ export function useWebSocket() {
         content: content,
         senderId: senderId,
       };
-      console.log("Sending message:", chatMessage);
       stompClient.publish({
         destination: "/pub/message",
         body: JSON.stringify(chatMessage),

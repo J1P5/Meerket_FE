@@ -5,6 +5,7 @@ import {
   BidContainerWrapper,
   ButtonContainerWrapper,
 } from "./styled";
+import { formatPrice } from "utils";
 
 /* -------------------------------------------------------------------
  * AuctionControlBar Root
@@ -39,7 +40,7 @@ const Bid = ({ title, price }: IBidProps) => {
         {title}
       </Text>
       <Text variant="writing_bold">
-        {`${price.toLocaleString()}원`}
+        {`${formatPrice(price)}원`}
       </Text>
     </BidWrapper>
   );

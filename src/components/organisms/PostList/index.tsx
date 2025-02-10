@@ -2,41 +2,9 @@ import { PostListWrapper } from "./styled";
 import { PostItem } from "../PostItem";
 import { DownIcon } from "components/atoms/Icon";
 import { Text } from "components/atoms";
+import type { IPost, PostItemType } from "types";
+import { formatPrice } from "utils";
 
-export interface IPost {
-  /** 게시글 ID */
-  productId: number;
-  /** 게시글 썸네일 이미지 */
-  imgUrl: string;
-  /** 게시글 제목 */
-  title: string;
-  /** 게시글 가격 */
-  price: number;
-  /** 게시글 등록된 주소 */
-  address: string;
-  /** 게시글 등록된 시간 */
-  uploadTime: string;
-  /** 게시글 아이템 클릭 이벤트 */
-  onClick: () => void;
-  /** 남은 시간 */
-  expiredTime: string;
-  /** 판매자 : 최고 입찰가, 구매자 : 나의 입찰가  */
-  maxPrice: number;
-  /** 판매중 : 끌어올리기, 완료 : 받은 후기 보기  */
-  onTextButtonClick: () => void;
-  /** 아이콘 버튼 클릭 이벤트 */
-  onIconButtonClick: () => void;
-  /** 판매자 여부 */
-  isSeller?: boolean;
-  /** 게시글 상태 */
-  status?: "BIDDING" | "IN_PROGRESS" | "COMPLETED";
-}
-export type PostItemType =
-  | "completed"
-  | "default"
-  | "chat"
-  | "selling"
-  | "buying";
 interface IPostListProps {
   posts: IPost[];
   type: PostItemType;
@@ -80,10 +48,9 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
     address,
     uploadTime,
   }: IPost) => {
-    console.log("postList isCompleted", isCompleted);
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} />
+        <PostItem.Image imgUrl={imgUrl} loading="lazy" />
         <PostItem.Container>
           <PostItem.Title title={title} />
           <PostItem.Price price={price} />
@@ -145,7 +112,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${maxPrice.toLocaleString()}원`}</Text>
+            >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -195,7 +162,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${price.toLocaleString()}원`}</Text>
+            >{`${formatPrice(price)}원`}</Text>
           </div>
         </PostItem.Container>
         {/* <PostItem.ButtonContainer
@@ -243,7 +210,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             <Text
               color={"#344fff"}
               variant="explan_bold"
-            >{`${maxPrice.toLocaleString()}원`}</Text>
+            >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
       </PostItem>
