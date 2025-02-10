@@ -1,3 +1,4 @@
+import { IResponse } from "types";
 
 export interface ISearchPost {
   myLocation: string;
