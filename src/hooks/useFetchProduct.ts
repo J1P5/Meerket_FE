@@ -10,7 +10,7 @@ export const useFetchProduct = (productId: string) => {
   const { data, isLoading, refetch, isRefetching, isError, error } = useQuery({
     queryKey: queries.product.detail(productId),
     queryFn: () => getProduct(productId),
-    select: (data) => data.result,
+    select: data => data.result,
     retry: false,
   });
 

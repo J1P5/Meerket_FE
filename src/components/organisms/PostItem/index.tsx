@@ -154,7 +154,7 @@ const PostItemPrice = ({
 }: IPostItemPriceProps) => {
   return (
     <PostItemPriceWrapper>
-      <Text variant={variant}>{`${title || ""}${formatPrice(price)}`}</Text>
+      <Text variant={variant}>{`${title || ""}${formatPrice(price)}원`}</Text>
     </PostItemPriceWrapper>
   );
 };
