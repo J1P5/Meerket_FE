@@ -38,7 +38,7 @@ export const HasProduct: Story = {
     }
   },
   args: {
-    productId: 1,
+    productId: "1",
     postForm: {
       category: "디지털/가전" as Category,
       title: "1번 product입니다.",

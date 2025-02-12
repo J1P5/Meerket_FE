@@ -88,7 +88,7 @@ export const registerProduct = async (
  * @returns
  */
 export const editProduct = async (
-  productId: number,
+  productId: string,
   updatedProduct: Omit<IProductPost, "images" | "expiredTime">
 ) => {
   console.log("updatedProduct", updatedProduct);

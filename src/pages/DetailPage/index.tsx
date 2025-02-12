@@ -19,9 +19,9 @@ import {
 } from "hooks";
 import { KebabWrapper } from "./styled";
 import { deleteProduct, earlyClose, reportUser, blockUser as blockSeller } from "services/apis";
-import type { Category, ReportType } from "types";
+import type { ReportType } from "types";
 import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { formatPrice, isExpired } from "../../utils";
+import { isExpired } from "../../utils";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const DetailPage = () => {
     actions: { setCoord, setLocation, setAddress },
   } = useSelectedLocationStore();
   // TODO
-  const { setFormData, setProductId } = useFormDataStore();
+  const { clear: clearFormData } = useFormDataStore();
   const { open, handleOpen, handleClose, menuRef } = useKebabMenu();
   const { handleCancel } = useBid(parseInt(productId!));
   const { removeNoBuyer, removeHasBuyer, reportPost, reportComplete, blockUser, blockUserComplete } =
@@ -150,21 +150,7 @@ const DetailPage = () => {
       return;
     }
     if (!product.hasBuyer) {
-      // 수정 페이지로 이동
-      // TODO 확인 필요
-      setProductId(productId!);
-      setFormData({
-        title: product.title,
-        content: product.content,
-        minimumPrice: formatPrice(product.minimumPrice),
-        category: product.category as Category,
-        latitude: product.productLocation.latitube,
-        longitude: product.productLocation.longitude,
-        address: product.productLocation.address,
-        location: product.productLocation.location,
-        imgUrls: product.images.map((img) => ({ url: img, file: null })),
-        expiredTime: product.expiredTime,
-      });
+      clearFormData();
       navigate(`/product?productId=${productId!}`);
       return;
     }

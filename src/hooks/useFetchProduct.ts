@@ -7,15 +7,18 @@ import { useNavigate } from "react-router-dom";
 
 export const useFetchProduct = (productId: string) => {
   const navigate = useNavigate();
+
   const { data, isLoading, refetch, isRefetching, isError, error } = useQuery({
     queryKey: queries.product.detail(productId),
     queryFn: () => getProduct(productId),
     select: data => data.result,
     retry: false,
+    enabled: !!productId,
   });
 
   useEffect(() => {
     if (isError) {
+      console.log("error", error)
       if (error instanceof AxiosError) {
         const { code } = error.response?.data;
         if (code === "PRODUCT410") {

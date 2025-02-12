@@ -4,7 +4,7 @@ import type { IProductForm } from "types";
 
 interface IPostRegisterTemplateProps {
   /** product Id */
-  productId?: number;
+  productId: string;
   /** 글 등록할 때 필요한 form 데이터 */
   postForm?: IProductForm;
   /** Submit 이벤트 발생 시 실행할 함수 */
@@ -19,6 +19,9 @@ export const PostRegisterTemplate = ({
   onSubmit,
   onClick
 }: IPostRegisterTemplateProps) => {
+  // postForm이 제대로 전달되었는지 확인
+  console.log("Received postForm:", postForm);
+
   return (
     <PostRegisterTemplateWrapper>
       <PostRegisterForm
