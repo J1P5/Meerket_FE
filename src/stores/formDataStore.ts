@@ -7,9 +7,9 @@ import type { IProductForm } from "types";
 const localStorageKey = "meerket--formData" as const;
 
 interface State {
-  productId?: number;
+  productId?: string;
   formData: IProductForm;
-  setProductId: (id: string | number) => void;
+  setProductId: (id: string) => void;
   setFormData: (data: Partial<IProductForm>) => void;
   isFormDataEmpty: () => boolean;
   clear: () => void;
@@ -19,7 +19,7 @@ export const defaultState: Omit<
   State,
   "setFormData" | "setProductId" | "isFormDataEmpty" | "clear"
 > = {
-  productId: undefined,
+  productId: "",
   formData: {
     title: "",
     content: "",
@@ -38,9 +38,9 @@ export const useFormDataStore: UseBoundStore<StoreApi<State>> = create(
   persist<State>(
     (set, get) => ({
       ...defaultState,
-      setProductId: (id: string | number) =>
+      setProductId: (id: string) =>
         set(() => ({
-          productId: Number(id),
+          productId: id,
         })),
       setFormData: (data) =>
         set(

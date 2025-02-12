@@ -1,13 +1,12 @@
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { PostRegisterTemplate } from "components/templates";
 import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFormDataStore, useTopBarStore } from "stores";
-import type { Category, ExpiredTime, IProductForm, IProductPost } from "types";
-import { getExpiredDate } from "utils";
 import { registerProduct, editProduct } from "services/apis/product";
-// import { useFetchProduct } from "hooks";
-
+import { useFetchProduct } from "hooks";
+import { ToastInstance as Toast } from "components/atoms/Toast";
+import { PostRegisterTemplate } from "components/templates";
+import { getExpiredDate, formatPrice } from "utils";
+import type { Category, ExpiredTime, IProductForm, IProductPost } from "types";
 
 /**
  * 임시 헬퍼 함수
@@ -58,44 +57,40 @@ export const PostRegisterPage = () => {
   const { setTitle } = useTopBarStore();
 
   const queryParams = new URLSearchParams(location.search);
-  const productId = Number(queryParams.get("productId"));
+  const PRODUCT_ID = queryParams.get("productId") || "";
   const formData = useFormDataStore((state) => state.formData);
+  const productId = useFormDataStore((state) => state.productId);
   const { latitude: lat, longitude: lng, address } = formData;
-  const { setFormData, clear } = useFormDataStore();
+  const { setProductId, setFormData, clear } = useFormDataStore();
+  const { product } = useFetchProduct(PRODUCT_ID && !productId ? PRODUCT_ID : "");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // const { product, isProductLoading } = useFetchProduct(
-  //   productId?.toString() || ""
-  // );
 
-  // 1. 데이터를 fetch해서 받아온다
-  // 2. 받아온 데이터를 formdata에 넣어준다
-  // 3. 변경된 formdata를 감지하고, 템플릿에 넣어준다.
-
-  // useEffect(() => {
-  //   if (productId && product && isFormDataEmpty()) {
-  //     setFormData({
-  //       title: product.title,
-  //       content: product.content,
-  //       minimumPrice: formatPrice(product.minimumPrice),
-  //       category: product.category as Category,
-  //       latitude: product.productLocation.latitude,
-  //       longitude: product.productLocation.longitude,
-  //       address: product.productLocation.address,
-  //       location: product.productLocation.location,
-  //       imgUrls: product.images.map((img) => ({ url: img, file: null })),
-  //       expiredTime: product.expiredTime,
-  //     });
-  //   }
-  // }, [product, setFormData]);
+  useEffect(() => {
+    if (product && PRODUCT_ID && !productId) {
+      setProductId(PRODUCT_ID);
+      setFormData({
+        title: product.title,
+        content: product.content,
+        minimumPrice: formatPrice(product.minimumPrice),
+        category: product.category as Category,
+        latitude: product.productLocation.latitube,
+        longitude: product.productLocation.longitude,
+        address: product.productLocation.address,
+        location: product.productLocation.location,
+        imgUrls: product.images.map((img) => ({ url: img, file: null })),
+        expiredTime: product.expiredTime,
+      });
+    }
+  }, [product, PRODUCT_ID, productId, setFormData, setProductId]);
 
   const handleSubmit = useCallback(
     async (formData: IProductForm) => {
       try {
-        const transformedData = transformFormData(formData, !productId);
+        const transformedData = transformFormData(formData, !PRODUCT_ID);
 
         const productData = createProductData(transformedData, {
           lat: lat!,
@@ -103,7 +98,7 @@ export const PostRegisterPage = () => {
           address: address!,
         });
 
-        if (!productId) {
+        if (!PRODUCT_ID) {
           await registerProduct(productData);
           navigate(`/`);
           Toast.show("물품이 등록되었어요!");
@@ -112,8 +107,8 @@ export const PostRegisterPage = () => {
           delete updateData.images;
           delete updateData.expiredTime;
 
-          await editProduct(productId, updateData);
-          navigate(`/product/${productId}`);
+          await editProduct(PRODUCT_ID, updateData);
+          navigate(`/product/${PRODUCT_ID}`);
           Toast.show("물품이 수정되었어요!");
         }
         clear();
@@ -122,7 +117,7 @@ export const PostRegisterPage = () => {
         console.error("Product submission failed:", error);
       }
     },
-    [lat, lng, address, clear, navigate, productId]
+    [lat, lng, address, clear, navigate, PRODUCT_ID]
   );
 
   const handleClick = useCallback(
@@ -146,7 +141,7 @@ export const PostRegisterPage = () => {
 
   return (
     <PostRegisterTemplate
-      productId={productId || undefined}
+      productId={PRODUCT_ID}
       postForm={formData}
       onClick={handleClick}
       onSubmit={handleSubmit}

@@ -15,7 +15,7 @@ import { isISOFormat, formatToDateTime } from "utils";
 
 interface IPostRegisterFormProps {
   /** product Id */
-  productId?: number;
+  productId: string;
   /** 글 등록할 때 필요한 form 데이터 */
   postForm?: IProductForm;
   /** Submit 이벤트 발생 시 실행할 함수 */
@@ -30,9 +30,7 @@ export const PostRegisterForm = ({
   onSubmit,
   onClick,
 }: IPostRegisterFormProps) => {
-  const [imageInfos, setImageInfos] = useState<IImageInfo[]>(
-    postForm?.imgUrls || [],
-  );
+  const [imageInfos, setImageInfos] = useState<IImageInfo[]>(postForm?.imgUrls || []);
 
   const { control, handleSubmit, setValue, getValues } = useForm<IProductForm>({
     mode: "onBlur",
@@ -45,6 +43,16 @@ export const PostRegisterForm = ({
       location: postForm?.location,
     },
   });
+
+  useEffect(() => {
+    setImageInfos(postForm?.imgUrls || []);
+    setValue("title", postForm?.title);
+    setValue("content", postForm?.content);
+    setValue("minimumPrice", postForm?.minimumPrice);
+    setValue("category", postForm?.category);
+    setValue("expiredTime", postForm?.expiredTime);
+    setValue("location", postForm?.location);
+  }, [postForm, setValue]);
 
   useEffect(() => {
     setValue("imgUrls", imageInfos);

@@ -37,11 +37,7 @@ const SelectLocationPage = () => {
         location: place,
       });
       setIsOpenBottomSheet(false);
-      if (productId) {
-        navigate(`/product?productId=${productId}`);
-      } else {
-        navigate("/product");
-      }
+      navigate(-1)
     },
     [setFormData, navigate, productId]
   );
