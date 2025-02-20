@@ -8,6 +8,7 @@ const PrivacyPolicyPage = () => {
   useEffect(() => {
     clear();
     setTitle(PRIVACY_POLICY_TITLE);
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
