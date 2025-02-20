@@ -1,8 +1,6 @@
-import { Text, TextButton } from "components/atoms";
-import {} from "components/molecules";
-import { EmptyTemplateWrapper } from "./styled";
+import { Text, TextButton, Logo } from "components/atoms";
+import { EmptyTemplateWrapper, LogoWrapper, TextContainer } from "./styled";
 import { useNavigate } from "react-router-dom";
-import { Sticker } from "components/atoms/Sticker";
 
 export interface IEmptyTemplateProps {
   type:
@@ -71,16 +69,18 @@ export const EmptyTemplate = ({ type = "default" }: IEmptyTemplateProps) => {
   const noButtonTypes = ["default", "blockedUser"];
   return (
     <EmptyTemplateWrapper className={type}>
-      <div className="text-con">
-        <Text variant="h5">
+      <TextContainer>
+        <Text variant="btn_bold">
           {msg}
         </Text>
-      </div>
-      <Sticker />
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </TextContainer>
       {/* noButtonTypes 배열에 포함되지 않는 경우에만 TextButton 렌더링 */}
       {!noButtonTypes.includes(type) &&
         <TextButton text={buttonText} onClick={handleClick} />}
-      {noButtonTypes.includes(type) && <div />}
+      {/* {noButtonTypes.includes(type) && <div />} */}
     </EmptyTemplateWrapper>
   );
 };
