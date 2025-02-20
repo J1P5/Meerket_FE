@@ -84,7 +84,7 @@ const BlockedUsersPage = () => {
   }
 
   return (
-    <>
+    <div style={{ width: "100%" }}>
       {blockedUsers.length > 0 ? (
         <BlockedUsersTemplate
           blockedUserItems={blockedUsers}
@@ -95,7 +95,7 @@ const BlockedUsersPage = () => {
       ) : (
         <EmptyTemplate type="blockedUser" />
       )}
-    </>
+    </div>
   );
 };
 
