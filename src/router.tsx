@@ -1,61 +1,60 @@
-// import { lazy } from "react";
+import { lazy } from "react";
 import { createBrowserRouter, type RouteObject } from "react-router-dom";
-// const BlockedUsersPage = lazy(() => import("pages/BlockedUsersPage"));
-// const CategoryPage = lazy(() => import("pages/CategoryPage"));
-// const ChatListPage = lazy(() => import("pages/ChatListPage"));
-// const ChatRoomPage = lazy(() => import("pages/ChatRoomPage"));
-// const DetailPage = lazy(() => import("pages/DetailPage"));
-// const HomePage = lazy(() => import("pages/HomePage"));
-// const LoginPage = lazy(() => import("pages/LoginPage"));
-// const MarketPricePage = lazy(() => import("pages/MarketPricePage"));
-// const MyPage = lazy(() => import("pages/MyPage"));
-// const NeighborhoodAuthPage = lazy(() => import("pages/NeighborhoodAuthPage"));
-// const NeighborhoodSelectionPage = lazy(
-//   () => import("pages/NeighborhoodSelectionPage")
-// );
-// const NotificationPage = lazy(() => import("pages/NotificationPage"));
-// const OAuthCallbackPage = lazy(() => import("pages/OAuthCallbackPage"));
-// const PermissionRequestPage = lazy(() => import("pages/PermissionRequestPage"));
-// const PostRegisterPage = lazy(() => import("pages/PostRegisterPage"));
-// const PrivacyPolicyPage = lazy(() => import("pages/PrivacyPolicyPage"));
-// const ProfileRegistrationPage = lazy(
-//   () => import("pages/ProfileRegistrationPage")
-// );
-// const SearchPage = lazy(() => import("pages/SearchPage"));
-// const SearchResultPage = lazy(() => import("pages/SearchResultPage"));
-// const SelectLocationPage = lazy(() => import("pages/SelectLocationPage"));
-// const TermsOfServicePage = lazy(() => import("pages/TermsOfServicePage"));
-// const TransactionLocationPage = lazy(
-//   () => import("pages/TransactionLocationPage")
-// );
-// const TransactionPage = lazy(() => import("pages/TransactionPage"));
+const BlockedUsersPage = lazy(() => import("pages/BlockedUsersPage"));
+const CategoryPage = lazy(() => import("pages/CategoryPage"));
+const ChatListPage = lazy(() => import("pages/ChatListPage"));
+const ChatRoomPage = lazy(() => import("pages/ChatRoomPage"));
+const DetailPage = lazy(() => import("pages/DetailPage"));
+const HomePage = lazy(() => import("pages/HomePage"));
+const LoginPage = lazy(() => import("pages/LoginPage"));
+const MarketPricePage = lazy(() => import("pages/MarketPricePage"));
+const MyPage = lazy(() => import("pages/MyPage"));
+const NeighborhoodAuthPage = lazy(() => import("pages/NeighborhoodAuthPage"));
+const NeighborhoodSelectionPage = lazy(
+  () => import("pages/NeighborhoodSelectionPage")
+);
+const NotificationPage = lazy(() => import("pages/NotificationPage"));
+const OAuthCallbackPage = lazy(() => import("pages/OAuthCallbackPage"));
+const PermissionRequestPage = lazy(() => import("pages/PermissionRequestPage"));
+const PostRegisterPage = lazy(() => import("pages/PostRegisterPage"));
+const PrivacyPolicyPage = lazy(() => import("pages/PrivacyPolicyPage"));
+const ProfileRegistrationPage = lazy(
+  () => import("pages/ProfileRegistrationPage")
+);
+const SearchPage = lazy(() => import("pages/SearchPage"));
+const SearchResultPage = lazy(() => import("pages/SearchResultPage"));
+const SelectLocationPage = lazy(() => import("pages/SelectLocationPage"));
+const TermsOfServicePage = lazy(() => import("pages/TermsOfServicePage"));
+const TransactionLocationPage = lazy(
+  () => import("pages/TransactionLocationPage")
+);
+const TransactionPage = lazy(() => import("pages/TransactionPage"));
 
-import {
-  BlockedUsersPage,
-  CategoryPage,
-  ChatListPage,
-  ChatRoomPage,
-  DetailPage,
-  HomePage,
-  LoginPage,
-  MarketPricePage,
-  MyPage,
-  NeighborhoodAuthPage,
-  NeighborhoodSelectionPage,
-  NotificationPage,
-  OAuthCallbackPage,
-  PermissionRequestPage,
-  PostRegisterPage,
-  PrivacyPolicyPage,
-  ProfileRegistrationPage,
-  SearchPage,
-  SearchResultPage,
-  SelectLocationPage,
-  TermsOfServicePage,
-  TransactionLocationPage,
-  TransactionPage,
-} from "pages";
-
+// import {
+//   BlockedUsersPage,
+//   CategoryPage,
+//   ChatListPage,
+//   ChatRoomPage,
+//   DetailPage,
+//   HomePage,
+//   LoginPage,
+//   MarketPricePage,
+//   MyPage,
+//   NeighborhoodAuthPage,
+//   NeighborhoodSelectionPage,
+//   NotificationPage,
+//   OAuthCallbackPage,
+//   PermissionRequestPage,
+//   PostRegisterPage,
+//   PrivacyPolicyPage,
+//   ProfileRegistrationPage,
+//   SearchPage,
+//   SearchResultPage,
+//   SelectLocationPage,
+//   TermsOfServicePage,
+//   TransactionLocationPage,
+//   TransactionPage,
+// } from "pages";
 import { AuthGuard, LoginGuard, RequiredGuard } from "pages/guards";
 import { EmptyTemplate, RootLayout } from "components/templates";
 
