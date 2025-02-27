@@ -23,7 +23,7 @@ const OAuthCallbackPage = () => {
   useEffect(() => {
     if (code) {
       getFcmToken().then((token) => {
-        setFcmToken(token || "");
+        setFcmToken(token);
       })
       .catch(console.error);
 
