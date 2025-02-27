@@ -21,7 +21,14 @@ const LoginPage = () => {
     return <Outlet />;
   }
 
-  console.log("LGP 관련 LoginPage.tsx 06_48");
+  const requestNotificationPermission = async () => {
+    await Notification.requestPermission();
+  };
+
+  requestNotificationPermission().catch((error) => {
+    console.error("알림 권한 거부:", error);
+  });
+
   return (
     <>
       <LoginTemplate
