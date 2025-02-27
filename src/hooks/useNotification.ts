@@ -7,6 +7,8 @@ export const useNotification = () => {
    */
   const getFcmToken = async () => {
     try {
+      localStorage.removeItem("fcmToken");
+
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
         const token = await getToken(messaging, {
