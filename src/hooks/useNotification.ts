@@ -16,9 +16,11 @@ export const useNotification = () => {
         localStorage.setItem("fcmToken", token);
       } else {
         console.warn("알림 권한이 거부되었습니다.");
+        localStorage.setItem("fcmToken", "");
       }
     } catch (error) {
       console.error("토큰 발급 실패:", error);
+      localStorage.setItem("fcmToken", "");
     }
   };
 
