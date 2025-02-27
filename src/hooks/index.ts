@@ -24,3 +24,4 @@ export * from "./useFetchBlockedUsers";
 export * from "./useFetchChatItems";
 export * from "./useWebSocket";
 export * from "./useChatGroups";
+export * from "./useNotification";
