@@ -1,8 +1,11 @@
 import { LoginTemplate } from "components/templates";
 import { Outlet } from "react-router-dom";
 import { requestOAuthLogin } from "services/apis";
+import { useNotification } from "hooks";
 
 const LoginPage = () => {
+  const { getFcmToken } = useNotification();
+
   /**
    * 카카오 로그인 버튼 클릭 이벤트 핸들러
    */
@@ -21,13 +24,9 @@ const LoginPage = () => {
     return <Outlet />;
   }
 
-  const requestNotificationPermission = async () => {
-    await Notification.requestPermission();
-  };
-
-  requestNotificationPermission().catch((error) => {
-    console.error("알림 권한 거부:", error);
-  });
+  getFcmToken().catch(()=>{
+    console.error("토큰 발급 실패")
+  })
 
   return (
     <>
