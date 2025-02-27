@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Navigate,
   useNavigate,
@@ -8,7 +8,7 @@ import {
 import { oauthLogin } from "services/apis";
 import { useUserStore } from "stores";
 import type { OAuthProvider } from "types";
-import { useNotification } from "hooks";
+
 
 const OAuthCallbackPage = () => {
   // TODO 직접 접근 막기
@@ -17,16 +17,10 @@ const OAuthCallbackPage = () => {
   const { setUser } = useUserStore();
   const [searchParams] = useSearchParams();
   const code = searchParams.get("code");
-  const { getFcmToken } = useNotification();
-  const [fcmToken, setFcmToken] = useState<string>("");
 
   useEffect(() => {
     if (code) {
-      getFcmToken().then((token) => {
-        setFcmToken(token);
-      })
-      .catch(console.error);
-
+      const fcmToken = localStorage.getItem("fcmToken") || "";
       oauthLogin({ code, provider: provider!.toUpperCase() as OAuthProvider, fcmToken })
         .then((data) => {
           const { result } = data;
