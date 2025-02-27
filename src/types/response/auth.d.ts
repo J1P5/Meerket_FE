@@ -16,4 +16,5 @@ export interface IAuthResponse extends IResponse {
 export interface IAuthData {
   code: string;
   provider: OAuthProvider;
+  fcmToken: string;
 }
