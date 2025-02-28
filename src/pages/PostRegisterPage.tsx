@@ -65,11 +65,6 @@ export const PostRegisterPage = () => {
   const { product } = useFetchProduct(PRODUCT_ID && !productId ? PRODUCT_ID : "");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-
-  useEffect(() => {
     if (product && PRODUCT_ID && !productId) {
       setProductId(PRODUCT_ID);
       setFormData({

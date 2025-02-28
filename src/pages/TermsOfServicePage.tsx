@@ -8,7 +8,6 @@ const TermsOfServicePage = () => {
   useEffect(() => {
     clear();
     setTitle(TERMS_OF_SERVICE_TITLE);
-    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
