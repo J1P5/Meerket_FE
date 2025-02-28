@@ -55,6 +55,13 @@ export const RootLayout = () => {
     setBackClick(handleBackButtonClick);
   }, []);
 
+  useEffect(
+    () => {
+      window.scrollTo(0, 0);
+    },
+    [_pathname]
+  );
+
   return (
     <RootLayoutWrapper>
       {["/", "/market-price", "/chat", "/my-page"].includes(pathname) &&

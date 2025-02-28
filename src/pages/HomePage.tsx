@@ -67,7 +67,6 @@ const HomePage = () => {
      */
     onClick: () => {
       saveScroll();
-      window.scrollTo(0, 0);
       navigate(HOME_NAVIGATE_URL + `/${homePost.productId}`);
     },
     /** 판매중 : 끌어올리기, 완료 : 받은 후기 보기
