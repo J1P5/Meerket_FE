@@ -19,9 +19,6 @@ export const PostRegisterTemplate = ({
   onSubmit,
   onClick
 }: IPostRegisterTemplateProps) => {
-  // postForm이 제대로 전달되었는지 확인
-  console.log("Received postForm:", postForm);
-
   return (
     <PostRegisterTemplateWrapper>
       <PostRegisterForm

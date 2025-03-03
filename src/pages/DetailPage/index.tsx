@@ -22,6 +22,8 @@ import { deleteProduct, earlyClose, reportUser, blockUser as blockSeller } from 
 import type { ReportType } from "types";
 import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { isExpired } from "../../utils";
+import { queries } from "constants/queryKeys";
+import { useQueryClient } from "@tanstack/react-query";
 
 const DetailPage = () => {
   const navigate = useNavigate();
@@ -46,6 +48,8 @@ const DetailPage = () => {
     () => !!product?.expiredTime && isExpired(product?.expiredTime),
     [isProductRefetching]
   );
+  const queryClient = useQueryClient();
+
 
   /**
    * 거래 희망 장소 클릭
@@ -161,10 +165,18 @@ const DetailPage = () => {
    */
   const handleDeleteProduct = () => {
     deleteProduct(productId!)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         Toast.show("삭제되었습니다.", 2000);
-        navigate("/", { replace: true });
+        // TODO: finally 실행 안되는 이슈 해결
+        queryClient
+          .invalidateQueries({ queryKey: queries.product.DEFAULT })
+          .then(() => {
+            navigate("/", { replace: true });
+          })
+          .catch(error => {
+            console.error("Failed to invalidateQueries of homePosts: ", error);
+            navigate("/", { replace: true });
+          });
         closeModal();
       })
       .catch(console.error);

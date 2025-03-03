@@ -82,7 +82,8 @@ export const http = {
     data?: D,
     options?: AxiosRequestConfig,
   ) => {
-    return api.post<T>(url, data && { ...data }, options).then(responseToData);
+    const processedData = data instanceof FormData ? data : (data && { ...data });
+    return api.post<T>(url, processedData, options).then(responseToData);
   },
   /**
    * HTTP PUT Method
