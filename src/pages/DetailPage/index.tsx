@@ -167,6 +167,7 @@ const DetailPage = () => {
     deleteProduct(productId!)
       .then(() => {
         Toast.show("삭제되었습니다.", 2000);
+        // TODO: finally 실행 안되는 이슈 해결
         queryClient
           .invalidateQueries({ queryKey: queries.product.DEFAULT })
           .then(() => {

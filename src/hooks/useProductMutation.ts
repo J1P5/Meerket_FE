@@ -18,6 +18,7 @@ export const useProductMutation = (options: ProductMutationOptions) => {
 
   const handleSuccess = (redirectPath: string, message: string) => {
     Toast.show(message);
+    // TODO: finally 실행 안되는 이슈 해결
     queryClient
       .invalidateQueries({ queryKey: queries.product.DEFAULT })
       .then(() => {
