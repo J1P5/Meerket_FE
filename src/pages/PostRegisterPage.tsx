@@ -1,12 +1,10 @@
 import { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFormDataStore, useTopBarStore } from "stores";
-import { registerProduct, editProduct } from "services/apis/product";
-import { useFetchProduct } from "hooks";
-import { ToastInstance as Toast } from "components/atoms/Toast";
 import { PostRegisterTemplate } from "components/templates";
 import { getExpiredDate, formatPrice } from "utils";
 import type { Category, ExpiredTime, IProductForm, IProductPost } from "types";
+import { useFetchProduct, useProductMutation } from "hooks";
 
 /**
  * 임시 헬퍼 함수
@@ -50,7 +48,6 @@ const createProductData = (
   expiredTime: getExpiredDate(formData.expiredTime as string),
 });
 
-
 export const PostRegisterPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -63,6 +60,11 @@ export const PostRegisterPage = () => {
   const { latitude: lat, longitude: lng, address } = formData;
   const { setProductId, setFormData, clear } = useFormDataStore();
   const { product } = useFetchProduct(PRODUCT_ID && !productId ? PRODUCT_ID : "");
+  const { mutate, isPending }= useProductMutation({
+    type: PRODUCT_ID ? 'edit' : 'register',
+    productId: PRODUCT_ID,
+    onSuccess: clear
+  });
 
   useEffect(() => {
     if (product && PRODUCT_ID && !productId) {
@@ -84,35 +86,25 @@ export const PostRegisterPage = () => {
 
   const handleSubmit = useCallback(
     async (formData: IProductForm) => {
-      try {
         const transformedData = transformFormData(formData, !PRODUCT_ID);
-
         const productData = createProductData(transformedData, {
           lat: lat!,
           lng: lng!,
           address: address!,
         });
 
+        if (isPending) return;
+        
         if (!PRODUCT_ID) {
-          await registerProduct(productData);
-          navigate(`/`);
-          Toast.show("물품이 등록되었어요!");
+          mutate(productData);
         } else {
           const updateData = { ...productData };
           delete updateData.images;
           delete updateData.expiredTime;
-
-          await editProduct(PRODUCT_ID, updateData);
-          navigate(`/product/${PRODUCT_ID}`);
-          Toast.show("물품이 수정되었어요!");
+          mutate(updateData);
         }
-        clear();
-      } catch (error) {
-        Toast.show("처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
-        console.error("Product submission failed:", error);
-      }
     },
-    [lat, lng, address, clear, navigate, PRODUCT_ID]
+    [lat, lng, address, PRODUCT_ID, mutate, isPending]
   );
 
   const handleClick = useCallback(

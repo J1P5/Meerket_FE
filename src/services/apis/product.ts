@@ -1,4 +1,3 @@
-import axios from "axios";
 import { http } from "services/api";
 import type {
   IProductDetailResponse,
@@ -69,7 +68,6 @@ export const editProduct = async (
   productId: string,
   updatedProduct: Omit<IProductPost, "images" | "expiredTime">
 ) => {
-  console.log("updatedProduct", updatedProduct);
   return http.patch<IProductResponse, typeof updatedProduct>(
     `/products/${productId}`,
     updatedProduct
