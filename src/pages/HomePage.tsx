@@ -14,6 +14,7 @@ import { useScrollRestoration } from 'hooks';
 import { http } from "services/api";
 import { useHeaderStore, useUserStore, useFormDataStore } from "stores";
 import type { IPost, IResponse } from "types";
+import { queries } from "constants/queryKeys";
 
 interface IHomePost {
   myLocation: string;
@@ -104,7 +105,7 @@ const HomePage = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["homePosts", HOME_API_URL],
+    queryKey: queries.product.DEFAULT,
     queryFn: fetchPosts,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     initialPageParam: undefined,
