@@ -57,7 +57,7 @@ const DetailPage = () => {
   const handleLocationMapClick = () => {
     if (product) {
       setCoord({
-        lat: product.productLocation.latitube,
+        lat: product.productLocation.latitude,
         lng: product.productLocation.longitude,
       });
       setLocation(product.productLocation.location);
