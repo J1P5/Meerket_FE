@@ -7,9 +7,13 @@ import { useEffect } from "react";
 
 interface IMarketPriceTemplateProps {
   posts: IPost[];
+  children?: React.ReactNode;
 }
 
-export const MarketPriceTemplate = ({ posts }: IMarketPriceTemplateProps) => {
+export const MarketPriceTemplate = ({
+  posts,
+  children,
+}: IMarketPriceTemplateProps) => {
   const { setTitle } = useHeaderStore();
 
   useEffect(() => {
@@ -25,6 +29,7 @@ export const MarketPriceTemplate = ({ posts }: IMarketPriceTemplateProps) => {
           <PostList posts={posts} type={"default"}></PostList>
         )}
       </div>
+      {children}
     </MarketPriceTemplateWrapper>
   );
 };

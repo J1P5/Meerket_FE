@@ -12,7 +12,10 @@ const BLOCK = "block" as const;
 const CHAT_ITEMS = "chat_items" as const;
 const ALL = "all" as const;
 const SEARCH_RESULT = "search_result" as const;
+const MARKET_PRICE = "market_price" as const;
 
+// TODO: 다른 것들과 통일 필요(소문자 -> 대문자로 변경)
+// 제일 상위 (session,product 등)은 그대로 두고 하위의 detail 등은 대문자로 변경
 export const queries = {
   session: {
     DEFAULT: [SESSION],
@@ -20,6 +23,7 @@ export const queries = {
   product: {
     DEFAULT: [PRODUCT],
     detail: (productId: string) => [PRODUCT, productId],
+    MARKET_PRICE: [PRODUCT, MARKET_PRICE],
   },
   comment: {
     DEFAULT: (productId: string) => [COMMENT, productId],
@@ -37,10 +41,9 @@ export const queries = {
       completed: [TRANSACTION, SELL, COMPLETED],
     },
   },
-  block:{
+  block: {
     DEFAULT: [BLOCK],
   },
-  // TODO: 다른 것들과 통일 필요
   chatItems: {
     DEFAULT: [CHAT_ITEMS],
     ALL: [CHAT_ITEMS, ALL],
@@ -49,6 +52,5 @@ export const queries = {
   },
   searchResult: {
     DEFAULT: [SEARCH_RESULT],
-  }
-
+  },
 } as const;
