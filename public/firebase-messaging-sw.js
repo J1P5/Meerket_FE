@@ -40,17 +40,12 @@ self.addEventListener("push", (event) => {
 });
 
 /**
- * 알림 클릭 이벤트 ( 더 확인 필요 ㅠ )
+ * 알림 클릭 이벤트
  */
 self.addEventListener("notificationclick", (event) => {
-  console.log("알림 클릭됨:", event);
-
   const notification = event.notification;
   const notificationData = notification.data;
-
-  // url ( 서버에서 보낸 url이 있다면 url 사용 / url 없는 경우 home )
   const url = notificationData?.url || "/"; //
-  console.log("url", url);
 
   event.notification.close(); // 알림 클릭 시 알림 제거
   event.waitUntil(clients.openWindow(url));
