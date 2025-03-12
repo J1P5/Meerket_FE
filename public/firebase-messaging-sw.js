@@ -22,8 +22,7 @@ self.addEventListener("push", (event) => {
   const title = notification.title;
   const options = {
     body: notification.body,
-    icon: notification.image || notification.icon, // 웹 푸시 이미지는 icon
-  };
+    icon: notification.icon || "/icons/logo-128x128.png"  };
 
   self.registration.showNotification(title, options);
 });
