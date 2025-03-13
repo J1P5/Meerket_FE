@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
-import { css, SerializedStyles } from "@emotion/react";
-import { ThemeType } from "styles/theme";
+import { css, SerializedStyles } from '@emotion/react';
+import styled from '@emotion/styled';
+import { ThemeType } from 'styles/theme';
 
 const commonStyles: SerializedStyles = css`
-  line-height: 140%;
   letter-spacing: -2.5%;
   white-space: pre-line;
 
@@ -12,164 +11,132 @@ const commonStyles: SerializedStyles = css`
   }
 `;
 
-export const H1Wrapper: ReturnType<typeof styled.p> = styled.h1<{
-  color?: string;
-}>`
-  font-size: 6rem;
-  font-weight: bold;
-  color: ${({ color }) => color || "inherit"};
-  ${commonStyles};
-`;
-
-export const H5Wrapper: ReturnType<typeof styled.p> = styled.h5<{
-  color?: string;
-}>`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: ${({ color }) => color || "inherit"};
-  ${commonStyles};
-`;
-
-export const Body1Wrapper: ReturnType<typeof styled.p> = styled.p<{
-  color?: string;
-}>`
-  font-size: 1rem;
-  color: ${({ color }) => color || "inherit"};
-  ${commonStyles};
-`;
-
-export const ButtonWrapper: ReturnType<typeof styled.p> = styled.p<{
-  color?: string;
-}>`
-  font-size: 0.875rem;
-  color: ${({ color }) => color || "inherit"};
-  ${commonStyles};
-`;
 /** 테마 적용  line-height 가 겹치는 부분이 많은데 이후에 유지 보수 쉽게 하기 위해 이런 형태로 구성하였습니다.*/
 export const TitleBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_bold.size};
+    theme.fonts.title_bold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_bold.bold};
+    theme.fonts.title_bold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_bold.height};
+    theme.fonts.title_bold.lineHeight};
 `;
 export const TitleSemiBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_semibold.size};
+    theme.fonts.title_semibold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_semibold.bold};
+    theme.fonts.title_semibold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.title_semibold.height};
-`;
-
-export const DescRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
-  color?: string;
-}>`
-  ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
-  font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_regular.size};
-  font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_regular.bold};
-  line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_regular.height};
+    theme.fonts.title_semibold.lineHeight};
 `;
 
 export const DescBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_bold.size};
+    theme.fonts.desc_bold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_bold.bold};
+    theme.fonts.desc_bold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.desc_bold.height};
+    theme.fonts.desc_bold.lineHeight};
 `;
 
-export const ExplainRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
+export const DescRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_regular.size};
+    theme.fonts.desc_regular.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_regular.bold};
+    theme.fonts.desc_regular.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_regular.height};
+    theme.fonts.desc_regular.lineHeight};
 `;
-export const ExplainBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
+
+export const GuideBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_bold.size};
+    theme.fonts.guide_bold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_bold.bold};
+    theme.fonts.guide_bold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.explan_bold.height};
+    theme.fonts.guide_bold.lineHeight};
+`;
+
+export const GuideRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
+  color?: string;
+}>`
+  ${commonStyles};
+  color: ${({ color }) => color || 'inherit'};
+  font-size: ${({ theme }: { theme: ThemeType }) =>
+    theme.fonts.guide_regular.size};
+  font-weight: ${({ theme }: { theme: ThemeType }) =>
+    theme.fonts.guide_regular.weight};
+  line-height: ${({ theme }: { theme: ThemeType }) =>
+    theme.fonts.guide_regular.lineHeight};
 `;
 
 export const TagRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.tag_regular.size};
+    theme.fonts.tag_regular.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.tag_regular.bold};
+    theme.fonts.tag_regular.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.tag_regular.height};
+    theme.fonts.tag_regular.lineHeight};
 `;
 
 export const WritingBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.writing_bold.size};
+    theme.fonts.writing_bold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.writing_bold.bold};
+    theme.fonts.writing_bold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.writing_bold.height};
+    theme.fonts.writing_bold.lineHeight};
 `;
 
 export const ButtonBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.btn_bold.size};
+    theme.fonts.button_bold.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.btn_bold.bold};
+    theme.fonts.button_bold.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.btn_bold.height};
+    theme.fonts.button_bold.lineHeight};
 `;
 
 export const BadgeRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
   ${commonStyles};
-  color: ${({ color }) => color || "inherit"};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.badge_regular.size};
+    theme.fonts.badge_regular.size};
   font-weight: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.badge_regular.bold};
+    theme.fonts.badge_regular.weight};
   line-height: ${({ theme }: { theme: ThemeType }) =>
-    theme.fontStyles.badge_regular.height};
+    theme.fonts.badge_regular.lineHeight};
 `;
