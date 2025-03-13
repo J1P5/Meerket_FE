@@ -1,3 +1,5 @@
+import { fonts, palette, radius, shadows, spacing, zIndexes } from 'styles';
+
 /* eslint-disable @rushstack/typedef-var */
 interface FontStyle {
   size: string;
@@ -87,6 +89,12 @@ export const defaultTheme = {
       bold: 400,
     } as FontStyle,
   } as { [key: string]: FontStyle }, // 인덱스 시그니처 추가,
+  fonts,
+  palette,
+  radius,
+  shadows,
+  spacing,
+  zIndexes,
 };
 
 // Theme 타입 정의
