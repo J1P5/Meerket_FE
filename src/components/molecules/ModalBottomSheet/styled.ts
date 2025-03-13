@@ -22,7 +22,7 @@ export const ModalBottomSheetBodyWrapper: ReturnType<typeof styled.div> =
   left: 50%;
   translate: -50%;
   padding: 1rem;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 16px 16px 0 0;
   background-color: white;
 `;
 

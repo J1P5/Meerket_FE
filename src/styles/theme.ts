@@ -12,7 +12,7 @@ export const defaultTheme = {
     max_width: '402px',
     min_width: '375px',
   },
-  colors: {
+  legacy_colors: {
     white: '#ffffff',
     black: '#000000',
     red: '#ff224d',
@@ -90,7 +90,7 @@ export const defaultTheme = {
     } as FontStyle,
   } as { [key: string]: FontStyle }, // 인덱스 시그니처 추가,
   fonts,
-  palette,
+  colors: palette,
   radius,
   shadows,
   spacing,

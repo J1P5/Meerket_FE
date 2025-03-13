@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import { HeaderWrapper } from "components/organisms/Header/styled";
-import { TopBarWrapper } from "components/organisms/TopBar/styled";
-import { BottomNavBarWrapper } from "components/organisms/BottomNavBar/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
+import { BottomNavBarWrapper } from 'components/organisms/BottomNavBar/styled';
+import { HeaderWrapper } from 'components/organisms/Header/styled';
+import { TopBarWrapper } from 'components/organisms/TopBar/styled';
 
 export const PageLayoutWrapper: ReturnType<typeof styled.div> = styled.div`
   flex: 1;
@@ -12,8 +11,8 @@ export const PageLayoutWrapper: ReturnType<typeof styled.div> = styled.div`
 
 export const RootLayoutWrapper: ReturnType<typeof styled.div> = styled.div`
   min-height: 100vh;
-  max-width: ${({ theme }: { theme: ThemeType }) => theme.sizes.min_width};
-  max-width: ${({ theme }: { theme: ThemeType }) => theme.sizes.max_width};
+  max-width: ${({ theme }) => theme.sizes.min_width};
+  max-width: ${({ theme }) => theme.sizes.max_width};
 
   width: 100%;
   height: 100%;

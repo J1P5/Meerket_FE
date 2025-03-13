@@ -27,8 +27,8 @@ export const ButtonContainerWrapper: ReturnType<typeof styled.div> = styled.div`
     &:disabled {
       cursor: default;
       background-color: ${({ theme }) =>
-        theme.colors.grey_field_guide_but_deactivate};
-      color: ${({ theme }) => theme.colors.blue_text};
+        theme.colors.grey400};
+      color: ${({ theme }) => theme.colors.primaryDark};
     }
   }
 `;
@@ -39,10 +39,10 @@ export const BidWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   flex-direction: column;
   ${DescRegularWrapper} {
-    color: ${({ theme }) => theme.colors.grey_text_guide};
+    color: ${({ theme }) => theme.colors.grey500};
   }
   ${WritingBoldWrapper} {
-    color: ${({ theme }) => theme.colors.grey_text_main};
+    color: ${({ theme }) => theme.colors.grey600};
   }
 `;
 

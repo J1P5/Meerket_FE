@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
 
 export const BadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   width: fit-content;
@@ -8,7 +7,7 @@ export const BadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: gray;
+  background-color: ${({ theme }) => theme.colors.grey200};
   border-radius: 16px;
 `;
 
@@ -20,8 +19,7 @@ export const BadgeChatWrapper: ReturnType<typeof styled.div> = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme }: { theme: ThemeType }) =>
-    theme.colors.blue_text};
-  color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.primaryDark};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 50%;
 `;

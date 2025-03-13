@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
+import styled from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
 import {
-  ProfileWrapper,
   ImageWrapper,
+  ProfileWrapper,
   TextWrapper,
-} from "components/organisms/Profile/styled";
-import { ThemeType } from "styles/theme";
+} from 'components/organisms/Profile/styled';
 
 export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -63,8 +62,7 @@ export const BackGroundWrapper: ReturnType<typeof styled.div> = styled.div`
 export const LogoutWithDrawWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   gap: 1rem;
-  color: ${({ theme }: { theme: ThemeType }) =>
-    theme.colors.grey_field_guide_but_deactivate};
+  color: ${({ theme }) => theme.colors.grey400};
   text-decoration: underline;
   margin: 0 1rem;
   cursor: pointer;

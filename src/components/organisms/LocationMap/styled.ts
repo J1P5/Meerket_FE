@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const LocationMapWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ export const LocationMapWrapper: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const TitleWrapper: ReturnType<typeof styled.div> = styled.div`
-  color: ${({ theme }) => theme.colors.blue_main};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 export const TextContainer: ReturnType<typeof styled.div> = styled.div`
   display: flex;
