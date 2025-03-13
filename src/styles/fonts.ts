@@ -7,6 +7,7 @@ interface IFontStyle {
 type FontKey =
   | 'title_bold'
   | 'title_semibold'
+  | 'title_regular'
   | 'desc_bold'
   | 'desc_regular'
   | 'guide_bold'
@@ -26,6 +27,11 @@ export const fonts: Record<FontKey, IFontStyle> = {
     size: '1rem',
     lineHeight: '145%',
     weight: 600,
+  },
+  title_regular: {
+    size: '1rem',
+    lineHeight: '145%',
+    weight: 400,
   },
   desc_bold: {
     size: '0.875rem',

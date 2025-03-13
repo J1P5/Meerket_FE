@@ -38,6 +38,20 @@ export const TitleSemiBold: Story = {
   },
 };
 
+export const TitleRegular: Story = {
+  args: {
+    variant: 'title_regular',
+    children: 'This is a title_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'title_regular에 쓰이는 텍스트로 사이즈는 1rem입니다.',
+      },
+    },
+  },
+};
+
 export const DescBold: Story = {
   args: {
     variant: 'desc_bold',

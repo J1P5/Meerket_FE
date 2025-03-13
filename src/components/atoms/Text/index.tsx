@@ -8,6 +8,7 @@ import {
   GuideRegularWrapper,
   TagRegularWrapper,
   TitleBoldWrapper,
+  TitleRegularWrapper,
   TitleSemiBoldWrapper,
   WritingBoldWrapper,
 } from './styled';
@@ -15,6 +16,7 @@ import {
 export type TextVariant =
   | 'title_bold'
   | 'title_semibold'
+  | 'title_regular'
   | 'desc_bold'
   | 'desc_regular'
   | 'guide_bold'
@@ -39,6 +41,7 @@ const variantMap: {
 } = {
   title_bold: TitleBoldWrapper,
   title_semibold: TitleSemiBoldWrapper,
+  title_regular: TitleRegularWrapper,
   desc_bold: DescBoldWrapper,
   desc_regular: DescRegularWrapper,
   guide_bold: GuideBoldWrapper,

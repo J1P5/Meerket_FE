@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { TitleSemiBoldWrapper } from "components/atoms/Text/styled";
+import { TitleRegularWrapper } from "components/atoms/Text/styled";
 import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
 import type { IModalButtonContainerProps, IModalRootProps } from ".";
 
@@ -19,7 +19,7 @@ export const ModalHeaderWrapper: ReturnType<typeof styled.div> = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 1rem 1rem 0.5rem;
-  ${TitleSemiBoldWrapper} {
+  ${TitleRegularWrapper} {
     flex: 1;
   }
 `;

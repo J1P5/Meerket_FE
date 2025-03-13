@@ -20,6 +20,7 @@ export const TitleBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   font-weight: ${({ theme }) => theme.fonts.title_bold.weight};
   line-height: ${({ theme }) => theme.fonts.title_bold.lineHeight};
 `;
+
 export const TitleSemiBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   color?: string;
 }>`
@@ -28,6 +29,16 @@ export const TitleSemiBoldWrapper: ReturnType<typeof styled.p> = styled.p<{
   font-size: ${({ theme }) => theme.fonts.title_semibold.size};
   font-weight: ${({ theme }) => theme.fonts.title_semibold.weight};
   line-height: ${({ theme }) => theme.fonts.title_semibold.lineHeight};
+`;
+
+export const TitleRegularWrapper: ReturnType<typeof styled.p> = styled.p<{
+  color?: string;
+}>`
+  ${commonStyles};
+  color: ${({ color }) => color || 'inherit'};
+  font-size: ${({ theme }) => theme.fonts.title_regular.size};
+  font-weight: ${({ theme }) => theme.fonts.title_regular.weight};
+  line-height: ${({ theme }) => theme.fonts.title_regular.lineHeight};
 `;
 
 export const DescBoldWrapper: ReturnType<typeof styled.p> = styled.p<{

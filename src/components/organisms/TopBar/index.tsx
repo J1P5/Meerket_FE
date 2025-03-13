@@ -62,7 +62,7 @@ interface ITopBarTitleProps {
 
 // TODO: Text variant 필요
 const TopBarTitle = ({ title }: ITopBarTitleProps) => {
-  return <Text variant="title_bold">{title}</Text>;
+  return <Text variant="title_regular">{title}</Text>;
 };
 
 interface ITopBarInputProps {

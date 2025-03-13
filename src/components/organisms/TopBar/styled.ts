@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
 import { NoIconWrapper } from 'components/atoms/Icon/NoIcon/styled';
 import { InputWrapper } from 'components/atoms/Input/styled';
-import { TitleSemiBoldWrapper } from 'components/atoms/Text/styled';
+import { TitleRegularWrapper } from 'components/atoms/Text/styled';
 
 const CommonIconWrapper: ReturnType<typeof styled.div> = styled.div``;
 export const TopBarBackIconWrapper: typeof CommonIconWrapper = styled(
@@ -25,13 +25,14 @@ export const TopBarWrapper: ReturnType<typeof styled.div> = styled.div`
   // 19px = 1.1875rem
   padding: 1.1875rem 1rem;
   gap: 0.5rem;
-  & > ${TitleSemiBoldWrapper} {
+  & > ${TitleRegularWrapper} {
     flex: 1;
     padding: 0.5rem;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: 400;
   }
   & > ${InputWrapper} {
     flex: 1;
