@@ -1,14 +1,14 @@
-import styled from "@emotion/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
 
-import { ImageWrapper } from "components/atoms/Image/styled";
-import { KebabMenuWrapper } from "components/molecules/KebabMenu/styled";
+import { BadgeWrapper } from 'components/atoms/Badge/styled';
+import { IconWrapper } from 'components/atoms/Icon/styled';
+import { ImageWrapper } from 'components/atoms/Image/styled';
 import {
   DescRegularWrapper,
   TitleBoldWrapper,
-} from "components/atoms/Text/styled";
-import { IconWrapper } from "components/atoms/Icon/styled";
-import { BadgeWrapper } from "components/atoms/Badge/styled";
+} from 'components/atoms/Text/styled';
+import { KebabMenuWrapper } from 'components/molecules/KebabMenu/styled';
 
 /**
  * 케밥메뉴
@@ -46,22 +46,21 @@ export const CommentHeaderContainer: ReturnType<typeof styled.div> = styled.div`
 /**
  * 댓글 작성자 / 작성 시간
  */
-export const WriterInformationWrapper: ReturnType<
-  typeof styled.div
-> = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
+export const WriterInformationWrapper: ReturnType<typeof styled.div> =
+  styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  `;
 
 export const WriterBadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   align-items: center;
   gap: ${6 / 16}rem;
   ${BadgeWrapper} {
-    font-size: ${({ theme }) => theme.fontStyles.tag_regular.size};
-    line-height: ${({ theme }) => theme.fontStyles.tag_regular.height};
-    font-weight: ${({ theme }) => theme.fontStyles.tag_regular.bold};
+    font-size: ${({ theme }) => theme.fonts.tag_regular.size};
+    line-height: ${({ theme }) => theme.fonts.tag_regular.weight};
+    font-weight: ${({ theme }) => theme.fonts.tag_regular.lineHeight};
     color: ${({ theme }) => theme.colors.blue_text};
     background-color: ${({ theme }) => theme.colors.grey_field_deactivate};
     border-radius: ${4 / 16}rem;

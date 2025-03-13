@@ -15,7 +15,7 @@ export const LoginTemplate = ({
 }: IComponentProps) => {
   return (
     <LoginTemplateWrapper>
-      <Text variant="h5">
+      <Text variant="title_bold">
         {WELL_COME_PAGE_TEXT}
       </Text>
       <Logo />

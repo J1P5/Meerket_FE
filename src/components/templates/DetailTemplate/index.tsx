@@ -183,7 +183,7 @@ export const DetailTemplate = ({
             {isSeller && maximumPrice && (
               <AuctionControlBar.Button
                 backgroundColor="red"
-                variant="btn_bold"
+                variant="button_bold"
                 text={
                   isEarly ? "경매 조기종료가 진행중입니다." : buttonNames.early
                 }

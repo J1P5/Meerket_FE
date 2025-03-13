@@ -40,11 +40,11 @@ const Content = ({
 }: IIconWithTextContentProps) => {
   return (
     <IconWithTextContentWrapper content={content}>
-      <Text variant={contentVariant || "body1"}>
+      <Text variant={contentVariant}>
         {content}
       </Text>
       {desc &&
-        <Text variant={descVariant || "button"}>
+        <Text variant={descVariant}>
           {desc}
         </Text>}
     </IconWithTextContentWrapper>

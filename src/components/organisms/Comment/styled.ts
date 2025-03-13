@@ -37,9 +37,9 @@ export const CommentWrapper: ReturnType<typeof styled.div> = styled.div`
   ${InputWithButtonWrapper} {
     padding: 0.5rem 1rem;
     ${InputWrapper} {
-      font-size: ${({ theme }) => theme.fontStyles.desc_regular.size};
-      line-height: ${({ theme }) => theme.fontStyles.desc_regular.height};
-      font-weight: ${({ theme }) => theme.fontStyles.desc_regular.bold};
+      font-size: ${({ theme }) => theme.fonts.desc_regular.size};
+      line-height: ${({ theme }) => theme.fonts.desc_regular.weight};
+      font-weight: ${({ theme }) => theme.fonts.desc_regular.lineHeight};
       color: ${({ theme }) => theme.colors.grey_text_main};
       background-color: ${({ theme }) => theme.colors.grey_button_deactivate};
     }

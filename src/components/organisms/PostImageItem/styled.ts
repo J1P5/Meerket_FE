@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
-import { Body1Wrapper } from "components/atoms/Text/styled";
+import { TitleSemiBoldWrapper } from "components/atoms/Text/styled";
 
 export const PostImageItemWrapper: ReturnType<typeof styled.div> = styled.div`
   position: relative;
@@ -13,7 +13,7 @@ export const PostImageItemWrapper: ReturnType<typeof styled.div> = styled.div`
     color: #2d2d39;
   }
 
-  ${Body1Wrapper} {
+  ${TitleSemiBoldWrapper} {
     background-color: var(--grey-button-deactivate, #2d2d3960);
     width: 100%;
     height: 25%;

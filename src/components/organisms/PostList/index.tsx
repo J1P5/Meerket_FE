@@ -108,10 +108,10 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">낙찰된 가격</Text>
+            <Text variant="guide_bold">낙찰된 가격</Text>
             <Text
               color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
             >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
@@ -158,10 +158,10 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">현재 입찰가</Text>
+            <Text variant="guide_bold">현재 입찰가</Text>
             <Text
               color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
             >{`${formatPrice(price)}원`}</Text>
           </div>
         </PostItem.Container>
@@ -206,10 +206,10 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">나의 입찰가</Text>
+            <Text variant="guide_bold">나의 입찰가</Text>
             <Text
               color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
             >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>

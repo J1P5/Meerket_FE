@@ -41,7 +41,7 @@ export const LocationInputBottomSheet = ({
         />
         {isError && (
           <div style={{ color: "#FF2E4D" }}>
-            <Text variant="explan_regular">장소를 입력해주세요!</Text>
+            <Text variant="guide_regular">장소를 입력해주세요!</Text>
           </div>
         )}
       </div>

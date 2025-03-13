@@ -7,7 +7,7 @@ interface IErrorMessageProps {
 
 export const ErrorMessage = ({ message }: IErrorMessageProps) =>
   <ErrorMessageWrapper>
-    <Text variant="explan_regular">
+    <Text variant="guide_regular">
       {message}
     </Text>
   </ErrorMessageWrapper>;

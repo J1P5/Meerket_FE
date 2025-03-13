@@ -1,7 +1,7 @@
-import { Text, Image } from "components/atoms";
-import { DEFAULT_IMG_PATH } from "constants/imgPath";
+import { Image, Text } from 'components/atoms';
+import { DEFAULT_IMG_PATH } from 'constants/imgPath';
 
-import { TextWithImageWrapper } from "./styled";
+import { TextWithImageWrapper } from './styled';
 
 export interface ITextWithImageProps {
   /** title */
@@ -14,6 +14,7 @@ export interface ITextWithImageProps {
   onClick?: () => void;
 }
 
+// TODO: Text variant 필요
 export const TextWithImage = ({
   title,
   desc,
@@ -28,15 +29,9 @@ export const TextWithImage = ({
       onClick={onClick}
     >
       <div className="text-con">
-        {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
-        <Text variant={"body1"}>
-          {title}
-        </Text>
-        {/** 이후 디자인 나오고 Text 에 variant 추가 되면 변경*/}
+        <Text variant="title_bold">{title}</Text>
         <div className="text-desc">
-          <Text variant={"button"}>
-            {desc}
-          </Text>
+          <Text variant="desc_regular">{desc}</Text>
         </div>
       </div>
       <Image type="square" url={imgUrl} />

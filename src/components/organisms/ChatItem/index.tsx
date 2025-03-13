@@ -37,7 +37,7 @@ export const ChatItem = ({
           <Text variant="title_bold">
             {name}
           </Text>
-          <Text variant="explan_regular">
+          <Text variant="guide_regular">
             {lastMsg}
           </Text>
         </div>

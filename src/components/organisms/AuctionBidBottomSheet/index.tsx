@@ -46,7 +46,7 @@ export const AuctionBidBottomSheet = ({
       />
       {isInvalidPrice && (
         <div style={{ color: "#FF2E4D" }}>
-          <Text variant="explan_regular">20억 이하로 입력해주세요.</Text>
+          <Text variant="guide_regular">20억 이하로 입력해주세요.</Text>
         </div>
       )}
       <Text variant="desc_regular">{`최소 입찰가 ${formatPrice(minPrice)}`}</Text>

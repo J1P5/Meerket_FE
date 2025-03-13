@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import { InputWrapper } from "components/atoms/Input/styled";
-import { Body1Wrapper } from "components/atoms/Text/styled";
-import { NoIconWrapper } from "components/atoms/Icon/NoIcon/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
+import { NoIconWrapper } from 'components/atoms/Icon/NoIcon/styled';
+import { InputWrapper } from 'components/atoms/Input/styled';
+import { TitleSemiBoldWrapper } from 'components/atoms/Text/styled';
 
 const CommonIconWrapper: ReturnType<typeof styled.div> = styled.div``;
 export const TopBarBackIconWrapper: typeof CommonIconWrapper = styled(
@@ -25,7 +25,7 @@ export const TopBarWrapper: ReturnType<typeof styled.div> = styled.div`
   // 19px = 1.1875rem
   padding: 1.1875rem 1rem;
   gap: 0.5rem;
-  & > ${Body1Wrapper} {
+  & > ${TitleSemiBoldWrapper} {
     flex: 1;
     padding: 0.5rem;
     text-align: center;

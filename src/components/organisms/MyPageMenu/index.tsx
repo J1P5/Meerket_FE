@@ -37,7 +37,7 @@ export const MyPageMenu = ({ onMenuClick }: IMyPageMenuProps) => {
                     contentVariant="title_semibold"
                   />
                 </IconWithText>
-                <Text variant="explan_regular">
+                <Text variant="guide_regular">
                   {desc}
                 </Text>
               </TextContainer>

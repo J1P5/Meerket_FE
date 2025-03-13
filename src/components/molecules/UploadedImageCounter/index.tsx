@@ -30,12 +30,12 @@ export const UploadedImageCounter = ({
         }}
       >
         <div style={{ color: "#707192" }}>
-          <Text variant="explan_bold">
+          <Text variant="guide_bold">
             {text}
           </Text>
         </div>
         <div style={{ color: "#9B9FBC" }}>
-          <Text variant="explan_regular">{`${currentCount}/${totalCount}`}</Text>
+          <Text variant="guide_regular">{`${currentCount}/${totalCount}`}</Text>
         </div>
       </div>
       <ImageUploadWrapper>

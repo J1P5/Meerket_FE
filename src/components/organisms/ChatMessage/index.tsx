@@ -22,7 +22,7 @@ export const ChatMessage = ({
   return (
     <ChatMessageWrapper isMe={isMe}>
       <MessageWrapper>
-        <Text variant="explan_regular">{msg}</Text>
+        <Text variant="guide_regular">{msg}</Text>
       </MessageWrapper>
       <MessageInfoWrapper>
         {!isRead && <Text variant="tag_regular">1</Text>}

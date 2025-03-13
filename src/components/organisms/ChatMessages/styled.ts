@@ -38,11 +38,11 @@ export const WriteBoxWrapper: ReturnType<typeof styled.div> = styled.div`
       background-color: ${({ theme }: { theme: ThemeType }) =>
         theme.colors.grey_button_deactivate};
       font-size: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.size};
+        theme.fonts.guide_bold.size};
       font-weight: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.bold};
+        theme.fonts.guide_bold.weight};
       line-height: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.height};
+        theme.fonts.guide_bold.lineHeight};
     }
   }
 
