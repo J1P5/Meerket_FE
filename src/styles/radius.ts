@@ -1,6 +1,6 @@
-type RadiusSizeKey = "sm" | "md" | "lg" | "xl" | "round";
+import { RadiusSize } from 'types';
 
-export const radius: Record<RadiusSizeKey, string> = {
+export const radius: Record<RadiusSize, string> = {
     sm: '4px',
     md: '8px',
     lg: '10px',

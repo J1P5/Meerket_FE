@@ -1,6 +1,6 @@
-type SpacingSizeKey = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+import { SpacingSize } from 'types';
 
-export const spacing: Record<SpacingSizeKey, string> = {
+export const spacing: Record<SpacingSize, string> = {
     xxs: '0.25rem', // 4px
     xs: '0.5rem',   // 8px
     sm: '0.75rem',   // 12px
