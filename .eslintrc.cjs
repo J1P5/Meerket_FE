@@ -19,6 +19,7 @@ module.exports = {
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "plugin:storybook/recommended",
     "plugin:storybook/recommended",
+    "prettier",
   ],
   settings: {
     // 공통으로 넣고 싶은 설정이 있으면 추가합니다.
