@@ -6,7 +6,7 @@ export const ToastManagerWrapper: ReturnType<typeof styled.div> = styled.div`
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: ${({ theme }) => theme.zIndexes.Toast};
+  z-index: 600;
 `;
 
 export const ToastItemWrapper: ReturnType<typeof styled.div> = styled.div`
@@ -44,7 +44,7 @@ export const ToastItemWrapper: ReturnType<typeof styled.div> = styled.div`
     }
   }
 
-  color: ${({ theme }) => theme.colors.white};
+  color: #fff;
   /* 설명/regular */
   font-family: Pretendard;
   font-size: 14px;
