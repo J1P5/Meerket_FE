@@ -25,7 +25,7 @@ export const NavBarItem = ({
   return (
     <NavBarItemWrapper state={state} onClick={onClick}>
       <IconComponent size="m" color={state === 'active' ? 'color' : ''} />
-      <Text variant="button_bold">{title}</Text>
+      <Text variant="tag_regular">{title}</Text>
     </NavBarItemWrapper>
   );
 };
