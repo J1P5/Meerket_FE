@@ -22,7 +22,7 @@ export const RootLayoutWrapper: ReturnType<typeof styled.div> = styled.div`
   ${HeaderWrapper}, ${TopBarWrapper} {
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: ${({ theme }) => theme.zIndexes.RootLayout};
   }
   ${BottomNavBarWrapper} {
     position: sticky;

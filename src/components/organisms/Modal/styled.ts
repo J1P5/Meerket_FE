@@ -68,7 +68,7 @@ export const ModalRootWrapper: ReturnType<
   top: 0;
   left: 50%;
   translate: -50%;
-  z-index: 9999;
+  z-index: ${({ theme }) => theme.zIndexes.Modal};
   max-width: ${({ theme }) => theme.sizes.max_width};
   width: 100%;
   height: 100%;

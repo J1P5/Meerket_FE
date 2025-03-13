@@ -35,7 +35,7 @@ export const DetailTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
   ${AuctionControlBarRootWrapper} {
     position: sticky;
     bottom: 10px;
-    z-index: 9999;
+    z-index: ${({ theme }) => theme.zIndexes.ControlBar};
     margin: 0 1rem;
   }
   ${ProfileWrapper} {

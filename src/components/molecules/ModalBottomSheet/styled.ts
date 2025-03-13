@@ -44,7 +44,7 @@ export const ModalBottomSheetWrapper: ReturnType<
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: ${({ theme }) => theme.zIndexes.BottomSheet};
   width: 100%;
   height: 100%;
   ${({ open }) => modalBottomSheetConfig(!!open)}

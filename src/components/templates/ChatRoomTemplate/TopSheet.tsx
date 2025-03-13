@@ -27,7 +27,7 @@ const TopSheetContainer = styled.div`
     isSeller ? (isOpen ? '11.25rem' : '0') : isOpen ? '7.6243751rem' : '0'};
   overflow: hidden;
   //overflow: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')}; /* 변경 */
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndexes.TopSheet};
   background-color: ${({ theme }) => theme.colors.white};
 
   transition: height 0.3s ease; /* 부드러운 애니메이션 */
@@ -68,7 +68,7 @@ const ToggleButton = styled.button<TopSheetWrapperProps>`
 
   cursor: pointer;
   // TODO: z-index 왜 있는건지?
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndexes.TopSheet};
   transition: top 0.3s ease; /* 버튼 위치 애니메이션 */
 
   .btn-bar {
