@@ -74,7 +74,7 @@ export const PostRegisterPage = () => {
         content: product.content,
         minimumPrice: formatPrice(product.minimumPrice),
         category: product.category as Category,
-        latitude: product.productLocation.latitube,
+        latitude: product.productLocation.latitude,
         longitude: product.productLocation.longitude,
         address: product.productLocation.address,
         location: product.productLocation.location,
