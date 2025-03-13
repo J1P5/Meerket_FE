@@ -24,6 +24,14 @@ self.addEventListener("push", (event) => {
     body: notification.body,
     icon: notification.icon || "/icons/logo-128x128.png"  };
 
+  
+  const notificationData = notification.data;
+  const url = notificationData?.url || "/"; 
+
+  console.log("event",event);
+  console.log("notificationData",notificationData);
+  console.log("url",url);
+
   self.registration.showNotification(title, options);
 });
 
