@@ -59,8 +59,8 @@ export const WriterBadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   gap: ${6 / 16}rem;
   ${BadgeWrapper} {
     font-size: ${({ theme }) => theme.fonts.tag_regular.size};
-    line-height: ${({ theme }) => theme.fonts.tag_regular.weight};
-    font-weight: ${({ theme }) => theme.fonts.tag_regular.lineHeight};
+    font-weight: ${({ theme }) => theme.fonts.tag_regular.weight};
+    line-height: ${({ theme }) => theme.fonts.tag_regular.lineHeight};
     color: ${({ theme }) => theme.colors.primaryDark};
     background-color: ${({ theme }) => theme.colors.grey200};
     border-radius: ${4 / 16}rem;
