@@ -24,14 +24,6 @@ self.addEventListener("push", (event) => {
     body: notification.body,
     icon: notification.icon || "/icons/logo-128x128.png"  };
 
-  
-  const notificationData = notification.data;
-  const url = notificationData?.url || "/"; 
-
-  console.log("event",event);
-  console.log("notificationData",notificationData);
-  console.log("url",url);
-
   self.registration.showNotification(title, options);
 });
 
@@ -39,13 +31,8 @@ self.addEventListener("push", (event) => {
  * 알림 클릭 이벤트
  */
 self.addEventListener("notificationclick", (event) => {
-  const notification = event.notification;
-  const notificationData = notification.data;
-  const url = notificationData?.url || "/"; 
-
-  console.log("event",event);
-  console.log("notificationData",notificationData);
-  console.log("url",url);
+  const data = event.data;
+  const url = data?.url || "/"; 
 
   event.notification.close(); // 알림 클릭 시 알림 제거
   event.waitUntil(clients.openWindow(url));
