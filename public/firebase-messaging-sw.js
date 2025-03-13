@@ -33,7 +33,11 @@ self.addEventListener("push", (event) => {
 self.addEventListener("notificationclick", (event) => {
   const notification = event.notification;
   const notificationData = notification.data;
-  const url = notificationData?.url || "/"; //
+  const url = notificationData?.url || "/"; 
+
+  console.log("event",event);
+  console.log("notificationData",notificationData);
+  console.log("url",url);
 
   event.notification.close(); // 알림 클릭 시 알림 제거
   event.waitUntil(clients.openWindow(url));
