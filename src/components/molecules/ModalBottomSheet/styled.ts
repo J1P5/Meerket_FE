@@ -9,7 +9,7 @@ export const ModalBottomSheetBackgroundWrapper: ReturnType<typeof styled.div> =
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000080;
+  background-color: ${({ theme }) => `${theme.colors.black}80`};
 `;
 
 export const ModalBottomSheetBodyWrapper: ReturnType<typeof styled.div> =
@@ -23,7 +23,7 @@ export const ModalBottomSheetBodyWrapper: ReturnType<typeof styled.div> =
   translate: -50%;
   padding: 1rem;
   border-radius: 16px 16px 0 0;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const modalBottomSheetConfig = (open: boolean) => css`

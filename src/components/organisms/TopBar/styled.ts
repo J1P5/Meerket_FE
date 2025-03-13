@@ -20,7 +20,7 @@ export const TopBarWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   position: relative;
   // 19px = 1.1875rem
   padding: 1.1875rem 1rem;
@@ -39,7 +39,7 @@ export const TopBarWrapper: ReturnType<typeof styled.div> = styled.div`
     // 적용 안되고있는 속성이라 주석처리했습니다!
     // height: 19/16rem;
     // padding: 15.5/16rem 1rem;
-    background-color: #eee;
+    background-color: ${({ theme }) => theme.colors.grey200};
   }
   &:has(${InputWrapper}) ${TopBarIconWrapper} {
     position: absolute;

@@ -1,15 +1,15 @@
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { TitleRegularWrapper } from "components/atoms/Text/styled";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
-import type { IModalButtonContainerProps, IModalRootProps } from ".";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
+import { TitleRegularWrapper } from 'components/atoms/Text/styled';
+import type { IModalButtonContainerProps, IModalRootProps } from '.';
 
 // Modal Background
 export const ModalBackgroundWrapper: ReturnType<typeof styled.div> = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #00000011;
+  background-color: ${({ theme }) => `${theme.colors.black}11`};
   backdrop-filter: blur(5px);
 `;
 
@@ -31,16 +31,16 @@ export const ModalBodyWrapper: ReturnType<typeof styled.div> = styled.div`
 
 // Modal ButtonContainer
 export const ModalButtonContainerWrapper: ReturnType<
-  typeof styled.div<Pick<IModalButtonContainerProps, "direction">>
-> = styled.div<Pick<IModalButtonContainerProps, "direction">>`
+  typeof styled.div<Pick<IModalButtonContainerProps, 'direction'>>
+> = styled.div<Pick<IModalButtonContainerProps, 'direction'>>`
   padding: 0 1rem 1rem;
   display: flex;
   flex-direction: ${({ direction }) =>
-    direction === "horizontal" ? "row" : "column"};
+    direction === 'horizontal' ? 'row' : 'column'};
   flex-wrap: wrap; // small mobile에서 깨짐 현상 수정
   gap: 0.25rem;
   ${TextButtonWrapper} {
-    flex: ${({ direction }) => (direction === "horizontal" ? "1" : "auto")};
+    flex: ${({ direction }) => (direction === 'horizontal' ? '1' : 'auto')};
     margin: 0;
   }
 `;
@@ -49,21 +49,21 @@ export const ModalButtonContainerWrapper: ReturnType<
 export const ModalContainerWrapper: ReturnType<typeof styled.div> = styled.div`
   width: calc(100% - 2rem); // 100% - 양 옆 1rem(16px)씩
   max-width: 500px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 1rem;
   position: relative;
 `;
 
 // Modal open 여부에 따른 스타일
 const modalConfig = (open: boolean) => css`
-  visibility: ${open ? "visible" : "hidden"};
+  visibility: ${open ? 'visible' : 'hidden'};
   opacity: ${open ? 1 : 0};
 `;
 
 // Modal Root
 export const ModalRootWrapper: ReturnType<
-  typeof styled.div<Pick<IModalRootProps, "open">>
-> = styled.div<Pick<IModalRootProps, "open">>`
+  typeof styled.div<Pick<IModalRootProps, 'open'>>
+> = styled.div<Pick<IModalRootProps, 'open'>>`
   position: fixed;
   top: 0;
   left: 50%;

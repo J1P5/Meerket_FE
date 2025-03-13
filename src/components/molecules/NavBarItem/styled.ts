@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import type { NavBarItemType } from ".";
+import styled from '@emotion/styled';
+import type { NavBarItemType } from '.';
 
 export const NavBarItemWrapper: ReturnType<
   typeof styled.div<{ state: NavBarItemType }>
@@ -9,6 +9,7 @@ export const NavBarItemWrapper: ReturnType<
   align-items: center;
   justify-content: center;
   gap: 0.125rem;
-  color: ${({ state }) => (state === "active" ? "#000000" : "#aaaaaa")};
+  color: ${({ state, theme }) =>
+    state === 'active' ? theme.colors.black : theme.colors.grey400};
   cursor: pointer;
 `;

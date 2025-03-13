@@ -11,7 +11,7 @@ export const LoadingWrapper: ReturnType<typeof styled.div> = styled.div`
   text-align: center;
   font-size: 1.2rem;
   white-space: pre-line;
-  color: #555;
+  color: ${({ theme }) => theme.colors.grey500};
 `;
 
 export const Spinner: ReturnType<typeof styled.div> = styled.div`

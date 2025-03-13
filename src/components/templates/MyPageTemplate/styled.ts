@@ -21,8 +21,8 @@ export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
     align-self: stretch;
 
     border-radius: 0px 0px 10px 10px;
-    border-top: 1px solid #eceef3;
-    background: #fff;
+    border-top: 1px solid ${({ theme }) => theme.colors.grey200};
+    background: ${({ theme }) => theme.colors.white};
 
     margin: 0;
 
@@ -31,12 +31,12 @@ export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
     -webkit-line-clamp: 1;
 
     overflow: hidden;
-    color: #707192;
+    color: ${({ theme }) => theme.colors.grey500};
     text-overflow: ellipsis;
   }
 
   ${ProfileWrapper} {
-    background: var(--white, #fff);
+    background: ${({ theme }) => theme.colors.white};
     gap: ${12 / 16}rem;
     ${TextWrapper} {
       width: 100%;
@@ -55,7 +55,7 @@ export const ProfileContainer: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const BackGroundWrapper: ReturnType<typeof styled.div> = styled.div`
-  background: #f4f6f9;
+  background: ${({ theme }) => theme.colors.grey100};
   padding: 1rem;
 `;
 

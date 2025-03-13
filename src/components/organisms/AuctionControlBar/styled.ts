@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
+import styled from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
 import {
   DescRegularWrapper,
   WritingBoldWrapper,
-} from "components/atoms/Text/styled";
+} from 'components/atoms/Text/styled';
 
 export const AuctionControlBarRootWrapper: ReturnType<typeof styled.div> =
   styled.div`
@@ -26,8 +26,7 @@ export const ButtonContainerWrapper: ReturnType<typeof styled.div> = styled.div`
     flex: 1;
     &:disabled {
       cursor: default;
-      background-color: ${({ theme }) =>
-        theme.colors.grey400};
+      background-color: ${({ theme }) => theme.colors.grey400};
       color: ${({ theme }) => theme.colors.primaryDark};
     }
   }

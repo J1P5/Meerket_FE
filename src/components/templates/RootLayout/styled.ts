@@ -5,7 +5,7 @@ import { TopBarWrapper } from 'components/organisms/TopBar/styled';
 
 export const PageLayoutWrapper: ReturnType<typeof styled.div> = styled.div`
   flex: 1;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
 `;
 

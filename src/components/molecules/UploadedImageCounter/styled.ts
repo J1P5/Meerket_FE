@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ImageUploadWrapper: ReturnType<typeof styled.div> = styled.div`
   position: absolute;
@@ -10,21 +10,20 @@ export const ImageUploadWrapper: ReturnType<typeof styled.div> = styled.div`
   border-radius: 10px;
 
   &:hover {
-    background-color: #00000022;
+    background-color: ${({ theme }) => `${theme.colors.black}22`};
   }
 `;
 
-export const UploadedImageCounterContainer: ReturnType<
-  typeof styled.div
-> = styled.div`
-  background-color: #f4f6f9;
-  text-align: center;
-  padding: 1rem;
-  position: relative;
+export const UploadedImageCounterContainer: ReturnType<typeof styled.div> =
+  styled.div`
+    background-color: ${({ theme }) => theme.colors.grey100};
+    text-align: center;
+    padding: 1rem;
+    position: relative;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-`;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  `;

@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-export const ErrorMessageWrapper = styled.div`
-  color: #ff2e4d;
+export const ErrorMessageWrapper: ReturnType<typeof styled.div> = styled.div`
+  color: ${({ theme }) => theme.colors.red};
 `;

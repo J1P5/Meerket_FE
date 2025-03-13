@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ToastManagerWrapper: ReturnType<typeof styled.div> = styled.div`
   position: fixed;
@@ -44,7 +44,7 @@ export const ToastItemWrapper: ReturnType<typeof styled.div> = styled.div`
     }
   }
 
-  color: var(--white, #fff);
+  color: ${({ theme }) => theme.colors.white};
   /* 설명/regular */
   font-family: Pretendard;
   font-size: 14px;

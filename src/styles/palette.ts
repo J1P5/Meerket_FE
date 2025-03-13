@@ -14,5 +14,5 @@ export const palette: {
   grey500: '#707192', // 설명 문구
   grey600: '#2D2D39', // 타이틀
 
-  red: '#FF224D',
+  red: '#FF2E4D',
 };

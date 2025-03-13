@@ -7,7 +7,7 @@ export interface IIconButtonProps {
   type?: "round" | "square";
   /** 사이즈 : 아이콘 사이즈  default는 m */
   size?: "s" | "m" | "l";
-  /** 배경 색깔 : default는 임의로 선정(=#D9D9D9, 이후 수정 바람) */
+  /** 배경 색깔 : default는 임의로 선정(=grey200, 이후 수정 바람) */
   backgroundColor?: "default" | "transparent";
   /** onClick 이벤트, 상위 컴포넌트 개발할 때 수정 요망 */
   onClick?: () => void;
