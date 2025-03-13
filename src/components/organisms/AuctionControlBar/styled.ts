@@ -13,7 +13,7 @@ export const AuctionControlBarRootWrapper: ReturnType<typeof styled.div> =
     gap: 0.5rem;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(15px);
-    filter: drop-shadow(0 0 10px rgba(19, 27, 83, 0.05));
+    box-shadow: ${({ theme }) => theme.shadows.md};
     padding: 1rem;
     border-radius: 0.5rem;
   `;

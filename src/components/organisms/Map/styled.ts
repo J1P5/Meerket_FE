@@ -17,7 +17,7 @@ export const MapWrapper: ReturnType<typeof styled.div> = styled.div`
     height: 50px;
     background: ${({ theme }) => theme.colors.white};
     outline: none;
-    box-shadow: 0px 0px 20px rgba(19, 27, 83, 0.15);
+    box-shadow: ${({ theme }) => theme.shadows.lg};
     color: ${({ theme }) => theme.colors.primary};
   }
 }
