@@ -43,7 +43,7 @@ export const WriteBoxWrapper: ReturnType<typeof styled.div> = styled.div`
   ${IconButtonWrapper} {
     width: 3rem;
     height: 3rem;
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.radius.lg};
     background-color: ${({ theme }) => theme.colors.primaryDark};
   }
 `;

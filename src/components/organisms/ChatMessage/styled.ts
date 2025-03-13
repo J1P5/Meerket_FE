@@ -5,7 +5,7 @@ import type { IChatMessageProps } from '.';
 export const MessageWrapper: ReturnType<typeof styled.div> = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: ${({ theme }) => theme.radius.md};
   max-width: 70%;
 `;
 export const MessageInfoWrapper: ReturnType<typeof styled.div> = styled.div`

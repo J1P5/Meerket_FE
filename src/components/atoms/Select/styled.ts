@@ -14,7 +14,7 @@ export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
       padding: 16px;
       min-height: auto;
       padding: 0.75rem 0.5rem;
-      border-radius: 10px;
+      border-radius: ${({ theme }) => theme.radius.lg};
       border: 1px solid ${({ theme }) => theme.colors.grey200};
       &--is-focused,
       &--is-open {

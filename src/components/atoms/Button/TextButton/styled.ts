@@ -39,7 +39,7 @@ export const TextButtonWrapper: ReturnType<
   }) =>
     backgroundColor === 'grey' ? theme.colors.grey500 : theme.colors.white};
 
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.radius.lg};
   padding: 0;
 
   font-size: 1rem;

@@ -33,7 +33,7 @@ export const TextContainer: ReturnType<typeof styled.div> = styled.div`
   align-items: flex-start;
   gap: 6px;
 
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.radius.lg};
   border: 1px solid ${({ theme }) => theme.colors.grey200};
   cursor: pointer; /* 클릭 포인터 추가 */
 

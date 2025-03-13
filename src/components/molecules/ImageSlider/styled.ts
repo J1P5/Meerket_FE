@@ -31,7 +31,7 @@ export const ImageSliderWrapper: ReturnType<typeof styled.div> = styled.div`
     padding: 4px 10px;
     background-color: ${({ theme }) => `${theme.colors.black}4c`};
     color: white;
-    border-radius: 100px;
+    border-radius: ${({ theme }) => theme.radius.xl};
     font-size: 12px;
   }
 `;

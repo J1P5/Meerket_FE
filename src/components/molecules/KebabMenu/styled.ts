@@ -8,7 +8,7 @@ export const KebabMenuWrapper: ReturnType<typeof styled.div> = styled.div`
   align-items: center;
   padding: 0 0.5rem;
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.radius.lg};
   box-shadow: ${({ theme }) => theme.shadows.md};
   ${TextButtonWrapper} {
     width: 100%;

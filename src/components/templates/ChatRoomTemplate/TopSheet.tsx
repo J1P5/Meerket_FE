@@ -75,7 +75,7 @@ const ToggleButton = styled.button<TopSheetWrapperProps>`
     width: 100px;
     height: 6px;
     background-color: ${({ theme }) => theme.colors.grey100};
-    border-radius: 100px;
+    border-radius: ${({ theme }) => theme.radius.xl};
   }
 `;
 

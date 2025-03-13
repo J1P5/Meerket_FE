@@ -16,15 +16,15 @@ export const IconButtonWrapper: ReturnType<
   outline: none;
   border: none;
 
-  //
-  //width: fit-content;
+  // width: fit-content;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: 4px;
-  border-radius: ${({ shape }) => (shape === 'square' ? '16px' : '50%')};
+  border-radius: ${({ shape, theme }) =>
+    shape === 'square' ? theme.radius.xl : theme.radius.round};
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor === 'transparent' ? 'transparent' : theme.colors.grey200};
 

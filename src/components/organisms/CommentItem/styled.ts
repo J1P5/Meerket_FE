@@ -63,7 +63,7 @@ export const WriterBadgeWrapper: ReturnType<typeof styled.div> = styled.div`
     line-height: ${({ theme }) => theme.fonts.tag_regular.lineHeight};
     color: ${({ theme }) => theme.colors.primaryDark};
     background-color: ${({ theme }) => theme.colors.grey200};
-    border-radius: ${4 / 16}rem;
+    border-radius: ${({ theme }) => theme.radius.sm};
     padding: ${3 / 16}rem ${6 / 16}rem;
   }
 `;

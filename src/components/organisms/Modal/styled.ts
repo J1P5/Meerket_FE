@@ -50,7 +50,7 @@ export const ModalContainerWrapper: ReturnType<typeof styled.div> = styled.div`
   width: calc(100% - 2rem); // 100% - 양 옆 1rem(16px)씩
   max-width: 500px;
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.xl};
   position: relative;
 `;
 

@@ -27,7 +27,7 @@ export const PostImageManagerWrapper: ReturnType<
     width: 106px;
     height: 106px;
     aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.radius.lg};
 
     ${({ disabled }) =>
       disabled &&

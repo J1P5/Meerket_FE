@@ -17,7 +17,7 @@ export const LoadingWrapper: ReturnType<typeof styled.div> = styled.div`
 export const Spinner: ReturnType<typeof styled.div> = styled.div`
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: ${({ theme }) => theme.colors.primary};
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.round};
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;

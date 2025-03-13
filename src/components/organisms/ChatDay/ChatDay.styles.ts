@@ -8,7 +8,7 @@ const ChatDayWarpper: ReturnType<typeof styled.div> = styled.div`
   p {
     color: ${({ theme }) => theme.colors.black};
   }
-  border-radius: 1rem;
+  border-radius: ${({ theme }) => theme.radius.xl};
   display: flex;
   justify-content: center;
 `;

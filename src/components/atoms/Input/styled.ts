@@ -14,7 +14,7 @@ export const InputWrapper: ReturnType<typeof styled.div<IInputWrapperProps>> =
     border: 1px solid
       ${({ focus, theme }) =>
         focus ? theme.colors.primary : theme.colors.grey200};
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.radius.lg};
     width: 100%;
     height: 3.125rem;
     padding: 1rem;

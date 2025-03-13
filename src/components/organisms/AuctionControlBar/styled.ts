@@ -15,7 +15,7 @@ export const AuctionControlBarRootWrapper: ReturnType<typeof styled.div> =
     backdrop-filter: blur(15px);
     box-shadow: ${({ theme }) => theme.shadows.md};
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: ${({ theme }) => theme.radius.md};
   `;
 
 export const ButtonContainerWrapper: ReturnType<typeof styled.div> = styled.div`

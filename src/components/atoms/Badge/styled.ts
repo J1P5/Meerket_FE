@@ -8,7 +8,7 @@ export const BadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   align-items: center;
 
   background-color: ${({ theme }) => theme.colors.grey200};
-  border-radius: 16px;
+  border-radius: ${({ theme }) => theme.radius.xl};
 `;
 
 export const BadgeChatWrapper: ReturnType<typeof styled.div> = styled.div`
@@ -21,5 +21,5 @@ export const BadgeChatWrapper: ReturnType<typeof styled.div> = styled.div`
 
   background-color: ${({ theme }) => theme.colors.primaryDark};
   color: ${({ theme }) => theme.colors.white};
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.radius.round};
 `;

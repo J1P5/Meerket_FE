@@ -7,7 +7,7 @@ export const ImageUploadWrapper: ReturnType<typeof styled.div> = styled.div`
   width: 100%;
   height: 100%;
 
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.radius.lg};
 
   &:hover {
     background-color: ${({ theme }) => `${theme.colors.black}22`};
