@@ -24,7 +24,11 @@ self.addEventListener("push", (event) => {
   const title = notification.title;
   const options = {
     body: notification.body,
-    icon: notification.icon || "/icons/logo-128x128.png",  };
+    icon: notification.icon || "/icons/logo-128x128.png",
+    data: {
+      link: notification.url,
+    },
+  };
 
   self.registration.showNotification(title, options);
 });
@@ -34,8 +38,8 @@ self.addEventListener("push", (event) => {
  */
 self.addEventListener("notificationclick", (event) => {
   console.log("notificationclick_event", event);
-  const data = event.data;
-  const url = data?.url || "/"; 
+  const data = event.notification.data;
+  const url = data?.link || "/"; 
 
   event.notification.close(); // 알림 클릭 시 알림 제거
   event.waitUntil(clients.openWindow(url));
