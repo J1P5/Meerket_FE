@@ -1,4 +1,4 @@
-import { fonts, palette, radius, shadows, spacing, zIndexes } from 'styles';
+import { colors, fonts, radius, shadows, spacing, zIndexes } from 'styles';
 
 /* eslint-disable @rushstack/typedef-var */
 interface FontStyle {
@@ -90,7 +90,7 @@ export const defaultTheme = {
     } as FontStyle,
   } as { [key: string]: FontStyle }, // 인덱스 시그니처 추가,
   fonts,
-  colors: palette,
+  colors,
   radius,
   shadows,
   spacing,

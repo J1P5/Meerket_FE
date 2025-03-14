@@ -1,4 +1,4 @@
-export const palette: {
+export const colors: {
   [key: string]: string;
 } = {
   primary: '#344FFF',
