@@ -20,12 +20,12 @@ self.addEventListener("push", (event) => {
   console.log("push_event.data.json()",event.data.json());
   console.log("push_event", event);
 
-  const notification = event.data.json().notification;
+  // const notification = event.data.json().notification;
   const data = event.data.json().data;
-  const title = notification.title;
+  const title = data.title;
   const options = {
-    body: notification.body,
-    icon: notification.icon || "/icons/logo-128x128.png",
+    body: data.body,
+    icon: data.icon || "/icons/logo-128x128.png",
     data: {
       link: data.uri,
     },
