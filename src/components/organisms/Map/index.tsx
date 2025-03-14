@@ -9,7 +9,7 @@ import {
   Marker,
   NaverMap,
 } from 'react-naver-maps';
-import { palette as colors } from 'styles';
+import { colors } from 'styles';
 import { IMapProps } from 'types';
 import { CenterMarkerWrapper, MapWrapper } from './styled';
 

@@ -1,5 +1,6 @@
 import { Text, TextButton } from 'components/atoms';
 import type { IModalBottomSheetProps } from 'components/molecules/ModalBottomSheet';
+import { colors } from 'styles';
 import { UserLocationBottomSheetWrapper } from './styled';
 
 interface IUserLocationBottomSheetProps extends IModalBottomSheetProps {
@@ -40,8 +41,8 @@ export const UserLocationBottomSheet = ({
           {`${nickname}님의 현 위치는`}
           <div style={{ display: 'flex' }}>
             <Text
-              color="#344FFF"
               variant={address!.length > 15 ? 'button_bold' : 'writing_bold'}
+              color={colors.primary}
             >
               {address}
             </Text>
