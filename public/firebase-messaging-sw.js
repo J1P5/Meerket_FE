@@ -26,7 +26,7 @@ self.addEventListener("push", (event) => {
     body: notification.body,
     icon: notification.icon || "/icons/logo-128x128.png",
     data: {
-      link: notification.url,
+      link: notification.data.uri,
     },
   };
 
