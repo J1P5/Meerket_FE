@@ -21,7 +21,7 @@ export const PermissionList = ({
 }: IPermissionListProps) => {
   return (
     <PermissionListWrapper>
-      <Text variant="h5">
+      <Text variant="title_bold">
         {"미어켓 이용을 위해\n 앱 권한을 허용해주세요"}
       </Text>
       <div className="permission-con">

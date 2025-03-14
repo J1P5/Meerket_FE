@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import type { ITabIndicatorProps } from "./index";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
+import { ThemeType } from 'styles/theme';
+import type { ITabIndicatorProps } from './index';
 
 export const TabIndicatorWrapper: ReturnType<
   typeof styled.div<ITabIndicatorProps>
@@ -15,6 +15,6 @@ export const TabIndicatorWrapper: ReturnType<
     theme: ThemeType;
   }) =>
     isActive
-      ? theme.colors.blue_text
-      : theme.colors.grey_field_guide_but_deactivate};
+      ? theme.colors.primaryDark
+      : theme.colors.grey400};
 `;

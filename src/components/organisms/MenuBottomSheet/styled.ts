@@ -1,7 +1,7 @@
-import type { ComponentProps } from "react";
-import styled, { type StyledComponent } from "@emotion/styled";
-import { ModalBottomSheet } from "components/molecules";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
+import styled, { type StyledComponent } from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
+import { ModalBottomSheet } from 'components/molecules';
+import type { ComponentProps } from 'react';
 
 export const MenuBottomSheetWrapper: StyledComponent<
   ComponentProps<typeof ModalBottomSheet>
@@ -14,15 +14,15 @@ export const MenuBottomSheetWrapper: StyledComponent<
   ${TextButtonWrapper} {
     position: relative;
     &:hover {
-      background-color: #f9f9f9;
+      background-color: ${({ theme }) => theme.colors.grey100};
     }
     &:not(:last-child)::after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       bottom: -0.125rem;
       width: 100%;
-      border-bottom: 1px solid #d9d9d9;
+      border-bottom: 1px solid ${({ theme }) => theme.colors.grey200};
     }
   }
 `;

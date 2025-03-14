@@ -1,6 +1,7 @@
-import { ImageUpload, Text } from "components/atoms";
-import { CameraIcon } from "components/atoms/Icon";
-import { ImageUploadWrapper, UploadedImageCounterContainer } from "./styled";
+import { ImageUpload, Text } from 'components/atoms';
+import { CameraIcon } from 'components/atoms/Icon';
+import { colors } from 'styles';
+import { ImageUploadWrapper, UploadedImageCounterContainer } from './styled';
 
 interface IUploadedImageCounter {
   /** Counter 위쪽 텍스트 */
@@ -24,19 +25,18 @@ export const UploadedImageCounter = ({
       <CameraIcon size="l" />
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <div style={{ color: "#707192" }}>
-          <Text variant="explan_bold">
-            {text}
-          </Text>
-        </div>
-        <div style={{ color: "#9B9FBC" }}>
-          <Text variant="explan_regular">{`${currentCount}/${totalCount}`}</Text>
-        </div>
+        <Text variant="guide_bold" color={colors.gray500}>
+          {text}
+        </Text>
+        <Text
+          variant="guide_regular"
+          color={colors.gray400}
+        >{`${currentCount}/${totalCount}`}</Text>
       </div>
       <ImageUploadWrapper>
         <ImageUpload onFileChange={onChange} />

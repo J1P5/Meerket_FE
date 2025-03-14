@@ -1,11 +1,11 @@
-import { IconButton, Input, Text } from "components/atoms";
-import { BackIcon, NoIcon } from "components/atoms/Icon";
-import type { IconType } from "types";
+import { IconButton, Input, Text } from 'components/atoms';
+import { BackIcon, NoIcon } from 'components/atoms/Icon';
+import type { IconType } from 'types';
 import {
   TopBarBackIconWrapper,
   TopBarIconWrapper,
   TopBarWrapper,
-} from "./styled";
+} from './styled';
 
 interface ITopBarProps {
   children: React.ReactNode;
@@ -60,8 +60,9 @@ interface ITopBarTitleProps {
   title: string;
 }
 
+// TODO: Text variant 필요
 const TopBarTitle = ({ title }: ITopBarTitleProps) => {
-  return <Text variant="body1">{title}</Text>;
+  return <Text variant="title_regular">{title}</Text>;
 };
 
 interface ITopBarInputProps {
@@ -78,7 +79,7 @@ interface ITopBarInputProps {
 const TopBarInput = ({
   value,
   setValue,
-  placeholder = "",
+  placeholder = '',
   onEnter,
 }: ITopBarInputProps) => {
   return (

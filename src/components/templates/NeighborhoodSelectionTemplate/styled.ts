@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
-import { IconWrapper } from "components/atoms/Icon/styled";
-import { NeighborhoodSelectionListWrapper } from "components/organisms/NeighborhoodSelectionList/styled";
+import styled from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
+import { IconWrapper } from 'components/atoms/Icon/styled';
+import { NeighborhoodSelectionListWrapper } from 'components/organisms/NeighborhoodSelectionList/styled';
 
 export const NeighborhoodSelectionTemplateWrapper: ReturnType<
   typeof styled.div
@@ -12,7 +12,7 @@ export const NeighborhoodSelectionTemplateWrapper: ReturnType<
 
   gap: 1rem;
   padding: 1rem 1rem 0;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
 
   ${NeighborhoodSelectionListWrapper} {
     flex: 1;

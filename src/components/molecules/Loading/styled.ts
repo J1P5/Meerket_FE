@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
 
 export const LoadingWrapper: ReturnType<typeof styled.div> = styled.div`
   width: 100%;
@@ -12,14 +11,13 @@ export const LoadingWrapper: ReturnType<typeof styled.div> = styled.div`
   text-align: center;
   font-size: 1.2rem;
   white-space: pre-line;
-  color: #555;
+  color: ${({ theme }) => theme.colors.grey500};
 `;
 
 export const Spinner: ReturnType<typeof styled.div> = styled.div`
   border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: ${({ theme }: { theme: ThemeType }) =>
-    theme.colors.blue_main};
-  border-radius: 50%;
+  border-left-color: ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ theme }) => theme.radius.round};
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;

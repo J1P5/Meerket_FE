@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const AuctionTimerWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -6,6 +6,6 @@ export const AuctionTimerWrapper: ReturnType<typeof styled.div> = styled.div`
   align-items: center;
   width: 100%;
   padding: 16px 24px;
-  background-color: ${({ theme }) => theme.colors.blue_main};
+  background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
 `;

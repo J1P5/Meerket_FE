@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { IconWithTextContentWrapper } from "components/molecules/IconWithText/styled";
+import styled from '@emotion/styled';
+import { IconWithTextContentWrapper } from 'components/molecules/IconWithText/styled';
 
 export const MyPageMenuWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const SubMenuWrapper: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const ColorWrapper: ReturnType<typeof styled.div> = styled.div`
-  color: var(--blue-text-blue, #131b53);
+  color: ${({ theme }) => theme.colors.primaryDark};
 `;
 
 export const TextContainer: ReturnType<typeof styled.div> = styled.div`
@@ -33,15 +33,15 @@ export const TextContainer: ReturnType<typeof styled.div> = styled.div`
   align-items: flex-start;
   gap: 6px;
 
-  border-radius: 10px;
-  border: 1px solid var(--grey-field-deactivate, #eceef3);
+  border-radius: ${({ theme }) => theme.radius.lg};
+  border: 1px solid ${({ theme }) => theme.colors.grey200};
   cursor: pointer; /* 클릭 포인터 추가 */
 
   &:hover {
-    background-color: #eeeeee;
+    background-color: ${({ theme }) => theme.colors.grey200};
   }
 
   ${IconWithTextContentWrapper} {
-    color: var(--grey-main-text, #2d2d39);
+    color: ${({ theme }) => theme.colors.grey600};
   }
 `;

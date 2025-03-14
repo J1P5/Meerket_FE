@@ -22,7 +22,7 @@ export const TextButton = ({
   size = "m",
   backgroundColor = "default",
   onClick = () => {},
-  variant = "btn_bold",
+  variant = "button_bold",
   disabled = false,
   ariaLabel,
 }: ITextButtonProps) => {

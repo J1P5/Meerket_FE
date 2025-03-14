@@ -5,7 +5,7 @@ import { IconWithTextWrapper } from "components/molecules/IconWithText/styled";
 export const CategoryWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.colors.blue_main};
+  color: ${({ theme }) => theme.colors.primary};
   ${IconWithTextWrapper} {
     cursor: default;
   }

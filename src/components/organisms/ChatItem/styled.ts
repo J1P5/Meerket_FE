@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { ImageWrapper } from "components/atoms/Image/styled";
+import styled from '@emotion/styled';
+import { ImageWrapper } from 'components/atoms/Image/styled';
 
 export const ChatItemWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const ChatItemWrapper: ReturnType<typeof styled.div> = styled.div`
   cursor: pointer;
   padding: 1rem;
   &:hover {
-    background-color: #eeeeee;
+    background-color: ${({ theme }) => theme.colors.grey200};
   }
 
   /* width를 주지 않으면 보이지 않아서 추가*/

@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
 
 export const PostListWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -7,14 +6,12 @@ export const PostListWrapper: ReturnType<typeof styled.div> = styled.div`
 
   .price-con {
     p {
-      color: ${({ theme }: { theme: ThemeType }) =>
-        theme.colors.grey_text_guide};
+      color: ${({ theme }) => theme.colors.grey500};
     }
   }
   .remain-con {
     p {
-      color: ${({ theme }: { theme: ThemeType }) =>
-        theme.colors.grey_text_guide};
+      color: ${({ theme }) => theme.colors.grey500};
     }
   }
 
@@ -26,8 +23,7 @@ export const PostListWrapper: ReturnType<typeof styled.div> = styled.div`
 
   .location-con {
     p {
-      color: ${({ theme }: { theme: ThemeType }) =>
-        theme.colors.grey_text_guide};
+      color: ${({ theme }) => theme.colors.grey500};
     }
   }
 `;

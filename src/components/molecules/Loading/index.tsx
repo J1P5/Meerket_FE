@@ -11,7 +11,7 @@ interface LoadingProps {
 export const Loading: React.FC<LoadingProps> = ({ message = "" }) =>
   <LoadingWrapper>
     <Spinner />
-    <Text variant="btn_bold">
+    <Text variant="button_bold">
       {message}
     </Text>
   </LoadingWrapper>;

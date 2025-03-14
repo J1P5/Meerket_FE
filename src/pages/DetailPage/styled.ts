@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const KebabWrapper: ReturnType<typeof styled.div> = styled.div`
   position: fixed;
-  z-index: 99999;
+  z-index: ${({ theme }) => theme.zIndexes.KebabMenu};
   top: 1rem;
   right: 0;
   transform-origin: right;

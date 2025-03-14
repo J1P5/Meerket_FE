@@ -302,7 +302,7 @@ export const CommentItem = ({
               placeholder="답글을 입력해주세요."
               buttonText="작성"
               onButtonClick={() => handleWriteButtonClick(commentId)}
-              variant="explan_bold"
+              variant="guide_bold"
             />
           )}
         </ReplyContainer>

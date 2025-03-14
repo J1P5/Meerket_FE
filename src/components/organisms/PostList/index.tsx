@@ -1,9 +1,10 @@
-import { PostListWrapper } from "./styled";
-import { PostItem } from "../PostItem";
-import { DownIcon } from "components/atoms/Icon";
-import { Text } from "components/atoms";
-import type { IPost, PostItemType } from "types";
-import { formatPrice } from "utils";
+import { Text } from 'components/atoms';
+import { DownIcon } from 'components/atoms/Icon';
+import { colors } from 'styles';
+import type { IPost, PostItemType } from 'types';
+import { formatPrice } from 'utils';
+import { PostItem } from '../PostItem';
+import { PostListWrapper } from './styled';
 
 interface IPostListProps {
   posts: IPost[];
@@ -27,7 +28,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   }: IPost) => {
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} size={"default"} />
+        <PostItem.Image imgUrl={imgUrl} size={'default'} />
         <PostItem.Container>
           <PostItem.Title title={title} />
           <PostItem.Price price={price} />
@@ -62,14 +63,15 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
             />
           </div>
         </PostItem.Container>
-        {isSeller &&
+        {isSeller && (
           <PostItem.ButtonContainer
-            buttonText={isCompleted ? "거래가 완료되었어요!" : "거래 완료"}
+            buttonText={isCompleted ? '거래가 완료되었어요!' : '거래 완료'}
             onTextButtonClick={onTextButtonClick}
             icon={DownIcon}
             onIconButtonClick={onIconButtonClick}
             disabled={isCompleted}
-          />}
+          />
+        )}
       </PostItem>
     );
   };
@@ -91,7 +93,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   }: IPost) => {
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} size={"default"} />
+        <PostItem.Image imgUrl={imgUrl} size={'default'} />
         <PostItem.Container>
           <PostItem.Title title={title} />
           <div className="location-con">
@@ -102,16 +104,16 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
           </div>
           <div className="price-con">
             <PostItem.Price
-              title={"최소 입찰가 ·"}
+              title={'최소 입찰가 ·'}
               price={price}
               variant="tag_regular"
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">낙찰된 가격</Text>
+            <Text variant="guide_bold">낙찰된 가격</Text>
             <Text
-              color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
+              color={colors.primary}
             >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
@@ -143,7 +145,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   }: IPost) => {
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} size={"default"} />
+        <PostItem.Image imgUrl={imgUrl} size={'default'} />
         <PostItem.Container>
           <PostItem.Title title={title} />
           {/* <PostItem.LocationAndTime address={address} uploadTime={uploadTime} /> */}
@@ -152,16 +154,16 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
           </div>
           <div className="price-con">
             <PostItem.Price
-              title={"최소 입찰가 ·"}
+              title={'최소 입찰가 ·'}
               price={price}
               variant="tag_regular"
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">현재 입찰가</Text>
+            <Text variant="guide_bold">현재 입찰가</Text>
             <Text
-              color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
+              color={colors.primary}
             >{`${formatPrice(price)}원`}</Text>
           </div>
         </PostItem.Container>
@@ -191,7 +193,7 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
   }: IPost) => {
     return (
       <PostItem key={productId} onClick={onClick}>
-        <PostItem.Image imgUrl={imgUrl} size={"default"} />
+        <PostItem.Image imgUrl={imgUrl} size={'default'} />
         <PostItem.Container>
           <PostItem.Title title={title} />
           {/* <PostItem.LocationAndTime address={address} uploadTime={uploadTime} /> */}
@@ -200,16 +202,16 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
           </div>
           <div className="price-con">
             <PostItem.Price
-              title={"최소 입찰가 ·"}
+              title={'최소 입찰가 ·'}
               price={price}
               variant="tag_regular"
             />
           </div>
           <div className="max-price-con">
-            <Text variant="explan_bold">나의 입찰가</Text>
+            <Text variant="guide_bold">나의 입찰가</Text>
             <Text
-              color={"#344fff"}
-              variant="explan_bold"
+              variant="guide_bold"
+              color={colors.primary}
             >{`${formatPrice(maxPrice)}원`}</Text>
           </div>
         </PostItem.Container>
@@ -223,12 +225,12 @@ export const PostList = ({ posts, type, isCompleted }: IPostListProps) => {
     chat: ChatState,
     selling: SellingState,
     buying: BuyingState,
-  }[type || "default"];
+  }[type || 'default'];
   return (
     <PostListWrapper>
-      {posts.map(post =>
+      {posts.map((post) => (
         <SelectedStateComponent key={post.productId} {...post} />
-      )}
+      ))}
     </PostListWrapper>
   );
 };

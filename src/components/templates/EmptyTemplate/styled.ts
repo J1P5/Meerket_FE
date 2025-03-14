@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
 
 export const EmptyTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -7,8 +6,8 @@ export const EmptyTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
   justify-content: space-between;
   flex: 1;
   height: 100%;
-  max-width: ${({ theme }: { theme: ThemeType }) => theme.sizes.max_width};
-  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
+  max-width: ${({ theme }) => theme.sizes.max_width};
+  background-color: ${({ theme }) => theme.colors.white};
 
   &.error {
     height: 100vh;

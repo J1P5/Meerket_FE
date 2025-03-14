@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const LabelWrapper: ReturnType<typeof styled.label> = styled.label`
   // TODO: 코드 나중에 정리
-  color: var(--grey-main-text, #2d2d39);
+  color: ${({ theme }) => theme.colors.grey600};
 
   /* 설명/bold */
   font-family: Pretendard;

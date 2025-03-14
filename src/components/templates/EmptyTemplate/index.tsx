@@ -70,7 +70,7 @@ export const EmptyTemplate = ({ type = "default" }: IEmptyTemplateProps) => {
   return (
     <EmptyTemplateWrapper className={type}>
       <TextContainer>
-        <Text variant="btn_bold">
+        <Text variant="button_bold">
           {msg}
         </Text>
         <LogoWrapper>

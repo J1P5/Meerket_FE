@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { css } from "@emotion/react";
-import { ITextButtonProps } from ".";
-import { ThemeType } from "styles/theme";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { ThemeType } from 'styles/theme';
+import { ITextButtonProps } from '.';
 
 export const TextButtonWrapper: ReturnType<
   typeof styled.button<ITextButtonProps>
@@ -16,46 +16,44 @@ export const TextButtonWrapper: ReturnType<
   cursor: pointer;
 
   background-color: ${({
-    backgroundColor = "default",
+    backgroundColor = 'default',
     theme,
   }: {
     backgroundColor?: string;
     theme: ThemeType;
   }) =>
-    backgroundColor === "transparent"
-      ? "transparent"
-      : backgroundColor === "red"
+    backgroundColor === 'transparent'
+      ? 'transparent'
+      : backgroundColor === 'red'
         ? theme.colors.red
-        : backgroundColor === "grey"
-          ? theme.colors.grey_field_deactivate
-          : theme.colors.blue_main};
+        : backgroundColor === 'grey'
+          ? theme.colors.grey200
+          : theme.colors.primary};
 
   color: ${({
-    backgroundColor = "default",
+    backgroundColor = 'default',
     theme,
   }: {
     backgroundColor?: string;
     theme: ThemeType;
   }) =>
-    backgroundColor === "grey"
-      ? theme.colors.grey_text_guide
-      : theme.colors.white};
+    backgroundColor === 'grey' ? theme.colors.grey500 : theme.colors.white};
 
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.radius.lg};
   padding: 0;
 
   font-size: 1rem;
 
   &:disabled {
-    background-color: ${({ theme }: {theme: ThemeType}) => theme.colors.grey_field_deactivate};
-    color: ${({ theme }: {theme: ThemeType}) => theme.colors.grey_text_guide};
+    background-color: ${({ theme }) => theme.colors.grey200};
+    color: ${({ theme }) => theme.colors.grey500};
   }
 
   /**
    * TODO : s 디자인 적용 필요
    */
   ${({ size }) =>
-    size === "s" &&
+    size === 's' &&
     css`
       height: 1.5rem;
       padding-left: 1rem;
@@ -63,7 +61,7 @@ export const TextButtonWrapper: ReturnType<
     `}
 
   ${({ size }) =>
-    size === "m" &&
+    size === 'm' &&
     css`
       height: 3.375rem;
       margin-left: 1rem;
@@ -73,7 +71,7 @@ export const TextButtonWrapper: ReturnType<
    * TODO : l 디자인 적용 필요
    */
   ${({ size }) =>
-    size === "l" &&
+    size === 'l' &&
     css`
       height: 2.5rem;
       padding-left: 2rem;

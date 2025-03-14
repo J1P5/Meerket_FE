@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import type { TabItemState } from ".";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
+import { ThemeType } from 'styles/theme';
+import type { TabItemState } from '.';
 
 export const TabItemWrapper: ReturnType<
   typeof styled.div<{ state: TabItemState }>
@@ -8,9 +8,9 @@ export const TabItemWrapper: ReturnType<
   display: flex;
   flex-direction: column;
   color: ${({ state, theme }: { state: TabItemState; theme: ThemeType }) =>
-    state === "active"
-      ? theme.colors.blue_text
-      : theme.colors.grey_field_guide_but_deactivate};
+    state === 'active'
+      ? theme.colors.primaryDark
+      : theme.colors.grey400};
   text-align: center;
   font-weight: bold;
   cursor: pointer;

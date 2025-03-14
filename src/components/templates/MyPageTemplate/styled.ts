@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-import { TextButtonWrapper } from "components/atoms/Button/TextButton/styled";
+import styled from '@emotion/styled';
+import { TextButtonWrapper } from 'components/atoms/Button/TextButton/styled';
 import {
-  ProfileWrapper,
   ImageWrapper,
+  ProfileWrapper,
   TextWrapper,
-} from "components/organisms/Profile/styled";
-import { ThemeType } from "styles/theme";
+} from 'components/organisms/Profile/styled';
 
 export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -22,8 +21,8 @@ export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
     align-self: stretch;
 
     border-radius: 0px 0px 10px 10px;
-    border-top: 1px solid #eceef3;
-    background: #fff;
+    border-top: 1px solid ${({ theme }) => theme.colors.grey200};
+    background: ${({ theme }) => theme.colors.white};
 
     margin: 0;
 
@@ -32,12 +31,12 @@ export const MyPageTemplateWrapper: ReturnType<typeof styled.div> = styled.div`
     -webkit-line-clamp: 1;
 
     overflow: hidden;
-    color: #707192;
+    color: ${({ theme }) => theme.colors.grey500};
     text-overflow: ellipsis;
   }
 
   ${ProfileWrapper} {
-    background: var(--white, #fff);
+    background: ${({ theme }) => theme.colors.white};
     gap: ${12 / 16}rem;
     ${TextWrapper} {
       width: 100%;
@@ -56,15 +55,14 @@ export const ProfileContainer: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const BackGroundWrapper: ReturnType<typeof styled.div> = styled.div`
-  background: #f4f6f9;
+  background: ${({ theme }) => theme.colors.grey100};
   padding: 1rem;
 `;
 
 export const LogoutWithDrawWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   gap: 1rem;
-  color: ${({ theme }: { theme: ThemeType }) =>
-    theme.colors.grey_field_guide_but_deactivate};
+  color: ${({ theme }) => theme.colors.grey400};
   text-decoration: underline;
   margin: 0 1rem;
   cursor: pointer;

@@ -33,7 +33,7 @@ export const Profile = ({ imgUrl, nickname, location }: IProfileProps) => {
           <IconWithText.Icon icon={LinkIcon} size="s" />
         </IconWithText>
         <TextGuideColor>
-          <Text variant="explan_regular">
+          <Text variant="guide_regular">
             {location}
           </Text>
         </TextGuideColor>

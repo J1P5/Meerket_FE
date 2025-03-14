@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
-import { ImageWrapper } from "components/atoms/Image/styled";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
+import { ImageWrapper } from 'components/atoms/Image/styled';
 
 export const MapWrapper: ReturnType<typeof styled.div> = styled.div`
   top:0;
@@ -15,10 +15,10 @@ export const MapWrapper: ReturnType<typeof styled.div> = styled.div`
     right: 1rem;
     width: 50px;
     height: 50px;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.white};
     outline: none;
-    box-shadow: 0px 0px 20px rgba(19, 27, 83, 0.15);
-    color: #344FFF;
+    box-shadow: ${({ theme }) => theme.shadows.lg};
+    color: ${({ theme }) => theme.colors.primary};
   }
 }
 `;
