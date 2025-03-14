@@ -17,12 +17,14 @@ self.addEventListener("push", (event) => {
   if (!event.data.json()) {
     return;
   }
+  console.log("push_event.data.json()",event.data.json());
+  console.log("push_event", event);
 
   const notification = event.data.json().notification;
   const title = notification.title;
   const options = {
     body: notification.body,
-    icon: notification.icon || "/icons/logo-128x128.png"  };
+    icon: notification.icon || "/icons/logo-128x128.png",  };
 
   self.registration.showNotification(title, options);
 });
@@ -31,6 +33,7 @@ self.addEventListener("push", (event) => {
  * 알림 클릭 이벤트
  */
 self.addEventListener("notificationclick", (event) => {
+  console.log("notificationclick_event", event);
   const data = event.data;
   const url = data?.url || "/"; 
 
