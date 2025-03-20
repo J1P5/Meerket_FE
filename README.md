@@ -1,5 +1,7 @@
 # 🐱 meerket
 
+![image](https://github.com/user-attachments/assets/b569f7f9-11bf-4808-b605-a586bdfaa226)
+
 <div align="center">
 
 [![백엔드 레포지토리](https://img.shields.io/badge/백엔드_레포지토리_바로가기-ffffff?style=flat-square&color=777777)](https://github.com/prgrms-web-devcourse-final-project/WEB1_1_J1P5_BE)
