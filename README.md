@@ -124,6 +124,7 @@ src/
 | <img src="https://github.com/Icecoff22.png" width="150" /> | <img src="https://github.com/sunghyun0610.png" width="150" /> | <img src="https://github.com/macmorning0116.png" width="150" /> |
 | :--------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------: |
 |           [정승주](https://github.com/Icecoff22)           |           [문성현](https://github.com/sunghyun0610)           |           [김예찬](https://github.com/macmorning0116)           |
+| - 사용자, 인증, 차단, 신고 기능 개발 <br>- 공간 데이터 정제 | - 경매물품 및 댓글 기능 개발 <br>- 입찰 기능 개발 | - 실시간 채팅 및 입찰 기능 개발 <br>- FCM 알림 기능 개발 |
 
 ## 📅 개발 기간
 
