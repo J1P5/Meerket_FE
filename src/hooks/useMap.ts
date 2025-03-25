@@ -15,7 +15,7 @@ export const useMap = ({
   const [myMarker, setMyMarker] = useState<naver.maps.Marker | null>(null);
   const [transactionMarker, setTransactionMarker] =
     useState<naver.maps.Marker | null>(null);
-  const [infowindow, setInfoWindow] = useState<naver.maps.InfoWindow | null>(
+  const [infoWindow, setInfoWindow] = useState<naver.maps.InfoWindow | null>(
     null,
   );
   const isFirstExecution = useRef(true);
@@ -106,19 +106,19 @@ export const useMap = ({
 
       if (!isCenterMarkerExist && transactionMarker) {
         transactionMarker.setPosition(position);
-        if (infowindow && markerInfo) {
+        if (infoWindow && markerInfo) {
           const contentHtml =
             '<div style="display: flex; padding: 6px 10px; justify-content: center; align-items: center; gap: 10px; border-radius:6px; background-color:#131B53; color:#FFF; font-size: 14px;">' +
             markerInfo +
             '</div>';
 
-          infowindow.setOptions({
+          infoWindow.setOptions({
             disableAnchor: true,
             borderWidth: 0,
             content: contentHtml,
           });
 
-          infowindow.open(map, transactionMarker);
+          infoWindow.open(map, transactionMarker);
         }
       }
     }
@@ -138,7 +138,7 @@ export const useMap = ({
 
   return {
     defaultCenter,
-    infowindow,
+    infoWindow,
     map,
     moveToCurrentLocation,
     myMarker,
