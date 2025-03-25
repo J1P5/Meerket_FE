@@ -2,6 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavermaps } from 'react-naver-maps';
 import { IMapProps } from 'types';
 
+const DEFAULT_COORD: [number, number] = [37.5666805, 126.9784147];
+const DEFAULT_ZOOM_LEVEL: number = 16;
+
 export const useMap = ({
   coord,
   isCenterMarkerExist,
@@ -10,7 +13,7 @@ export const useMap = ({
   locationErrorEvent,
 }: IMapProps) => {
   const navermaps = useNavermaps();
-  const defaultCenter = new navermaps.LatLng(37.5666805, 126.9784147);
+  const defaultCenter = new navermaps.LatLng(...DEFAULT_COORD);
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [myMarker, setMyMarker] = useState<naver.maps.Marker | null>(null);
   const [transactionMarker, setTransactionMarker] =
@@ -31,7 +34,7 @@ export const useMap = ({
 
       myMarker?.setVisible(true);
       myMarker?.setPosition(location);
-      map?.setZoom(16);
+      map?.setZoom(DEFAULT_ZOOM_LEVEL);
 
       if (coord && isFirstExecution.current) {
         isFirstExecution.current = false;
