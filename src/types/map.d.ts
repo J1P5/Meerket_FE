@@ -15,7 +15,9 @@ export interface IMapProps {
   /** 좌표 (위도, 경도) */
   coord?: ICoord;
   /** center 좌표 설정 함수 */
-  setCenterCoord?: React.Dispatch<React.SetStateAction<any>>;
+  setCenterCoord?: React.Dispatch<
+    React.SetStateAction<naver.maps.Coord | null>
+  >;
   /** 현재 위치 좌표 설정 함수  */
-  setMyCoord?: React.Dispatch<React.SetStateAction<any>>;
+  setMyCoord?: React.Dispatch<React.SetStateAction<naver.maps.Coord | null>>;
 }

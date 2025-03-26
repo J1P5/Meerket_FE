@@ -5,7 +5,7 @@ export const useReverseGeocode = () => {
   const navermaps = useNavermaps();
 
   const searchCoordinateToAddress = useCallback(
-    (latLng: naver.maps.LatLng): Promise<string> => {
+    (latLng: naver.maps.Coord): Promise<string> => {
       return new Promise((resolve, reject) => {
         navermaps.Service.reverseGeocode(
           {

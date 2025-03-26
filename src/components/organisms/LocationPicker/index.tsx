@@ -22,7 +22,7 @@ export const LocationPicker: React.MemoExoticComponent<
   }: ILocationPickerProps) => JSX.Element
 > = React.memo(
   ({ coord, onLocationSelect, locationErrorEvent }: ILocationPickerProps) => {
-    const [centerCoord, setCenterCoord] = useState<naver.maps.LatLng | null>(
+    const [centerCoord, setCenterCoord] = useState<naver.maps.Coord | null>(
       null,
     );
     const { searchCoordinateToAddress } = useReverseGeocode();
@@ -38,7 +38,7 @@ export const LocationPicker: React.MemoExoticComponent<
           .then((address: string) => {
             onLocationSelect({ coord: iCoord, address });
           })
-          .catch((error: Error) => {
+          .catch((error: LocationErrorCode) => {
             locationErrorEvent(error.message as LocationErrorCode);
           });
       }

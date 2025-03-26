@@ -23,7 +23,7 @@ export const NeighborhoodAuthForm = ({
   onSubmitButtonClick,
   locationErrorEvent,
 }: INeighborhoodAuthFormProps) => {
-  const [myCoord, setMyCoord] = useState<naver.maps.LatLng | null>(null);
+  const [myCoord, setMyCoord] = useState<naver.maps.Coord | null>(null);
   const [location, setLocation] = useState<ILocation>({
     coord: undefined,
     address: '',
