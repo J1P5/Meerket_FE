@@ -30,15 +30,15 @@ export const LocationPicker: React.MemoExoticComponent<
     const handleButtonClick = useCallback(() => {
       if (centerCoord) {
         const iCoord: ICoord = {
-          lat: centerCoord.lat(),
-          lng: centerCoord.lng(),
+          lat: (centerCoord as naver.maps.LatLng).lat(),
+          lng: (centerCoord as naver.maps.LatLng).lng(),
         } as const;
 
         searchCoordinateToAddress(centerCoord)
           .then((address: string) => {
             onLocationSelect({ coord: iCoord, address });
           })
-          .catch((error: LocationErrorCode) => {
+          .catch((error: Error) => {
             locationErrorEvent(error.message as LocationErrorCode);
           });
       }
