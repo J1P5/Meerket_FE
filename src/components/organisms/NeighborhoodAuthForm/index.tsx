@@ -35,8 +35,8 @@ export const NeighborhoodAuthForm = ({
   useEffect(() => {
     if (myCoord) {
       const iCoord: ICoord = {
-        lat: myCoord.lat(),
-        lng: myCoord.lng(),
+        lat: (myCoord as naver.maps.LatLng).lat(),
+        lng: (myCoord as naver.maps.LatLng).lng(),
       } as const;
 
       searchCoordinateToAddress(myCoord)
