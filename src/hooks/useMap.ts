@@ -14,6 +14,10 @@ export const useMap = ({
 }: IMapProps) => {
   const navermaps = useNavermaps();
   const defaultCenter = new navermaps.LatLng(...DEFAULT_COORD);
+
+  /**
+   * 지도 상태 관리
+   */
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [myMarker, setMyMarker] = useState<naver.maps.Marker | null>(null);
   const [transactionMarker, setTransactionMarker] =
@@ -23,6 +27,22 @@ export const useMap = ({
   );
   const isFirstExecution = useRef(true);
 
+  /**
+   * 마커 위치 업데이트 및 표시
+   */
+  const updateMyMarkerPosition = useCallback(
+    (position: naver.maps.Coord) => {
+      if (!map || !myMarker) return;
+      myMarker.setVisible(true);
+      myMarker.setPosition(position);
+      map.setZoom(DEFAULT_ZOOM_LEVEL);
+    },
+    [map, myMarker],
+  );
+
+  /**
+   * 위치 정보 획득 성공 시 처리
+   */
   const onSuccessGeolocation = useCallback(
     (position: GeolocationPosition) => {
       if (!map || !myMarker) return;
@@ -32,11 +52,9 @@ export const useMap = ({
       );
 
       setMyCoord?.(location);
+      updateMyMarkerPosition(location);
 
-      myMarker.setVisible(true);
-      myMarker.setPosition(location);
-      map.setZoom(DEFAULT_ZOOM_LEVEL);
-
+      // 거래 희망 장소를 보여줄 경우 지도 중심을 현재 위치로 변경하지 않음
       if (coord && isFirstExecution.current) {
         isFirstExecution.current = false;
         return;
@@ -49,34 +67,42 @@ export const useMap = ({
 
   const onErrorGeolocation = useCallback(
     (error: GeolocationPositionError) => {
-      switch (error.code) {
-        case 1:
-          locationErrorEvent?.('PERMISSION_DENIED');
-          break;
-        case 2:
-          locationErrorEvent?.('POSITION_UNAVAILABLE');
-          break;
-        case 3:
-          locationErrorEvent?.('TIMEOUT');
-          break;
-      }
+      const errorCode = {
+        1: 'PERMISSION_DENIED',
+        2: 'POSITION_UNAVAILABLE',
+        3: 'TIMEOUT',
+      }[error.code];
+
+      locationErrorEvent?.(errorCode);
     },
     [locationErrorEvent],
   );
 
+  /**
+   * 위치 권한 상태에 따른 처리
+   */
   const handlePermission = useCallback(
     (result: PermissionStatus, type: string) => {
+      // 권한이 허용됐거나 요청 상태
+
       if (result.state === 'granted' || result.state === 'prompt') {
         navigator.geolocation.getCurrentPosition(
           onSuccessGeolocation,
           onErrorGeolocation,
-          { timeout: 10000 },
+          {
+            timeout: 10000,
+          },
         );
-      } else if (result.state === 'denied') {
-        if (
-          type === 'getMyLocation' ||
-          (type === 'init' && !coord && !isCenterMarkerExist)
-        ) {
+        return;
+      }
+
+      // 권한이 거부된 상태
+      if (result.state === 'denied') {
+        const shouldShowError =
+          type === 'GET_MY_LOCATION' ||
+          (type === 'INIT' && !coord && !isCenterMarkerExist);
+
+        if (shouldShowError) {
           locationErrorEvent?.('PERMISSION_DENIED');
         }
       }
@@ -84,6 +110,9 @@ export const useMap = ({
     [locationErrorEvent, onErrorGeolocation, onSuccessGeolocation],
   );
 
+  /**
+   * 위치 정보 요청
+   */
   const requestGeolocation = useCallback(
     (type: string) => {
       if (navigator.permissions) {
@@ -93,29 +122,38 @@ export const useMap = ({
           .catch((error) => {
             console.error('Error querying geolocation permissions:', error);
           });
-      } else {
-        locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
-        myMarker?.setPosition(defaultCenter);
-        myMarker?.setVisible(!coord && !isCenterMarkerExist);
+        return;
       }
+
+      // 브라우저가 권한 API를 지원하지 않는 경우
+      locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
     },
-    [locationErrorEvent, handlePermission],
+    [locationErrorEvent, handlePermission, myMarker],
   );
 
+  /**
+   * 현재 나의 위치로 이동
+   */
   const moveToCurrentLocation = useCallback(() => {
     if (!map || !myMarker) return;
-    requestGeolocation('getMyLocation');
+    requestGeolocation('GET_MY_LOCATION');
   }, [map, myMarker, requestGeolocation]);
 
+  /**
+   * 지도 초기화 및 좌표 설정
+   */
   useEffect(() => {
     if (!map || !myMarker) return;
 
+    // 좌표가 있는 경우 지도 중심 설정
     if (coord) {
       const position = new navermaps.LatLng(coord.lat, coord.lng);
       map.setCenter(position);
 
+      // 거래 장소 마커만 있는 경우 (읽기 전용)
       if (!isCenterMarkerExist && transactionMarker) {
         transactionMarker.setPosition(position);
+        // InfoWindow 설정
         if (infoWindow && markerInfo) {
           const contentHtml =
             '<div style="display: flex; padding: 6px 10px; justify-content: center; align-items: center; gap: 10px; border-radius:6px; background-color:#131B53; color:#FFF; font-size: 14px;">' +
@@ -133,16 +171,13 @@ export const useMap = ({
       }
     }
 
-    /**
-     * 위치 요청 보내기 전 전처리
-     * 동네 인증 시 내 위치를 못 불러와도 내 마커를 보여줘야 함
-     * 나머지 경우에는 마커를 숨김
-     */
+    // myMarker 기본 설정 (위치 권한이 없어도 동네 인증에서는 디폴트 위치로 표시)
     myMarker.setPosition(defaultCenter);
     myMarker.setVisible(!coord && !isCenterMarkerExist);
 
+    // 위치 요청
     if (!coord || isCenterMarkerExist || markerInfo) {
-      requestGeolocation('init');
+      requestGeolocation('INIT');
     }
   }, [map, myMarker, requestGeolocation]);
 
