@@ -2,6 +2,7 @@ export * from './block';
 export * from './button';
 export * from './category';
 export * from './chat';
+export * from './error';
 export * from './icon';
 export * from './image';
 export * from './map';

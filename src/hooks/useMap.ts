@@ -25,6 +25,7 @@ export const useMap = ({
 
   const onSuccessGeolocation = useCallback(
     (position: GeolocationPosition) => {
+      if (!map || !myMarker) return;
       const location = new navermaps.LatLng(
         position.coords.latitude,
         position.coords.longitude,
@@ -32,26 +33,36 @@ export const useMap = ({
 
       setMyCoord?.(location);
 
-      myMarker?.setVisible(true);
-      myMarker?.setPosition(location);
-      map?.setZoom(DEFAULT_ZOOM_LEVEL);
+      myMarker.setVisible(true);
+      myMarker.setPosition(location);
+      map.setZoom(DEFAULT_ZOOM_LEVEL);
 
       if (coord && isFirstExecution.current) {
         isFirstExecution.current = false;
         return;
       }
 
-      map?.setCenter(location);
+      map.setCenter(location);
     },
     [coord, map, myMarker, setMyCoord],
   );
 
-  const onErrorGeolocation = useCallback(() => {
-    /**
-     * TODO: 권한 요청을 했는데, 그냥 취소 누른 경우 실행되는 부분
-     */
-    locationErrorEvent?.('위치를 불러오는데 실패했어요.');
-  }, [locationErrorEvent]);
+  const onErrorGeolocation = useCallback(
+    (error: GeolocationPositionError) => {
+      switch (error.code) {
+        case 1:
+          locationErrorEvent?.('PERMISSION_DENIED');
+          break;
+        case 2:
+          locationErrorEvent?.('POSITION_UNAVAILABLE');
+          break;
+        case 3:
+          locationErrorEvent?.('TIMEOUT');
+          break;
+      }
+    },
+    [locationErrorEvent],
+  );
 
   const handlePermission = useCallback(
     (result: PermissionStatus, type: string) => {
@@ -59,13 +70,14 @@ export const useMap = ({
         navigator.geolocation.getCurrentPosition(
           onSuccessGeolocation,
           onErrorGeolocation,
+          { timeout: 10000 },
         );
       } else if (result.state === 'denied') {
         if (
           type === 'getMyLocation' ||
           (type === 'init' && !coord && !isCenterMarkerExist)
         ) {
-          locationErrorEvent?.('지금은 위치를 불러올 수 없어요.');
+          locationErrorEvent?.('PERMISSION_DENIED');
         }
       }
     },
@@ -82,12 +94,7 @@ export const useMap = ({
             console.error('Error querying geolocation permissions:', error);
           });
       } else {
-        /**
-         * 만일의 경우를 대비한 처리. 실제로 사용될 일은 드물 것으로 예상됨
-         * TODO: 추후에 개발 후 처분 결정
-         */
-        locationErrorEvent?.('브라우저가 위치 정보를 지원하지 않아요.');
-
+        locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
         myMarker?.setPosition(defaultCenter);
         myMarker?.setVisible(!coord && !isCenterMarkerExist);
       }

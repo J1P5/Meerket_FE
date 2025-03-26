@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { NavermapsProvider } from 'react-naver-maps';
-import { ILocation } from 'types';
+import { ILocation, LocationErrorCode } from 'types';
 import { NeighborhoodAuthTemplate } from '.';
 
 const meta: Meta<typeof NeighborhoodAuthTemplate> = {
@@ -34,7 +34,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onSubmitButtonClick: (location: ILocation) => console.log(location),
-    locationErrorEvent: (message: string) => console.log(message),
+    locationErrorEvent: (errorCode: LocationErrorCode) =>
+      console.log(errorCode),
   },
   render: (args) => <NeighborhoodAuthTemplate {...args} />,
 };

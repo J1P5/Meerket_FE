@@ -1,17 +1,19 @@
 import { Text } from 'components/atoms';
 import { AntennaIcon } from 'components/atoms/Icon';
 import { Modal } from 'components/organisms';
+import { LocationError } from 'constants/errorMessage';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useModalStore } from 'stores';
 import { colors } from 'styles';
+import { LocationErrorCode } from 'types';
 
 export const useLocationErrorEvent = () => {
   const { openModal, closeModal } = useModalStore((state) => state.actions);
   const navigate = useNavigate();
 
   return useCallback(
-    (message: string) => {
+    (errorCode: LocationErrorCode) => {
       openModal(
         <>
           <Modal.Body>
@@ -35,11 +37,10 @@ export const useLocationErrorEvent = () => {
                 }}
               >
                 <Text variant="title_bold" color={colors.gray600}>
-                  {message}
+                  {LocationError[errorCode].title}
                 </Text>
-                {/* // TODO: 에러마다 바뀔 것 같아서, 나중에 prop으로 처리 */}
                 <Text variant="guide_regular" color={colors.gray500}>
-                  위치 권한 허용 후 다시 시도해 주세요!
+                  {LocationError[errorCode].message}
                 </Text>
               </div>
             </div>

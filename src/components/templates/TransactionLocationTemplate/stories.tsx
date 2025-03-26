@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { NavermapsProvider } from 'react-naver-maps';
+import { LocationErrorCode } from 'types';
 import { TransactionLocationTemplate } from '.';
 
 const meta: Meta<typeof TransactionLocationTemplate> = {
@@ -39,7 +40,8 @@ export const Default: Story = {
       lng: 126.9784147,
     },
     location: '보라매공원 CU',
-    locationErrorEvent: (message: string) => console.log(message),
+    locationErrorEvent: (errorCode: LocationErrorCode) =>
+      console.log(errorCode),
   },
 };
 export default meta;
