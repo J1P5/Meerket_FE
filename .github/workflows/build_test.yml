@@ -14,8 +14,11 @@ defaults:
     working-directory: .
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -47,25 +50,17 @@ jobs:
 
       - name: Build
         run: |
-          yarn build 2>&1 | tee build.log
-          echo "BUILD_EXIT_CODE=$?" >> $GITHUB_ENV
+          yarn build
         id: build
 
       - name: Comment PR
-        if: steps.build.outcome != 'success'
+        if: failure()
         uses: actions/github-script@v7
         with:
           script: |
-            const fs = require('fs');
-            const errorMessage = fs.readFileSync('build.log', 'utf8');
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `## ❌ 빌드 테스트 실패\n\n빌드 테스트 중 다음과 같은 에러가 발생했습니다:\n<details>\n<summary>에러 로그 보기</summary>\n\`\`\`\n${errorMessage}\n\`\`\`\n</details>\n\n코드를 확인하고 수정해주세요.`
+              body: `## ❌ 빌드 테스트 실패\n\n빌드 테스트 중 에러가 발생했습니다. 로그를 확인하고 수정해주세요!`
             })
-
-      - name: Fail the job
-        if: steps.build.outcome != 'success'
-        run: exit 1
