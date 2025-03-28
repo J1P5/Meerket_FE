@@ -47,9 +47,11 @@ jobs:
 
       - name: Build
         run: |
-          if ! yarn build 2>&1 | tee build.log; then
+          yarn build 2>&1 | tee build.log
+          BUILD_EXIT_CODE=$?
+          if [ $BUILD_EXIT_CODE -ne 0 ]; then
             echo "빌드에 실패했습니다. PR에 코멘트를 남기고 작업을 실패 처리합니다."
-            exit 1
+            exit $BUILD_EXIT_CODE
           fi
         id: build
 
