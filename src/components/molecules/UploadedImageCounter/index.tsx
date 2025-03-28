@@ -1,25 +1,55 @@
 import { ImageUpload, Text } from 'components/atoms';
 import { CameraIcon } from 'components/atoms/Icon';
 import { colors } from 'styles';
+import { removeDuplicateFiles, validateFileCount } from 'utils';
 import { ImageUploadWrapper, UploadedImageCounterContainer } from './styled';
 
 interface IUploadedImageCounter {
   /** Counter 위쪽 텍스트 */
   text: string;
-  /** 현재 업로드 된 이미지 개수 */
-  currentCount: number;
+  /** 현재 업로드 된 이미지 파일 목록 */
+  files: File[];
   /** file input onChange 이벤트 발생 시 실행 될 함수 */
-  onChange: (file: File) => void;
+  onChange: (files: File[]) => void;
   /** 업로드 받을 수 있는 이미지 개수 */
   totalCount?: number;
+  /** 다중 업로드 가능 여부 */
+  multiple?: boolean;
+  /** 이미지 개수 초과 시 호출될 함수 */
+  onExceed?: (exceededCount: number) => void;
 }
 
 export const UploadedImageCounter = ({
   text,
-  currentCount,
+  files,
   onChange,
   totalCount = 10,
+  onExceed,
 }: IUploadedImageCounter) => {
+  const handleFileChange = (newFiles: File[]) => {
+    const remainingCount = totalCount - files.length;
+
+    // 중복 파일 필터링
+    const uniqueFiles = removeDuplicateFiles(newFiles, files);
+
+    // 중복을 제외한 파일이 없으면 종료
+    if (uniqueFiles.length === 0) {
+      return;
+    }
+
+    // 파일 개수 검증
+    const { files: validFiles, exceededCount } = validateFileCount(
+      uniqueFiles,
+      remainingCount,
+    );
+
+    if (exceededCount) {
+      onExceed?.(exceededCount);
+    }
+
+    onChange(validFiles);
+  };
+
   return (
     <UploadedImageCounterContainer>
       <CameraIcon size="l" />
@@ -36,10 +66,10 @@ export const UploadedImageCounter = ({
         <Text
           variant="guide_regular"
           color={colors.gray400}
-        >{`${currentCount}/${totalCount}`}</Text>
+        >{`${files.length}/${totalCount}`}</Text>
       </div>
       <ImageUploadWrapper>
-        <ImageUpload onFileChange={onChange} />
+        <ImageUpload onFileChange={handleFileChange} multiple />
       </ImageUploadWrapper>
     </UploadedImageCounterContainer>
   );

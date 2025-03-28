@@ -11,18 +11,16 @@ type Story = StoryObj<typeof meta>;
 
 export const defaultState: Story = {
   args: {
-    onFileChange: (fileList) => {
-      // 파일명을 콘솔에 출력
-      console.log('Selected file:', fileList[0].name);
+    onFileChange: (files: File[]) => {
+      console.log('Selected file:', files[0].name);
     },
   },
 };
 
 export const Multiple: Story = {
   args: {
-    onFileChange: (fileList) => {
-      // 파일명을 콘솔에 출력
-      const fileNames = Array.from(fileList).map((file: File) => file.name);
+    onFileChange: (files: File[]) => {
+      const fileNames = files.map((file: File) => file.name);
       console.log('Selected file:', fileNames);
     },
     multiple: true,
