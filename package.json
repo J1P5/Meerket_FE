@@ -13,11 +13,11 @@
   },
   "lint-staged": {
     "app/**/*.{js,jsx,ts,tsx}": [
-      "next lint",
-      "prettier . --check"
+      "prettier --write",
+      "eslint --fix"
     ],
     "app/**/*.{json,css,scss,md}": [
-      "prettier . --check"
+      "prettier --write"
     ]
   },
   "dependencies": {
