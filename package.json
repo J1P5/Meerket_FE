@@ -12,9 +12,12 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "app/**/*.{json,css,scss,md}": [
+    "app/**/*.{js,jsx,ts,tsx}": [
       "next lint",
-      "prettier --write"
+      "prettier . --check"
+    ],
+    "app/**/*.{json,css,scss,md}": [
+      "prettier . --check"
     ]
   },
   "dependencies": {
