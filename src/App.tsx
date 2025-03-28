@@ -12,7 +12,7 @@ const queryClient: QueryClient = new QueryClient();
 
 const App = () => {
   useForegroundNotification();
-  const isopenError = useModalStore((store) => store.isOpen);
+  const isOpen = useModalStore((store) => store.isOpen);
   const content = useModalStore((store) => store.content);
   const { closeModal } = useModalStore((store) => store.actions);
 
