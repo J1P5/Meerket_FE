@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
-import { InputWrapper } from "components/atoms/Input/styled";
-import { InputWithButtonWrapper } from "components/molecules/InputWithButton/styled";
-import { ThemeType } from "styles/theme";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
+import { InputWrapper } from 'components/atoms/Input/styled';
+import { InputWithButtonWrapper } from 'components/molecules/InputWithButton/styled';
 
 export const ChatBubblesWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -19,8 +18,8 @@ export const ChatBubblesWrapper: ReturnType<typeof styled.div> = styled.div`
 export const WriteBoxWrapper: ReturnType<typeof styled.div> = styled.div`
   position: fixed;
   padding: 1rem;
-  background-color: ${({ theme }: { theme: ThemeType }) => theme.colors.white};
-  max-width: ${({ theme }: { theme: ThemeType }) => theme.sizes.max_width};
+  background-color: ${({ theme }) => theme.colors.white};
+  max-width: ${({ theme }) => theme.sizes.max_width};
   width: 100%;
   left: 50%;
   transform: translate(-50%);
@@ -31,27 +30,21 @@ export const WriteBoxWrapper: ReturnType<typeof styled.div> = styled.div`
   ${InputWrapper} {
     flex: 1;
     padding: 0.9375rem;
-    background-color: ${({ theme }: { theme: ThemeType }) =>
-      theme.colors.grey_button_deactivate};
+    background-color: ${({ theme }) => theme.colors.grey100};
     border: none;
     input {
-      background-color: ${({ theme }: { theme: ThemeType }) =>
-        theme.colors.grey_button_deactivate};
-      font-size: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.size};
-      font-weight: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.bold};
-      line-height: ${({ theme }: { theme: ThemeType }) =>
-        theme.fontStyles.explan_bold.height};
+      background-color: ${({ theme }) => theme.colors.grey100};
+      font-size: ${({ theme }) => theme.fonts.guide_bold.size};
+      font-weight: ${({ theme }) => theme.fonts.guide_bold.weight};
+      line-height: ${({ theme }) => theme.fonts.guide_bold.lineHeight};
     }
   }
 
   ${IconButtonWrapper} {
     width: 3rem;
     height: 3rem;
-    border-radius: 10px;
-    background-color: ${({ theme }: { theme: ThemeType }) =>
-      theme.colors.blue_text};
+    border-radius: ${({ theme }) => theme.radius.lg};
+    background-color: ${({ theme }) => theme.colors.primaryDark};
   }
 `;
 
@@ -60,7 +53,4 @@ export const ChatMessagesWrapper: ReturnType<typeof styled.div> = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 5rem; // WriteBoxWrapper 만큼 빼야됨!!
-
-  flex-grow: 1; /* 부모 컨테이너의 나머지 공간을 차지 */
-  overflow-y: auto; /* 내부 스크롤 활성화 */
 `;

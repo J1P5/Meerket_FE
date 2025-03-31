@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch } from "@react-icons/all-files/fi/FiSearch";
 
 /**
  * 검색 아이콘

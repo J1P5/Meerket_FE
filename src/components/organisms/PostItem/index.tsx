@@ -1,5 +1,5 @@
 import { Image, Text, TextButton } from "components/atoms";
-import { formatToDateTime, getRelativeTime } from "utils";
+import { formatToDateTime, getRelativeTime, formatPrice } from "utils";
 import { useRemainingTimer } from "hooks";
 import type { IconType } from "types";
 import {
@@ -41,6 +41,7 @@ const PostItemRoot = ({ children, onClick }: IPostItemRootProps) => {
 export interface IPostItemImageProps {
   imgUrl: string;
   size?: "default" | "mini";
+  loading?: "eager" | "lazy";
 }
 
 /**
@@ -49,8 +50,9 @@ export interface IPostItemImageProps {
  * @param size 이미지 사이즈 (default: default)
  * 	- default: 84px
  * 	- mini: 60px
+ * @param lazyLoading 유무 (eager, lazy)
  */
-const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
+const PostItemImage = ({ imgUrl, size = "default", loading="eager" }: IPostItemImageProps) => {
   return (
     <PostItemImageWrapper size={size}>
       <Image
@@ -58,6 +60,7 @@ const PostItemImage = ({ imgUrl, size = "default" }: IPostItemImageProps) => {
         type="square"
         url={imgUrl}
         alt="PostItem Image"
+        loading={loading}
       />
     </PostItemImageWrapper>
   );
@@ -93,7 +96,7 @@ interface IPostItemTitleProps {
 const PostItemTitle = ({ title }: IPostItemTitleProps) => {
   return (
     <PostItemTitleWrapper>
-      <Text variant="title_bold" content={title} />
+      <Text variant="title_bold">{title}</Text>
     </PostItemTitleWrapper>
   );
 };
@@ -124,9 +127,7 @@ const PostItemLocationAndTime = ({
       : formatToDateTime(uploadTime);
   return (
     <PostItemLocationAndTimeWrapper>
-      <Text variant="tag_regular" content={address} />
-      <Text variant="tag_regular" content="·" />
-      <Text variant="tag_regular" content={time} />
+      <Text variant="tag_regular">{`${address}·${time}`}</Text>
     </PostItemLocationAndTimeWrapper>
   );
 };
@@ -153,8 +154,7 @@ const PostItemPrice = ({
 }: IPostItemPriceProps) => {
   return (
     <PostItemPriceWrapper>
-      {title && <Text variant={variant} content={`${title}`} />}
-      <Text variant={variant} content={`${price.toLocaleString()}원`} />
+      <Text variant={variant}>{`${title || ""}${formatPrice(price)}원`}</Text>
     </PostItemPriceWrapper>
   );
 };
@@ -177,12 +177,7 @@ const PostItemRemainingTime = ({
   const { timeRemaining } = useRemainingTimer(expiredTime);
   return (
     <PostItemRemainingTimeWrapper>
-      <Text variant="tag_regular" content="남은 시간" />
-      <Text variant="tag_regular" content="·" />
-      <Text
-        variant="tag_regular"
-        content={timeRemaining === "over" ? "종료" : timeRemaining}
-      />
+      <Text variant="tag_regular">{`남은 시간·${timeRemaining === "over" ? "종료" : timeRemaining}`}</Text>
     </PostItemRemainingTimeWrapper>
   );
 };

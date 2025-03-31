@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ImageSliderWrapper: ReturnType<typeof styled.div> = styled.div`
   cursor: pointer;
@@ -12,7 +12,7 @@ export const ImageSliderWrapper: ReturnType<typeof styled.div> = styled.div`
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.white};
   }
 
   .swiper-slide img {
@@ -29,9 +29,9 @@ export const ImageSliderWrapper: ReturnType<typeof styled.div> = styled.div`
     right: 1rem;
     width: fit-content;
     padding: 4px 10px;
-    background-color: #0000004c;
+    background-color: ${({ theme }) => `${theme.colors.black}4c`};
     color: white;
-    border-radius: 100px;
+    border-radius: ${({ theme }) => theme.radius.xl};
     font-size: 12px;
   }
 `;

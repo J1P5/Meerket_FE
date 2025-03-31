@@ -1,6 +1,7 @@
 import { TabMenu } from "components/molecules";
 import { TransactionOverviewWrapper } from "./styled";
-import { IPost, PostItemType, PostList } from "../PostList";
+import { PostList } from "../PostList";
+import type { IPost, PostItemType } from "types";
 
 interface ITransactionOverviewProps {
   /** 탭 메뉴 title 리스트 */
@@ -21,8 +22,8 @@ export const TransactionOverview = ({
 }: ITransactionOverviewProps) => {
   return (
     <TransactionOverviewWrapper>
-      <TabMenu menus={menus} onClick={onClick}></TabMenu>
-      <PostList posts={posts} type={type}></PostList>
+      <TabMenu menus={menus} onClick={onClick} />
+      <PostList posts={posts} type={type} />
     </TransactionOverviewWrapper>
   );
 };

@@ -1,8 +1,8 @@
-import { Text } from "components/atoms";
-import type { IconType } from "types/icon";
-import { NavBarItemWrapper } from "./styled";
+import { Text } from 'components/atoms';
+import type { IconType } from 'types/icon';
+import { NavBarItemWrapper } from './styled';
 
-export type NavBarItemType = "default" | "active";
+export type NavBarItemType = 'default' | 'active';
 
 interface INavBarItemProps {
   /** 현재 선택된 아이템인지 아닌지 구분 */
@@ -24,8 +24,8 @@ export const NavBarItem = ({
   const IconComponent = icon;
   return (
     <NavBarItemWrapper state={state} onClick={onClick}>
-      <IconComponent size="m" color={state === "active" ? "color" : ""} />
-      <Text content={title} variant="button" />
+      <IconComponent size="m" color={state === 'active' ? 'color' : ''} />
+      <Text variant="tag_regular">{title}</Text>
     </NavBarItemWrapper>
   );
 };

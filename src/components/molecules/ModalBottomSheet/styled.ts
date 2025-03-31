@@ -9,7 +9,7 @@ export const ModalBottomSheetBackgroundWrapper: ReturnType<typeof styled.div> =
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000080;
+  background-color: ${({ theme }) => `${theme.colors.black}80`};
 `;
 
 export const ModalBottomSheetBodyWrapper: ReturnType<typeof styled.div> =
@@ -22,8 +22,8 @@ export const ModalBottomSheetBodyWrapper: ReturnType<typeof styled.div> =
   left: 50%;
   translate: -50%;
   padding: 1rem;
-  border-radius: 1rem 1rem 0 0;
-  background-color: white;
+  border-radius: 16px 16px 0 0;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const modalBottomSheetConfig = (open: boolean) => css`
@@ -44,7 +44,7 @@ export const ModalBottomSheetWrapper: ReturnType<
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: ${({ theme }) => theme.zIndexes.BottomSheet};
   width: 100%;
   height: 100%;
   ${({ open }) => modalBottomSheetConfig(!!open)}

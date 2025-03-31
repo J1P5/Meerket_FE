@@ -15,7 +15,9 @@ export const LoginTemplate = ({
 }: IComponentProps) => {
   return (
     <LoginTemplateWrapper>
-      <Text variant="h5" content={WELL_COME_PAGE_TEXT} />
+      <Text variant="title_bold">
+        {WELL_COME_PAGE_TEXT}
+      </Text>
       <Logo />
       <LoginButtonWrapper>
         <LoginButton type="naver" onClick={onNaverLoginClick} />

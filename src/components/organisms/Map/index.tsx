@@ -1,16 +1,17 @@
+import DEFAULTMARKER from 'assets/Map/default_marker.svg';
+import MYMARKER from 'assets/Map/my_marker.svg';
+import { IconButton } from 'components/atoms';
+import { MyLocationIcon } from 'components/atoms/Icon';
+import { useMap } from 'hooks';
 import {
-  Container as MapDiv,
-  NaverMap,
-  Marker,
   InfoWindow,
-} from "react-naver-maps";
-import { MyLocationIcon } from "components/atoms/Icon";
-import { IconButton } from "components/atoms";
-import { MapWrapper, CenterMarkerWrapper } from "./styled";
-import { useMap } from "hooks";
-import { IMapProps } from "types";
-import MYMARKER from "assets/Map/my_marker.svg";
-import DEFAULTMARKER from "assets/Map/default_marker.svg";
+  Container as MapDiv,
+  Marker,
+  NaverMap,
+} from 'react-naver-maps';
+import { colors } from 'styles';
+import { IMapProps } from 'types';
+import { CenterMarkerWrapper, MapWrapper } from './styled';
 
 export const Map = ({
   coord,
@@ -39,8 +40,8 @@ export const Map = ({
     <MapWrapper>
       <MapDiv
         style={{
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
         }}
       >
         <NaverMap
@@ -73,7 +74,7 @@ export const Map = ({
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M7 20.0261C7 10.6228 14.6228 3 24.0261 3C33.4293 3 41.0522 10.6228 41.0522 20.0261C41.0522 24.5715 38.4642 29.3974 35.6598 33.3661C32.7962 37.4186 29.4295 40.9564 27.3614 42.9943C25.4996 44.8289 22.5526 44.8289 20.6907 42.9943C18.6226 40.9564 15.2559 37.4186 12.3924 33.3661C9.58801 29.3974 7 24.5715 7 20.0261ZM17.2268 19.4003C17.2268 15.6447 20.2713 12.6003 24.0268 12.6003C27.7823 12.6003 30.8268 15.6447 30.8268 19.4003C30.8268 23.1558 27.7823 26.2003 24.0268 26.2003C20.2713 26.2003 17.2268 23.1558 17.2268 19.4003Z"
-                  fill="#131B53"
+                  fill={colors.primaryDark}
                 />
               </svg>
 

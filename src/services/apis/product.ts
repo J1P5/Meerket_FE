@@ -1,4 +1,3 @@
-import axios from "axios";
 import { http } from "services/api";
 import type {
   IProductDetailResponse,
@@ -28,8 +27,8 @@ export const earlyClose = async (productId: string) => {
  */
 export const registerProduct = async (
   newProduct: IProductPost
-): Promise<void> => {
-  const requestBody = new FormData();
+): Promise<IProductResponse> => {
+  const productFormData = new FormData();
   const jsonRequestData = JSON.stringify({
     title: newProduct.title,
     content: newProduct.content,
@@ -43,42 +42,20 @@ export const registerProduct = async (
   });
 
   const request = new Blob([jsonRequestData], { type: "application/json" });
-  requestBody.append("request", request);
+  productFormData.append("request", request);
   newProduct.images!.forEach((img) => {
-    requestBody.append("images", img);
+    productFormData.append("images", img);
   });
 
-  // HTTP 요청 전송
-  try {
-    const res = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/api/v1/products`,
-      requestBody,
-      {
-        withCredentials: true,
+  return http.post<IProductResponse, typeof productFormData>(
+    "/products",
+    productFormData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data"
       }
-    );
-    console.log("Response:", res.data); // 요청 성공 시 응답 데이터 출력
-    return res.data; // 요청 성공 시 응답 데이터 반환
-  } catch (error) {
-    console.error("Error:", error); // 요청 실패 시 에러 출력
-    throw error; // 에러를 다시 던져서 호출하는 곳에서 처리할 수 있도록 함
-  }
-
-  // TODO: 이걸로 하면 500 에러 뜨는 원인 찾기
-  // try {
-  //   await http.post<IProductsResponse, typeof requestBody>(
-  //     "/products",
-  //     requestBody,
-  //     {
-  //       withCredentials: true,
-  //       headers: {
-  //         "Content-Type": "multipart/form-data"
-  //       }
-  //     }
-  //   );
-  // } catch (error) {
-  //   console.error("Failed to submit new product:", error);
-  // }
+    }
+  );
 };
 
 /**
@@ -88,10 +65,9 @@ export const registerProduct = async (
  * @returns
  */
 export const editProduct = async (
-  productId: number,
+  productId: string,
   updatedProduct: Omit<IProductPost, "images" | "expiredTime">
 ) => {
-  console.log("updatedProduct", updatedProduct);
   return http.patch<IProductResponse, typeof updatedProduct>(
     `/products/${productId}`,
     updatedProduct

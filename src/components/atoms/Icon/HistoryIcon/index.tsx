@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiClock } from "react-icons/fi";
+import { FiClock } from "@react-icons/all-files/fi/FiClock";
 
 /**
  * 히스토리 아이콘 (검색기록)

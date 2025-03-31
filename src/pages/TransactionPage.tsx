@@ -1,4 +1,3 @@
-import { IPost } from "components/organisms/PostList";
 import {
   TransactionBuyTemplate,
   TransactionSellTemplate,
@@ -9,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { useTopBarStore } from "stores";
 import { type TransactionTab, useFetchTransactions } from "hooks";
 import { Loading } from "components/molecules/Loading";
-import type { IAuction, ITransactionProduct } from "types";
+import type { IPost, IAuction, ITransactionProduct } from "types";
 
 interface TransactionPageProps {
   /** 판매내역 구매내역 */
   type: "buy" | "sell";
 }
 
-export const TransactionPage = ({ type }: TransactionPageProps) => {
+const TransactionPage = ({ type }: TransactionPageProps) => {
   const navigate = useNavigate();
   const TransactionTemplate =
     // 현재 페이지 타입에 따라 Template 설정
@@ -139,3 +138,5 @@ export const TransactionPage = ({ type }: TransactionPageProps) => {
     </Suspense>
   );
 };
+
+export default TransactionPage;

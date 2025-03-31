@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiBell } from "react-icons/fi";
+import { FiBell } from "@react-icons/all-files/fi/FiBell";
 
 /**
  * 알림 아이콘

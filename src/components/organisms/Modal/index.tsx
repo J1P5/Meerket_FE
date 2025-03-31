@@ -1,21 +1,21 @@
+import { IconButton, Text, TextButton } from 'components/atoms';
+import type { ITextButtonProps } from 'components/atoms/Button/TextButton';
+import { XIcon } from 'components/atoms/Icon';
 import {
   type Context,
   createContext,
   useContext,
   useEffect,
   useRef,
-} from "react";
-import { IconButton, Text, TextButton } from "components/atoms";
-import { XIcon } from "components/atoms/Icon";
-import type { ITextButtonProps } from "components/atoms/Button/TextButton";
+} from 'react';
 import {
-  ModalBodyWrapper,
-  ModalHeaderWrapper,
-  ModalContainerWrapper,
   ModalBackgroundWrapper,
-  ModalRootWrapper,
+  ModalBodyWrapper,
   ModalButtonContainerWrapper,
-} from "./styled";
+  ModalContainerWrapper,
+  ModalHeaderWrapper,
+  ModalRootWrapper,
+} from './styled';
 
 /* -------------------------------------------------------------------
  * Modal Context
@@ -39,7 +39,7 @@ const ModalContext: Context<IModalContextProps> =
 const useModal = () => {
   const context = useContext(ModalContext);
   if (!context) {
-    throw new Error("Modal Context 내에서만 사용 가능합니다.");
+    throw new Error('Modal Context 내에서만 사용 가능합니다.');
   }
   return context;
 };
@@ -67,7 +67,7 @@ const ModalRoot = ({
   children,
   open,
   onClose,
-  className = "",
+  className = '',
 }: IModalRootProps) => {
   return (
     <ModalRootWrapper open={open} className={className}>
@@ -115,19 +115,19 @@ const ModalContainer = ({ children }: IModalContainerProps) => {
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && open) {
+      if (event.key === 'Escape' && open) {
         // 눌린 Key가 ESC면서 open=true 상태
         onClose!(); // 여기로 넘어왔다는건 확실하게 있다는거니까 타입 단언
       }
     };
     if (open) {
       // open=true가 되면 keydown 이벤트에 handleEscape 넣기
-      document.addEventListener("keydown", handleEscape);
+      document.addEventListener('keydown', handleEscape);
       containerRef.current?.focus();
     }
     return () => {
       // 언마운트 될 때 제거
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, [open, onClose]);
 
@@ -145,6 +145,7 @@ interface IModalHeaderProps {
   hasCloseButton?: boolean;
 }
 
+// TODO: Text variant 필요
 /**
  * Modal의 Header
  * @param title 제목
@@ -154,7 +155,7 @@ const ModalHeader = ({ title, hasCloseButton = true }: IModalHeaderProps) => {
   const { onClose } = useModal();
   return (
     <ModalHeaderWrapper>
-      {title && <Text content={title} variant="body1" />}
+      {title && <Text variant="title_bold">{title}</Text>}
       {hasCloseButton && (
         <IconButton
           icon={XIcon}
@@ -181,7 +182,7 @@ interface IModalBodyProps {
  * @param children
  * @param className 스타일링을 위한 className
  */
-const ModalBody = ({ children, className = "" }: IModalBodyProps) => {
+const ModalBody = ({ children, className = '' }: IModalBodyProps) => {
   return <ModalBodyWrapper className={className}>{children}</ModalBodyWrapper>;
 };
 
@@ -191,13 +192,13 @@ const ModalBody = ({ children, className = "" }: IModalBodyProps) => {
 
 export interface IButton {
   title: string;
-  background?: ITextButtonProps["backgroundColor"];
+  background?: ITextButtonProps['backgroundColor'];
   onClick?: () => void;
 }
 
 export interface IModalButtonContainerProps {
   buttons: IButton[];
-  direction?: "horizontal" | "vertical";
+  direction?: 'horizontal' | 'vertical';
 }
 
 /**
@@ -207,7 +208,7 @@ export interface IModalButtonContainerProps {
  */
 const ModalButtonContainer = ({
   buttons,
-  direction = "horizontal",
+  direction = 'horizontal',
 }: IModalButtonContainerProps) => {
   return (
     <ModalButtonContainerWrapper direction={direction}>

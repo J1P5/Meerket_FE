@@ -2,7 +2,7 @@ import { SearchTemplate } from "components/templates";
 import { useSearchTopBar } from "hooks";
 import { useNavigate } from "react-router-dom";
 
-export const SearchPage = () => {
+const SearchPage = () => {
   const navigate = useNavigate();
   useSearchTopBar();
 
@@ -19,3 +19,5 @@ export const SearchPage = () => {
     ></SearchTemplate>
   );
 };
+
+export default SearchPage;

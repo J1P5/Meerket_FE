@@ -1,4 +1,4 @@
-import { Map } from "components/organisms";
+import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
 import { TransactionLocationTemplateWrapper } from "./styled";
 import { ICoord } from "types";
 

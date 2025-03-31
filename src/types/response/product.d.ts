@@ -11,7 +11,7 @@ export interface IProductDetail {
   };
   productLocation: {
     longitude: number;
-    latitube: number;
+    latitude: number;
     address: string;
     location: string;
   };

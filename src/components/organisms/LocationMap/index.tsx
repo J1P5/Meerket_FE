@@ -1,7 +1,7 @@
 import { Text } from "components/atoms";
 import { LinkIcon } from "components/atoms/Icon";
 import { IconWithText } from "components/molecules";
-import { Map } from "components/organisms";
+import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
 import { LocationMapWrapper, TextContainer, TitleWrapper } from "./styled";
 import { ICoord } from "types";
 
@@ -23,7 +23,7 @@ export const LocationMap = ({
     <LocationMapWrapper onClick={onClick}>
       <TextContainer>
         <TitleWrapper>
-          <Text variant="title_bold" content="거래희망장소" />
+          <Text variant="title_bold">거래희망장소</Text>
         </TitleWrapper>
         <IconWithText>
           <IconWithText.Content

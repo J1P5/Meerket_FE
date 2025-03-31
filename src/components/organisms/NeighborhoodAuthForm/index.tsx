@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { TextButton } from "components/atoms";
 import { NeighborhoodAuthFormWrapper } from "./styled";
-import { Map } from "components/organisms";
+import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
 import { ICoord, ILocation } from "types";
 import { useReverseGeocode } from "hooks";
 import { createPortal } from "react-dom";
@@ -68,13 +68,11 @@ export const NeighborhoodAuthForm = ({
     <NeighborhoodAuthFormWrapper>
       <Map setMyCoord={setMyCoord} locationErrorEvent={locationErrorEvent} />
       {/* <LocationConfirmationContainer>
-        <Text
-          content={
+        <Text>{
             location.address
               ? `현재 위치가 '${location.address}'에 있어요`
               : "현재 위치정보를 가져올 수 없어요. 잠시 후 다시 시도해주세요"
-          }
-        />
+          }</Text>
       </LocationConfirmationContainer> */}
       {location.address && (
         <TextButton

@@ -1,14 +1,14 @@
-import styled from "@emotion/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
 
-import { ImageWrapper } from "components/atoms/Image/styled";
-import { KebabMenuWrapper } from "components/molecules/KebabMenu/styled";
+import { BadgeWrapper } from 'components/atoms/Badge/styled';
+import { IconWrapper } from 'components/atoms/Icon/styled';
+import { ImageWrapper } from 'components/atoms/Image/styled';
 import {
   DescRegularWrapper,
   TitleBoldWrapper,
-} from "components/atoms/Text/styled";
-import { IconWrapper } from "components/atoms/Icon/styled";
-import { BadgeWrapper } from "components/atoms/Badge/styled";
+} from 'components/atoms/Text/styled';
+import { KebabMenuWrapper } from 'components/molecules/KebabMenu/styled';
 
 /**
  * 케밥메뉴
@@ -18,7 +18,7 @@ export const KebabWrapper: ReturnType<typeof styled.div> = styled.div`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    z-index: 99999;
+    z-index: ${({ theme }) => theme.zIndexes.KebabMenu};
   }
 `;
 
@@ -33,38 +33,37 @@ export const CommentHeaderContainer: ReturnType<typeof styled.div> = styled.div`
     width: 50px;
   }
   ${TitleBoldWrapper} {
-    color: ${({ theme }) => theme.colors.grey_text_main};
+    color: ${({ theme }) => theme.colors.grey600};
   }
   ${DescRegularWrapper} {
-    color: ${({ theme }) => theme.colors.grey_text_guide};
+    color: ${({ theme }) => theme.colors.grey500};
   }
   ${IconButtonWrapper} {
-    color: ${({ theme }) => theme.colors.grey_field_guide_but_deactivate};
+    color: ${({ theme }) => theme.colors.grey400};
   }
 `;
 
 /**
  * 댓글 작성자 / 작성 시간
  */
-export const WriterInformationWrapper: ReturnType<
-  typeof styled.div
-> = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
+export const WriterInformationWrapper: ReturnType<typeof styled.div> =
+  styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  `;
 
 export const WriterBadgeWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   align-items: center;
   gap: ${6 / 16}rem;
   ${BadgeWrapper} {
-    font-size: ${({ theme }) => theme.fontStyles.tag_regular.size};
-    line-height: ${({ theme }) => theme.fontStyles.tag_regular.height};
-    font-weight: ${({ theme }) => theme.fontStyles.tag_regular.bold};
-    color: ${({ theme }) => theme.colors.blue_text};
-    background-color: ${({ theme }) => theme.colors.grey_field_deactivate};
-    border-radius: ${4 / 16}rem;
+    font-size: ${({ theme }) => theme.fonts.tag_regular.size};
+    font-weight: ${({ theme }) => theme.fonts.tag_regular.weight};
+    line-height: ${({ theme }) => theme.fonts.tag_regular.lineHeight};
+    color: ${({ theme }) => theme.colors.primaryDark};
+    background-color: ${({ theme }) => theme.colors.grey200};
+    border-radius: ${({ theme }) => theme.radius.sm};
     padding: ${3 / 16}rem ${6 / 16}rem;
   }
 `;
@@ -74,7 +73,7 @@ export const WriterBadgeWrapper: ReturnType<typeof styled.div> = styled.div`
  */
 export const CommentContentWrapper: ReturnType<typeof styled.div> = styled.div`
   white-space: pre-wrap;
-  color: ${({ theme }) => theme.colors.grey_text_main};
+  color: ${({ theme }) => theme.colors.grey600};
 `;
 
 /**
@@ -84,11 +83,11 @@ export const ReplyCommentWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   padding: 1rem 0 1rem 1rem;
   ${IconWrapper} {
-    color: ${({ theme }) => theme.colors.grey_field_guide_but_deactivate};
+    color: ${({ theme }) => theme.colors.grey400};
   }
 
   &:nth-of-type(odd) {
-    background-color: ${({ theme }) => theme.colors.grey_button_deactivate};
+    background-color: ${({ theme }) => theme.colors.grey100};
   }
 `;
 
@@ -119,7 +118,7 @@ export const CommentItemWrapper: ReturnType<typeof styled.div> = styled.div`
   padding-left: 1rem;
   &.deleted,
   &.blocked {
-    color: ${({ theme }) => theme.colors.grey_field_guide_but_deactivate};
+    color: ${({ theme }) => theme.colors.grey400};
   }
 `;
 

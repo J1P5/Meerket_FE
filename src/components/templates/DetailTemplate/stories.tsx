@@ -43,7 +43,7 @@ export const Default: Story = {
     // 거래 희망 장소
     productLocation: {
       longitude: 126.9784147,
-      latitube: 37.5666805,
+      latitude: 37.5666805,
       address: "관악구 신림동",
       location: "보라매공원 CU",
     },

@@ -1,8 +1,9 @@
 import { TextButton } from "components/atoms";
 import { SearchTemplateWrapper } from "./styled";
 import { SearchHistory } from "components/organisms";
+import React from "react";
 
-interface ISearchTemplateprops {
+interface ISearchTemplateProps {
   /** 최근 검색어 리스트 */
   searchTerms: string[];
   /** 카테고리 버튼 클릭 이벤트 */
@@ -15,28 +16,26 @@ interface ISearchTemplateprops {
   onHistoryItemClick: (searchTerm: string) => void;
 }
 
-export const SearchTemplate = ({
+const baseSearchTemplate = ({
   searchTerms,
   onCategoryBtnClick,
   onAllDeleteButtonClick,
   onDeleteButtonClick,
   onHistoryItemClick,
-}: ISearchTemplateprops) => {
+}: ISearchTemplateProps) => {
   const categoryBtnText = "카테고리로 검색하기";
   return (
     <SearchTemplateWrapper>
-      <TextButton
-        text={categoryBtnText}
-        onClick={onCategoryBtnClick}
-      ></TextButton>
-      {searchTerms.length !== 0 && (
+      <TextButton text={categoryBtnText} onClick={onCategoryBtnClick} />
+      {searchTerms.length !== 0 &&
         <SearchHistory
           searchTerms={searchTerms}
           onAllDeleteButtonClick={onAllDeleteButtonClick}
           onDeleteButtonClick={onDeleteButtonClick}
           onHistoryItemClick={onHistoryItemClick}
-        ></SearchHistory>
-      )}
+        />}
     </SearchTemplateWrapper>
   );
 };
+
+export const SearchTemplate = React.memo(baseSearchTemplate);

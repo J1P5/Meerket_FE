@@ -20,30 +20,28 @@ export const Header = ({
   type,
   title,
   onLocationClick,
-  onSearchClick,
-}: //onNotificationClick,
-IHeaderProps) => {
+  onSearchClick, //onNotificationClick,
+}: IHeaderProps) => {
   return (
     <HeaderWrapper>
-      {type === "home" ? (
-        <IconWithText onClick={onLocationClick}>
-          <IconWithText.Content
-            content={title}
-            contentVariant={"writing_bold"}
-          />
-          <IconWithText.Icon icon={DownIcon} />
-        </IconWithText>
-      ) : (
-        <Text variant="title_bold" content={title} />
-      )}
+      {type === "home"
+        ? <IconWithText onClick={onLocationClick}>
+            <IconWithText.Content
+              content={title}
+              contentVariant={"writing_bold"}
+            />
+            <IconWithText.Icon icon={DownIcon} />
+          </IconWithText>
+        : <Text variant="title_bold">
+            {title}
+          </Text>}
       <ButtonsWrapper>
-        {type === "home" && (
+        {type === "home" &&
           <IconButton
             icon={SearchIcon}
             onClick={onSearchClick}
             backgroundColor="transparent"
-          />
-        )}
+          />}
         {/* 알림 쪽 아이콘 일괄 삭제*/}
         {/* <IconButton
           icon={NotificationIcon}

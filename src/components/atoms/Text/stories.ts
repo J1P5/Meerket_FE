@@ -1,117 +1,165 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Text } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Text } from '.';
 
 const meta: Meta<typeof Text> = {
-  title: "Atoms/Text",
+  title: 'Atoms/Text',
   component: Text,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const H1: Story = {
-  args: {
-    variant: "h1",
-    content: "This is an H1",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "H1에 쓰이는 텍스트로 사이즈는 6rem입니다.",
-      },
-    },
-  },
-};
-
-export const H5: Story = {
-  args: {
-    variant: "h5",
-    content: "This is an H5",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "H5에 쓰이는 텍스트로 사이즈는 1.5rem입니다.",
-      },
-    },
-  },
-};
-
-export const Body1: Story = {
-  args: {
-    variant: "body1",
-    content: "This is a body1 text",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "바디에 쓰이는 텍스트로 사이즈는 1rem입니다.",
-      },
-    },
-  },
-};
-
-export const Button: Story = {
-  args: {
-    variant: "button",
-    content: "This is a button text",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "버튼에 쓰이는 텍스트로 사이즈는 0.875rem입니다.",
-      },
-    },
-  },
-};
-
 export const TitleBold: Story = {
   args: {
-    variant: "title_bold",
-    content: "This is a title_bold text",
+    variant: 'title_bold',
+    children: 'This is a title_bold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'title_bold에 쓰이는 텍스트로 사이즈는 1rem입니다.',
+      },
+    },
   },
 };
-export const DescRegular: Story = {
+
+export const TitleSemiBold: Story = {
   args: {
-    variant: "desc_regular",
-    content: "This is a desc_regular text",
+    variant: 'title_semibold',
+    children: 'This is a title_semibold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'title_semibold에 쓰이는 텍스트로 사이즈는 1rem입니다.',
+      },
+    },
+  },
+};
+
+export const TitleRegular: Story = {
+  args: {
+    variant: 'title_regular',
+    children: 'This is a title_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'title_regular에 쓰이는 텍스트로 사이즈는 1rem입니다.',
+      },
+    },
   },
 };
 
 export const DescBold: Story = {
   args: {
-    variant: "desc_bold",
-    content: "This is a desc_bold text",
+    variant: 'desc_bold',
+    children: 'This is a desc_bold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'desc_bold에 쓰이는 텍스트로 사이즈는 0.875rem입니다.',
+      },
+    },
   },
 };
-export const ExplainRegular: Story = {
+
+export const DescRegular: Story = {
   args: {
-    variant: "explan_regular",
-    content: "This is a explan_regular text",
+    variant: 'desc_regular',
+    children: 'This is a desc_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'desc_regular에 쓰이는 텍스트로 사이즈는 0.875rem입니다.',
+      },
+    },
   },
 };
-export const ExplainBold: Story = {
+
+export const GuideBold: Story = {
   args: {
-    variant: "explan_bold",
-    content: "This is a explan_bold text",
+    variant: 'guide_bold',
+    children: 'This is a guide_bold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'guide_bold에 쓰이는 텍스트로 사이즈는 0.8125rem입니다.',
+      },
+    },
   },
 };
+
+export const GuideRegular: Story = {
+  args: {
+    variant: 'guide_regular',
+    children: 'This is a guide_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'guide_regular에 쓰이는 텍스트로 사이즈는 0.8125rem입니다.',
+      },
+    },
+  },
+};
+
 export const TagRegular: Story = {
   args: {
-    variant: "tag_regular",
-    content: "This is a tag_regular text",
+    variant: 'tag_regular',
+    children: 'This is a tag_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'tag_regular에 쓰이는 텍스트로 사이즈는 0.75rem입니다.',
+      },
+    },
   },
 };
+
 export const WritingBold: Story = {
   args: {
-    variant: "writing_bold",
-    content: "This is a writing_bold text",
+    variant: 'writing_bold',
+    children: 'This is a writing_bold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'writing_bold에 쓰이는 텍스트로 사이즈는 1.5rem입니다.',
+      },
+    },
   },
 };
+
 export const ButtonBold: Story = {
   args: {
-    variant: "btn_bold",
-    content: "This is a btn_bold text",
+    variant: 'button_bold',
+    children: 'This is a button_bold text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'button_bold에 쓰이는 텍스트로 사이즈는 1.0625rem입니다.',
+      },
+    },
+  },
+};
+
+export const BadgeRegular: Story = {
+  args: {
+    variant: 'badge_regular',
+    children: 'This is a badge_regular text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'badge_regular에 쓰이는 텍스트로 사이즈는 0.6875rem입니다.',
+      },
+    },
   },
 };

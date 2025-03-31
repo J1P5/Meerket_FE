@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ProfileWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
@@ -23,6 +23,6 @@ export const TextWrapper: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const TextGuideColor: ReturnType<typeof styled.div> = styled.div`
-  color: #707192;
+  color: ${({ theme }) => theme.colors.grey500};
   text-align: center;
 `;

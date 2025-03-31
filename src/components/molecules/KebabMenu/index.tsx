@@ -15,7 +15,7 @@ const Button = (menu: IMenu) => {
     <TextButton
       text={menu.content}
       size="s"
-      variant="explan_bold"
+      variant="guide_bold"
       onClick={menu.onClick}
       backgroundColor="transparent"
     />

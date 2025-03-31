@@ -14,3 +14,5 @@ export { TextDividerList } from "./TextDividerList";
 export { TextWithImage } from "./TextWithImage";
 export { UploadedImageCounter } from "./UploadedImageCounter";
 export { ModalBottomSheet } from "./ModalBottomSheet";
+export { ErrorMessage } from "./ErrorMessage";
+export { Loading } from "./Loading";

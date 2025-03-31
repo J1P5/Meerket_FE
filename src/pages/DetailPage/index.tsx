@@ -19,11 +19,13 @@ import {
 } from "hooks";
 import { KebabWrapper } from "./styled";
 import { deleteProduct, earlyClose, reportUser, blockUser as blockSeller } from "services/apis";
-import type { Category, ReportType } from "types";
-import { Toast } from "components/atoms";
+import type { ReportType } from "types";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { isExpired } from "../../utils";
+import { queries } from "constants/queryKeys";
+import { useQueryClient } from "@tanstack/react-query";
 
-export const DetailPage = () => {
+const DetailPage = () => {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
   const { product, isProductLoading, productRefetch, isProductRefetching } =
@@ -37,7 +39,7 @@ export const DetailPage = () => {
     actions: { setCoord, setLocation, setAddress },
   } = useSelectedLocationStore();
   // TODO
-  const { setFormData, setProductId } = useFormDataStore();
+  const { clear: clearFormData } = useFormDataStore();
   const { open, handleOpen, handleClose, menuRef } = useKebabMenu();
   const { handleCancel } = useBid(parseInt(productId!));
   const { removeNoBuyer, removeHasBuyer, reportPost, reportComplete, blockUser, blockUserComplete } =
@@ -46,6 +48,8 @@ export const DetailPage = () => {
     () => !!product?.expiredTime && isExpired(product?.expiredTime),
     [isProductRefetching]
   );
+  const queryClient = useQueryClient();
+
 
   /**
    * 거래 희망 장소 클릭
@@ -53,7 +57,7 @@ export const DetailPage = () => {
   const handleLocationMapClick = () => {
     if (product) {
       setCoord({
-        lat: product.productLocation.latitube,
+        lat: product.productLocation.latitude,
         lng: product.productLocation.longitude,
       });
       setLocation(product.productLocation.location);
@@ -150,21 +154,7 @@ export const DetailPage = () => {
       return;
     }
     if (!product.hasBuyer) {
-      // 수정 페이지로 이동
-      // TODO 확인 필요
-      setProductId(productId!);
-      setFormData({
-        title: product.title,
-        content: product.content,
-        minimumPrice: product.minimumPrice.toLocaleString(),
-        category: product.category as Category,
-        latitude: product.productLocation.latitube,
-        longitude: product.productLocation.longitude,
-        address: product.productLocation.address,
-        location: product.productLocation.location,
-        imgUrls: product.images.map((img) => ({ url: img, file: null })),
-        expiredTime: product.expiredTime,
-      });
+      clearFormData();
       navigate(`/product?productId=${productId!}`);
       return;
     }
@@ -175,10 +165,18 @@ export const DetailPage = () => {
    */
   const handleDeleteProduct = () => {
     deleteProduct(productId!)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         Toast.show("삭제되었습니다.", 2000);
-        navigate("/", { replace: true });
+        // TODO: finally 실행 안되는 이슈 해결
+        queryClient
+          .invalidateQueries({ queryKey: queries.product.DEFAULT })
+          .then(() => {
+            navigate("/", { replace: true });
+          })
+          .catch(error => {
+            console.error("Failed to invalidateQueries of homePosts: ", error);
+            navigate("/", { replace: true });
+          });
         closeModal();
       })
       .catch(console.error);
@@ -274,3 +272,5 @@ export const DetailPage = () => {
     </Suspense>
   );
 };
+
+export default DetailPage;

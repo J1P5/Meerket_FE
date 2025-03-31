@@ -24,9 +24,10 @@ export const requestOAuthLogin = (provider: OAuthProvider) => {
  * oauth 로그인
  * @param code
  * @param provider
+ * @param fcmToken
  */
-export const oauthLogin = async ({ code, provider }: IAuthData) => {
-  return http.post<IAuthResponse, IAuthData>("/oauth", { code, provider });
+export const oauthLogin = async ({ code, provider, fcmToken }: IAuthData) => {
+  return http.post<IAuthResponse, IAuthData>("/oauth", { code, provider, fcmToken });
 };
 
 /**

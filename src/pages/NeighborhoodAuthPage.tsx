@@ -1,14 +1,14 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Toast } from "components/atoms";
+import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
 import { NeighborhoodAuthTemplate } from "components/templates";
 import { useLocationErrorEvent } from "hooks";
 import { ILocation, IAreaAuthPost } from "types";
 import { registerAreaAuth } from "services/apis/areaAuth";
 import { useUserStore, useTopBarStore } from "stores";
 
-export const NeighborhoodAuthPage = () => {
+const NeighborhoodAuthPage = () => {
   const navigate = useNavigate();
   const { clear, setTitle } = useTopBarStore();
   const { user } = useUserStore();
@@ -54,3 +54,5 @@ export const NeighborhoodAuthPage = () => {
     />
   );
 };
+
+export default NeighborhoodAuthPage;

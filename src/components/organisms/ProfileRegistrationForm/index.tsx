@@ -1,9 +1,11 @@
-import { Controller, useForm } from "react-hook-form";
-import { Image, ImageUpload, Text, TextButton } from "components/atoms";
-import { LabeledInput } from "components/molecules";
-import ProfileUpload from "assets/ProfileRegistrationForm/profile_upload.svg";
-import type { IUser } from "types";
-import { ProfileImageWrapper, ProfileRegistrationFormWrapper } from "./styled";
+import ProfileUpload from 'assets/ProfileRegistrationForm/profile_upload.svg';
+import { Image, ImageUpload, TextButton } from 'components/atoms';
+import { ErrorMessage, LabeledInput } from 'components/molecules';
+import { useCallback } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import type { IUser } from 'types';
+import { convertToWebP } from 'utils';
+import { ProfileImageWrapper, ProfileRegistrationFormWrapper } from './styled';
 
 interface IProfileRegistrationFormProps {
   /** Submit 이벤트 발생 시 실행할 함수 */
@@ -17,19 +19,27 @@ export const ProfileRegistrationForm = ({
   user,
 }: IProfileRegistrationFormProps) => {
   const { control, handleSubmit, setValue } = useForm<IUser>({
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: {
       nickname: user?.nickname,
       profile: user?.profile,
     },
   });
 
-  const getProfileImageURL = (profile: IUser["profile"]) => {
-    if (!profile || typeof profile === "string") {
+  const getProfileImageURL = useCallback((profile: IUser['profile']) => {
+    if (!profile || typeof profile === 'string') {
       return profile;
     }
     return URL.createObjectURL(profile);
-  };
+  }, []);
+
+  const onChange = useCallback(
+    async (file: File) => {
+      const resizedFile = await convertToWebP(file, 360);
+      setValue('profile', resizedFile);
+    },
+    [setValue],
+  );
 
   return (
     <ProfileRegistrationFormWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -42,8 +52,9 @@ export const ProfileRegistrationForm = ({
               type="round"
               url={getProfileImageURL(value) || ProfileUpload}
               alt="유저 프로필 사진"
+              fetchpriority="high"
             />
-            <ImageUpload onFileChange={(file) => setValue("profile", file)} />
+            <ImageUpload onFileChange={onChange} />
           </ProfileImageWrapper>
         )}
       />
@@ -51,10 +62,10 @@ export const ProfileRegistrationForm = ({
         name="nickname"
         control={control}
         rules={{
-          required: "닉네임은 필수 입력 항목입니다.",
+          required: '닉네임은 필수 입력 항목입니다.',
           maxLength: {
             value: 14,
-            message: "닉네임은 15자리 미만으로 입력해주세요.",
+            message: '닉네임은 15자리 미만으로 입력해주세요.',
           },
         }}
         render={({ field: { value }, fieldState: { invalid }, formState }) => (
@@ -62,16 +73,15 @@ export const ProfileRegistrationForm = ({
             <LabeledInput
               id="profile-nickname"
               label="닉네임"
-              value={value || ""}
+              value={value || ''}
               setValue={(value) => {
-                setValue("nickname", value);
+                setValue('nickname', value);
               }}
               placeholder="닉네임을 입력해주세요."
             />
             {invalid && (
-              <Text
-                variant="button"
-                content={formState.errors.nickname?.message || ""}
+              <ErrorMessage
+                message={formState.errors.nickname?.message || ''}
               />
             )}
           </>
@@ -79,7 +89,7 @@ export const ProfileRegistrationForm = ({
       />
       <TextButton
         size="l"
-        text={`${!user?.nickname ? "등록" : "수정"} 완료`}
+        text={`${!user?.nickname ? '등록' : '수정'} 완료`}
         onClick={() => handleSubmit(onSubmit)}
       />
     </ProfileRegistrationFormWrapper>

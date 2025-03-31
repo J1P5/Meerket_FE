@@ -1,6 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiChevronDown } from "react-icons/fi";
-
+import { FiChevronDown } from "@react-icons/all-files/fi/FiChevronDown";
 /**
  * Down 아이콘
  */

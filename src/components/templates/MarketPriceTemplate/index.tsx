@@ -1,14 +1,19 @@
 import { MarketPriceTemplateWrapper } from "./styled";
-import { IPost, PostList } from "components/organisms/PostList";
+import { PostList } from "components/organisms";
+import { IPost } from "types";
 import { EmptyTemplate } from "../EmptyTemplate";
 import { useHeaderStore } from "stores";
 import { useEffect } from "react";
 
 interface IMarketPriceTemplateProps {
   posts: IPost[];
+  children?: React.ReactNode;
 }
 
-export const MarketPriceTemplate = ({ posts }: IMarketPriceTemplateProps) => {
+export const MarketPriceTemplate = ({
+  posts,
+  children,
+}: IMarketPriceTemplateProps) => {
   const { setTitle } = useHeaderStore();
 
   useEffect(() => {
@@ -24,6 +29,7 @@ export const MarketPriceTemplate = ({ posts }: IMarketPriceTemplateProps) => {
           <PostList posts={posts} type={"default"}></PostList>
         )}
       </div>
+      {children}
     </MarketPriceTemplateWrapper>
   );
 };

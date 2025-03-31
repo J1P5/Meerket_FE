@@ -47,18 +47,18 @@ export const MyPageTemplate = ({
           <TextButton
             text="프로필 편집"
             onClick={onProfileEditButtonClick}
-            variant="explan_regular"
+            variant="guide_regular"
           />
         </ProfileContainer>
       </BackGroundWrapper>
       <MyPageMenu onMenuClick={onMenuClick} />
       <LogoutWithDrawWrapper>
-        <Text variant="explan_regular" content="로그아웃" onClick={onLogout} />
-        <Text
-          variant="explan_regular"
-          content="회원탈퇴"
-          onClick={onServiceExit}
-        />
+        <Text variant="guide_regular" onClick={onLogout}>
+          로그아웃
+        </Text>
+        <Text variant="guide_regular" onClick={onServiceExit}>
+          회원탈퇴
+        </Text>
       </LogoutWithDrawWrapper>
     </MyPageTemplateWrapper>
   );

@@ -14,11 +14,8 @@ export interface ICategoryGridWrapperProps {
 
 export const CategoryGrid = ({
   categories,
-  onClick,
+  onClick: handleClick,
 }: ICategoryGridWrapperProps) => {
-  const handleClick = (name: string) => {
-    onClick(name);
-  };
   return (
     <CategoryGridWrapper>
       {categories.map((category, idx) => {
@@ -30,7 +27,7 @@ export const CategoryGrid = ({
               onClick={() => {
                 handleClick(category.serverType);
               }}
-            ></RoundImageWithText>
+            />
           </CategoryItemWrapper>
         );
       })}

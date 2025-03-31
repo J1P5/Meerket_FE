@@ -8,4 +8,6 @@ export * from "./activityAreas";
 export * from "./auction";
 export * from "./areaAuth";
 export * from "./transaction";
-export * from "./block"
+export * from "./block";
+export * from "./post";
+export * from "./chat";

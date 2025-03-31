@@ -1,6 +1,7 @@
-import { Input, Text, TextButton } from "components/atoms";
-import type { IModalBottomSheetProps } from "components/molecules/ModalBottomSheet";
-import { LocationInputBottomSheetWrapper } from "./styled";
+import { Input, Text, TextButton } from 'components/atoms';
+import { ErrorMessage } from 'components/molecules/ErrorMessage';
+import type { IModalBottomSheetProps } from 'components/molecules/ModalBottomSheet';
+import { LocationInputBottomSheetWrapper } from './styled';
 
 interface ILocationInputBottomSheetProps extends IModalBottomSheetProps {
   /** 장소 텍스트 */
@@ -19,32 +20,25 @@ export const LocationInputBottomSheet = ({
   place,
   setPlace,
   onRegistrationButtonClick,
-  isError
+  isError,
 }: ILocationInputBottomSheetProps) => {
   return (
     <LocationInputBottomSheetWrapper open={open} onClose={onClose}>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          width: "100%"
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          width: '100%',
         }}
       >
-        <Text
-          variant="title_bold"
-          content="선택한 곳의 장소명을 입력해주세요"
-        />
+        <Text variant="title_bold">선택한 곳의 장소명을 입력해주세요</Text>
         <Input
           value={place}
           setValue={setPlace}
           placeholder="예) 미금역 8번 출구 앞, 역전우동 앞"
         />
-        {isError && (
-          <div style={{ color: "#FF2E4D" }}>
-            <Text variant="explan_regular" content="장소를 입력해주세요!" />
-          </div>
-        )}
+        {isError && <ErrorMessage message="장소를 입력해주세요!" />}
       </div>
 
       <TextButton text="거래 장소 등록" onClick={onRegistrationButtonClick} />

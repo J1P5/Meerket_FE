@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { Body1Wrapper } from "components/atoms/Text/styled";
+import { DescRegularWrapper } from "components/atoms/Text/styled";
 import { IconWithTextWrapper } from "components/molecules/IconWithText/styled";
 
 export const CategoryWrapper: ReturnType<typeof styled.div> = styled.div`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.colors.blue_main};
+  color: ${({ theme }) => theme.colors.primary};
   ${IconWithTextWrapper} {
     cursor: default;
   }
@@ -17,7 +17,7 @@ export const ItemDetailsHeader: ReturnType<typeof styled.div> = styled.div`
 `;
 
 export const DescriptionWrapper: ReturnType<typeof styled.div> = styled.div`
-  ${Body1Wrapper} {
+  ${DescRegularWrapper} {
     white-space: break-spaces;
   }
 `;

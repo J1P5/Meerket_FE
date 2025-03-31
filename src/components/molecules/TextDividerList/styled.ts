@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const TextDividerTextWrapper: ReturnType<typeof styled.div> = styled.div`
   padding: 0.5rem;
   &:hover {
-    background-color: #eeeeee;
+    background-color: ${({ theme }) => theme.colors.grey200};
   }
 `;
 

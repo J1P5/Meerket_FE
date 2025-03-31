@@ -1,40 +1,33 @@
-import type { HTMLAttributes } from "react";
+import type { HTMLAttributes } from 'react';
 import {
-  H1Wrapper,
-  H5Wrapper,
-  Body1Wrapper,
-  ButtonWrapper,
-  TitleBoldWrapper,
-  TitleSemiBoldWrapper,
-  DescRegularWrapper,
-  DescBoldWrapper,
-  ExplainRegularWrapper,
-  ExplainBoldWrapper,
-  TagRegularWrapper,
-  WritingBoldWrapper,
-  ButtonBoldWrapper,
   BadgeRegularWrapper,
-} from "./styled";
+  ButtonBoldWrapper,
+  DescBoldWrapper,
+  DescRegularWrapper,
+  GuideBoldWrapper,
+  GuideRegularWrapper,
+  TagRegularWrapper,
+  TitleBoldWrapper,
+  TitleRegularWrapper,
+  TitleSemiBoldWrapper,
+  WritingBoldWrapper,
+} from './styled';
 
 export type TextVariant =
-  | "h1"
-  | "h5"
-  | "body1"
-  | "button"
-  | "title_bold"
-  | "title_semibold"
-  | "desc_regular"
-  | "desc_bold"
-  | "explan_regular"
-  | "explan_bold"
-  | "tag_regular"
-  | "writing_bold"
-  | "btn_bold"
-  | "badge_regular";
+  | 'title_bold'
+  | 'title_semibold'
+  | 'title_regular'
+  | 'desc_bold'
+  | 'desc_regular'
+  | 'guide_bold'
+  | 'guide_regular'
+  | 'tag_regular'
+  | 'writing_bold'
+  | 'button_bold'
+  | 'badge_regular';
 
 interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
-  /** Text에 들어가는 내용 */
-  content: string;
+  children: React.ReactNode;
   /** Text의 타입 (스타일 가이드 준수) */
   variant?: TextVariant;
   /** Text의 색깔 */
@@ -42,36 +35,33 @@ interface ITextProps extends HTMLAttributes<HTMLParagraphElement> {
 }
 
 const variantMap: {
-  [key in NonNullable<ITextProps["variant"]>]: React.ComponentType<
+  [key in NonNullable<ITextProps['variant']>]: React.ComponentType<
     HTMLAttributes<HTMLParagraphElement>
   >;
 } = {
-  h1: H1Wrapper,
-  h5: H5Wrapper,
-  body1: Body1Wrapper,
-  button: ButtonWrapper,
   title_bold: TitleBoldWrapper,
   title_semibold: TitleSemiBoldWrapper,
-  desc_regular: DescRegularWrapper,
+  title_regular: TitleRegularWrapper,
   desc_bold: DescBoldWrapper,
-  explan_regular: ExplainRegularWrapper,
-  explan_bold: ExplainBoldWrapper,
+  desc_regular: DescRegularWrapper,
+  guide_bold: GuideBoldWrapper,
+  guide_regular: GuideRegularWrapper,
   tag_regular: TagRegularWrapper,
   writing_bold: WritingBoldWrapper,
-  btn_bold: ButtonBoldWrapper,
+  button_bold: ButtonBoldWrapper,
   badge_regular: BadgeRegularWrapper,
 };
 
 export const Text = ({
-  content,
-  variant = "body1",
+  children,
+  variant = 'title_bold',
   onClick = () => {},
   color,
 }: ITextProps) => {
   const Component = variantMap[variant];
   return (
     <Component onClick={onClick} color={color}>
-      {content}
+      {children}
     </Component>
   );
 };

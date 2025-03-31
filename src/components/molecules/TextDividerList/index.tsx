@@ -12,14 +12,16 @@ interface ITextDividerListProps {
 export const TextDividerList = ({ items, onClick }: ITextDividerListProps) => {
   return (
     <TextDividerListWrapper>
-      {items.map((item, idx) => (
+      {items.map((item, idx) =>
         <Fragment key={`${idx}_${item}`}>
           <TextDividerTextWrapper>
-            <Text content={item} onClick={() => onClick(item)} />
+            <Text onClick={() => onClick(item)}>
+              {item}
+            </Text>
           </TextDividerTextWrapper>
           <Divider />
         </Fragment>
-      ))}
+      )}
     </TextDividerListWrapper>
   );
 };

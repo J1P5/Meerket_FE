@@ -3,7 +3,7 @@ import { TERMS_OF_SERVICE_TITLE } from "constants/TermsOfServicePageConstants";
 import { useEffect } from "react";
 import { useTopBarStore } from "stores";
 
-export const TermsOfServicePage = () => {
+const TermsOfServicePage = () => {
   const { clear, setTitle } = useTopBarStore();
   useEffect(() => {
     clear();
@@ -13,3 +13,5 @@ export const TermsOfServicePage = () => {
 
   return <TermsOfServiceTemplate />;
 };
+
+export default TermsOfServicePage;

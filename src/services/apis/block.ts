@@ -1,16 +1,20 @@
 
 import { http } from "services/api";
 import type {
+    IBlockResponse,
     IBlockUser,
-    IUnblockUser,
     IGetBlockedUsersResponse,
-    IBlockResponse
+    IUnblockUser
 } from "types";
 
 
-export const getBlockedUsers = async ({page, size}: {page: number, size: number}) => {
-    return http.get<IGetBlockedUsersResponse, {page: number, size:number}>("/blocks",{
-        page: page, size: size
+export const getBlockedUsers = async ({
+    pageParam,
+  }: {
+    pageParam: number | undefined;
+  }) => {
+    return http.get<IGetBlockedUsersResponse, { cursor: number | undefined; size: number }>("/blocks",{
+        cursor: pageParam, size: 10
       });
 };
   

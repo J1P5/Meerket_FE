@@ -1,18 +1,17 @@
 import Resizer from "react-image-file-resizer";
 
-export const convertToWebP = (file: File) =>
-  new Promise<File>((resolve) => {
+export const convertToWebP = (file: File, size = 500) =>
+  new Promise<File>(resolve => {
     Resizer.imageFileResizer(
       file,
-      500,
-      500,
+      size,
+      size,
       "WEBP",
       90,
       0,
-      (uri) => {
+      uri => {
         resolve(uri as File);
       },
       "file"
     );
   });
-

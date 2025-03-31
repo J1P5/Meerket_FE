@@ -14,18 +14,18 @@ export const AuctionBidBottomSheetWrapper: StyledComponent<
   flex-direction: column;
   gap: 0.5rem;
   ${TitleBoldWrapper} {
-    color: ${({ theme }) => theme.colors.blue_main};
+    color: ${({ theme }) => theme.colors.primary};
   }
   ${DescRegularWrapper} {
-    color: ${({ theme }) => theme.colors.grey_text_guide};
+    color: ${({ theme }) => theme.colors.grey500};
   }
   ${TextButtonWrapper} {
     margin: 0;
-    background-color: ${({ theme }) => theme.colors.blue_text};
+    background-color: ${({ theme }) => theme.colors.primaryDark};
     &:disabled {
       cursor: default;
       background-color: ${({ theme }) =>
-        theme.colors.grey_field_guide_but_deactivate};
+        theme.colors.grey400};
     }
   }
 `;

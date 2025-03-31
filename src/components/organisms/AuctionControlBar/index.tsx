@@ -5,6 +5,7 @@ import {
   BidContainerWrapper,
   ButtonContainerWrapper,
 } from "./styled";
+import { formatPrice } from "utils";
 
 /* -------------------------------------------------------------------
  * AuctionControlBar Root
@@ -16,7 +17,9 @@ interface IAuctionControlBarRootProps {
 
 const AuctionControlBarRoot = ({ children }: IAuctionControlBarRootProps) => {
   return (
-    <AuctionControlBarRootWrapper>{children}</AuctionControlBarRootWrapper>
+    <AuctionControlBarRootWrapper>
+      {children}
+    </AuctionControlBarRootWrapper>
   );
 };
 
@@ -33,8 +36,12 @@ export interface IBidProps {
 const Bid = ({ title, price }: IBidProps) => {
   return (
     <BidWrapper>
-      <Text variant="desc_regular" content={title} />
-      <Text variant="writing_bold" content={`${price.toLocaleString()}원`} />
+      <Text variant="desc_regular">
+        {title}
+      </Text>
+      <Text variant="writing_bold">
+        {`${formatPrice(price)}원`}
+      </Text>
     </BidWrapper>
   );
 };
@@ -49,7 +56,11 @@ export interface IBidsProps {
 }
 
 const BidContainer = ({ children }: IBidsProps) => {
-  return <BidContainerWrapper>{children}</BidContainerWrapper>;
+  return (
+    <BidContainerWrapper>
+      {children}
+    </BidContainerWrapper>
+  );
 };
 
 /* -------------------------------------------------------------------
@@ -63,7 +74,11 @@ export interface IAuctionControlBarButtonContainerProps {
 const ButtonContainer = ({
   children,
 }: IAuctionControlBarButtonContainerProps) => {
-  return <ButtonContainerWrapper>{children}</ButtonContainerWrapper>;
+  return (
+    <ButtonContainerWrapper>
+      {children}
+    </ButtonContainerWrapper>
+  );
 };
 
 /* -------------------------------------------------------------------

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TransactionOverview } from ".";
-import { IPost, PostItemType } from "../PostList";
+import type { IPost, PostItemType } from "types";
 import { DEFAULT_IMG_PATH } from "constants/imgPath";
 
 const meta: Meta<typeof TransactionOverview> = {

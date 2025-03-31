@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiMapPin } from "react-icons/fi";
+import { FiMapPin } from "@react-icons/all-files/fi/FiMapPin";
 
 /**
  * 장소(Map pin) 아이콘

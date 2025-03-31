@@ -14,7 +14,7 @@ export const useModalForm = () => {
     openModal(
       <>
         <Modal.Body>
-          <Text content={message} />
+          <Text>{message}</Text>
         </Modal.Body>
         <Modal.ButtonContainer
           buttons={[
@@ -33,7 +33,7 @@ export const useModalForm = () => {
     openModal(
       <>
         <Modal.Body>
-          <Text content={message} />
+          <Text>{message}</Text>
         </Modal.Body>
         <Modal.ButtonContainer
           buttons={[
@@ -58,8 +58,8 @@ export const useModalForm = () => {
     openModal(
       <>
         <Modal.Body>
-          <Text variant="writing_bold" content={modalMessage.todo.title} />
-          <Text variant="desc_regular" content={modalMessage.todo.desc} />
+          <Text variant="writing_bold">{modalMessage.todo.title}</Text>
+          <Text variant="desc_regular">{modalMessage.todo.desc}</Text>
         </Modal.Body>
         <Modal.ButtonContainer
           buttons={[

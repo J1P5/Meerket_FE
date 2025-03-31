@@ -40,7 +40,7 @@ interface IBaseDetailTemplateProps
   /** 거래 희망 장소 */
   productLocation: {
     longitude: number;
-    latitube: number;
+    latitude: number;
     address: string;
     location: string;
   };
@@ -76,7 +76,7 @@ export const DetailTemplate = ({
   // 판매자 정보
   seller: { name, image },
   // 거래 희망 장소
-  productLocation: { longitude, latitube, address, location },
+  productLocation: { longitude, latitude, address, location },
   onLocationClick,
   // 댓글
   comments,
@@ -129,7 +129,7 @@ export const DetailTemplate = ({
       {/* TODO 프로필 사진 없는 경우 Logo 사진 */}
       <Profile imgUrl={image || LOGO_PATH} nickname={name} location={address} />
       <LocationMap
-        coord={{ lat: latitube, lng: longitude }}
+        coord={{ lat: latitude, lng: longitude }}
         location={location}
         onClick={onLocationClick}
       />
@@ -183,7 +183,7 @@ export const DetailTemplate = ({
             {isSeller && maximumPrice && (
               <AuctionControlBar.Button
                 backgroundColor="red"
-                variant="btn_bold"
+                variant="button_bold"
                 text={
                   isEarly ? "경매 조기종료가 진행중입니다." : buttonNames.early
                 }

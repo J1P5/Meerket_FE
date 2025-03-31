@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { IconButtonWrapper } from "components/atoms/Button/IconButton/styled";
-import { Body1Wrapper } from "components/atoms/Text/styled";
+import styled from '@emotion/styled';
+import { IconButtonWrapper } from 'components/atoms/Button/IconButton/styled';
+import { TitleRegularWrapper } from 'components/atoms/Text/styled';
 
 export const PostImageItemWrapper: ReturnType<typeof styled.div> = styled.div`
   position: relative;
@@ -10,11 +10,11 @@ export const PostImageItemWrapper: ReturnType<typeof styled.div> = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    color: #2d2d39;
+    color: ${({ theme }) => theme.colors.grey600};
   }
 
-  ${Body1Wrapper} {
-    background-color: var(--grey-button-deactivate, #2d2d3960);
+  ${TitleRegularWrapper} {
+    background-color: ${({ theme }) => `${theme.colors.grey600}60`};
     width: 100%;
     height: 25%;
     position: absolute;
@@ -28,7 +28,7 @@ export const PostImageItemWrapper: ReturnType<typeof styled.div> = styled.div`
     align-items: center;
 
     // TODO: text에 variant를 주니까 레이아웃이 틀어지는 버그 수정
-    color: var(--grey-text-guide, #f4f6f9);
+    color: ${({ theme }) => theme.colors.grey100};
 
     /* 가이드/regular */
     font-size: 13px;

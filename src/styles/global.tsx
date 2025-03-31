@@ -1,46 +1,65 @@
-import { css, Global } from "@emotion/react";
+import { css, Global } from '@emotion/react';
 
 export const GlobalStyle = () => {
   return (
     <Global
       styles={() => css`
         // Font
-
         @font-face {
-          font-family: "Pretendard";
-          src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-            format("woff");
+          font-family: 'Pretendard';
           font-weight: 400;
           font-style: normal;
+          font-display: swap;
+          src:
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.woff2')
+              format('woff2'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.woff')
+              format('woff'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.otf')
+              format('opentype');
         }
-
         @font-face {
-          font-family: "Pretendard";
-          src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff")
-            format("woff");
+          font-family: 'Pretendard';
           font-weight: 600;
           font-style: normal;
+          font-display: swap;
+          src:
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.woff2')
+              format('woff2'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.woff')
+              format('woff'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.otf')
+              format('opentype');
         }
-
         @font-face {
-          font-family: "Pretendard";
-          src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-            format("woff");
+          font-family: 'Pretendard';
           font-weight: 700;
           font-style: normal;
+          font-display: swap;
+          src:
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.woff2')
+              format('woff2'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.woff')
+              format('woff'),
+            url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.otf')
+              format('opentype');
         }
-
         // RootContainer
         body {
           background-color: #212121; // 임시
-          font-family: "Pretendard", sans-serif;
+          font-family: 'Pretendard', sans-serif;
+
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
         }
         #root {
           display: flex;
           justify-content: center;
         }
         button {
-          font-family: "Pretendard", sans-serif;
+          font-family: 'Pretendard', sans-serif;
         }
       `}
     />

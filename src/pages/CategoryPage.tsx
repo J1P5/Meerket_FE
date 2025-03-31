@@ -5,14 +5,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTopBarStore } from "stores";
 
-export const CategoryPage = () => {
+const CategoryPage = () => {
   const { clear, setTitle } = useTopBarStore();
 
   const navigate = useNavigate();
 
-  const categories: ICategory[] = CATEGORIES.map((category) => ({
+  const categories: ICategory[] = CATEGORIES.map(category => ({
     title: category.name,
-    imgUrl: `/categorys/${category.code}.png`,
+    imgUrl: category.imgUrl,
     serverType: category.code,
   }));
 
@@ -24,9 +24,8 @@ export const CategoryPage = () => {
     navigate(`/search/category/${category}`);
   };
   return (
-    <CategoryTemplate
-      categories={categories}
-      onClick={handleCategoryButton}
-    ></CategoryTemplate>
+    <CategoryTemplate categories={categories} onClick={handleCategoryButton} />
   );
 };
+
+export default CategoryPage;

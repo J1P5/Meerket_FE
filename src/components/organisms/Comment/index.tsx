@@ -23,7 +23,7 @@ export const Comment = ({ comments, hasBuyer }: ICommentProps) => {
 
   return (
     <CommentWrapper>
-      <Text variant="title_bold" content="문의사항" />
+      <Text variant="title_bold">문의사항</Text>
       <CommentWriteBoxWrapper>
         <InputWithButton
           value={comment}
@@ -31,7 +31,7 @@ export const Comment = ({ comments, hasBuyer }: ICommentProps) => {
           placeholder="댓글을 입력해주세요."
           buttonText="작성"
           onButtonClick={() => handleWriteButtonClick(null)}
-          variant="explan_bold"
+          variant="guide_bold"
         />
       </CommentWriteBoxWrapper>
       <CommentListWrapper>

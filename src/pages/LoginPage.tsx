@@ -1,8 +1,11 @@
 import { LoginTemplate } from "components/templates";
 import { Outlet } from "react-router-dom";
 import { requestOAuthLogin } from "services/apis";
+import { useNotification } from "hooks";
 
-export const LoginPage = () => {
+const LoginPage = () => {
+  const { getFcmToken } = useNotification();
+
   /**
    * 카카오 로그인 버튼 클릭 이벤트 핸들러
    */
@@ -21,6 +24,10 @@ export const LoginPage = () => {
     return <Outlet />;
   }
 
+  getFcmToken().catch(()=>{
+    console.error("토큰 발급 실패")
+  })
+
   return (
     <>
       <LoginTemplate
@@ -31,3 +38,5 @@ export const LoginPage = () => {
     </>
   );
 };
+
+export default LoginPage;

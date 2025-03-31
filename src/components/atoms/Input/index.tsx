@@ -4,7 +4,7 @@ import {
   useCallback,
   useState
 } from "react";
-
+import { formatPrice } from "utils";
 import { InputWrapper } from "./styled";
 
 interface IInputProps {
@@ -24,6 +24,8 @@ interface IInputProps {
   onClick?: () => void;
   /** Input Enter 눌렀을때 수행할 액션 */
   onKeyDown?: () => void;
+  /** aria-label */
+  ariaLabel?: string;
 }
 
 /**
@@ -37,7 +39,8 @@ export const Input = ({
   placeholder,
   setValue,
   onClick,
-  onKeyDown
+  onKeyDown,
+  ariaLabel
 }: IInputProps) => {
   const [focus, setFocus] = useState(false);
 
@@ -58,7 +61,7 @@ export const Input = ({
 
         if (numCheck) {
           const numValue = value.split(",").join("");
-          value = Number(numValue).toLocaleString();
+          value = formatPrice(Number(numValue));
         }
         setValue(value);
       } else {
@@ -97,6 +100,7 @@ export const Input = ({
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={handleKeyPress}
+        aria-label={ariaLabel}
       />
     </InputWrapper>
   );

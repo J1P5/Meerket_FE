@@ -111,7 +111,7 @@ export const CommonModal: Story = {
             <Modal.Container>
               <Modal.Header title={args?.title} />
               <Modal.Body>
-                <Text content={args?.bodyText} />
+                <Text >{args?.bodyText}</Text>
               </Modal.Body>
             </Modal.Container>
           </Modal>
@@ -145,7 +145,7 @@ export const AlertModal: Story = {
             <Modal.Background />
             <Modal.Container>
               <Modal.Body>
-                <Text content={args?.bodyText} />
+                <Text >{args?.bodyText}</Text>
               </Modal.Body>
               <Modal.ButtonContainer
                 buttons={[
@@ -190,7 +190,7 @@ export const ConfirmModal: Story = {
             <Modal.Background />
             <Modal.Container>
               <Modal.Body>
-                <Text content={args?.bodyText} />
+                <Text >{args?.bodyText}</Text>
               </Modal.Body>
               <Modal.ButtonContainer
                 buttons={[
@@ -301,7 +301,7 @@ export const CustomModal: Story = {
             <Modal.Background hasClickEvent={true} />
             <Modal.Container>
               <Modal.Body>
-                <Text content={args?.bodyText} />
+                <Text >{args?.bodyText}</Text>
               </Modal.Body>
               <Modal.ButtonContainer buttons={buttons} direction="vertical" />
             </Modal.Container>

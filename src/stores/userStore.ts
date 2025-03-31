@@ -11,20 +11,19 @@ interface UserState {
   setUser: (user: IUser | null) => void;
 }
 
-// TODO: 프로필 이미지가 없을 시 Logo를 넣은 부분 테스트 필요
 export const useUserStore: UseBoundStore<StoreApi<UserState>> = create(
   persist<UserState>(
     (set) => ({
       user: null,
       setUser: (user) => {
-        if (user && !user.profile) {
-          user.profile = LOGO_PATH;
-        }
         set(
           produce((state: UserState) => {
             if (state.user) {
               Object.assign(state.user, user);
             } else {
+              if (user && !user.profile) {
+                user.profile = LOGO_PATH;
+              }
               state.user = user;
             }
           })

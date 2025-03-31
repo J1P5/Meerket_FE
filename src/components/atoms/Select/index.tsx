@@ -1,7 +1,12 @@
-import ReactSelect from "react-select";
+import React, { Suspense } from "react";
+//import ReactSelect from "react-select";
 import { SelectWrapper } from "./styled";
 import type { ISelectOption } from "types";
 
+// eslint-disable-next-line @rushstack/typedef-var
+const ReactSelect = React.lazy(() =>
+  import("react-select").then((module) => ({ default: module.default }))
+);
 interface ISelectProps {
   /** Select의 id */
   id?: string;
@@ -23,21 +28,25 @@ export const Select = ({
   value,
   onChange,
   options,
-  placeholder = "선택해주세요"
+  placeholder = "선택해주세요",
 }: ISelectProps) => {
   return (
     <SelectWrapper>
-      <ReactSelect
-        id={id}
-        name={name}
-        classNamePrefix="rs"
-        placeholder={placeholder}
-        value={value}
-        onChange={(selected) => onChange(selected || undefined)}
-        options={options}
-        // 검색 옵션 제거
-        isSearchable={false}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ReactSelect
+          id={id}
+          name={name}
+          classNamePrefix="rs"
+          placeholder={placeholder}
+          value={value}
+          onChange={(selected) =>
+            onChange((selected as ISelectOption) || undefined)
+          }
+          options={options}
+          // 검색 옵션 제거
+          isSearchable={false}
+        />
+      </Suspense>
     </SelectWrapper>
   );
 };

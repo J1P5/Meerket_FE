@@ -1,5 +1,5 @@
 import { type IIconProps, IconWrapper } from "../styled";
-import { FiPercent } from "react-icons/fi";
+import { FiPercent } from "@react-icons/all-files/fi/FiPercent";
 
 /**
  * 판매 아이콘

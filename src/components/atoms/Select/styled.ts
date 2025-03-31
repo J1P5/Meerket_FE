@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
   width: 100%;
@@ -14,15 +14,15 @@ export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
       padding: 16px;
       min-height: auto;
       padding: 0.75rem 0.5rem;
-      border-radius: 10px;
-      border: 1px solid #eceef3;
+      border-radius: ${({ theme }) => theme.radius.lg};
+      border: 1px solid ${({ theme }) => theme.colors.grey200};
       &--is-focused,
       &--is-open {
         box-shadow: unset;
-        border: 1px solid #eceef3;
+        border: 1px solid ${({ theme }) => theme.colors.grey200};
       }
       &:hover {
-        border: 1px solid #344fff;
+        border: 1px solid ${({ theme }) => theme.colors.primary};
       }
     }
 
@@ -30,7 +30,7 @@ export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
      * placeholder
      */
     &__placeholder {
-      color: #9b9fbc;
+      color: ${({ theme }) => theme.colors.grey400};
     }
 
     /**
@@ -59,11 +59,12 @@ export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
       text-align: center;
 
       &:not(:last-child)::after {
-        content: "";
+        content: '';
         display: block;
         width: 95%;
         height: 1px;
-        background-color: #eceef3;
+        background-color: ${({ theme }) => theme.colors.grey200};
+
         position: absolute;
         bottom: -1px;
         left: 50%;
@@ -71,22 +72,22 @@ export const SelectWrapper: ReturnType<typeof styled.div> = styled.div`
       }
 
       &--is-focused {
-        color: #344fff;
+        color: ${({ theme }) => theme.colors.primary};
         background-color: transparent;
       }
       &--is-selected {
-        // background-color: #344fff;
-        color: #344fff;
+        // background-color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary};
         background-color: transparent;
       }
       &:active {
-        color: #344fff;
+        color: ${({ theme }) => theme.colors.primary};
         background-color: transparent;
       }
     }
   }
 
-  color: var(--grey-field-guide-but-deactivate, #9b9fbc);
+  color: ${({ theme }) => theme.colors.grey400};
   /* 가이드/regular */
   font-size: 13px;
   font-style: normal;

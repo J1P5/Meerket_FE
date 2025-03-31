@@ -183,10 +183,10 @@ export const CommentItem = ({
             <Image url={imgUrl || LOGO_PATH} type="round" />
             <WriterInformationWrapper>
               <WriterBadgeWrapper>
-                <Text variant="title_bold" content={nickname} />
+                <Text variant="title_bold">{nickname}</Text>
                 {isSeller && <Badge text="판매자" />}
               </WriterBadgeWrapper>
-              <Text variant="desc_regular" content={time} />
+              <Text variant="desc_regular">{time}</Text>
             </WriterInformationWrapper>
             {!editMode && (
               /**
@@ -239,7 +239,7 @@ export const CommentItem = ({
             )}
           </CommentHeaderContainer>
           <CommentContentWrapper>
-            {!editMode && <Text variant="desc_regular" content={content} />}
+            {!editMode && <Text variant="desc_regular">{content}</Text>}
             {editMode && (
               <InputWithButton
                 value={thisComment}
@@ -302,7 +302,7 @@ export const CommentItem = ({
               placeholder="답글을 입력해주세요."
               buttonText="작성"
               onButtonClick={() => handleWriteButtonClick(commentId)}
-              variant="explan_bold"
+              variant="guide_bold"
             />
           )}
         </ReplyContainer>
