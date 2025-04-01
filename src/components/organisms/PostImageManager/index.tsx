@@ -72,7 +72,7 @@ export const PostImageManager = ({
   );
 
   const files = useMemo(
-    () => imageInfos.map((info) => info.file as File),
+    () => imageInfos.map((info) => info.file).filter((file) => file) as File[],
     [imageInfos],
   );
 
@@ -88,6 +88,8 @@ export const PostImageManager = ({
       <UploadedImageCounter
         text="사진 등록"
         files={files}
+        currentCount={imageInfos.length}
+        totalCount={10}
         onChange={onChange}
       />
       <PostImageListWrapper>

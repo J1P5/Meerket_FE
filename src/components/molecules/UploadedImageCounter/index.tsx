@@ -11,6 +11,8 @@ interface IUploadedImageCounter {
   files: File[];
   /** file input onChange 이벤트 발생 시 실행 될 함수 */
   onChange: (files: File[]) => void;
+  /** 현재 업로드 된 이미지 개수 */
+  currentCount: number;
   /** 업로드 받을 수 있는 이미지 개수 */
   totalCount?: number;
   /** 다중 업로드 가능 여부 */
@@ -23,11 +25,12 @@ export const UploadedImageCounter = ({
   text,
   files,
   onChange,
+  currentCount,
   totalCount = 10,
   onExceed,
 }: IUploadedImageCounter) => {
   const handleFileChange = (newFiles: File[]) => {
-    const remainingCount = totalCount - files.length;
+    const remainingCount = totalCount - currentCount;
 
     // 중복 파일 필터링
     const uniqueFiles = removeDuplicateFiles(newFiles, files);
@@ -66,7 +69,7 @@ export const UploadedImageCounter = ({
         <Text
           variant="guide_regular"
           color={colors.gray400}
-        >{`${files.length}/${totalCount}`}</Text>
+        >{`${currentCount}/${totalCount}`}</Text>
       </div>
       <ImageUploadWrapper>
         <ImageUpload onFileChange={handleFileChange} multiple />
