@@ -2,14 +2,14 @@ import {
   type ChangeEvent,
   type MouseEvent,
   useCallback,
-  useState
-} from "react";
-import { formatPrice } from "utils";
-import { InputWrapper } from "./styled";
+  useState,
+} from 'react';
+import { formatPrice } from 'utils';
+import { InputWrapper } from './styled';
 
 interface IInputProps {
   /** Input의 type */
-  type?: "text" | "number";
+  type?: 'text' | 'number';
   /** Input의 id */
   id?: string;
   /** Input의 name */
@@ -32,7 +32,7 @@ interface IInputProps {
  * Input 컴포넌트
  */
 export const Input = ({
-  type = "text",
+  type = 'text',
   id,
   name,
   value,
@@ -40,7 +40,7 @@ export const Input = ({
   setValue,
   onClick,
   onKeyDown,
-  ariaLabel
+  ariaLabel,
 }: IInputProps) => {
   const [focus, setFocus] = useState(false);
 
@@ -55,18 +55,15 @@ export const Input = ({
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (setValue) {
       let value = event.target.value;
-      if (type === "number") {
+      if (type === 'number') {
         const numCheck = /^[0-9,]/.test(value);
         if (!numCheck && value) return;
-
         if (numCheck) {
-          const numValue = value.split(",").join("");
+          const numValue = value.split(',').join('');
           value = formatPrice(Number(numValue));
         }
-        setValue(value);
-      } else {
-        setValue(value);
       }
+      setValue(value);
     }
   };
 
@@ -77,7 +74,7 @@ export const Input = ({
 
   // 엔터 키로 메시지 전송
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       e.preventDefault();
       if (onKeyDown) {
         onKeyDown();
@@ -88,7 +85,7 @@ export const Input = ({
 
   return (
     <InputWrapper focus={focus}>
-      {type === "number" && <p>₩</p>}
+      {type === 'number' && <p>₩</p>}
       <input
         type="text"
         id={id}
