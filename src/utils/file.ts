@@ -34,6 +34,16 @@ export const filterDuplicateFiles = (
 };
 
 /**
+ * 파일명 확장자 제거
+ * @param fileName - 확장자가 포함된 파일명
+ * @returns 확장자를 제거한 파일명
+ */
+export const removeExtension = (fileName: string) => {
+  const lastDotIndex = fileName.lastIndexOf('.');
+  return lastDotIndex === -1 ? fileName : fileName.substring(0, lastDotIndex);
+};
+
+/**
  * 파일 중복 검사 및 필터링
  * @param newFiles - 새로 선택된 파일 목록
  * @param existingFiles - 기존 파일 목록
@@ -43,8 +53,12 @@ export const removeDuplicateFiles = (
   newFiles: File[],
   existingFiles: File[],
 ): File[] => {
-  const existingFileNames = new Set(existingFiles.map((file) => file.name));
-  return newFiles.filter((file) => !existingFileNames.has(file.name));
+  const existingFileNames = new Set(
+    existingFiles.map((file) => removeExtension(file.name)),
+  );
+  return newFiles.filter(
+    (file) => !existingFileNames.has(removeExtension(file.name)),
+  );
 };
 
 /**

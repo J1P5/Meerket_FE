@@ -11,10 +11,11 @@ export const ImageUpload = ({
   onFileChange,
   multiple = false,
 }: ImageUploadProps) => {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = event.target.files;
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
     if (!fileList?.length) return;
     onFileChange(Array.from(fileList));
+    e.target.value = '';
   };
 
   return (

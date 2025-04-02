@@ -1,5 +1,6 @@
 import { ImageUpload, Text } from 'components/atoms';
 import { CameraIcon } from 'components/atoms/Icon';
+import { useCallback } from 'react';
 import { colors } from 'styles';
 import { removeDuplicateFiles, validateFileCount } from 'utils';
 import { ImageUploadWrapper, UploadedImageCounterContainer } from './styled';
@@ -29,30 +30,30 @@ export const UploadedImageCounter = ({
   totalCount = 10,
   onExceed,
 }: IUploadedImageCounter) => {
-  const handleFileChange = (newFiles: File[]) => {
-    const remainingCount = totalCount - currentCount;
+  const handleFileChange = useCallback(
+    (newFiles: File[]) => {
+      const remainingCount = totalCount - currentCount;
 
-    // 중복 파일 필터링
-    const uniqueFiles = removeDuplicateFiles(newFiles, files);
+      // 중복 파일 필터링
+      const uniqueFiles = removeDuplicateFiles(newFiles, files);
+      if (uniqueFiles.length === 0) {
+        return;
+      }
 
-    // 중복을 제외한 파일이 없으면 종료
-    if (uniqueFiles.length === 0) {
-      return;
-    }
+      console.log('uniqueFiles', uniqueFiles);
+      // 파일 개수 검증
+      const { files: validFiles, exceededCount } = validateFileCount(
+        uniqueFiles,
+        remainingCount,
+      );
 
-    // 파일 개수 검증
-    const { files: validFiles, exceededCount } = validateFileCount(
-      uniqueFiles,
-      remainingCount,
-    );
-
-    if (exceededCount) {
-      onExceed?.(exceededCount);
-    }
-
-    onChange(validFiles);
-  };
-
+      if (exceededCount) {
+        onExceed?.(exceededCount);
+      }
+      onChange(validFiles);
+    },
+    [currentCount, files],
+  );
   return (
     <UploadedImageCounterContainer>
       <CameraIcon size="l" />
