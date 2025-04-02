@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { UploadedImageCounterContainer } from "components/molecules/UploadedImageCounter/styled";
-import { PostImageItemWrapper } from "components/organisms/PostImageItem/styled";
+import styled from '@emotion/styled';
+import { UploadedImageCounterContainer } from 'components/molecules/UploadedImageCounter/styled';
+import { PostImageItemWrapper } from 'components/organisms/PostImageItem/styled';
 interface PostImageManagerWrapperProps {
   disabled?: boolean;
 }
@@ -14,6 +14,7 @@ export const PostImageManagerWrapper: ReturnType<
   overflow-x: hidden;
   overflow-y: hidden;
   width: 100%;
+  touch-action: none;
 
   ${({ disabled }) =>
     disabled &&

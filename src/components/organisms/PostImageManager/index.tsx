@@ -1,7 +1,8 @@
 import { UploadedImageCounter } from 'components/molecules';
 import { PostImageItem } from 'components/organisms';
-import { Fragment, useCallback, useMemo, useRef } from 'react';
+import { Fragment, useCallback, useMemo } from 'react';
 
+import { useHorizontalScroll } from 'hooks';
 import { IImageInfo } from 'types';
 import { convertToWebP } from 'utils';
 import { PostImageListWrapper, PostImageManagerWrapper } from './styled';
@@ -20,31 +21,14 @@ export const PostImageManager = ({
   setImageInfos,
   disabled = false,
 }: IPostImageManagerProps) => {
-  // TODO: 임시로 넣은 gpt의 가로 스크롤 이벤트 코드 나중에 수정 필요 (코드 이해 및 애니메이션 추가)
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  let isDragging = false;
-  let startX: number;
-  let scrollLeft: number;
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    isDragging = true;
-    startX = e.pageX - wrapperRef.current!.offsetLeft;
-    scrollLeft = wrapperRef.current!.scrollLeft;
-    wrapperRef.current!.style.cursor = 'grabbing';
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - wrapperRef.current!.offsetLeft;
-    const walk = (x - startX) * 1;
-    wrapperRef.current!.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    isDragging = false;
-    wrapperRef.current!.style.cursor = 'grab';
-  };
+  const {
+    wrapperRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleEnd,
+    handleTouchStart,
+    handleTouchMove,
+  } = useHorizontalScroll();
 
   const onChange = useCallback(
     async (files: File[]) => {
@@ -82,8 +66,11 @@ export const PostImageManager = ({
       disabled={disabled}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleEnd}
     >
       <UploadedImageCounter
         text="사진 등록"
