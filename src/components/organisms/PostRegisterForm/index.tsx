@@ -38,8 +38,8 @@ export const PostRegisterForm = ({
   );
 
   const postRegisterSchema = z.object({
-    title: z.string().min(1, { message: '제목은 필수 입력 항목입니다.' }),
-    content: z.string().min(1, { message: '설명은 필수 입력 항목입니다.' }),
+    title: z.string().min(2, { message: '제목은 2자 이상 입력해주세요.' }),
+    content: z.string().min(10, { message: '설명은 10자 이상 입력해주세요.' }),
     minimumPrice: z
       .string({ required_error: '최저 입찰가는 필수 입력 항목입니다.' })
       .refine((val) => Number(val.replace(/,/g, '')) <= 2000000000, {
