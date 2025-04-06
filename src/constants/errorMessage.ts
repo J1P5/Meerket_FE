@@ -8,6 +8,14 @@ export const LocationError: Record<
     title: '지금은 위치를 불러올 수 없어요.',
     message: '위치 권한 허용 후 다시 시도해 주세요!',
   },
+  PERMISSION_DENIED_IOS: {
+    title: '지금은 위치를 불러올 수 없어요.',
+    message: '설정 → Safari → 웹사이트 설정 → 위치 → 허용으로 변경해주세요!',
+  },
+  PERMISSION_DENIED_ANDROID: {
+    title: '지금은 위치를 불러올 수 없어요.',
+    message: '주소창 왼쪽 자물쇠 아이콘 → 위치 → 허용으로 변경해주세요!',
+  },
   ADDRESS_FETCH_ERROR: {
     title: '주소를 가져오는 데 문제가 발생했어요.',
     message: '잠시 후에 다시 시도해 주세요!',

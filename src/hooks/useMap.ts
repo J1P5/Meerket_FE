@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavermaps } from 'react-naver-maps';
 import { IMapProps } from 'types';
+import { detectOS } from 'utils';
 
 const DEFAULT_COORD: [number, number] = [37.5666805, 126.9784147];
 const DEFAULT_ZOOM_LEVEL: number = 16;
@@ -84,7 +85,6 @@ export const useMap = ({
   const handlePermission = useCallback(
     (result: PermissionStatus, type: string) => {
       // 권한이 허용됐거나 요청 상태
-
       if (result.state === 'granted' || result.state === 'prompt') {
         navigator.geolocation.getCurrentPosition(
           onSuccessGeolocation,
@@ -103,7 +103,12 @@ export const useMap = ({
           (type === 'INIT' && !coord && !isCenterMarkerExist);
 
         if (shouldShowError) {
-          locationErrorEvent?.('PERMISSION_DENIED');
+          const errorCode = {
+            iOS: 'PERMISSION_DENIED_IOS',
+            Android: 'PERMISSION_DENIED_ANDROID',
+            Other: 'PERMISSION_DENIED',
+          }[detectOS()];
+          locationErrorEvent?.(errorCode);
         }
       }
     },
@@ -115,20 +120,20 @@ export const useMap = ({
    */
   const requestGeolocation = useCallback(
     (type: string) => {
-      if (navigator.permissions) {
-        navigator.permissions
-          .query({ name: 'geolocation' })
-          .then((result) => handlePermission(result, type))
-          .catch((error) => {
-            console.error('Error querying geolocation permissions:', error);
-          });
+      if (!navigator.permissions) {
+        // 브라우저가 권한 API를 지원하지 않는 경우
+        locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
         return;
       }
 
-      // 브라우저가 권한 API를 지원하지 않는 경우
-      locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((result) => handlePermission(result, type))
+        .catch((error) => {
+          console.error('Error querying geolocation permissions:', error);
+        });
     },
-    [locationErrorEvent, handlePermission, myMarker],
+    [locationErrorEvent, handlePermission],
   );
 
   /**
