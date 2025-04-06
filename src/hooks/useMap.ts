@@ -1,7 +1,7 @@
+import { useGeolocation } from 'hooks';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavermaps } from 'react-naver-maps';
-import { IMapProps } from 'types';
-import { detectOS } from 'utils';
+import { IMapProps, LocationErrorCode } from 'types';
 
 const DEFAULT_COORD: [number, number] = [37.5666805, 126.9784147];
 const DEFAULT_ZOOM_LEVEL: number = 16;
@@ -27,6 +27,9 @@ export const useMap = ({
     null,
   );
   const isFirstExecution = useRef(true);
+
+  const GET_MY_LOCATION_CONDITION = true;
+  const INIT_CONDITION = !coord && !isCenterMarkerExist;
 
   /**
    * 마커 위치 업데이트 및 표시
@@ -66,83 +69,30 @@ export const useMap = ({
     [coord, map, myMarker, setMyCoord],
   );
 
+  /**
+   * 위치 정보 획득 실패 시 처리
+   */
   const onErrorGeolocation = useCallback(
-    (error: GeolocationPositionError) => {
-      const errorCode = {
-        1: 'PERMISSION_DENIED',
-        2: 'POSITION_UNAVAILABLE',
-        3: 'TIMEOUT',
-      }[error.code];
-
-      locationErrorEvent?.(errorCode);
+    (error: LocationErrorCode) => {
+      locationErrorEvent?.(error);
     },
     [locationErrorEvent],
   );
 
-  /**
-   * 위치 권한 상태에 따른 처리
-   */
-  const handlePermission = useCallback(
-    (result: PermissionStatus, type: string) => {
-      // 권한이 허용됐거나 요청 상태
-      if (result.state === 'granted' || result.state === 'prompt') {
-        navigator.geolocation.getCurrentPosition(
-          onSuccessGeolocation,
-          onErrorGeolocation,
-          {
-            timeout: 10000,
-          },
-        );
-        return;
-      }
-
-      // 권한이 거부된 상태
-      if (result.state === 'denied') {
-        const shouldShowError =
-          type === 'GET_MY_LOCATION' ||
-          (type === 'INIT' && !coord && !isCenterMarkerExist);
-
-        if (shouldShowError) {
-          const errorCode = {
-            iOS: 'PERMISSION_DENIED_IOS',
-            Android: 'PERMISSION_DENIED_ANDROID',
-            Other: 'PERMISSION_DENIED',
-          }[detectOS()];
-          locationErrorEvent?.(errorCode);
-        }
-      }
-    },
-    [locationErrorEvent, onErrorGeolocation, onSuccessGeolocation],
-  );
-
-  /**
-   * 위치 정보 요청
-   */
-  const requestGeolocation = useCallback(
-    (type: string) => {
-      if (!navigator.permissions) {
-        // 브라우저가 권한 API를 지원하지 않는 경우
-        locationErrorEvent?.('BROWSER_NOT_SUPPORTED');
-        return;
-      }
-
-      navigator.permissions
-        .query({ name: 'geolocation' })
-        .then((result) => handlePermission(result, type))
-        .catch((error) => {
-          console.error('Error querying geolocation permissions:', error);
-        });
-    },
-    [locationErrorEvent, handlePermission],
-  );
+  const { getPosition } = useGeolocation({
+    onSuccess: onSuccessGeolocation,
+    onError: onErrorGeolocation,
+  });
 
   /**
    * 현재 나의 위치로 이동
    */
   const moveToCurrentLocation = useCallback(() => {
     if (!map || !myMarker) return;
-    requestGeolocation('GET_MY_LOCATION');
-  }, [map, myMarker, requestGeolocation]);
+    getPosition(GET_MY_LOCATION_CONDITION).catch((error: Error) => {
+      console.error('Error querying geolocation permissions:', error);
+    });
+  }, [map, myMarker, getPosition]);
 
   /**
    * 지도 초기화 및 좌표 설정
@@ -182,9 +132,11 @@ export const useMap = ({
 
     // 위치 요청
     if (!coord || isCenterMarkerExist || markerInfo) {
-      requestGeolocation('INIT');
+      getPosition(INIT_CONDITION).catch((error: Error) => {
+        console.error('Error querying geolocation permissions:', error);
+      });
     }
-  }, [map, myMarker, requestGeolocation]);
+  }, [map, myMarker, getPosition]);
 
   return {
     defaultCenter,
