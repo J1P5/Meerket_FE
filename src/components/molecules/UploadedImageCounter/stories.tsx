@@ -33,6 +33,7 @@ export const Default: Story = {
         <UploadedImageCounter
           text={args.text}
           files={images}
+          currentCount={images.length}
           totalCount={args.totalCount}
           onChange={handleImageUpload}
           multiple={args.multiple}

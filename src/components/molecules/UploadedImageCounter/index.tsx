@@ -40,7 +40,6 @@ export const UploadedImageCounter = ({
         return;
       }
 
-      console.log('uniqueFiles', uniqueFiles);
       // 파일 개수 검증
       const { files: validFiles, exceededCount } = validateFileCount(
         uniqueFiles,
@@ -52,7 +51,7 @@ export const UploadedImageCounter = ({
       }
       onChange(validFiles);
     },
-    [currentCount, files],
+    [currentCount, files, onExceed, onChange, totalCount],
   );
   return (
     <UploadedImageCounterContainer>

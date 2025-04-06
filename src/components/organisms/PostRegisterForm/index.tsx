@@ -42,7 +42,7 @@ export const PostRegisterForm = ({
     content: z.string().min(10, { message: '설명은 10자 이상 입력해주세요.' }),
     minimumPrice: z
       .string({ required_error: '최저 입찰가는 필수 입력 항목입니다.' })
-      .refine((val) => Number(val.replace(/,/g, '')) <= 2000000000, {
+      .refine((val: string) => Number(val.replace(/,/g, '')) <= 2000000000, {
         message: '최저 입찰가는 20억 이하로 입력해주세요.',
       }),
     category: z.string({ required_error: '카테고리는 필수 입력 항목입니다.' }),
