@@ -20,66 +20,7 @@
 
   /* Accent Colors */
   --color-red: #ff2e4d;
-
-  /* 폰트 설정 */
-  --font-pretendard: 'Pretendard', sans-serif;
 }
 
 @layer base {
-  /* 
-    Pretendard Regular (400)
-    - 기본 폰트 굵기
-    - 일반 텍스트에 사용
-    - local : 사용자 PC에 폰트가 있는 경우 사용
-    - url : 사용자 PC에 폰트가 없는 경우 사용
-  */
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    src:
-      local('Pretendard-Regular'),
-      url('/fonts/Pretendard-Regular.woff2') format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Regular.woff2')
-        format('woff2');
-  }
-
-  /* 
-    Pretendard SemiBold (600)
-    - 중간 굵기
-    - 제목이나 강조 텍스트에 사용
-    - local : 사용자 PC에 폰트가 있는 경우 사용
-    - url : 사용자 PC에 폰트가 없는 경우 사용
-  */
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-    src:
-      local('Pretendard-SemiBold'),
-      url('/fonts/Pretendard-SemiBold.woff2') format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-SemiBold.woff2')
-        format('woff2');
-  }
-
-  /* 
-    Pretendard Bold (700)
-    - 가장 굵은 굵기
-    - 중요한 제목이나 강조 텍스트에 사용
-    - local : 사용자 PC에 폰트가 있는 경우 사용
-    - url : 사용자 PC에 폰트가 없는 경우 사용
-  */
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-    src:
-      local('Pretendard-Bold'),
-      url('/fonts/Pretendard-Bold.woff2') format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard-Bold.woff2')
-        format('woff2');
-  }
 }
