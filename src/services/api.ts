@@ -3,8 +3,8 @@ import axios, {
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
-} from "axios";
-import type { IResponse } from "types";
+} from 'axios';
+import type { IResponse } from 'types';
 
 const api: AxiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,
@@ -67,9 +67,7 @@ export const http = {
     params?: P,
     options?: AxiosRequestConfig,
   ) => {
-    return api
-      .get<T>(url, { params: params && { ...params }, ...options })
-      .then(responseToData);
+    return api.get<T>(url, { params, ...options }).then(responseToData);
   },
   /**
    * HTTP POST Method
@@ -82,8 +80,7 @@ export const http = {
     data?: D,
     options?: AxiosRequestConfig,
   ) => {
-    const processedData = data instanceof FormData ? data : (data && { ...data });
-    return api.post<T>(url, processedData, options).then(responseToData);
+    return api.post<T>(url, data, options).then(responseToData);
   },
   /**
    * HTTP PUT Method
@@ -96,7 +93,7 @@ export const http = {
     data?: D,
     options?: AxiosRequestConfig,
   ) => {
-    return api.put<T>(url, data && { ...data }, options).then(responseToData);
+    return api.put<T>(url, data, options).then(responseToData);
   },
   /**
    * HTTP PATCH Method
@@ -109,7 +106,7 @@ export const http = {
     data?: D,
     options?: AxiosRequestConfig,
   ) => {
-    return api.patch<T>(url, data && { ...data }, options).then(responseToData);
+    return api.patch<T>(url, data, options).then(responseToData);
   },
   /**
    * HTTP DELETE Method
