@@ -1,6 +1,6 @@
-import { IconButton, Image, Text } from "components/atoms";
-import { PostImageItemWrapper } from "./styled";
-import { XIcon } from "components/atoms/Icon";
+import { IconButton, Image, Text } from 'components/atoms';
+import { XIcon } from 'components/atoms/Icon';
+import { PostImageItemWrapper } from './styled';
 
 interface IPostImageItemProps {
   /** 이미지 경로 */
@@ -24,7 +24,7 @@ export const PostImageItem = ({
         onClick={onClick}
         backgroundColor="transparent"
       />
-      {isThumbnail && <Text>대표 사진</Text>}
+      {isThumbnail && <Text variant="title_regular">대표 사진</Text>}
     </PostImageItemWrapper>
   );
 };

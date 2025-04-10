@@ -34,8 +34,8 @@ export const ProfileRegistrationForm = ({
   }, []);
 
   const onChange = useCallback(
-    async (file: File) => {
-      const resizedFile = await convertToWebP(file, 360);
+    async (files: File[]) => {
+      const resizedFile = await convertToWebP(files[0], 360);
       setValue('profile', resizedFile);
     },
     [setValue],
