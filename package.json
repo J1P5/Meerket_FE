@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@titicaca/eslint-config-triple": "^5.3.1",
     "@titicaca/prettier-config-triple": "^1.2.1",
