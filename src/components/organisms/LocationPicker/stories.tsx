@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { NavermapsProvider } from 'react-naver-maps';
-import { ILocation } from 'types';
+import { ILocation, LocationErrorCode } from 'types';
 import { LocationPicker } from '.';
 
 const meta: Meta<typeof LocationPicker> = {
@@ -38,7 +38,8 @@ type Story = StoryObj<typeof meta>;
 export const Register: Story = {
   args: {
     onLocationSelect: (location: ILocation) => console.log(location),
-    locationErrorEvent: (message: string) => console.log(message),
+    locationErrorEvent: (errorCode: LocationErrorCode) =>
+      console.log(errorCode),
   },
   render: (args) => (
     <div style={{ height: '100vh' }}>
@@ -53,7 +54,8 @@ export const Edit: Story = {
       lng: 126.9784147,
     },
     onLocationSelect: (location: ILocation) => console.log(location),
-    locationErrorEvent: (message: string) => console.log(message),
+    locationErrorEvent: (errorCode: LocationErrorCode) =>
+      console.log(errorCode),
   },
   render: (args) => (
     <div style={{ height: '100vh' }}>

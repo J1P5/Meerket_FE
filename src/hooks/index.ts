@@ -11,6 +11,7 @@ export * from './useFetchProduct';
 export * from './useFetchSession';
 export * from './useFetchTransactions';
 export * from './useForegroundNotification';
+export * from './useGeolocation';
 export * from './useHorizontalScroll';
 export * from './useKebabMenu';
 export * from './useLocationErrorEvent';

@@ -36,6 +36,14 @@ export const Map = ({
     markerInfo,
     setMyCoord,
   });
+
+  // 거래 마커(읽기 전용) 렌더링 여부 결정
+  const shouldShowTransactionMarker = !isCenterMarkerExist && !!coord;
+
+  // 내 위치 찾기 버튼 렌더링 여부 결정
+  const shouldShowLocationButton =
+    isCenterMarkerExist || !coord || !!markerInfo;
+
   return (
     <MapWrapper>
       <MapDiv
@@ -52,12 +60,7 @@ export const Map = ({
         >
           <Marker
             icon={{
-              // TODO: svg인데 왜 깨져 보이지?
               url: MYMARKER,
-              // url: MY_MARKER_IMG_PATH,
-              // size: new navermaps.Size(38, 38),
-              // anchor: new navermaps.Point(24, 24)
-              // origin: new navermaps.Point(85, 30),
             }}
             ref={setMyMarker}
           />
@@ -77,12 +80,9 @@ export const Map = ({
                   fill={colors.primaryDark}
                 />
               </svg>
-
-              {/* <Image url="https://url.kr/y7fjy4" alt="Center Marker" /> */}
             </CenterMarkerWrapper>
           )}
-
-          {!isCenterMarkerExist && coord && (
+          {shouldShowTransactionMarker && (
             <Marker
               icon={{
                 url: DEFAULTMARKER,
@@ -95,7 +95,7 @@ export const Map = ({
           {markerInfo && (
             <InfoWindow content={markerInfo} ref={setInfoWindow} />
           )}
-          {!(!isCenterMarkerExist && coord && !markerInfo) && (
+          {shouldShowLocationButton && (
             <IconButton
               icon={MyLocationIcon}
               type="round"

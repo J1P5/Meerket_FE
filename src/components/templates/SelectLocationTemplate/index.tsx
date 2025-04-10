@@ -1,9 +1,9 @@
-import { useState, useMemo } from "react";
-import { createPortal } from "react-dom";
-import { LocationInputBottomSheet } from "components/organisms";
-import { LocationPicker } from "components/organisms/LocationPicker";
-import { SelectLocationTemplateWrapper } from "./styled";
-import { ICoord, ILocation } from "types";
+import { LocationInputBottomSheet } from 'components/organisms';
+import { LocationPicker } from 'components/organisms/LocationPicker';
+import { useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { ICoord, ILocation, LocationErrorCode } from 'types';
+import { SelectLocationTemplateWrapper } from './styled';
 
 interface ISelectLocationTemplateProps {
   /** 거래희망장소 좌표 (위도, 경도) */
@@ -19,7 +19,7 @@ interface ISelectLocationTemplateProps {
   /** 거래희망장소 등록 버튼 클릭 시 실행될 함수 */
   onRegistrationButtonClick: (place: string) => void;
   /** 위치 권한 가져오기 실패 시 모달을 실행할 함수 */
-  locationErrorEvent: (message: string) => void;
+  locationErrorEvent: (errorCode: LocationErrorCode) => void;
   /** 에러 발생 여부 (Input이 비었을 경우 true) */
   isError: boolean;
 }
@@ -35,16 +35,17 @@ export const SelectLocationTemplate = ({
   isError,
 }: ISelectLocationTemplateProps) => {
   // TODO: 템플릿은 스켈레톤이기 때문에 페이지로 useState를 빼는 게 나을까?
-  const [place, setPlace] = useState(location || "");
+  const [place, setPlace] = useState(location || '');
 
   const memoizedLocationPicker = useMemo(
-    () =>
+    () => (
       <LocationPicker
         coord={coord}
         onLocationSelect={onLocationSelect}
         locationErrorEvent={locationErrorEvent}
-      />,
-    [coord, onLocationSelect, locationErrorEvent]
+      />
+    ),
+    [coord, onLocationSelect, locationErrorEvent],
   );
 
   return (
@@ -59,7 +60,7 @@ export const SelectLocationTemplate = ({
           onRegistrationButtonClick={() => onRegistrationButtonClick(place)}
           isError={isError}
         />,
-        document.body
+        document.body,
       )}
     </SelectLocationTemplateWrapper>
   );

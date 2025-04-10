@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { TextButton } from "components/atoms";
-import { NeighborhoodAuthFormWrapper } from "./styled";
-import { Map } from "components/organisms/Map"; // 순환 의존 문제로 수정
-import { ICoord, ILocation } from "types";
-import { useReverseGeocode } from "hooks";
-import { createPortal } from "react-dom";
-import { UserLocationBottomSheet } from "components/organisms";
+import { TextButton } from 'components/atoms';
+import { UserLocationBottomSheet } from 'components/organisms';
+import { Map } from 'components/organisms/Map'; // 순환 의존 문제로 수정
+import { useReverseGeocode } from 'hooks';
+import { useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { ICoord, ILocation, LocationErrorCode } from 'types';
+import { NeighborhoodAuthFormWrapper } from './styled';
 
 interface INeighborhoodAuthFormProps {
   /** 유저 닉네임 */
@@ -15,19 +15,18 @@ interface INeighborhoodAuthFormProps {
   /** 동네 인증 버튼 클릭 이벤트 */
   onSubmitButtonClick?: (location: ILocation) => void;
   /** 위치 권한 가져오기 실패 시 모달을 실행할 함수 */
-  locationErrorEvent: (message: string) => void;
+  locationErrorEvent: (errorCode: LocationErrorCode) => void;
 }
-
 export const NeighborhoodAuthForm = ({
   nickname,
   myAddress,
   onSubmitButtonClick,
   locationErrorEvent,
 }: INeighborhoodAuthFormProps) => {
-  const [myCoord, setMyCoord] = useState<any>(null);
+  const [myCoord, setMyCoord] = useState<naver.maps.Coord | null>(null);
   const [location, setLocation] = useState<ILocation>({
     coord: undefined,
-    address: "",
+    address: '',
   });
   const [isOpenBottomSheet, setIsOpenBottomSheet] = useState(false);
 
@@ -36,17 +35,17 @@ export const NeighborhoodAuthForm = ({
   useEffect(() => {
     if (myCoord) {
       const iCoord: ICoord = {
-        lat: myCoord.lat(),
-        lng: myCoord.lng(),
+        lat: (myCoord as naver.maps.LatLng).lat(),
+        lng: (myCoord as naver.maps.LatLng).lng(),
       } as const;
 
       searchCoordinateToAddress(myCoord)
         .then((address) => {
           setLocation({ coord: iCoord, address });
         })
-        .catch((error) => {
-          console.error("Failed to fetch address:", error);
-          setLocation({ coord: iCoord, address: "" });
+        .catch((error: Error) => {
+          locationErrorEvent(error.message as LocationErrorCode);
+          setLocation({ coord: iCoord, address: '' });
         });
     }
   }, [myCoord, searchCoordinateToAddress]);
@@ -55,9 +54,6 @@ export const NeighborhoodAuthForm = ({
     if (location.address) {
       setIsOpenBottomSheet(true);
     }
-
-    console.log("location.address", location.address);
-    console.log("myAddress", myAddress);
   }, [location, myAddress]);
 
   const handleSubmitButtonClick = useCallback(() => {
@@ -67,16 +63,9 @@ export const NeighborhoodAuthForm = ({
   return (
     <NeighborhoodAuthFormWrapper>
       <Map setMyCoord={setMyCoord} locationErrorEvent={locationErrorEvent} />
-      {/* <LocationConfirmationContainer>
-        <Text>{
-            location.address
-              ? `현재 위치가 '${location.address}'에 있어요`
-              : "현재 위치정보를 가져올 수 없어요. 잠시 후 다시 시도해주세요"
-          }</Text>
-      </LocationConfirmationContainer> */}
       {location.address && (
         <TextButton
-          text={"현재 위치가 맞아요!"}
+          text={'현재 위치가 맞아요!'}
           onClick={handleCheckButtonClick}
         />
       )}
@@ -89,7 +78,7 @@ export const NeighborhoodAuthForm = ({
           address={location.address}
           onSubmitButtonClick={handleSubmitButtonClick}
         />,
-        document.body
+        document.body,
       )}
     </NeighborhoodAuthFormWrapper>
   );

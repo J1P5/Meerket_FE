@@ -37,18 +37,18 @@ export const UserLocationBottomSheet = ({
         <Text variant="guide_regular">
           선택하신 동네는&nbsp;<strong>{myAddress}</strong>이에요.
         </Text>
-        <Text variant="writing_bold">
-          {`${nickname}님의 현 위치는`}
-          <div style={{ display: 'flex' }}>
+        <div>
+          <Text variant="writing_bold">{`${nickname}님의 현 위치는`}</Text>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Text
               variant={address!.length > 15 ? 'button_bold' : 'writing_bold'}
               color={colors.primary}
             >
               {address}
             </Text>
-            이에요!
+            <Text variant="writing_bold">이에요!</Text>
           </div>
-        </Text>
+        </div>
       </div>
 
       <TextButton
