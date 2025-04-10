@@ -1,10 +1,11 @@
-import { Fragment, useCallback, useRef } from "react";
-import { UploadedImageCounter } from "components/molecules";
-import { PostImageItem } from "components/organisms";
+import { UploadedImageCounter } from 'components/molecules';
+import { PostImageItem } from 'components/organisms';
+import { Fragment, useCallback, useMemo } from 'react';
 
-import { PostImageManagerWrapper, PostImageListWrapper } from "./styled";
-import { IImageInfo } from "types";
-import { convertToWebP } from "utils";
+import { useHorizontalScroll } from 'hooks';
+import { IImageInfo } from 'types';
+import { convertToWebP } from 'utils';
+import { PostImageListWrapper, PostImageManagerWrapper } from './styled';
 
 interface IPostImageManagerProps {
   /** ImageInfo 배열 (url: S3에 업로드 된 이미지 url, base64Url: 아직 S3에 올라가지 않아서 미리보기만 제공되는 url, file: 아직 안올라간 이미지들을 나중에 S3에 올리기 위해 필요한 file)*/
@@ -20,76 +21,43 @@ export const PostImageManager = ({
   setImageInfos,
   disabled = false,
 }: IPostImageManagerProps) => {
-  // TODO: 임시로 넣은 gpt의 가로 스크롤 이벤트 코드 나중에 수정 필요 (코드 이해 및 애니메이션 추가)
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  let isDragging = false;
-  let startX: number;
-  let scrollLeft: number;
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    isDragging = true;
-    startX = e.pageX - wrapperRef.current!.offsetLeft;
-    scrollLeft = wrapperRef.current!.scrollLeft;
-    wrapperRef.current!.style.cursor = "grabbing";
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - wrapperRef.current!.offsetLeft;
-    const walk = (x - startX) * 1;
-    wrapperRef.current!.scrollLeft = scrollLeft - walk;
-  };
-
-  const handleMouseUp = () => {
-    isDragging = false;
-    wrapperRef.current!.style.cursor = "grab";
-  };
+  const {
+    wrapperRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleEnd,
+    handleTouchStart,
+    handleTouchMove,
+  } = useHorizontalScroll();
 
   const onChange = useCallback(
-    async (file: File) => {
+    async (files: File[]) => {
       if (disabled) return;
-      const resizedFile = await convertToWebP(file);
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64Url = e.target?.result as string;
-        const newImgData: IImageInfo = {
-          base64Url,
-          file: resizedFile as File, // 변환 파일
+      const newImagePromises = files.map(async (file) => {
+        const resizedFile = await convertToWebP(file);
+        return {
+          base64Url: URL.createObjectURL(file),
+          file: resizedFile,
         };
-        setImageInfos((prev) => [...prev, newImgData]);
-      };
-      reader.readAsDataURL(resizedFile as File);
-    },
-    [setImageInfos, disabled]
-  );
+      });
 
-  /**
-   * 라이브러리 안쓴 성능 저하 버전
-   */
-  // const onChangeLegacy = useCallback(
-  //   async (file: File) => {
-  //     if (disabled) return;
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       const base64Url = e.target?.result as string;
-  //       const newImgData: IImageInfo = {
-  //         base64Url,
-  //         file
-  //       };
-  //       setImageInfos((prev) => [...prev, newImgData]);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   },
-  //   [setImageInfos, disabled]
-  // );
+      const newImages = await Promise.all(newImagePromises);
+      setImageInfos((prev) => [...prev, ...newImages]);
+    },
+    [setImageInfos, disabled],
+  );
 
   const handleRemoveImage = useCallback(
     (index: number) => {
       if (disabled) return;
       setImageInfos((prev) => prev.filter((_, i) => i !== index));
     },
-    [setImageInfos, disabled]
+    [setImageInfos, disabled],
+  );
+
+  const files = useMemo(
+    () => imageInfos.map((info) => info.file).filter((file) => file) as File[],
+    [imageInfos],
   );
 
   return (
@@ -98,12 +66,17 @@ export const PostImageManager = ({
       disabled={disabled}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleEnd}
     >
       <UploadedImageCounter
-        text='사진 등록'
+        text="사진 등록"
+        files={files}
         currentCount={imageInfos.length}
+        totalCount={10}
         onChange={onChange}
       />
       <PostImageListWrapper>

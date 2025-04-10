@@ -1,44 +1,18 @@
-import { useCallback, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useFormDataStore, useTopBarStore } from "stores";
-import { PostRegisterTemplate } from "components/templates";
-import { getExpiredDate, formatPrice } from "utils";
-import type { Category, ExpiredTime, IProductForm, IProductPost } from "types";
-import { useFetchProduct, useProductMutation } from "hooks";
-
-/**
- * 임시 헬퍼 함수
- */
-const transformFormData = (formData: IProductForm, isNewProduct: boolean) => {
-  const transformed = { ...formData };
-
-  if (
-    transformed.category &&
-    typeof transformed.category === "object" &&
-    "value" in transformed.category
-  ) {
-    transformed.category = transformed.category.value;
-  }
-
-  if (
-    isNewProduct &&
-    transformed.expiredTime &&
-    typeof transformed.expiredTime === "object" &&
-    "value" in transformed.expiredTime
-  ) {
-    transformed.expiredTime = transformed.expiredTime.value;
-  }
-
-  return transformed;
-};
+import { PostRegisterTemplate } from 'components/templates';
+import { useFetchProduct, useProductMutation } from 'hooks';
+import { useCallback, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useFormDataStore, useTopBarStore } from 'stores';
+import type { Category, IProductForm, IProductPost } from 'types';
+import { formatPrice, getExpiredDate } from 'utils';
 
 const createProductData = (
   formData: IProductForm,
-  coordinates: { lat: number; lng: number; address: string }
+  coordinates: { lat: number; lng: number; address: string },
 ): IProductPost => ({
   title: formData.title!,
   content: formData.content!,
-  minimumPrice: Number(formData.minimumPrice!.replace(/,/g, "")),
+  minimumPrice: Number(formData.minimumPrice!.replace(/,/g, '')),
   category: formData.category!,
   latitude: coordinates.lat,
   longitude: coordinates.lng,
@@ -54,16 +28,18 @@ export const PostRegisterPage = () => {
   const { setTitle } = useTopBarStore();
 
   const queryParams = new URLSearchParams(location.search);
-  const PRODUCT_ID = queryParams.get("productId") || "";
+  const PRODUCT_ID = queryParams.get('productId') || '';
   const formData = useFormDataStore((state) => state.formData);
   const productId = useFormDataStore((state) => state.productId);
   const { latitude: lat, longitude: lng, address } = formData;
   const { setProductId, setFormData, clear } = useFormDataStore();
-  const { product } = useFetchProduct(PRODUCT_ID && !productId ? PRODUCT_ID : "");
-  const { mutate, isPending }= useProductMutation({
+  const { product } = useFetchProduct(
+    PRODUCT_ID && !productId ? PRODUCT_ID : '',
+  );
+  const { mutate, isPending } = useProductMutation({
     type: PRODUCT_ID ? 'edit' : 'register',
     productId: PRODUCT_ID,
-    onSuccess: clear
+    onSuccess: clear,
   });
 
   useEffect(() => {
@@ -78,7 +54,7 @@ export const PostRegisterPage = () => {
         longitude: product.productLocation.longitude,
         address: product.productLocation.address,
         location: product.productLocation.location,
-        imgUrls: product.images.map((img) => ({ url: img, file: null })),
+        imgUrls: product.images.map((img) => ({ url: img })),
         expiredTime: product.expiredTime,
       });
     }
@@ -86,44 +62,36 @@ export const PostRegisterPage = () => {
 
   const handleSubmit = useCallback(
     async (formData: IProductForm) => {
-        const transformedData = transformFormData(formData, !PRODUCT_ID);
-        const productData = createProductData(transformedData, {
-          lat: lat!,
-          lng: lng!,
-          address: address!,
-        });
+      const productData = createProductData(formData, {
+        lat: lat!,
+        lng: lng!,
+        address: address!,
+      });
 
-        if (isPending) return;
-        
-        if (!PRODUCT_ID) {
-          mutate(productData);
-        } else {
-          const updateData = { ...productData };
-          delete updateData.images;
-          delete updateData.expiredTime;
-          mutate(updateData);
-        }
+      if (isPending) return;
+
+      if (!PRODUCT_ID) {
+        mutate(productData);
+      } else {
+        const updateData = { ...productData };
+        delete updateData.images;
+        delete updateData.expiredTime;
+        mutate(updateData);
+      }
     },
-    [lat, lng, address, PRODUCT_ID, mutate, isPending]
+    [lat, lng, address, PRODUCT_ID, mutate, isPending],
   );
 
   const handleClick = useCallback(
     (formData: IProductForm) => {
-      if (formData.category && typeof formData.category === "object") {
-        formData.category = formData.category.value as Category;
-      }
-      if (formData.expiredTime && typeof formData.expiredTime === "object") {
-        formData.expiredTime = formData.expiredTime.value as ExpiredTime;
-      }
-
       setFormData(formData);
-      navigate("/location-selection");
+      navigate('/location-selection');
     },
-    [navigate, setFormData]
+    [navigate, setFormData],
   );
 
   useEffect(() => {
-    setTitle("내 물건 판매하기");
+    setTitle('내 물건 판매하기');
   }, [setTitle]);
 
   return (
@@ -196,18 +164,4 @@ export default PostRegisterPage;
 
 //   const images = await Promise.all(uploadPromises);
 //   return images;
-// };
-
-// // 기존 데이터를 가져오는 함수
-// // TODO: 상세 조회는 내용이 너무 많아서 타입 따로 파야함
-// const fetchProductData = async (productId: number): Promise<INewPostForm> => {
-//   try {
-//     const response = await http.get<IProductsResponse, INewPostForm>(
-//       `/products/${productId}`
-//     );
-//     return response.result;
-//   } catch (error) {
-//     console.error("Failed to fetch product data:", error);
-//     throw error;
-//   }
 // };

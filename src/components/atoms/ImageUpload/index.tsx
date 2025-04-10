@@ -1,20 +1,32 @@
-import { ImageUploadWrapper } from "./styled";
+import { ImageUploadWrapper } from './styled';
 
-interface IImageUploadProps {
-  /** 파일을 선택했을 때 동작하는 로직,이후 파라미터 같은 부분 별도 커스텀 필요 합니다. */
-  onFileChange: (file: File) => void;
+interface ImageUploadProps {
+  /** 파일 변경 시 호출되는 콜백 함수 */
+  onFileChange: (files: File[]) => void;
+  /** 다중 파일 선택 여부 */
+  multiple?: boolean;
 }
-export const ImageUpload = ({ onFileChange }: IImageUploadProps) => {
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      onFileChange(file);
-    }
+
+export const ImageUpload = ({
+  onFileChange,
+  multiple = false,
+}: ImageUploadProps) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+    if (!fileList?.length) return;
+    onFileChange(Array.from(fileList));
+    e.target.value = '';
   };
 
   return (
     <ImageUploadWrapper>
-      <input type="file" onChange={handleFileChange} aria-label="imageUploader" />
+      <input
+        type="file"
+        onChange={handleFileChange}
+        multiple={multiple}
+        accept="image/*"
+        aria-label="imageUploader"
+      />
     </ImageUploadWrapper>
   );
 };

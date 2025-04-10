@@ -1,20 +1,30 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { ToastInstance as Toast } from "components/atoms/Toast"; // 순환 의존 문제로 수정
-import { Loading } from "components/molecules";
-import { EmptyTemplate, ChatRoomTemplate } from "components/templates";
-import { TopSheet } from "components/templates/ChatRoomTemplate/TopSheet";
+import { ToastInstance as Toast } from 'components/atoms/Toast'; // 순환 의존 문제로 수정
+import { Loading } from 'components/molecules';
+import { ChatRoomTemplate, EmptyTemplate } from 'components/templates';
+import { TopSheet } from 'components/templates/ChatRoomTemplate/TopSheet';
 
-import { DEFAULT_IMG_PATH } from "constants/imgPath";
-import { CHATROOM_LOADING_MESSAGE, CHATROOM_ENTER_API_URL, CHATROOM_NEW_MESSAGE_API_URL, CHATROOM_NAVIGATE_URL } from "constants/ChatRoomPageConstants";
-import { useChatGroups, useWebSocket } from "hooks";
-import { http } from "services/api";
-import { completeProduct } from "services/apis";
-import { useTopBarStore } from "stores";
-import type { IPost, IChatMsg, IChatRoomPageResponse, IChatRoomNewMsgResponse } from "types";
-import { decryptRoomId } from "utils";
+import {
+  CHATROOM_ENTER_API_URL,
+  CHATROOM_LOADING_MESSAGE,
+  CHATROOM_NAVIGATE_URL,
+  CHATROOM_NEW_MESSAGE_API_URL,
+} from 'constants/ChatRoomPageConstants';
+import { DEFAULT_IMG_PATH, LOGO_PATH } from 'constants/imgPath';
+import { useChatGroups, useWebSocket } from 'hooks';
+import { http } from 'services/api';
+import { completeProduct } from 'services/apis';
+import { useTopBarStore } from 'stores';
+import type {
+  IChatMsg,
+  IChatRoomNewMsgResponse,
+  IChatRoomPageResponse,
+  IPost,
+} from 'types';
+import { decryptRoomId } from 'utils';
 
 interface IChatRoomBasic {
   /** 채팅방 ID, 몽고DB */
@@ -42,22 +52,21 @@ interface IChatRoomBasic {
   /** 게시글 등록 날짜 */
   productCreatedAt: string;
   /** 게시글 상태 */
-  productStatus: "BIDDING" | "IN_PROGRESS" | "COMPLETED";
+  productStatus: 'BIDDING' | 'IN_PROGRESS' | 'COMPLETED';
 }
-
 
 const ChatRoomPage = () => {
   const { clear, setTitle } = useTopBarStore();
   const navigate = useNavigate();
   const { roomId, userId } = useParams(); // URL에서 roomId 가져오기
-  const decrtyptRoomId = roomId ? decryptRoomId(roomId) : "";
+  const decrtyptRoomId = roomId ? decryptRoomId(roomId) : '';
 
   const [post, setPost] = useState<IPost>();
   const [otherUserId, setOtherUserId] = useState<number>(-1);
-  const [otherNickname, setOtherNickname] = useState<string>("");
-  const [imgUrl, setImgUrl] = useState<string>(DEFAULT_IMG_PATH);
+  const [otherNickname, setOtherNickname] = useState<string>('');
+  const [imgUrl, setImgUrl] = useState<string>(LOGO_PATH);
   const [chats, setChats] = useState<IChatMsg[]>([]);
-  const [lastMsgTime, setLastMsgTime] = useState<string>("");
+  const [lastMsgTime, setLastMsgTime] = useState<string>('');
   const [isFirstFetch, setIsFirstFetch] = useState(true);
   const chatGroups = useChatGroups(chats, otherUserId, imgUrl);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -69,15 +78,14 @@ const ChatRoomPage = () => {
 
   const [loading, setLoading] = useState(true); // 로딩 상태
 
-
   /** 백엔드 IChatRoom 타입을 프론트 IChatItemProps 으로 변환 함수
    * @param chatRoom : IChatRoom
    * @returns IChatItemProps
    */
   const createChatRoomBasicInfo = (
-    chatRoomBasicInfo: IChatRoomBasic
+    chatRoomBasicInfo: IChatRoomBasic,
   ): IPost => {
-    setIsCompleted(chatRoomBasicInfo.productStatus === "COMPLETED");
+    setIsCompleted(chatRoomBasicInfo.productStatus === 'COMPLETED');
     return {
       productId: chatRoomBasicInfo.productId,
       imgUrl: chatRoomBasicInfo.productImage || DEFAULT_IMG_PATH,
@@ -86,7 +94,7 @@ const ChatRoomPage = () => {
       price: chatRoomBasicInfo.price,
       address: chatRoomBasicInfo.sellerAddress,
       uploadTime: chatRoomBasicInfo.productCreatedAt,
-      expiredTime: "",
+      expiredTime: '',
       isSeller: chatRoomBasicInfo.isSeller,
       status: chatRoomBasicInfo.productStatus,
       onClick: () => {
@@ -94,17 +102,17 @@ const ChatRoomPage = () => {
       },
       onTextButtonClick: () => {
         completeProduct(chatRoomBasicInfo.productId!.toString())
-        .then(() => {
-          Toast.show("거래가 완료되었어요!", 2000);
-          setIsCompleted(true);
-        })
-        .catch((error) => {
-          Toast.show("잠시 후에 다시 시도해 주세요.", 2000);
-          console.error(error);
-        });
+          .then(() => {
+            Toast.show('거래가 완료되었어요!', 2000);
+            setIsCompleted(true);
+          })
+          .catch((error) => {
+            Toast.show('잠시 후에 다시 시도해 주세요.', 2000);
+            console.error(error);
+          });
       },
       onIconButtonClick: () => {
-        console.log("onIconButtonClick");
+        console.log('onIconButtonClick');
       },
     };
   };
@@ -121,24 +129,25 @@ const ChatRoomPage = () => {
       return dateA.getTime() - dateB.getTime(); // 오름차순 정렬
     });
     return messages;
-  },[]);
+  }, []);
 
   /** 초기 채팅방 진입 시 기본 정보 및 초기 메시지30 불러오는 함수
    */
   const fetchMessages = async () => {
     try {
-      const response = await http.post<IChatRoomPageResponse>(`${CHATROOM_ENTER_API_URL}/${decrtyptRoomId}`);
-      if (response.success && response.code === "COMMON200") {
+      const response = await http.post<IChatRoomPageResponse>(
+        `${CHATROOM_ENTER_API_URL}/${decrtyptRoomId}`,
+      );
+      if (response.success && response.code === 'COMMON200') {
         setOtherUserId(response.result.chatRoomBasicInfo.otherUserId);
         setOtherNickname(response.result.chatRoomBasicInfo.otherNickname);
         // 백엔드 타입 프론트엔드 타입으로 변환
         const createdPost = createChatRoomBasicInfo(
-          response.result.chatRoomBasicInfo
+          response.result.chatRoomBasicInfo,
         );
         setPost(createdPost);
         setImgUrl(
-          response.result.chatRoomBasicInfo.otherProfileImage ||
-            DEFAULT_IMG_PATH
+          response.result.chatRoomBasicInfo.otherProfileImage || LOGO_PATH,
         );
         if (response.result.messages.length !== 0) {
           const sortedMessages = sortMessages(response.result.messages);
@@ -147,7 +156,7 @@ const ChatRoomPage = () => {
         }
       }
     } catch (error) {
-      console.error("Failed to fetch messages:", error);
+      console.error('Failed to fetch messages:', error);
     }
   };
 
@@ -159,12 +168,12 @@ const ChatRoomPage = () => {
         IChatRoomNewMsgResponse,
         { roomId: string; beforeTime: string }
       >(CHATROOM_NEW_MESSAGE_API_URL, {
-        roomId: decrtyptRoomId || "",
-        beforeTime: lastMsgTime || "",
+        roomId: decrtyptRoomId || '',
+        beforeTime: lastMsgTime || '',
       });
       if (
         response.success &&
-        response.code === "COMMON200" &&
+        response.code === 'COMMON200' &&
         response.result.length !== 0
       ) {
         const sortedMessages = sortMessages(response.result);
@@ -176,7 +185,7 @@ const ChatRoomPage = () => {
         }
       }
     } catch (error) {
-      console.error("Failed to fetch messages:", error);
+      console.error('Failed to fetch messages:', error);
     }
   };
 
@@ -190,7 +199,7 @@ const ChatRoomPage = () => {
     };
     fetchChatMessages()
       .catch((error) => {
-        console.error("Error fetching Chat Message:", error);
+        console.error('Error fetching Chat Message:', error);
       })
       .finally(() => {
         setLoading(false);
@@ -217,7 +226,7 @@ const ChatRoomPage = () => {
     };
 
     connectToWebSocket().catch((error) => {
-      console.error("Error connecting to WebSocket:", error);
+      console.error('Error connecting to WebSocket:', error);
     }); // 연결 시도 중 발생할 수 있는 오류를 처리
 
     /** 컴포넌트 언마운트 시 웹 소켓 연결 끊기 */
@@ -227,7 +236,7 @@ const ChatRoomPage = () => {
       };
 
       disconnectFromWebSocket().catch((error) => {
-        console.error("Error disconnecting from WebSocket:", error);
+        console.error('Error disconnecting from WebSocket:', error);
       }); // 연결 시도 중 발생할 수 있는 오류를 처리
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -237,7 +246,7 @@ const ChatRoomPage = () => {
    */
   const scrollToBottom = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollIntoView({ behavior: "auto" });
+      scrollContainerRef.current.scrollIntoView({ behavior: 'auto' });
     }
   };
 
@@ -258,29 +267,31 @@ const ChatRoomPage = () => {
         setIsMsgSended(false);
       }
       if (isNewFetch && scrollRef.current) {
-        document.documentElement.scrollTop = scrollRef.current.scrollHeight - prevHeight; 
+        document.documentElement.scrollTop =
+          scrollRef.current.scrollHeight - prevHeight;
         setIsNewFetch(false);
       }
     }
   }, [chatGroups]);
 
-
   const { ref: loadMoreRef, inView } = useInView();
 
   useEffect(() => {
     if (inView) {
-      if(!check){
+      if (!check) {
         setCheck(true);
         return;
       }
       setPrevHeight(scrollRef.current?.scrollHeight || 0);
-      fetchNewMessages().then(() => {
-        setIsNewFetch(true);
-      }).catch((error) => {
-        console.error("Failed to fetch new messages:", error);
-      });
+      fetchNewMessages()
+        .then(() => {
+          setIsNewFetch(true);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch new messages:', error);
+        });
     }
-  }, [inView]); 
+  }, [inView]);
 
   const handleInput = (message: string) => {
     sendMessage(decrtyptRoomId, message, Number(userId!), otherUserId);
@@ -304,8 +315,8 @@ const ChatRoomPage = () => {
       </ChatRoomTemplate>
     </>
   ) : (
-    <div style={{ width: "100%" }}>
-      <EmptyTemplate type={"chatRoom"}></EmptyTemplate>
+    <div style={{ width: '100%' }}>
+      <EmptyTemplate type={'chatRoom'}></EmptyTemplate>
     </div>
   );
 };
