@@ -1,7 +1,5 @@
-// 'use client'
-
 import { LoginButton } from '@/components/atoms'
-import { WELL_COME_PAGE_TEXT } from '@/constants/Login'
+import { WELCOME_PAGE_TEXT } from '@/constants'
 import Logo from '@/public/Logo.svg'
 
 interface IComponentProps {
@@ -18,7 +16,7 @@ export const LoginTemplate = ({
   return (
     <div className="flex flex-col justify-between flex-1 pt-8 px-4 pb-4">
       <p className="text-[var(--color-black)] text-[1rem] font-bold leading-[145%]">
-        {WELL_COME_PAGE_TEXT}
+        {WELCOME_PAGE_TEXT}
       </p>
       <Logo className="self-center w-32 md:w-40" />
       <div className="flex flex-col gap-2 mt-12 w-full">
