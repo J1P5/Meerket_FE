@@ -23,4 +23,14 @@
 }
 
 @layer base {
+  body {
+    /* 텍스트 선택 방지 */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    /* 줄바꿈 처리 */
+    white-space: pre-line;
+  }
 }
