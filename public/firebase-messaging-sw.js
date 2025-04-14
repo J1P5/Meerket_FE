@@ -1,5 +1,3 @@
-// importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js");
-// importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js");
 importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js');
 
@@ -32,9 +30,6 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(title, options);
 });
 
-
-
-
 self.addEventListener("notificationclick", (event) => {
   const { link } = event.notification.data;
   event.notification.close();
@@ -44,21 +39,21 @@ self.addEventListener("notificationclick", (event) => {
 /**
  * 백그라운드 알림 처리
  */
-self.addEventListener("push", (event) => {
-  if (!event.data.json()) {
-    return;
-  }
-  console.log("push_event.data.json()",event.data.json());
-  console.log("push_event", event);
+// self.addEventListener("push", (event) => {
+//   if (!event.data.json()) {
+//     return;
+//   }
+//   console.log("push_event.data.json()",event.data.json());
+//   console.log("push_event", event);
 
-  const {title, content, uri} = event.data.json().data;
-  const options = {
-    body: content,
-    icon: "/icons/logo-128x128.png",
-    data: {
-      link: uri || "/",
-    },
-  };
+//   const {title, content, uri} = event.data.json().data;
+//   const options = {
+//     body: content,
+//     icon: "/icons/logo-128x128.png",
+//     data: {
+//       link: uri || "/",
+//     },
+//   };
 
-  self.registration.showNotification(title, options);
-});
+//   self.registration.showNotification(title, options);
+// });
