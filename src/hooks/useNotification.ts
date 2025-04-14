@@ -1,5 +1,5 @@
-import { getToken } from "firebase/messaging";
-import { messaging } from "services/firebase";
+import { getToken } from 'firebase/messaging';
+import { messaging } from 'services/firebase';
 
 export const useNotification = () => {
   /**
@@ -7,20 +7,17 @@ export const useNotification = () => {
    */
   const getFcmToken = async () => {
     try {
-      localStorage.removeItem("fcmToken");
-
       const permission = await Notification.requestPermission();
-      if (permission === "granted") {
+      if (permission === 'granted') {
         const token = await getToken(messaging, {
           vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
         });
-        console.log("FCM 토큰:", token);
-        localStorage.setItem("fcmToken", token);
+        return token || '';
       } else {
-        console.warn("알림 권한이 거부되었습니다.");
+        return '';
       }
     } catch (error) {
-      console.error("토큰 발급 실패:", error);
+      return '';
     }
   };
 

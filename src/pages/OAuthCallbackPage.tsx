@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { useNotification } from 'hooks';
+import { useEffect } from 'react';
 import {
   Navigate,
   useNavigate,
   useParams,
-  useSearchParams
-} from "react-router-dom";
-import { oauthLogin } from "services/apis";
-import { useUserStore } from "stores";
-import type { OAuthProvider } from "types";
-
+  useSearchParams,
+} from 'react-router-dom';
+import { oauthLogin } from 'services/apis';
+import { useUserStore } from 'stores';
+import type { OAuthProvider } from 'types';
 
 const OAuthCallbackPage = () => {
   // TODO 직접 접근 막기
@@ -16,25 +16,34 @@ const OAuthCallbackPage = () => {
   const { provider } = useParams<{ provider: Lowercase<OAuthProvider> }>();
   const { setUser } = useUserStore();
   const [searchParams] = useSearchParams();
-  const code = searchParams.get("code");
+  const code = searchParams.get('code');
+  const { getFcmToken } = useNotification();
 
   useEffect(() => {
-    if (code) {
-      const fcmToken = localStorage.getItem("fcmToken") || "";
-      oauthLogin({ code, provider: provider!.toUpperCase() as OAuthProvider, fcmToken })
+    const login = async () => {
+      if (!code) return;
+      const fcmToken = await getFcmToken();
+      oauthLogin({
+        code,
+        provider: provider!.toUpperCase() as OAuthProvider,
+        fcmToken: fcmToken || '',
+      })
         .then((data) => {
           const { result } = data;
           setUser({
             profile: result.profileUrl || undefined,
             nickname: result.nickname || undefined,
             emdName: result.emdName || undefined,
-            emdId: result.emdId || undefined
+            emdId: result.emdId || undefined,
           });
 
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
         })
         .catch(console.error);
-    }
+    };
+    login().catch(() => {
+      console.error('로그인 실패');
+    });
   }, []);
 
   if (!code) {
