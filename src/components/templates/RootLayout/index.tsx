@@ -1,6 +1,6 @@
+import { BottomNavBar, Header, TopBar } from "components/organisms";
 import { useEffect, useMemo } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Header, BottomNavBar, TopBar } from "components/organisms";
 import { useHeaderStore, useTopBarStore } from "stores";
 import { PageLayoutWrapper, RootLayoutWrapper } from "./styled";
 
@@ -45,9 +45,14 @@ export const RootLayout = () => {
   };
   /**
    * 뒤로가기
+   * history state가 없거나 첫 페이지인 경우에는 홈으로 이동
    */
   const handleBackButtonClick = () => {
-    navigate(-1);
+    if (!window.history.state || window.history.state.idx === 0) {
+      navigate('/');
+    } else {
+      navigate(-1);
+    }
   };
 
   /** backIcon 클릭 기본 함수 지정 */
