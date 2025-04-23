@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-grey-100">
       {/* <head>
         <script
           type="text/javascript"
@@ -35,7 +35,7 @@ export default function RootLayout({
         >
           
         </NavermapsProvider> */}
-        <div className="min-h-screen max-w-screen-lg mx-auto flex flex-col justify-between">
+        <div className="min-h-screen min-w-mobile max-w-mobile mx-auto flex flex-col justify-between bg-white">
           {children}
         </div>
       </body>

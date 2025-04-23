@@ -1,5 +1,5 @@
 export const colors: {
-  [key: string]: string;
+  [key: string]: string
 } = {
   primary: '#344FFF',
   primaryDark: '#131B53',
@@ -15,4 +15,4 @@ export const colors: {
   grey600: '#2D2D39', // 타이틀
 
   red: '#FF2E4D',
-};
+}
