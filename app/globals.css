@@ -20,6 +20,24 @@
 
   /* Accent Colors */
   --color-red: #ff2e4d;
+
+  /* Font Styles */
+  --font-title: 1rem; /* 16px */
+  --font-desc: 0.875rem; /* 14px */
+  --font-explan: 0.8125rem; /* 13px */
+  --font-tag: 0.75rem; /* 12px */
+  --font-writing: 1.5rem; /* 24px */
+  --font-btn: 1.0625rem; /* 17px */
+  --font-badge: 0.6875rem; /* 11px */
+
+  /* Line Heights */
+  --leading-normal: 145%;
+  --leading-writing: 135%;
+
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 }
 
 @layer base {
@@ -32,5 +50,68 @@
 
     /* 줄바꿈 처리 */
     white-space: pre-line;
+  }
+}
+
+/* Typography Classes */
+@layer components {
+  .text-title-bold {
+    font-size: var(--font-title);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-bold);
+  }
+
+  .text-title-semibold {
+    font-size: var(--font-title);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-semibold);
+  }
+
+  .text-desc-regular {
+    font-size: var(--font-desc);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-regular);
+  }
+
+  .text-desc-bold {
+    font-size: var(--font-desc);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-bold);
+  }
+
+  .text-explan-regular {
+    font-size: var(--font-explan);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-regular);
+  }
+
+  .text-explan-bold {
+    font-size: var(--font-explan);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-semibold);
+  }
+
+  .text-tag-regular {
+    font-size: var(--font-tag);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-regular);
+  }
+
+  .text-writing-bold {
+    font-size: var(--font-writing);
+    line-height: var(--leading-writing);
+    font-weight: var(--weight-semibold);
+  }
+
+  .text-btn-bold {
+    font-size: var(--font-btn);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-semibold);
+  }
+
+  .text-badge-regular {
+    font-size: var(--font-badge);
+    line-height: var(--leading-normal);
+    font-weight: var(--weight-regular);
   }
 }
