@@ -1,17 +1,27 @@
-import { Suspense } from "react";
-import { RouterProvider } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { GlobalStyle } from "styles";
-import { useForegroundNotification } from "hooks";
-import { Modal } from "components/organisms";
-import { useModalStore } from "stores";
-import { Loading } from "components/molecules/Loading";
-import { router } from "router";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Loading } from 'components/molecules/Loading';
+import { Modal } from 'components/organisms';
+import { useForegroundNotification } from 'hooks';
+import { Suspense } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from 'router';
+import { useModalStore } from 'stores';
+import { GlobalStyle } from 'styles';
 const queryClient: QueryClient = new QueryClient();
 
 const App = () => {
   useForegroundNotification();
+
+  // useEffect(() => {
+  //   const unsubscribe = onMessage(messaging, (payload) => {
+  //     console.log('메시지 수신:', payload);
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
   const isOpen = useModalStore((store) => store.isOpen);
   const content = useModalStore((store) => store.content);
   const { closeModal } = useModalStore((store) => store.actions);

@@ -1,5 +1,5 @@
-importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js");
+importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js');
 
 const firebaseConfig = {
   apiKey: "AIzaSyDW5D3PgKLgB43bjav1EvAhQtBhLSc76C4",
@@ -10,38 +10,60 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const messaging = firebase.messaging();
+messaging.onBackgroundMessage((payload) => {
+  console.log(
+    'Received background message: ',
+    payload
+  );
+
+  // const {title, body} =  payload.notification;
+  // const options = {
+  //   body,
+  //   icon: "/icons/logo-128x128.png",
+  //   badge: "/icons/logo-128x128.png",
+  // };
+
+  // self.registration.showNotification(title, options);
+
+  // const {title, content, uri} =  payload.data;
+  // const options = {
+  //   body: content,
+  //   icon: "/icons/logo-128x128.png",
+  //   data: {
+  //     link: uri || "/",
+  //   },
+  //   badge: "/icons/logo-128x128.png",
+  // };
+
+  // self.registration.showNotification(title, options);
+});
+
+// self.addEventListener("notificationclick", (event) => {
+//   console.log("notificationclick", event);
+//   const { link } = event.notification.data;
+//   event.notification.close();
+//   event.waitUntil(clients.openWindow(link || "/"));
+// });
+
 /**
  * 백그라운드 알림 처리
  */
-self.addEventListener("push", (event) => {
-  if (!event.data.json()) {
-    return;
-  }
-  console.log("push_event.data.json()",event.data.json());
-  console.log("push_event", event);
+// self.addEventListener("push", (event) => {
+//   if (!event.data.json()) {
+//     return;
+//   }
+//   console.log("push_event.data.json()",event.data.json());
+//   console.log("push_event", event);
 
-  // const notification = event.data.json().notification;
-  const data = event.data.json().data;
-  const title = data.title;
-  const options = {
-    body: data.body,
-    icon: data.icon || "/icons/logo-128x128.png",
-    data: {
-      link: data.uri,
-    },
-  };
+//   const {title, content, uri} = event.data.json().data;
+//   const options = {
+//     body: content,
+//     icon: "/icons/logo-128x128.png",
+//     data: {
+//       link: uri || "/",
+//     },
+//   };
 
-  self.registration.showNotification(title, options);
-});
-
-/**
- * 알림 클릭 이벤트
- */
-self.addEventListener("notificationclick", (event) => {
-  console.log("notificationclick_event", event);
-  const data = event.notification.data;
-  const url = data?.link || "/"; 
-
-  event.notification.close(); // 알림 클릭 시 알림 제거
-  event.waitUntil(clients.openWindow(url));
-});
+//   self.registration.showNotification(title, options);
+// });

@@ -1,6 +1,6 @@
-import { onMessage } from "firebase/messaging";
-import { useEffect } from "react";
-import { messaging } from "services/firebase";
+import { onMessage } from 'firebase/messaging';
+import { useEffect } from 'react';
+import { messaging } from 'services/firebase';
 
 /**
  * 앱 활성화 상태일 때 알림 처리를 위한 훅
@@ -8,18 +8,19 @@ import { messaging } from "services/firebase";
 export const useForegroundNotification = () => {
   useEffect(() => {
     const unsubscribe = onMessage(messaging, (payload) => {
-      console.log("포그라운드 메시지 수신:", payload);
-
-      const title = payload.notification?.title || "알림";
-      const body =
-        payload.notification?.body || "새로운 메시지가 도착했습니다.";
-
-      // const url = data?.url || "/"; 
-    
-      console.log("data?.url", payload.data?.url);
-
-      // TODO 앱 사용중 알림 처리
-      console.log(title, body);
+      // eslint-disable-next-line no-new
+      const notification = new Notification(
+        payload.notification?.title as string,
+        {
+          body: payload.notification?.body,
+          icon: '/icons/logo-128x128.png',
+          badge: '/icons/logo-128x128.png',
+        },
+      );
+      notification.onclick = () => {
+        notification.close();
+        window.location.href = payload.data?.uri || '/';
+      };
     });
 
     return () => {
