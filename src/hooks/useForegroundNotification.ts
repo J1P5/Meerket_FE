@@ -8,19 +8,17 @@ import { messaging } from 'services/firebase';
 export const useForegroundNotification = () => {
   useEffect(() => {
     const unsubscribe = onMessage(messaging, (payload) => {
-      console.log('Received foreground message: ', payload);
-
       // eslint-disable-next-line no-new
       const notification = new Notification(
-        payload.data?.title || '포그라운드 알림',
+        payload.notification?.title as string,
         {
-          body: payload.data?.content || '포그라운드 바디',
+          body: payload.notification?.body,
           icon: '/icons/logo-128x128.png',
           badge: '/icons/logo-128x128.png',
         },
       );
-
       notification.onclick = () => {
+        notification.close();
         window.location.href = payload.data?.uri || '/';
       };
     });
